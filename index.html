@@ -254,6 +254,79 @@
       font-variant-numeric: tabular-nums;
     }
 
+    .intro-transcript {
+      margin-top: 0.35rem;
+      width: 100%;
+      max-width: 720px;
+    }
+
+    .intro-transcript-toggle {
+      border: none;
+      background: transparent;
+      list-style: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      min-height: 44px;
+      cursor: pointer;
+      color: var(--accent);
+      font-size: 0.9rem;
+      border-bottom: 1px solid rgba(37, 59, 104, 0.3);
+      user-select: none;
+      padding: 0.1rem 0;
+      font-family: inherit;
+    }
+
+    .intro-transcript-toggle::after {
+      content: "+";
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    .intro-transcript-toggle[aria-expanded="true"]::after {
+      content: "−";
+    }
+
+    .intro-transcript-toggle:hover,
+    .intro-transcript-toggle:focus-visible {
+      border-bottom-color: var(--accent);
+      outline: none;
+    }
+
+    .transcript-panel {
+      width: 100%;
+      max-width: 720px;
+      display: grid;
+      grid-template-rows: 0fr;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: grid-template-rows 300ms ease, opacity 220ms ease, transform 220ms ease;
+      overflow: hidden;
+    }
+
+    .transcript-panel.open {
+      grid-template-rows: 1fr;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .transcript-body {
+      min-height: 0;
+      overflow: hidden;
+      margin-top: 0.45rem;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.58);
+      padding: 0.8rem 0.9rem;
+    }
+
+    .transcript-body p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 0.94rem;
+      line-height: 1.68;
+    }
+
     .mobile-domain-nav {
       display: none;
       margin-top: 1.15rem;
@@ -1288,6 +1361,20 @@
         font-size: 0.71rem;
       }
 
+      .intro-transcript,
+      .transcript-panel {
+        max-width: none;
+      }
+
+      .transcript-body {
+        padding: 0.72rem 0.78rem;
+      }
+
+      .transcript-body p {
+        font-size: 0.9rem;
+        line-height: 1.62;
+      }
+
       .cookie-notice {
         left: 0.5rem;
         right: 0.5rem;
@@ -1312,7 +1399,8 @@
       .mini-network,
       .edge,
       .edge.related,
-      .edge.active {
+      .edge.active,
+      .transcript-panel {
         transition: none;
         animation: none;
       }
@@ -1332,7 +1420,7 @@
       <button class="mini-node m-soc" data-target="soc" aria-label="KI + Gesellschaft">G</button>
       <button class="mini-node m-trans" data-target="trans" aria-label="KI-Transformation">T</button>
       <button class="mini-node m-tool" data-target="tool" aria-label="KI-Werkzeugkasten">W</button>
-      <button class="mini-node m-pers" data-target="pers" aria-label="Persoenliche KI-Kompetenz">P</button>
+      <button class="mini-node m-pers" data-target="pers" aria-label="Persönliche KI-Kompetenz">P</button>
       <button class="mini-node m-fin" data-target="fin" aria-label="KI + Finanzen">F</button>
     </div>
   </aside>
@@ -1360,6 +1448,20 @@
               <span class="audio-time" id="audioTime">00:00 / 01:20</span>
             </div>
             <audio id="introAudio" preload="metadata" src="audio.mp3"></audio>
+            <div class="intro-transcript">
+              <button
+                type="button"
+                class="intro-transcript-toggle"
+                id="transcriptToggle"
+                aria-expanded="false"
+                aria-controls="transcriptPanel"
+              >Transkript lesen</button>
+              <div class="transcript-panel" id="transcriptPanel" hidden>
+                <div class="transcript-body">
+                  <p>Sieben Fachgebiete. Ein System. Was Sie hier sehen, ist kein Buchkatalog. Es ist eine Wissensarchitektur — aufgebaut über mehrere Dutzend Fachpublikationen, die alle einem Ziel folgen: Künstliche Intelligenz nicht nur verstehen, sondern steuern und wirksam einsetzen. Jedes der sieben Fachgebiete deckt eine eigene Dimension ab. Von Regulierung und Compliance über autonome KI-Systeme bis hin zu den gesellschaftlichen Fragen, die KI aufwirft. Von konkreten Transformationsstrategien für Unternehmen über den praktischen KI-Werkzeugkasten für den Alltag bis zur persönlichen Kompetenzentwicklung mit KI. Das Besondere daran: Die Fachgebiete stehen nicht isoliert nebeneinander. Sie sind miteinander verbunden — weil KI-Governance ohne Change Management nicht funktioniert. Weil autonome Systeme regulatorische Grenzen brauchen. Und weil persönliches Wachstum mit KI ein Verständnis der gesellschaftlichen Auswirkungen voraussetzt. Klicken Sie auf ein Fachgebiet, das Sie interessiert — oder erkunden Sie die Verbindungen im Netzwerk. Jede Reihe bietet einen eigenen Einstieg, von der kritischen Analyse bis zur technischen Spezialisierung. Mein Name ist Robert Meyer. Willkommen in der Architektur des KI-Wissens.</p>
+                </div>
+              </div>
+            </div>
           </div>
           <nav class="mobile-domain-nav" aria-label="Fachgebiete Schnellnavigation auf Mobilgeräten">
             <p class="mobile-domain-label">Fachgebiete direkt öffnen</p>
@@ -1376,7 +1478,7 @@
             <button class="node n-soc" data-node="soc" style="--delay:0.62s;">KI + Gesellschaft</button>
             <button class="node n-trans" data-node="trans" style="--delay:0.34s;">KI-Transformation</button>
             <button class="node n-tool" data-node="tool" style="--delay:0.58s;">KI-Werkzeugkasten</button>
-            <button class="node n-pers" data-node="pers" style="--delay:0.73s;">Persoenliche KI-Kompetenz</button>
+            <button class="node n-pers" data-node="pers" style="--delay:0.73s;">Persönliche KI-Kompetenz</button>
             <button class="node n-fin" data-node="fin" style="--delay:0.51s;">KI + Finanzen</button>
 
             <div class="network-tooltip" id="networkTooltip" role="tooltip" aria-hidden="true"></div>
@@ -1724,6 +1826,8 @@
       const audioProgress = document.getElementById('audioProgress');
       const audioTime = document.getElementById('audioTime');
       const audioIconPath = document.getElementById('audioIconPath');
+      const transcriptToggle = document.getElementById('transcriptToggle');
+      const transcriptPanel = document.getElementById('transcriptPanel');
       const mobileDomainList = document.getElementById('mobileDomainList');
       const cookieNotice = document.getElementById('cookieNotice');
       const cookieAck = document.getElementById('cookieAck');
@@ -2173,6 +2277,54 @@
         syncUi();
       }
 
+      function installTranscriptToggle() {
+        if (!transcriptToggle || !transcriptPanel) return;
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isMobile = window.matchMedia('(max-width: 900px)');
+
+        const openPanel = () => {
+          transcriptPanel.hidden = false;
+          transcriptToggle.setAttribute('aria-expanded', 'true');
+          requestAnimationFrame(() => {
+            transcriptPanel.classList.add('open');
+          });
+        };
+
+        const closePanel = () => {
+          transcriptToggle.setAttribute('aria-expanded', 'false');
+          transcriptPanel.classList.remove('open');
+
+          if (prefersReducedMotion) {
+            transcriptPanel.hidden = true;
+            return;
+          }
+
+          const onTransitionEnd = (event) => {
+            if (event.propertyName !== 'grid-template-rows') return;
+            transcriptPanel.hidden = true;
+          };
+
+          transcriptPanel.addEventListener('transitionend', onTransitionEnd, { once: true });
+        };
+
+        transcriptToggle.addEventListener('click', () => {
+          const expanded = transcriptToggle.getAttribute('aria-expanded') === 'true';
+          if (expanded) {
+            closePanel();
+            return;
+          }
+          openPanel();
+        });
+
+        window.addEventListener('scroll', () => {
+          if (!isMobile.matches) return;
+          const expanded = transcriptToggle.getAttribute('aria-expanded') === 'true';
+          if (!expanded) return;
+          closePanel();
+        }, { passive: true });
+      }
+
       function installCookieNotice() {
         if (!cookieNotice || !cookieAck) return;
 
@@ -2426,6 +2578,7 @@
       installSpreadObserver();
       installReveal();
       installAudioPlayer();
+      installTranscriptToggle();
       installCookieNotice();
       installImpressumModal();
       installDatenschutzModal();
