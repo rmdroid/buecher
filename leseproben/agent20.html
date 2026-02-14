@@ -1,0 +1,1319 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>AGENTIC AI 2.0 — Leseprobe | Robert Meyer</title>
+  <meta name="description" content="Kostenlose Leseprobe: AGENTIC AI 2.0 von Robert Meyer. Vom Prototyp zum Produktivsystem für autonome KI-Agenten im Unternehmen.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://ki-fachbuecher.de/leseproben/agent20.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" content="AGENTIC AI 2.0 — Leseprobe | Robert Meyer">
+  <meta property="og:description" content="Kostenlose Leseprobe: AGENTIC AI 2.0 von Robert Meyer. Vom Prototyp zum Produktivsystem für autonome KI-Agenten im Unternehmen.">
+  <meta property="og:url" content="https://ki-fachbuecher.de/leseproben/agent20.html">
+  <meta property="og:image" content="https://ki-fachbuecher.de/agent2.png">
+  <meta property="og:image:alt" content="Buchcover AGENTIC AI 2.0 von Robert Meyer">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AGENTIC AI 2.0 — Leseprobe | Robert Meyer">
+  <meta name="twitter:description" content="Kostenlose Leseprobe: AGENTIC AI 2.0 von Robert Meyer.">
+  <meta name="twitter:image" content="https://ki-fachbuecher.de/agent2.png">
+  <meta name="theme-color" content="#f4efe5">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --cream: #f7f2e8;
+      --paper: #fbf7ef;
+      --mist: #f2ece2;
+      --ink: #1f2738;
+      --ink-soft: #4f5a70;
+      --line: rgba(31, 39, 56, 0.18);
+      --line-strong: rgba(31, 39, 56, 0.34);
+      --accent: #253b68;
+      --shadow: 0 16px 34px rgba(20, 28, 44, 0.14);
+      --reader-width: 620px;
+      --reader-font: clamp(1.08rem, 2.6vw, 1.18rem);
+      --reader-line: 1.82;
+      --reader-measure: 35ch;
+      --reader-scale: 1;
+      --reader-line-adjust: 0;
+    }
+
+    body[data-mode="immersiv"] {
+      --reader-font: clamp(1.18rem, 2.9vw, 1.3rem);
+      --reader-line: 1.96;
+      --reader-measure: 33ch;
+    }
+
+    body[data-font-size="sm"] {
+      --reader-scale: 0.93;
+      --reader-line-adjust: -0.04;
+    }
+
+    body[data-font-size="md"] {
+      --reader-scale: 1;
+      --reader-line-adjust: 0;
+    }
+
+    body[data-font-size="lg"] {
+      --reader-scale: 1.11;
+      --reader-line-adjust: 0.07;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(880px 380px at 12% -20%, rgba(37, 59, 104, 0.08), transparent 70%), var(--cream);
+      color: var(--ink);
+      font-family: "DM Sans", system-ui, -apple-system, Segoe UI, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    body {
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.2;
+      background-image:
+        radial-gradient(circle at 18% 22%, rgba(30, 40, 62, 0.075) 0 0.45px, transparent 0.6px),
+        radial-gradient(circle at 72% 77%, rgba(30, 40, 62, 0.06) 0 0.5px, transparent 0.65px);
+      background-size: 3px 3px, 4px 4px;
+      mix-blend-mode: multiply;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(100%, calc(var(--reader-width) + 2.6rem));
+      margin: 0 auto;
+      padding: 1.1rem 1.2rem 7.6rem;
+    }
+
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.9rem;
+      margin-bottom: 2rem;
+      font-size: 0.92rem;
+      color: var(--ink-soft);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      color: var(--accent);
+      border-bottom: 1px solid rgba(37, 59, 104, 0.32);
+      padding: 0.1rem 0;
+    }
+
+    .back-link:hover,
+    .back-link:focus-visible {
+      border-bottom-color: var(--accent);
+      outline: none;
+    }
+
+    .nav-label {
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+      font-size: 0.68rem;
+    }
+
+    .book-header {
+      text-align: center;
+      padding-bottom: 1.35rem;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .book-cover {
+      width: min(100%, 250px);
+      margin: 0 auto;
+      border-radius: 12px;
+      border: 1px solid rgba(31, 39, 56, 0.18);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      background: #efe6d8;
+    }
+
+    .book-cover img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .book-title {
+      margin: 1.2rem 0 0;
+      font-family: "Fraunces", serif;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.08;
+      font-size: clamp(2rem, 6vw, 2.8rem);
+      color: #1b2333;
+    }
+
+    .book-subtitle {
+      margin: 0.55rem auto 0;
+      font-size: 1.03rem;
+      color: var(--ink-soft);
+      max-width: 36ch;
+      line-height: 1.45;
+    }
+
+    .book-author {
+      margin: 0.62rem 0 0;
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+    }
+
+    .book-tag {
+      margin: 0.75rem auto 0;
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0.24rem 0.62rem;
+      border-radius: 999px;
+      border: 1px solid rgba(37, 59, 104, 0.25);
+      color: var(--accent);
+      font-size: 0.76rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .reader-controls {
+      position: fixed;
+      left: 50%;
+      bottom: 3.95rem;
+      transform: translate(-50%, calc(100% - 2.95rem));
+      z-index: 52;
+      width: min(560px, calc(100% - 0.9rem));
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(251, 247, 239, 0.88);
+      backdrop-filter: blur(7px);
+      -webkit-backdrop-filter: blur(7px);
+      padding: 0;
+      box-shadow: 0 8px 20px rgba(20, 28, 44, 0.07);
+      transition: transform 220ms ease;
+    }
+
+    .reader-controls[open] {
+      transform: translate(-50%, 0);
+    }
+
+    .reader-controls > summary {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      list-style: none;
+      color: var(--accent);
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-size: 0.84rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding: 0.56rem 0.68rem;
+    }
+
+    .reader-controls-handle {
+      display: none;
+      width: 36px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(37, 59, 104, 0.34);
+      margin: 0 auto 0.32rem;
+      flex: 0 0 auto;
+    }
+
+    .reader-controls-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.42rem;
+    }
+
+    .reader-controls > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .reader-controls > summary::after {
+      content: "▾";
+      font-size: 0.8rem;
+      opacity: 0.75;
+      transform: rotate(0deg);
+      transition: transform 180ms ease;
+    }
+
+    .reader-controls:not([open]) > summary::after {
+      transform: rotate(-90deg);
+    }
+
+    .reader-controls-inner {
+      border-top: 1px solid var(--line);
+      padding: 0 0.68rem 0.72rem;
+    }
+
+    .reader-controls:not([open]) .reader-controls-inner {
+      display: none;
+    }
+
+    .reader-controls[data-locked="true"] > summary {
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .reader-controls[data-locked="true"] > summary::after {
+      display: none;
+    }
+
+    .reading-hud {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 55;
+      padding: calc(0.2rem + env(safe-area-inset-top)) 0.55rem 0.32rem;
+      background: linear-gradient(to bottom, rgba(247, 242, 232, 0.98), rgba(247, 242, 232, 0.84));
+      border-bottom: 1px solid rgba(31, 39, 56, 0.16);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      transform: translateY(-110%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 180ms ease, opacity 180ms ease;
+    }
+
+    .reading-hud.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .reading-hud-inner {
+      width: min(calc(100% - 0.2rem), 640px);
+      margin: 0 auto;
+    }
+
+    .reading-hud-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.65rem;
+      color: var(--ink-soft);
+      font-size: 0.74rem;
+      line-height: 1.35;
+    }
+
+    .reading-hud-track {
+      margin-top: 0.24rem;
+      height: 3px;
+      border-radius: 999px;
+      background: rgba(37, 59, 104, 0.19);
+      overflow: hidden;
+    }
+
+    .reading-hud-bar {
+      display: block;
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #314a7b 0%, #253b68 100%);
+      transition: width 180ms ease;
+    }
+
+    .control-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      align-items: center;
+      margin-bottom: 0.55rem;
+    }
+
+    .mode-switch,
+    .size-switch {
+      display: inline-flex;
+      gap: 0.45rem;
+      margin: 0;
+    }
+
+    .mode-btn,
+    .size-btn {
+      min-height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(37, 59, 104, 0.28);
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--ink-soft);
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-size: 0.83rem;
+      letter-spacing: 0.02em;
+      padding: 0.38rem 0.95rem;
+      cursor: pointer;
+    }
+
+    .mode-btn.active,
+    .size-btn.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.94);
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.7rem;
+      color: var(--ink-soft);
+      font-size: 0.78rem;
+      letter-spacing: 0.02em;
+      line-height: 1.45;
+    }
+
+    .progress-track {
+      height: 5px;
+      margin-top: 0.34rem;
+      border-radius: 999px;
+      background: rgba(37, 59, 104, 0.18);
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      display: block;
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #314a7b 0%, #253b68 100%);
+      transition: width 180ms ease;
+    }
+
+    .chapter-nav {
+      margin-top: 0.66rem;
+      border-top: 1px solid var(--line);
+      padding-top: 0.56rem;
+    }
+
+    .chapter-nav summary {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      color: var(--accent);
+      cursor: pointer;
+      font-size: 0.84rem;
+      list-style: none;
+      border-bottom: 1px solid rgba(37, 59, 104, 0.3);
+      padding: 0.1rem 0;
+    }
+
+    .chapter-nav summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .chapter-links {
+      display: grid;
+      gap: 0.44rem;
+      margin-top: 0.62rem;
+    }
+
+    .chapter-links a {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      font-size: 0.83rem;
+      color: var(--ink-soft);
+      line-height: 1.35;
+      border-bottom: 1px solid rgba(31, 39, 56, 0.14);
+      padding: 0.13rem 0;
+    }
+
+    .chapter-links a.active {
+      color: var(--accent);
+      border-bottom-color: rgba(37, 59, 104, 0.4);
+      font-weight: 600;
+    }
+
+    .sample {
+      position: relative;
+    }
+
+    .sample-text {
+      position: relative;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.45)),
+        radial-gradient(circle at 13% 8%, rgba(37, 59, 104, 0.06), transparent 44%);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.35rem 1.1rem 6.5rem;
+      font-family: "Fraunces", serif;
+      font-size: calc(var(--reader-font) * var(--reader-scale));
+      line-height: calc(var(--reader-line) + var(--reader-line-adjust));
+      letter-spacing: 0.001em;
+      color: #1d2535;
+      box-shadow: 0 8px 20px rgba(20, 28, 44, 0.06);
+      hyphens: auto;
+      overflow-wrap: break-word;
+      orphans: 3;
+      widows: 3;
+    }
+
+    .sample-text h2 {
+      margin: 1.95rem 0 0.68rem;
+      font-family: "Fraunces", serif;
+      font-size: clamp(1.26rem, 3.95vw, 1.66rem);
+      line-height: 1.33;
+      letter-spacing: -0.01em;
+      color: #1b2333;
+      scroll-margin-top: 7rem;
+    }
+
+    .sample-text h2:first-child {
+      margin-top: 0;
+    }
+
+    .sample-text p {
+      margin: 0.96rem 0;
+      text-wrap: pretty;
+      max-width: var(--reader-measure);
+    }
+
+    .sample-text h2 + p {
+      font-size: 1.06em;
+      line-height: calc(var(--reader-line) + 0.02);
+    }
+
+    .sample-text .meta-line {
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+      line-height: 1.58;
+      max-width: none;
+    }
+
+    .mid-cta {
+      margin: 1.45rem 0 1.25rem;
+      border: 1px solid rgba(37, 59, 104, 0.22);
+      border-radius: 12px;
+      padding: 0.86rem 0.88rem;
+      background: rgba(255, 255, 255, 0.66);
+      max-width: 100%;
+    }
+
+    .mid-cta p {
+      margin: 0.16rem 0;
+      max-width: none;
+      color: var(--ink-soft);
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-size: 0.9rem;
+      line-height: 1.52;
+    }
+
+    .mid-cta a {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      color: var(--accent);
+      border-bottom: 1px solid rgba(37, 59, 104, 0.34);
+      font-size: 0.92rem;
+      margin-top: 0.22rem;
+    }
+
+    .sample-fade {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 228px;
+      border-radius: 0 0 14px 14px;
+      background: linear-gradient(to bottom, rgba(251, 247, 239, 0), rgba(251, 247, 239, 0.86) 58%, var(--cream) 96%);
+      pointer-events: none;
+    }
+
+    .sample-cta {
+      margin-top: 1.15rem;
+      text-align: center;
+      padding-bottom: 2.4rem;
+    }
+
+    .sample-cta p {
+      margin: 0.42rem 0;
+      color: var(--ink-soft);
+    }
+
+    .sample-cta .cta-primary {
+      margin-top: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0.55rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(37, 59, 104, 0.35);
+      background: rgba(255, 255, 255, 0.82);
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 180ms ease, border-color 180ms ease;
+    }
+
+    .sample-cta .cta-primary:hover,
+    .sample-cta .cta-primary:focus-visible {
+      transform: translateY(-1px);
+      border-color: var(--accent);
+      outline: none;
+    }
+
+    .series-note {
+      margin-top: 0.72rem;
+      font-size: 0.84rem;
+      color: var(--ink-soft);
+    }
+
+    .series-note a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 0.13em;
+    }
+
+    .next-step {
+      margin-top: 0.84rem;
+      font-size: 0.84rem;
+      color: var(--ink-soft);
+    }
+
+    .next-step a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 0.13em;
+      font-weight: 600;
+    }
+
+    .resume-banner {
+      position: fixed;
+      left: 50%;
+      bottom: 4.75rem;
+      transform: translateX(-50%);
+      width: min(calc(100% - 1.2rem), 560px);
+      border: 1px solid rgba(37, 59, 104, 0.25);
+      border-radius: 12px;
+      background: rgba(251, 247, 239, 0.95);
+      box-shadow: 0 8px 24px rgba(16, 24, 38, 0.12);
+      padding: 0.55rem 0.62rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.66rem;
+      z-index: 36;
+    }
+
+    .resume-banner[hidden] {
+      display: none;
+    }
+
+    .resume-banner p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 0.82rem;
+      line-height: 1.36;
+    }
+
+    .resume-btn {
+      min-height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(37, 59, 104, 0.35);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-weight: 600;
+      padding: 0.35rem 0.8rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .sticky-cta {
+      position: fixed;
+      left: 50%;
+      bottom: 0.65rem;
+      transform: translate(-50%, 14px);
+      width: min(calc(100% - 1.2rem), 760px);
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 0.65rem;
+      align-items: center;
+      padding: 0.45rem 0.6rem;
+      border-radius: 13px;
+      border: 1px solid rgba(31, 39, 56, 0.2);
+      background: rgba(248, 242, 230, 0.78);
+      box-shadow: 0 10px 24px rgba(16, 24, 38, 0.16);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 180ms ease, transform 180ms ease;
+      z-index: 40;
+    }
+
+    .sticky-cta.visible {
+      transform: translate(-50%, 0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .sticky-thumb {
+      width: 27px;
+      height: 40px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid rgba(31, 39, 56, 0.18);
+      background: #efe6d8;
+    }
+
+    .sticky-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .sticky-meta {
+      min-width: 0;
+      font-size: 0.84rem;
+      color: #25334b;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .sticky-buy {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      color: var(--accent);
+      font-size: 0.84rem;
+      border-bottom: 1px solid rgba(37, 59, 104, 0.3);
+    }
+
+    .sticky-buy:hover,
+    .sticky-buy:focus-visible {
+      border-bottom-color: var(--accent);
+      outline: none;
+    }
+
+    .page-footer {
+      margin-top: 1.4rem;
+      border-top: 1px solid var(--line);
+      padding-top: 0.9rem;
+      font-size: 0.84rem;
+      color: var(--ink-soft);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.62rem;
+    }
+
+    .page-footer nav {
+      display: inline-flex;
+      gap: 0.7rem;
+    }
+
+    .page-footer nav a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 0.12em;
+    }
+
+    @media (min-width: 980px) {
+      .reader-controls {
+        top: calc(env(safe-area-inset-top) + 2.45rem);
+        right: 0.7rem;
+        left: auto;
+        bottom: auto;
+        transform: none;
+        width: min(360px, calc(100% - 1rem));
+        border-radius: 14px;
+        transition: none;
+      }
+
+      .reader-controls[open] {
+        transform: none;
+      }
+
+      .reader-controls[data-locked="true"] .reader-controls-inner {
+        display: block;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        width: 100%;
+        padding: 0.85rem 0.85rem 7.4rem;
+      }
+
+      .reader-controls {
+        width: calc(100% - 0.9rem);
+        bottom: 3.75rem;
+      }
+
+      .reader-controls > summary {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0.52rem 0.58rem;
+      }
+
+      .reader-controls-handle {
+        display: block;
+      }
+
+      .reader-controls > summary::after {
+        margin-top: 0.18rem;
+      }
+
+      .reader-controls-inner {
+        padding: 0 0.58rem 0.7rem;
+      }
+
+      .sample-text {
+        padding: 1rem 0.88rem 6.1rem;
+      }
+
+      .sample-text p {
+        max-width: none;
+      }
+
+      .sticky-cta {
+        width: calc(100% - 0.8rem);
+        bottom: 0.4rem;
+      }
+
+      .sticky-meta {
+        font-size: 0.8rem;
+      }
+
+      .resume-banner {
+        width: calc(100% - 0.9rem);
+        bottom: 4.4rem;
+      }
+
+      .reading-hud-top {
+        font-size: 0.72rem;
+      }
+    }
+
+    @media (max-width: 520px) {
+      :root {
+        --reader-font: clamp(1.04rem, 4.65vw, 1.16rem);
+        --reader-line: 1.86;
+      }
+
+      body[data-mode="immersiv"] {
+        --reader-font: clamp(1.1rem, 4.9vw, 1.24rem);
+        --reader-line: 1.98;
+      }
+
+      .book-subtitle {
+        font-size: 0.97rem;
+      }
+
+      .progress-label {
+        font-size: 0.75rem;
+      }
+
+      .resume-banner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .sticky-cta,
+      .sample-cta .cta-primary,
+      .progress-bar,
+      .reading-hud,
+      .reading-hud-bar {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="reading-hud" id="readingHud" aria-hidden="true">
+    <div class="reading-hud-inner">
+      <div class="reading-hud-top">
+        <span id="hudProgressPercent">0%</span>
+        <span id="hudRemainingTime">ca. 1 Min verbleibend</span>
+      </div>
+      <div class="reading-hud-track">
+        <span class="reading-hud-bar" id="hudProgressBar"></span>
+      </div>
+    </div>
+  </div>
+
+  <main class="page">
+    <header class="top-nav" aria-label="Leseproben Navigation">
+      <a class="back-link" href="https://ki-fachbuecher.de/index.html">← Alle Fachgebiete</a>
+      <span class="nav-label">Leseprobe</span>
+    </header>
+
+    <section class="book-header" id="bookHeader" aria-labelledby="bookTitle">
+      <figure class="book-cover">
+        <img src="../agent2.png" alt="Buchcover AGENTIC AI 2.0 von Robert Meyer" width="1000" height="1500" loading="eager" decoding="async">
+      </figure>
+      <h1 class="book-title" id="bookTitle">AGENTIC AI 2.0</h1>
+      <p class="book-subtitle">Vom Prototyp zum Produktivsystem · Wie Unternehmen autonome KI-Agenten skalieren</p>
+      <p class="book-author">Robert Meyer</p>
+      <span class="book-tag">Autonome KI-Systeme</span>
+    </section>
+
+    <details class="reader-controls" id="readerMenu" aria-label="Leseeinstellungen und Fortschritt">
+      <summary><span class="reader-controls-handle" aria-hidden="true"></span><span class="reader-controls-title">Lesemenü</span></summary>
+      <div class="reader-controls-inner">
+      <div class="control-row">
+        <div class="mode-switch" role="group" aria-label="Lesemodus wählen">
+          <button class="mode-btn active" type="button" data-mode-target="kompakt">Kompakt</button>
+          <button class="mode-btn" type="button" data-mode-target="immersiv">Immersiv</button>
+        </div>
+        <div class="size-switch" role="group" aria-label="Schriftgröße wählen">
+          <button class="size-btn" type="button" data-font-size-target="sm" aria-label="Schrift verkleinern">A-</button>
+          <button class="size-btn active" type="button" data-font-size-target="md" aria-label="Standard Schriftgröße">A</button>
+          <button class="size-btn" type="button" data-font-size-target="lg" aria-label="Schrift vergrößern">A+</button>
+        </div>
+      </div>
+      <div class="progress-label">
+        <span id="progressPercent">0%</span>
+        <span id="remainingTime">ca. 1 Min verbleibend</span>
+      </div>
+      <div class="progress-track" aria-hidden="true">
+        <span class="progress-bar" id="progressBar"></span>
+      </div>
+      <details class="chapter-nav" id="chapterNav">
+        <summary>Kapitelübersicht öffnen</summary>
+        <nav class="chapter-links" id="chapterLinks" aria-label="Kapitelnavigation"></nav>
+      </details>
+      </div>
+    </details>
+
+    <section class="sample" aria-label="Leseprobe Text">
+      <article class="sample-text" id="sampleText">
+        <h2>AGENTIC AI 2.0</h2>
+        <p class="meta-line">Vom Prototyp zum Produktivsystem</p>
+        <p class="meta-line">Wie Unternehmen autonome KI-Agenten skalieren</p>
+        <p class="meta-line">Robert Meyer</p>
+        <p class="meta-line">© Robert Meyer, 2025 · Erste Auflage – Dezember 2025</p>
+        <p class="meta-line">Dieses Buch wurde im Selbstverlag über Amazon Kindle Direct Publishing veröffentlicht.</p>
+        <p class="meta-line">Kein Teil dieses Buches darf ohne ausdrückliche schriftliche Genehmigung des Autors vervielfältigt, verbreitet oder in irgendeiner Form weiterverwendet werden. Das vollständige Impressum finden Sie am Ende dieses Buches.</p>
+        <p class="meta-line">Die Wiedergabe von Gebrauchsnamen, Handelsnamen, Warenbezeichnungen usw. in diesem Werk berechtigt auch ohne besondere Kennzeichnung nicht zu der Annahme, dass solche Namen im Sinne der Warenzeichen- und Markenschutz-Gesetzgebung als frei zu betrachten wären und daher von jedermann benutzt werden dürften.</p>
+        <p class="meta-line">Haftungsausschluss: Alle Angaben in diesem Buch wurden vom Autor mit größter Sorgfalt erarbeitet. Dennoch können Fehler nicht vollständig ausgeschlossen werden. Der Autor übernimmt keine juristische Verantwortung oder irgendeine Haftung für eventuell verbliebene fehlerhafte Angaben und deren Folgen.</p>
+
+        <h2>Vorwort</h2>
+        <p>Die Reise der künstlichen Intelligenz in Unternehmen ist eine Geschichte von Hoffnungen, Enttäuschungen und schließlich echten Durchbrüchen. Wenn Sie dieses Buch in den Händen halten, haben Sie mit hoher Wahrscheinlichkeit bereits erste Erfahrungen mit KI-Agenten gemacht. Vielleicht haben Sie einen beeindruckenden Proof of Concept gesehen, der Ihnen das enorme Potenzial vor Augen führte. Vielleicht haben Sie sogar selbst ein Pilotprojekt gestartet und waren begeistert von den Ergebnissen.</p>
+        <p>Und dann kam die Ernüchterung.</p>
+        <p>Die Demo, die im Konferenzraum so reibungslos lief, bricht in der Produktion zusammen. Der Agent, der zehn Testfälle perfekt bewältigt hat, scheitert bei Fall Nummer elf. Die Kosten explodieren von hundert Dollar pro Monat im Piloten auf zehntausend Dollar in der Realität. Das Team, das den Prototyp gebaut hat, weiß nicht, wie man ein Produktivsystem betreibt. Die Fachabteilungen verlieren das Vertrauen.</p>
+        <p>Dieses Buch ist entstanden aus der Frustration über genau diese Situation. Nach dutzenden Gesprächen mit C-Level-Führungskräften, CIOs und Projektleitern wurde ein Muster deutlich: Nicht mangelnde Technologie ist das Problem, sondern mangelndes Verständnis dafür, was es bedeutet, einen KI-Agenten vom Prototyp zum Produktivsystem zu entwickeln.</p>
+        <p>Die erste Generation von Agentic AI-Implementierungen war geprägt von Experimenten und Lernkurven. Wir haben gesehen, was funktioniert und was nicht. Wir haben verstanden, welche Probleme erst bei Skalierung auftreten. Wir haben erlebt, wie unterschätzte Details zu kritischen Blockern werden. Und genau aus diesen Learnings ist dieses Buch entstanden.</p>
+        <p>Agentic AI 2.0 ist nicht einfach die nächste Version einer Technologie. Es ist die Professionalisierung einer Revolution. Es ist der Übergang von beeindruckenden Demos zu verlässlichen Systemen. Von Einzelprojekten zu skalierbaren Plattformen. Von Hoffnung zu messbaren Business-Ergebnissen.</p>
+        <p>Dieses Buch richtet sich an Sie, wenn Sie verantwortlich sind für strategische Technologie-Entscheidungen in Ihrem Unternehmen. An Sie, wenn Sie verstehen wollen, warum 80 Prozent der KI-Agenten-Projekte scheitern und wie Ihr Projekt zu den erfolgreichen 20 Prozent gehören kann. An Sie, wenn Sie bereits einen funktionierenden Prototyp haben und nun vor der Herausforderung stehen, diesen auf zehntausend Nutzer oder zehntausend Anfragen pro Tag zu skalieren.</p>
+        <p>Was Sie hier nicht finden werden, sind Code-Beispiele oder technische Implementation-Details. Davon gibt es genug in anderen Publikationen. Stattdessen konzentrieren wir uns auf die strategischen, architektonischen und organisatorischen Entscheidungen, die über Erfolg oder Scheitern entscheiden. Auf die unsichtbaren Herausforderungen, die erst bei der Produktivierung sichtbar werden. Auf die kritischen Dimensionen, die in keiner Demo gezeigt werden, aber in der Realität über alles entscheiden.</p>
+        <p>Ich habe dieses Buch geschrieben, damit Sie nicht dieselben teuren Fehler machen müssen, die andere vor Ihnen gemacht haben. Damit Sie verstehen, worauf es wirklich ankommt, wenn Sie aus zehn Testnutzern zehntausend echte Nutzer machen wollen. Damit Sie die richtigen Fragen stellen können, bevor Sie investieren. Und damit Sie realistische Erwartungen setzen können, sowohl nach oben gegenüber Ihrem Vorstand als auch nach unten gegenüber Ihren Teams.</p>
+        <p>Die Transformation zu einem autonomen, agenten-gestützten Unternehmen ist keine Sprint-Strecke. Sie ist ein Marathon, der strategische Planung, kontinuierliche Optimierung und vor allem Durchhaltevermögen erfordert. Aber für diejenigen, die diesen Weg erfolgreich gehen, sind die Vorteile immens: Effizienzgewinne von 60 bis 80 Prozent, Kostenreduktionen im zweistelligen Millionenbereich, und vor allem ein nachhaltiger Wettbewerbsvorteil in einer Welt, in der Agentic AI zum Standard wird.</p>
+        <p>Lassen Sie uns gemeinsam diesen Weg gehen. Von der Theorie zur Praxis. Vom Prototyp zum Produktivsystem. Zu einem Unternehmen, das nicht nur mit KI experimentiert, sondern KI als strategischen Kern seiner Wertschöpfung etabliert hat.</p>
+        <p>Robert Meyer</p>
+
+        <h2>Inhaltsverzeichnis</h2>
+        <p>Einleitung: Die Post-POC-Realität · Warum 80 Prozent der AI-Agenten-Projekte scheitern · Von 10 zu 10.000: Die unterschätzte Skalierungskomplexität · Der Business Case für Production-Grade AI · Was Sie in diesem Buch erwartet.</p>
+        <p>TEIL I: Production-Readiness · Kapitel 1: Die 7 kritischen Dimensionen für Produktivsysteme · Kapitel 2: Vom POC zur Produktion – Die Transformation · Kapitel 3: AgentOps – Der neue Betriebsstandard.</p>
+        <p>TEIL II: Skalierung und Performance · Kapitel 4: Architektur und Orchestrierung für Scale · Kapitel 5: Performance-Optimierung · Kapitel 6: Cost Engineering.</p>
+        <p>TEIL III: Enterprise-Integration · Kapitel 7: Legacy-Systeme und Data Governance · Kapitel 8: Security, Compliance und Risk Management · Kapitel 9: Testing, Debugging und Quality Assurance.</p>
+        <p>TEIL IV: Operations und Kontinuierliche Verbesserung · Kapitel 10: Monitoring, Alerting und Incident Management · Kapitel 11: Continuous Improvement.</p>
+        <p>TEIL V: Real-World-Blueprints · Kapitel 12 bis 14: Kundenservice-, Procurement- und Financial-Reporting-Agent.</p>
+        <p>TEIL VI: Organisation und Change Management · Kapitel 15 bis 17.</p>
+        <p>TEIL VII: Lessons Learned und Antipatterns · Kapitel 18 und 19.</p>
+        <p>TEIL VIII: Die Zukunft operationalisieren · Kapitel 20.</p>
+        <p>Anhang: Production-Readiness-Checkliste · AgentOps-Framework · Incident-Response-Playbook · Compliance-Checkliste · Glossar · Ressourcen.</p>
+
+        <h2>Einleitung: Die Post-POC-Realität</h2>
+        <p>Es ist Montagmorgen, neun Uhr. In einem modernen Konferenzraum eines deutschen Mittelständlers versammeln sich Geschäftsführung, IT-Leitung und Projektteam. Auf dem großen Bildschirm läuft eine beeindruckende Demo: Ein KI-Agent beantwortet Kundenanfragen, recherchiert automatisch in der Wissensdatenbank, erstellt personalisierte Antworten und eskaliert komplexe Fälle an menschliche Mitarbeiter. Alles funktioniert reibungslos. Die Geschäftsführung ist begeistert. Budget wird freigegeben. Das Projekt startet.</p>
+        <p>Sechs Monate später, gleicher Konferenzraum, deutlich angespanntere Atmosphäre. Der Agent ist live, aber die Realität sieht anders aus als in der Demo. Statt der erhofften 80 Prozent Automatisierung liegt die Quote bei 45 Prozent. Die Fehlerrate ist höher als akzeptabel. Die Kosten sind doppelt so hoch wie kalkuliert. Das System fällt regelmäßig aus, ohne dass jemand versteht warum. Die Mitarbeiter umgehen den Agenten, wo immer möglich. Der CIO muss erklären, warum aus einem Erfolgsversprechen ein Problemfall wurde.</p>
+        <p>Diese Geschichte ist keine Ausnahme. Sie ist die Regel.</p>
+
+        <h2>Warum 80 Prozent der AI-Agenten-Projekte scheitern</h2>
+        <p>Die nackten Zahlen sind ernüchternd: Nach aktuellen Studien führender Beratungshäuser scheitern zwischen 75 und 85 Prozent aller Agentic AI-Projekte entweder komplett oder verfehlen ihre ursprünglichen Ziele deutlich. Das bedeutet nicht, dass die Technologie nicht funktioniert. Es bedeutet, dass wir als Industrie die Komplexität der Produktivierung massiv unterschätzt haben.</p>
+        <p>Das Problem beginnt meist mit einer perfekten Demo. Vendor präsentieren ihre Lösungen mit handverlesenen Use Cases, optimierten Prompts und idealisierten Szenarien. Alles läuft glatt. Jede Frage wird korrekt beantwortet. Jeder Prozess wird automatisiert. Die Reaktionszeit liegt bei Sekunden. Die Zuschauer sind beeindruckt und überzeugt.</p>
+        <p>Was in diesen Demos nicht gezeigt wird, ist die Realität der Produktivierung. Der Agent, der zehn Testfälle perfekt bewältigt, muss in der Realität zehntausend verschiedene Anfragen verarbeiten, von denen viele nicht dem idealen Schema entsprechen. Er muss mit unvollständigen Informationen umgehen, mit unklaren Anfragen, mit widersprüchlichen Daten. Er muss integriert werden in Legacy-Systeme, die nie für KI-Integration konzipiert wurden. Er muss skaliert werden auf hunderte oder tausende gleichzeitige Nutzer. Und er muss das alles tun, während er 24/7 läuft, ohne dass ein Entwickler daneben steht und bei Problemen manuell eingreift.</p>
+        <p>Die Gründe für das Scheitern sind vielfältig, aber sie folgen einem erkennbaren Muster: mangelndes Error Handling, fehlende Observability, unterschätzte Integrationskomplexität, explodierende Kosten, falsche Teamzuschnitte und vernachlässigtes Change Management.</p>
+
+        <h2>Von 10 zu 10.000: Die unterschätzte Skalierungskomplexität</h2>
+        <p>Der Sprung von zehn Testnutzern zu zehntausend Produktivnutzern ist kein linearer Skalierungsprozess. Es ist ein qualitativer Sprung, der neue Architektur-Entscheidungen, neue Tools und neue Prozesse erfordert.</p>
+        <p>Mit zehn Nutzern können Sie sich leisten, dass ein Agent mal zehn Sekunden braucht, um zu antworten. Mit zehntausend Nutzern müssen Sie Sub-Sekunden-Latenz gewährleisten, sonst brechen Journeys ab. Mit zehn Nutzern können Sie manuell nachsehen, wenn etwas schiefgeht. Mit zehntausend Nutzern brauchen Sie automatische Alerting-Systeme, die Probleme erkennen, bevor Ihre Nutzer sich beschweren.</p>
+        <p>Die Komplexität steigt exponentiell. Zehn gleichzeitige Anfragen sind beherrschbar. Hundert erzeugen Contention um Ressourcen. Tausend erfordern horizontale Skalierung über multiple Server. Zehntausend verlangen eine komplett andere Architektur mit Queues, Caching und verteilten Datenbanken.</p>
+
+        <h2>Der Business Case für Production-Grade AI</h2>
+        <p>Trotz aller Herausforderungen lautet die Botschaft nicht: Lassen Sie die Finger von Agentic AI. Im Gegenteil. Die Botschaft lautet: Tun Sie es richtig. Investieren Sie in Production-Grade von Anfang an. Planen Sie für Scale. Bauen Sie auf soliden Fundamenten.</p>
+        <p>Die Unternehmen, die den Sprung schaffen, erzielen erhebliche Vorteile: stark reduzierte Bearbeitungszeiten, messbare Qualitätssteigerungen, sinkende Prozesskosten und bessere Kundenerlebnisse. Diese Ergebnisse entstehen nicht durch Demos, sondern durch professionell betriebene Produktivsysteme.</p>
+
+        <h2>Was Sie in diesem Buch erwartet</h2>
+        <p>Dieses Buch ist ein Leitfaden für die Transformation vom POC zum Produktivsystem. Es fokussiert die sieben kritischen Dimensionen: Error Handling, Monitoring, Security, Performance, Cost Management, Version Control und Testing.</p>
+        <p>Sie erhalten einen konkreten Fahrplan zur Produktivierung, inklusive Migrationsstrategien, AgentOps-Betriebsmodellen, Integrationsmustern, Blueprints aus der Praxis und einem klaren Blick auf Antipatterns.</p>
+        <div class="mid-cta" aria-label="Zwischenhinweis">
+          <p>Sie möchten die vollständigen Praxis-Blueprints und Checklisten sehen?</p>
+          <a href="https://amzn.eu/d/00afhkdj" target="_blank" rel="noopener noreferrer">Vollständiges Buch bei Amazon weiterlesen ↗</a>
+        </div>
+
+        <h2>TEIL I: PRODUCTION-READINESS</h2>
+        <h2>Kapitel 1: Die 7 kritischen Dimensionen für Produktivsysteme</h2>
+        <p>Wenn Sie einem Entwickler die Frage stellen, ob sein KI-Agent produktionsreif ist, werden Sie oft ein zuversichtliches Ja hören. Fragen Sie denselben Entwickler nach Error-Handling-Strategien, Monitoring-Konzepten oder Rollback-Mechanismen, werden die Antworten vager. Das ist kein Vorwurf, sondern Realität: Funktionalität bauen und produktionsreif betreiben sind unterschiedliche Disziplinen.</p>
+        <p>Ein produktionsreifes System muss in allen sieben Dimensionen stark sein. Schwäche in einer einzigen Dimension kann das Gesamtsystem gefährden.</p>
+        <p><strong>Error Handling und Graceful Degradation:</strong> Systeme dürfen bei Ausfällen einzelner Komponenten nicht komplett brechen, sondern müssen kontrolliert mit reduzierter Funktionalität weiterlaufen.</p>
+        <p><strong>Monitoring und Observability:</strong> Sie müssen nicht nur sehen, dass etwas schiefgeht, sondern warum. Ohne diese Transparenz fliegen Sie blind.</p>
+        <p><strong>Security und Access Control:</strong> Agenten sind privilegierte Akteure. Ohne Least-Privilege, klare Authentifizierung und Audit-Trails entstehen hohe Risiken.</p>
+        <p><strong>Performance und Latency:</strong> In der Produktion zählt jede Sekunde. Nutzerakzeptanz hängt direkt von Antwortzeiten ab.</p>
+        <p><strong>Cost Management:</strong> Unkontrollierte Token- und Infrastrukturkosten können ein Projekt wirtschaftlich kippen.</p>
+        <p><strong>Version Control und Rollback:</strong> Prompts, Konfigurationen und Modellwechsel müssen versioniert und jederzeit reversibel sein.</p>
+        <p><strong>Testing und Quality Assurance:</strong> Nicht-deterministische Systeme erfordern neue Teststrategien mit klaren Qualitätskriterien.</p>
+
+        <h2>Kapitel 2: Vom POC zur Produktion – Die Transformation</h2>
+        <p>Sie haben einen funktionierenden Prototyp. Die Demo war ein Erfolg. Jetzt kommt die entscheidende Frage: Wie lange dauert der Weg in die Produktion wirklich?</p>
+        <p>Die praktische Erfahrung zeigt: Die Produktivierung dauert typischerweise drei- bis fünfmal so lange wie die Entwicklung des Prototyps. Nicht, weil Teams langsam sind, sondern weil Produktionsqualität zusätzliche Architektur-, Betriebs- und Governance-Arbeit erfordert.</p>
+        <p>Der Weg beginnt mit einem ehrlichen Maturity-Check. Wo stehen Sie wirklich? Level null bis vier machen diese Einschätzung greifbar.</p>
+        <p>Danach folgt die Migrationsstrategie: Big Bang oder iterativ. Für die meisten Unternehmen ist ein schrittweiser Rollout das robustere Modell, weil Risiken kontrollierbar bleiben und Lernen unter Realbedingungen möglich wird.</p>
+        <p>Ein praktikabler Rahmen ist das 90-Tage-Produktivierungsprogramm in drei Phasen: Hardening, Integration und Rollout. Jede Phase mit klaren Milestones, messbaren Kriterien und belastbarer Ressourcenplanung.</p>
+        <p>Ressourcen sind dabei kein Nebenthema. Unterbesetzte Projekte scheitern häufiger. Erfolgreiche Programme stellen dedizierte Teams auf und investieren gezielt in QA, Monitoring und Operations.</p>
+        <p>Bei Make-or-Buy-Entscheidungen gilt: Commodity-Fähigkeiten wie Observability und Infrastruktur eher zukaufen, differenzierende Kernlogik selbst entwickeln. So bleibt der Fokus dort, wo der eigentliche Wettbewerbsvorteil entsteht.</p>
+        <p>Die Übergangsphase vom POC zur Produktion ist die riskanteste Phase jedes Agentic-AI-Projekts. Wer hier sauber plant, transparent kommuniziert und konsequent an Qualitätskriterien ausrichtet, gehört am Ende zu den erfolgreichen 20 Prozent.</p>
+      </article>
+
+      <div class="sample-fade" aria-hidden="true"></div>
+    </section>
+
+    <section class="sample-cta" aria-label="Buchkauf Hinweis">
+      <p><strong>Diese Leseprobe endet hier.</strong></p>
+      <p>Das vollständige Buch weiterlesen:</p>
+      <a class="cta-primary" href="https://amzn.eu/d/00afhkdj" target="_blank" rel="noopener noreferrer">Bei Amazon kaufen ↗</a>
+      <p class="series-note">Teil der Reihe: <a href="https://ki-fachbuecher.de/index.html#spread-auto">Autonome KI-Systeme</a></p>
+      <p class="next-step">Nächster empfohlener Titel dieser Reihe: <a href="https://amzn.eu/d/0hsbd4NJ" target="_blank" rel="noopener noreferrer">Der MCP Architekt ↗</a></p>
+    </section>
+
+    <footer class="page-footer">
+      <div>© 2026 Robert Meyer</div>
+      <nav aria-label="Footer Links">
+        <a href="https://ki-fachbuecher.de/index.html#openImpressum">Impressum</a>
+        <a href="https://ki-fachbuecher.de/index.html#openDatenschutz">Datenschutz</a>
+      </nav>
+    </footer>
+  </main>
+
+  <div class="resume-banner" id="resumeBanner" hidden>
+    <p id="resumeText">Sie waren zuletzt bei 0% der Leseprobe.</p>
+    <button class="resume-btn" type="button" id="resumeButton">Weiterlesen</button>
+  </div>
+
+  <aside class="sticky-cta" id="stickyCta" aria-label="Schnellkauf Leiste">
+    <div class="sticky-thumb">
+      <img src="../agent2.png" alt="Kleines Buchcover AGENTIC AI 2.0" width="1000" height="1500" loading="lazy" decoding="async">
+    </div>
+    <div class="sticky-meta">AGENTIC AI 2.0 — Robert Meyer</div>
+    <a class="sticky-buy" id="stickyBuy" href="https://amzn.eu/d/00afhkdj" target="_blank" rel="noopener noreferrer">Weiterlesen ↗</a>
+  </aside>
+
+  <script>
+    (() => {
+      const sticky = document.getElementById('stickyCta');
+      const stickyBuy = document.getElementById('stickyBuy');
+      const header = document.getElementById('bookHeader');
+      const sample = document.querySelector('.sample');
+      const sampleText = document.getElementById('sampleText');
+      const progressBar = document.getElementById('progressBar');
+      const progressPercent = document.getElementById('progressPercent');
+      const remainingTime = document.getElementById('remainingTime');
+      const hud = document.getElementById('readingHud');
+      const hudProgressBar = document.getElementById('hudProgressBar');
+      const hudProgressPercent = document.getElementById('hudProgressPercent');
+      const hudRemainingTime = document.getElementById('hudRemainingTime');
+      const chapterLinks = document.getElementById('chapterLinks');
+      const modeButtons = Array.from(document.querySelectorAll('.mode-btn'));
+      const sizeButtons = Array.from(document.querySelectorAll('.size-btn'));
+      const readerMenu = document.getElementById('readerMenu');
+      const resumeBanner = document.getElementById('resumeBanner');
+      const resumeButton = document.getElementById('resumeButton');
+      const resumeText = document.getElementById('resumeText');
+
+      if (!sticky || !header || !sample || !sampleText || !progressBar || !progressPercent || !remainingTime || !chapterLinks || !hud || !hudProgressBar || !hudProgressPercent || !hudRemainingTime || !readerMenu) return;
+
+      const MODE_KEY = 'leseprobe-agent20-mode';
+      const FONT_SIZE_KEY = 'leseprobe-agent20-font-size';
+      const PROGRESS_KEY = 'leseprobe-agent20-progress';
+      const MENU_KEY = 'leseprobe-agent20-menu-state';
+      const WORDS_PER_MINUTE = 185;
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const desktopMenuMq = window.matchMedia('(min-width: 980px)');
+      const headings = Array.from(sampleText.querySelectorAll('h2'));
+      const headingLinkMap = new Map();
+      let bounds = { start: 0, end: 1 };
+      let currentProgress = 0;
+      let savedProgressValue = 0;
+      let rafPending = false;
+      let lastSaveTs = 0;
+
+      const saveLocal = (key, value) => {
+        try {
+          window.localStorage.setItem(key, String(value));
+        } catch (error) {
+          return;
+        }
+      };
+
+      const readLocal = (key, fallback = '') => {
+        try {
+          return window.localStorage.getItem(key) ?? fallback;
+        } catch (error) {
+          return fallback;
+        }
+      };
+
+      const slugify = (value, index) => {
+        const normalized = value
+          .toLowerCase()
+          .replace(/ä/g, 'ae')
+          .replace(/ö/g, 'oe')
+          .replace(/ü/g, 'ue')
+          .replace(/ß/g, 'ss')
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-+|-+$/g, '');
+        return normalized ? `kapitel-${normalized}` : `kapitel-${index + 1}`;
+      };
+
+      headings.forEach((heading, index) => {
+        if (!heading.id) {
+          heading.id = slugify(heading.textContent || `kapitel-${index + 1}`, index);
+        }
+        const link = document.createElement('a');
+        link.href = `#${heading.id}`;
+        link.textContent = heading.textContent || `Kapitel ${index + 1}`;
+        chapterLinks.appendChild(link);
+        headingLinkMap.set(heading.id, link);
+      });
+
+      chapterLinks.addEventListener('click', (event) => {
+        const target = event.target;
+        if (!(target instanceof HTMLElement)) return;
+        if (!target.closest('a')) return;
+        if (!desktopMenuMq.matches) {
+          readerMenu.open = false;
+        }
+      });
+
+      const applyMenuBehavior = (savedState = '') => {
+        if (desktopMenuMq.matches) {
+          readerMenu.dataset.locked = 'true';
+          readerMenu.open = true;
+          return;
+        }
+        readerMenu.dataset.locked = 'false';
+        if (savedState === 'open' || savedState === 'closed') {
+          readerMenu.open = savedState === 'open';
+        } else {
+          readerMenu.open = false;
+        }
+      };
+
+      const totalWords = Math.max(1, (sampleText.textContent || '').trim().split(/\s+/).filter(Boolean).length);
+
+      const setMode = (mode) => {
+        const safeMode = mode === 'immersiv' ? 'immersiv' : 'kompakt';
+        document.body.dataset.mode = safeMode;
+        modeButtons.forEach((button) => {
+          button.classList.toggle('active', button.dataset.modeTarget === safeMode);
+        });
+        saveLocal(MODE_KEY, safeMode);
+      };
+
+      const setFontSize = (size) => {
+        const allowed = new Set(['sm', 'md', 'lg']);
+        const safeSize = allowed.has(size) ? size : 'md';
+        document.body.dataset.fontSize = safeSize;
+        sizeButtons.forEach((button) => {
+          button.classList.toggle('active', button.dataset.fontSizeTarget === safeSize);
+        });
+        saveLocal(FONT_SIZE_KEY, safeSize);
+      };
+
+      const setBounds = () => {
+        const sampleTop = sample.offsetTop;
+        const sampleHeight = sample.offsetHeight;
+        const viewport = window.innerHeight;
+        const start = sampleTop - (viewport * 0.18);
+        const end = sampleTop + sampleHeight - (viewport * 0.68);
+        bounds = {
+          start: Math.max(0, start),
+          end: Math.max(Math.max(1, start + 1), end)
+        };
+      };
+
+      const calculateProgress = () => {
+        const y = window.scrollY || window.pageYOffset || 0;
+        const ratio = (y - bounds.start) / (bounds.end - bounds.start);
+        return Math.max(0, Math.min(1, ratio));
+      };
+
+      const setActiveChapter = () => {
+        const marker = window.scrollY + window.innerHeight * 0.3;
+        let activeId = headings[0] ? headings[0].id : '';
+        headings.forEach((heading) => {
+          if (heading.offsetTop <= marker) {
+            activeId = heading.id;
+          }
+        });
+        headingLinkMap.forEach((link, id) => {
+          link.classList.toggle('active', id === activeId);
+        });
+      };
+
+      const refreshProgressUi = () => {
+        currentProgress = calculateProgress();
+        const percent = Math.round(currentProgress * 100);
+        progressBar.style.width = `${percent}%`;
+        progressPercent.textContent = `${percent}%`;
+        hudProgressBar.style.width = `${percent}%`;
+        hudProgressPercent.textContent = `${percent}%`;
+
+        const wordsLeft = Math.max(0, Math.round(totalWords * (1 - currentProgress)));
+        const minutesLeft = Math.ceil(wordsLeft / WORDS_PER_MINUTE);
+        const remainingText = currentProgress >= 0.995 ? 'Ende erreicht' : `ca. ${Math.max(1, minutesLeft)} Min verbleibend`;
+        remainingTime.textContent = remainingText;
+        hudRemainingTime.textContent = remainingText;
+
+        if (stickyBuy) {
+          stickyBuy.textContent = currentProgress >= 0.74 ? 'Bei Amazon ↗' : 'Weiterlesen ↗';
+        }
+
+        setActiveChapter();
+
+        const now = Date.now();
+        if (now - lastSaveTs > 900) {
+          saveLocal(PROGRESS_KEY, currentProgress.toFixed(4));
+          lastSaveTs = now;
+        }
+
+        if (resumeBanner && !resumeBanner.hidden && currentProgress >= (savedProgressValue - 0.02)) {
+          resumeBanner.hidden = true;
+        }
+
+        const y = window.scrollY || window.pageYOffset || 0;
+        const hudVisible = y > (bounds.start - 80) && y < (bounds.end + 280);
+        hud.classList.toggle('visible', hudVisible);
+      };
+
+      const onScroll = () => {
+        if (rafPending) return;
+        rafPending = true;
+        window.requestAnimationFrame(() => {
+          rafPending = false;
+          refreshProgressUi();
+        });
+      };
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          const entry = entries[0];
+          if (!entry) return;
+          sticky.classList.toggle('visible', !entry.isIntersecting);
+        }, {
+          threshold: 0.2
+        });
+        observer.observe(header);
+      } else {
+        const stickyFallback = () => {
+          const rect = header.getBoundingClientRect();
+          sticky.classList.toggle('visible', rect.bottom < 0);
+        };
+        window.addEventListener('scroll', stickyFallback, { passive: true });
+        stickyFallback();
+      }
+
+      modeButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          setMode(button.dataset.modeTarget || 'kompakt');
+          setBounds();
+          refreshProgressUi();
+        });
+      });
+
+      sizeButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          setFontSize(button.dataset.fontSizeTarget || 'md');
+          window.requestAnimationFrame(() => {
+            setBounds();
+            refreshProgressUi();
+          });
+        });
+      });
+
+      const savedMode = readLocal(MODE_KEY, 'kompakt');
+      const savedFontSize = readLocal(FONT_SIZE_KEY, 'md');
+      const savedMenuState = readLocal(MENU_KEY, '');
+      setMode(savedMode);
+      setFontSize(savedFontSize);
+      applyMenuBehavior(savedMenuState);
+      readerMenu.addEventListener('toggle', () => {
+        if (desktopMenuMq.matches) {
+          if (!readerMenu.open) {
+            readerMenu.open = true;
+          }
+          return;
+        }
+        saveLocal(MENU_KEY, readerMenu.open ? 'open' : 'closed');
+      });
+      setBounds();
+      refreshProgressUi();
+
+      savedProgressValue = Number.parseFloat(readLocal(PROGRESS_KEY, '0')) || 0;
+      if (resumeBanner && resumeText && resumeButton && savedProgressValue > 0.08 && savedProgressValue < 0.96) {
+        resumeText.textContent = `Sie waren zuletzt bei ${Math.round(savedProgressValue * 100)}% der Leseprobe.`;
+        resumeBanner.hidden = false;
+        resumeButton.addEventListener('click', () => {
+          setBounds();
+          const target = bounds.start + ((bounds.end - bounds.start) * savedProgressValue);
+          window.scrollTo({
+            top: target,
+            behavior: reducedMotion ? 'auto' : 'smooth'
+          });
+          resumeBanner.hidden = true;
+        });
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', () => {
+        applyMenuBehavior(readLocal(MENU_KEY, ''));
+        setBounds();
+        refreshProgressUi();
+      }, { passive: true });
+    })();
+  </script>
+</body>
+</html>
