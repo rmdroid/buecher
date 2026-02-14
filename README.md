@@ -1,2 +1,2 @@
-# buecher
-KI Bücher Landing Page
+# Buecher
+Die Architektur des KI-Wissens.
