@@ -738,6 +738,24 @@
       outline: none;
     }
 
+    .sample-link {
+      margin-top: -0.2rem;
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      font-size: 0.72rem;
+      color: rgba(31, 39, 56, 0.72);
+      text-decoration: underline;
+      text-underline-offset: 0.12em;
+      text-decoration-thickness: 1px;
+    }
+
+    .sample-link:hover,
+    .sample-link:focus-visible {
+      color: var(--accent);
+      outline: none;
+    }
+
     .series-link {
       margin-top: 0.9rem;
       display: inline-flex;
@@ -1623,7 +1641,7 @@
           lead: 'Von der kritischen Analyse über strukturierte Governance bis zur regulatorischen Umsetzung.',
           description: 'Die Reihe für alle, die KI nicht nur einsetzen, sondern verantwortungsvoll steuern wollen.',
           books: [
-            { title: 'Die KI-Lüge', cover: 'lüge.png', url: 'https://amzn.eu/d/03TE7yga' },
+            { title: 'Die KI-Lüge', cover: 'lüge.png', url: 'https://amzn.eu/d/03TE7yga', sampleUrl: 'leseproben/die_ki_luege.html' },
             { title: 'EU AI Act Readiness für KMU', cover: 'act.png', url: 'https://amzn.eu/d/06i2a1wU' },
             { title: 'MCP Security', cover: 'mcp.png', url: 'https://amzn.eu/d/0hNjEcf2' }
           ],
@@ -1637,7 +1655,7 @@
           lead: 'Wie KI-Systeme eigenständig handeln, Werkzeuge nutzen und komplexe Aufgaben orchestrieren.',
           description: 'Von der Theorie bis zur praktischen Implementierung in realen Prozessen.',
           books: [
-            { title: 'Agentic AI 2.0', cover: 'agent2.png', url: 'https://amzn.eu/d/00afhkdj' },
+            { title: 'Agentic AI 2.0', cover: 'agent2.png', url: 'https://amzn.eu/d/00afhkdj', sampleUrl: 'leseproben/agent20.html' },
             { title: 'Der MCP Architekt', cover: 'mcp2.png', url: 'https://amzn.eu/d/0hsbd4NJ' },
             { title: 'Skills>Workflows', cover: 'skills.png', url: 'https://amzn.eu/d/025EjdMx' }
           ],
@@ -1856,6 +1874,9 @@
       function bookCardMarkup(book) {
         const cover = String(book.cover || '').trim();
         const isPlaceholder = !cover || (/^\[.+\]$/.test(cover));
+        const sampleLink = book.sampleUrl
+          ? `<a class="sample-link" href="${book.sampleUrl}" target="_blank" rel="noopener noreferrer">Leseprobe lesen →</a>`
+          : '';
         const media = isPlaceholder
           ? `<div class="book-cover book-cover-placeholder"><span>Cover folgt</span></div>`
           : `<a class="cover-link" href="${book.url}" target="_blank" rel="noopener noreferrer">
@@ -1868,6 +1889,7 @@
             <figcaption>
               <h3 class="book-title">${book.title}</h3>
               <a class="book-link" href="${book.url}" target="_blank" rel="noopener noreferrer">Amazon ↗</a>
+              ${sampleLink}
             </figcaption>
           </figure>
         `;
