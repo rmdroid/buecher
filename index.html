@@ -1210,11 +1210,11 @@
     }
 
     .process-track {
-      width: min(80%, 980px);
-      margin: 0 auto;
+      width: min(100%, 980px);
+      margin: 0;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       gap: 0.38rem;
       min-height: 120px;
     }
@@ -1729,29 +1729,6 @@
         display: none !important;
       }
 
-      .process-track-wrap {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: thin;
-        scroll-snap-type: x proximity;
-        padding-bottom: 0.14rem;
-      }
-
-      .process-track {
-        width: max-content;
-        min-width: 100%;
-        justify-content: flex-start;
-        padding: 0 0.32rem;
-        gap: 0.33rem;
-      }
-
-      .process-node {
-        scroll-snap-align: start;
-      }
-
-      .process-link {
-        width: 34px;
-      }
     }
 
     @media (max-width: 767px) {
@@ -1761,6 +1738,60 @@
 
       .mobile-domain-nav {
         display: block;
+      }
+
+      .process-track-wrap {
+        overflow: visible;
+        padding-bottom: 0;
+      }
+
+      .process-track {
+        width: min(100%, 520px);
+        min-height: auto;
+        padding: 0;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        column-gap: 0.34rem;
+        row-gap: 0.82rem;
+        justify-items: center;
+        align-items: start;
+      }
+
+      .process-link {
+        display: none;
+      }
+
+      .process-node {
+        min-width: 0;
+        width: 100%;
+        max-width: 122px;
+        scroll-snap-align: none;
+        position: relative;
+        padding-inline: 0.1rem;
+      }
+
+      .process-node:nth-of-type(4) {
+        grid-column: 1;
+      }
+
+      .process-node:nth-of-type(5) {
+        grid-column: 2;
+      }
+
+      .process-node::after {
+        content: "→";
+        position: absolute;
+        right: -0.36rem;
+        top: 12px;
+        font-size: 0.92rem;
+        line-height: 1;
+        color: rgba(37, 59, 104, 0.56);
+      }
+
+      .process-node:nth-of-type(3)::after,
+      .process-node:nth-of-type(5)::after {
+        content: none;
       }
 
       .reveal {
@@ -1791,6 +1822,25 @@
       .author-process.in .process-head {
         animation: none;
         stroke-dashoffset: 0;
+      }
+
+      /* Mobile-only text wrapping fix for "Wie diese Bücher entstehen" + "Über den Autor" */
+      .author-process,
+      .author-layout,
+      .author-text-block,
+      .author-copy {
+        min-width: 0;
+      }
+
+      .author-process-title,
+      .process-label,
+      .author-text-block p,
+      .author-copy h2,
+      .author-copy p {
+        white-space: normal;
+        overflow-wrap: anywhere;
+        word-break: normal;
+        hyphens: auto;
       }
     }
 
@@ -1888,12 +1938,13 @@
 
     @media (max-width: 430px) {
       .process-track {
-        min-height: 108px;
-        padding: 0 0.22rem;
+        width: 100%;
+        column-gap: 0.28rem;
+        row-gap: 0.74rem;
       }
 
       .process-node {
-        min-width: 98px;
+        max-width: 104px;
         gap: 0.36rem;
       }
 
@@ -1913,8 +1964,7 @@
       }
 
       .process-link {
-        width: 28px;
-        height: 12px;
+        display: none;
       }
 
       .author-text-block {
@@ -1939,7 +1989,7 @@
       }
 
       .process-node {
-        min-width: 94px;
+        max-width: 98px;
       }
 
       .author-process-title {
@@ -2824,6 +2874,26 @@
         const mobileEnabled = window.matchMedia('(max-width: 767px)').matches;
         const alphas = [0.95, 0.84, 0.76, 0.68, 0.6, 0.52, 0.46];
         let mobileHintCancelled = false;
+        const mobileHintKey = 'mobile-domain-hint-v1';
+        let mobileHintRecorded = false;
+
+        const hasSeenMobileHint = () => {
+          try {
+            return window.localStorage.getItem(mobileHintKey) === '1';
+          } catch (error) {
+            return false;
+          }
+        };
+
+        const markMobileHintSeen = () => {
+          if (mobileHintRecorded) return;
+          mobileHintRecorded = true;
+          try {
+            window.localStorage.setItem(mobileHintKey, '1');
+          } catch (error) {
+            // Ignore storage issues; hint may show again in strict modes.
+          }
+        };
 
         mobileDomainList.innerHTML = domains.map((item, index) => {
           const books = item.books.slice(0, 3).map((book) => {
@@ -2882,6 +2952,7 @@
           const trigger = ev.target.closest('[data-mobile-trigger]');
           if (!trigger) return;
           mobileHintCancelled = true;
+          markMobileHintSeen();
           const id = trigger.getAttribute('data-mobile-trigger');
           if (!id) return;
           const expanded = trigger.getAttribute('aria-expanded') === 'true';
@@ -2902,12 +2973,22 @@
         });
 
         if (mobileEnabled) {
+          const showMobileHint = !hasSeenMobileHint();
+          const firstId = domains[0]?.id || null;
+
           mobileDomainList.addEventListener('pointerdown', () => {
             mobileHintCancelled = true;
+            markMobileHintSeen();
           }, { once: true });
           mobileDomainList.addEventListener('touchstart', () => {
             mobileHintCancelled = true;
+            markMobileHintSeen();
           }, { once: true, passive: true });
+
+          if (!showMobileHint) {
+            openMobileItem(firstId);
+            return;
+          }
 
           demoSetTimeout(() => {
             if (mobileHintCancelled) return;
@@ -2916,10 +2997,11 @@
             firstTrigger.classList.add('demo-tap');
             demoSetTimeout(() => {
               firstTrigger.classList.remove('demo-tap');
+              if (mobileHintCancelled) return;
+              markMobileHintSeen();
+              openMobileItem(firstId);
             }, 820);
           }, 860);
-
-          openMobileItem(domains[0]?.id || null);
         }
       }
 
@@ -3356,26 +3438,30 @@
   </style>
 </head>
 <body>
-  <h1>Impressum</h1>
-  <p>Angaben gemäß § 5 TMG</p>
+  <h1>Impressum gemäß § 5 TMG &amp; § 55 RStV</h1>
 
+  <h2>Angaben gemäß § 5 TMG</h2>
   <p><strong>Robert Meyer</strong><br>
-  Freiberuflicher KI-Consultant und Dozent<br>
-  Bertolt-Brecht-Straße 8<br>
-  61169 Friedberg<br>
+  Robert Meyer c/o Online-Impressum.de #4759<br>
+  Europaring 90<br>
+  53757 Sankt Augustin<br>
   Deutschland</p>
 
   <h2>Kontakt</h2>
-  <p>Telefon: +49 (0) 162 4194748<br>
-  E-Mail: rm@kostenmanager.net</p>
+  <p>E-Mail: rm@kostenmanager.net<br>
+  Kontaktformular: <a href="https://mein.online-impressum.de/robert-meyer/" target="_blank" rel="noopener noreferrer">https://mein.online-impressum.de/robert-meyer/</a></p>
 
-  <h2>EU-Streitschlichtung</h2>
-  <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:<br>
-  <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a><br>
-  Unsere E-Mail-Adresse finden Sie oben im Impressum.</p>
+  <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
+  <p><strong>Robert Meyer</strong><br>
+  Robert Meyer c/o Online-Impressum.de #4759<br>
+  Europaring 90<br>
+  53757 Sankt Augustin</p>
 
-  <h2>Verbraucherstreitbeilegung/Universalschlichtungsstelle</h2>
-  <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+  <h2>Plattform der EU-Kommission zur Online-Streitbeilegung</h2>
+  <p><a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a></p>
+
+  <h2>Verbraucherstreitbeilegung</h2>
+  <p>Ich bin nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
 </body>
 </html>`;
         impressumFrame.srcdoc = impressumDoc;
@@ -3461,7 +3547,7 @@
   Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Impressum dieser Website entnehmen.</p>
 
   <p><strong>Wie erfassen wir Ihre Daten?</strong><br>
-  Diese Website sammelt keine personenbezogenen Daten über Formulare oder Nutzerkonten. Es gibt keine Kontaktformulare und keine Newsletter-Anmeldungen. Zur technischen, cookielosen Reichweitenmessung wird Umami eingesetzt. Links zu externen Buchseiten (books.rm-on.de) unterliegen den jeweiligen Datenschutzbestimmungen.</p>
+  Diese Website sammelt keine personenbezogenen Daten über eigene Formulare oder Nutzerkonten. Es gibt kein internes Kontaktformular und keine Newsletter-Anmeldung. Zur technischen, cookielosen Reichweitenmessung wird Umami eingesetzt. Bei Klick auf externe Links (z. B. Kontaktformular unter mein.online-impressum.de oder Buchseiten unter books.rm-on.de) gelten die Datenschutzbestimmungen der jeweiligen Anbieter.</p>
 
   <h2>2. Hosting und Datenverarbeitung</h2>
   <p>Diese Website wird bei GitHub Pages gehostet. Der Anbieter ist GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA (nachfolgend GitHub). Bei jedem Aufruf dieser Website erfasst GitHub Informationen über den Zugriff und speichert diese als „Server-Logfiles\". Die Datenverarbeitung erfolgt dabei auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigte Interessen).</p>
@@ -3480,7 +3566,8 @@
   53757 Sankt Augustin<br>
   Deutschland</p>
 
-  <p>E-Mail: rm@kostenmanager.net</p>
+  <p>E-Mail: rm@kostenmanager.net<br>
+  Kontaktformular: <a href="https://mein.online-impressum.de/robert-meyer/" target="_blank" rel="noopener noreferrer">https://mein.online-impressum.de/robert-meyer/</a></p>
 
   <p><strong>Ihre Rechte</strong></p>
   <p>Sie haben jederzeit das Recht unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung, Sperrung oder Löschung dieser Daten zu verlangen.</p>
