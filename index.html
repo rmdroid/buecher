@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Robert Meyer · KI-Fachbuchprogramm — 7 Fachgebiete für die KI-Transformation</title>
-  <meta name="description" content="Das umfassendste deutschsprachige KI-Buchprogramm: 7 kuratierte Fachreihen von Governance über Agentic AI bis Future Skills. Für Entscheider, Führungskräfte und KI-Profis im DACH-Raum.">
+  <meta name="description" content="7 kuratierte KI-Fachreihen von Governance über Agentic AI bis Future Skills. Für Entscheider, Führungskräfte und KI-Profis im DACH-Raum.">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://ki-fachbuecher.de">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="de_DE">
   <meta property="og:title" content="Robert Meyer · KI-Fachbuchprogramm — 7 Fachgebiete für die KI-Transformation">
-  <meta property="og:description" content="Das umfassendste deutschsprachige KI-Buchprogramm: 7 kuratierte Fachreihen von Governance über Agentic AI bis Future Skills. Für Entscheider, Führungskräfte und KI-Profis im DACH-Raum.">
+  <meta property="og:description" content="7 kuratierte KI-Fachreihen von Governance über Agentic AI bis Future Skills. Für Entscheider, Führungskräfte und KI-Profis im DACH-Raum.">
   <meta property="og:image" content="https://ki-fachbuecher.de/og_image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -19,7 +19,7 @@
   <meta property="og:site_name" content="Robert Meyer KI-Fachbuchprogramm">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Robert Meyer · KI-Fachbuchprogramm — 7 Fachgebiete für die KI-Transformation">
-  <meta name="twitter:description" content="Das umfassendste deutschsprachige KI-Buchprogramm: 7 kuratierte Fachreihen von Governance über Agentic AI bis Future Skills.">
+  <meta name="twitter:description" content="7 kuratierte KI-Fachreihen von Governance über Agentic AI bis Future Skills.">
   <meta name="twitter:image" content="https://ki-fachbuecher.de/og_image.png">
   <meta name="theme-color" content="#f4efe5">
   <script defer src="https://cv.rm-on.de/script.js" data-website-id="c3560049-b6a3-408b-bb7c-73e51c8b8df7"></script>
@@ -333,11 +333,11 @@
       border: 1px solid var(--line);
       border-radius: 14px;
       background: rgba(255, 255, 255, 0.62);
-      padding: 0.6rem 0.75rem;
+      padding: 0.58rem 0.66rem;
     }
 
     .mobile-domain-label {
-      margin: 0 0 0.4rem;
+      margin: 0 0 0.46rem;
       font-size: 0.7rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -345,23 +345,173 @@
     }
 
     .mobile-domain-list {
+      position: relative;
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 0.08rem;
+      gap: 0.2rem;
+      padding-left: 0.1rem;
     }
 
-    .mobile-domain-link {
-      min-height: 44px;
-      display: flex;
+    .mobile-domain-list::before {
+      content: "";
+      position: absolute;
+      left: 0.88rem;
+      top: 12px;
+      bottom: 12px;
+      width: 1px;
+      background: linear-gradient(180deg, rgba(37, 59, 104, 0.28), rgba(37, 59, 104, 0.08));
+    }
+
+    .mobile-domain-item {
+      position: relative;
+      padding-left: 1.78rem;
+    }
+
+    .mobile-domain-trigger {
+      width: 100%;
+      min-height: 48px;
+      border: none;
+      background: transparent;
+      color: var(--ink);
+      display: grid;
+      grid-template-columns: auto 1fr auto;
       align-items: center;
-      color: var(--accent);
-      font-size: 0.94rem;
+      gap: 0.55rem;
       padding: 0.2rem 0;
-      border-bottom: 1px solid rgba(31, 39, 56, 0.12);
+      text-align: left;
+      font-family: inherit;
+      cursor: pointer;
+      touch-action: manipulation;
     }
 
-    .mobile-domain-link:last-child {
-      border-bottom: none;
+    .mobile-domain-trigger:focus-visible {
+      outline: 2px solid rgba(37, 59, 104, 0.36);
+      outline-offset: 2px;
+      border-radius: 8px;
+    }
+
+    .mobile-domain-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(37, 59, 104, var(--dot-alpha, 0.8));
+      box-shadow: 0 0 0 3px rgba(37, 59, 104, 0.12);
+    }
+
+    .mobile-domain-name {
+      font-size: 0.92rem;
+      color: var(--accent);
+      line-height: 1.25;
+    }
+
+    .mobile-domain-chevron {
+      color: rgba(37, 59, 104, 0.7);
+      font-size: 1rem;
+      line-height: 1;
+      transform: rotate(0deg);
+      transition: transform 180ms ease;
+    }
+
+    .mobile-domain-trigger[aria-expanded="true"] .mobile-domain-chevron {
+      transform: rotate(45deg);
+    }
+
+    .mobile-domain-trigger.demo-tap::after {
+      content: "";
+      position: absolute;
+      left: 0.28rem;
+      top: 50%;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1.3px solid rgba(37, 59, 104, 0.46);
+      transform: translate(-50%, -50%) scale(0.46);
+      opacity: 0;
+      animation: mobileTapHint 760ms ease-out 1;
+      pointer-events: none;
+    }
+
+    @keyframes mobileTapHint {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.4);
+      }
+      25% {
+        opacity: 0.86;
+        transform: translate(-50%, -50%) scale(0.72);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.36);
+      }
+    }
+
+    .mobile-domain-panel {
+      display: grid;
+      grid-template-rows: 0fr;
+      opacity: 0;
+      overflow: hidden;
+      transition: grid-template-rows 220ms ease, opacity 180ms ease;
+      margin-top: 0.12rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .mobile-domain-panel.open {
+      grid-template-rows: 1fr;
+      opacity: 1;
+    }
+
+    .mobile-domain-panel-inner {
+      min-height: 0;
+      overflow: hidden;
+      border-left: 1px solid rgba(37, 59, 104, 0.18);
+      padding: 0.36rem 0 0.2rem 0.62rem;
+    }
+
+    .mobile-domain-text {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 0.89rem;
+      line-height: 1.46;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .mobile-domain-books {
+      margin-top: 0.48rem;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    .mobile-domain-book {
+      display: grid;
+      gap: 0.25rem;
+      text-decoration: none;
+      color: inherit;
+      min-height: 44px;
+      touch-action: manipulation;
+    }
+
+    .mobile-domain-book img {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid rgba(31, 39, 56, 0.2);
+      box-shadow: 0 8px 16px rgba(20, 28, 46, 0.15);
+      background: #f1ebdf;
+    }
+
+    .mobile-domain-book-title {
+      font-size: 0.69rem;
+      line-height: 1.26;
+      color: var(--ink-soft);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .network-area {
@@ -436,15 +586,8 @@
       font-weight: 500;
       line-height: 1.2;
       cursor: pointer;
-      transition: color 200ms ease, border-color 200ms ease, transform 200ms ease;
-      animation: pulseNode 3.8s ease-in-out infinite;
-      animation-delay: var(--delay, 0s);
+      transition: color 200ms ease, border-color 200ms ease, opacity 200ms ease, transform 220ms ease;
       white-space: nowrap;
-    }
-
-    @keyframes pulseNode {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-2px); }
     }
 
     .node:hover,
@@ -464,6 +607,54 @@
       color: rgba(37, 59, 104, 0.78);
     }
 
+    .network-shell.focused .node.dim {
+      opacity: 0.3;
+    }
+
+    .node.demo-pulse {
+      color: var(--accent);
+      border-bottom-color: rgba(37, 59, 104, 0.48);
+      animation: nodeDemoPulse 860ms ease-in-out infinite;
+    }
+
+    @keyframes nodeDemoPulse {
+      0%, 100% {
+        transform: scale(1);
+        text-shadow: 0 0 0 rgba(37, 59, 104, 0);
+      }
+      50% {
+        transform: scale(1.035);
+        text-shadow: 0 0 10px rgba(37, 59, 104, 0.28);
+      }
+    }
+
+    .network-shell.intro-running .node {
+      opacity: 0;
+      transform: translateY(7px);
+      animation: nodeIntro 420ms ease forwards;
+      animation-delay: var(--delay, 0s);
+    }
+
+    @keyframes nodeIntro {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .network-shell.intro-running .edge {
+      stroke-dasharray: 1400;
+      stroke-dashoffset: 1400;
+      animation: edgeIntro 620ms ease forwards;
+      animation-delay: calc(0.9s + (var(--edge-idx, 0) * 110ms));
+    }
+
+    @keyframes edgeIntro {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
     .n-reg { top: 8%; left: 40%; }
     .n-auto { top: 22%; right: 6%; }
     .n-soc { top: 56%; right: 3%; }
@@ -474,15 +665,14 @@
 
     .network-tooltip {
       position: absolute;
-      max-width: 280px;
-      padding: 0.58rem 0.66rem;
-      font-size: 0.76rem;
-      line-height: 1.35;
-      color: var(--ink);
-      background: rgba(255, 255, 255, 0.94);
-      border: 1px solid rgba(31, 39, 56, 0.2);
-      border-radius: 10px;
-      box-shadow: 0 10px 26px rgba(18, 24, 36, 0.14);
+      max-width: 250px;
+      padding: 0.38rem 0.5rem;
+      font-size: 0.72rem;
+      line-height: 1.3;
+      color: rgba(247, 242, 232, 0.98);
+      background: rgba(31, 39, 56, 0.78);
+      border-radius: 8px;
+      box-shadow: 0 7px 18px rgba(18, 24, 36, 0.12);
       pointer-events: none;
       opacity: 0;
       transform: translate3d(-50%, 6px, 0);
@@ -495,11 +685,52 @@
       transform: translate3d(-50%, 0, 0);
     }
 
+    .network-pointer-hint {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 18px;
+      height: 22px;
+      color: rgba(37, 59, 104, 0.9);
+      pointer-events: none;
+      opacity: 0;
+      transform: translate3d(-44px, 28px, 0) scale(0.96);
+      transition: opacity 180ms ease;
+      z-index: 7;
+      will-change: transform, opacity;
+    }
+
+    .network-pointer-hint svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      fill: currentColor;
+      filter: drop-shadow(0 4px 10px rgba(18, 24, 36, 0.18));
+    }
+
+    .network-pointer-hint.show {
+      opacity: 0.96;
+    }
+
+    .network-pointer-hint.moving {
+      transition: transform 760ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 180ms ease;
+    }
+
+    .network-pointer-hint.click {
+      animation: pointerClick 260ms ease-in-out 1;
+    }
+
+    @keyframes pointerClick {
+      0% { transform: var(--ptr-transform); }
+      50% { transform: var(--ptr-transform) scale(0.9); }
+      100% { transform: var(--ptr-transform) scale(1); }
+    }
+
     .panel-wrap {
       max-height: var(--panel-max);
       opacity: var(--panel-opacity);
       transform: translateY(var(--panel-shift));
-      transition: max-height 380ms ease, opacity 320ms ease, transform 380ms ease;
+      transition: max-height 280ms ease, opacity 220ms ease, transform 280ms ease;
       overflow: hidden;
       will-change: max-height, opacity, transform;
     }
@@ -527,8 +758,8 @@
       border: 1px solid var(--line);
       background: rgba(255, 255, 255, 0.7);
       color: var(--ink-soft);
-      width: 34px;
-      height: 34px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       cursor: pointer;
       font-size: 1.06rem;
@@ -566,6 +797,12 @@
     .panel-title-line {
       display: block;
       white-space: nowrap;
+    }
+
+    .panel-meta[data-node="trans"] h2,
+    .panel-meta[data-node="tool"] h2 {
+      font-size: clamp(1.2rem, 2.35vw, 1.74rem);
+      line-height: 1.1;
     }
 
     .panel-sub {
@@ -664,6 +901,11 @@
       min-width: 0;
     }
 
+    .book-card figcaption {
+      display: grid;
+      gap: 0.18rem;
+    }
+
     .book-cover {
       position: relative;
       aspect-ratio: 2 / 3;
@@ -739,10 +981,10 @@
     }
 
     .sample-link {
-      margin-top: -0.2rem;
+      margin-top: 0;
       display: inline-flex;
       align-items: center;
-      min-height: 32px;
+      min-height: 44px;
       font-size: 0.72rem;
       color: rgba(31, 39, 56, 0.72);
       text-decoration: underline;
@@ -940,6 +1182,151 @@
 
     .author {
       border-top: 1px solid rgba(31, 39, 56, 0.12);
+    }
+
+    .author .container {
+      display: grid;
+      gap: clamp(1.6rem, 3.2vw, 2.8rem);
+    }
+
+    .author-process {
+      border: 1px solid rgba(31, 39, 56, 0.12);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(246, 240, 229, 0.76));
+      padding: clamp(1rem, 2.8vw, 1.5rem);
+    }
+
+    .author-process-title {
+      margin: 0;
+      font-family: var(--display-font);
+      font-size: clamp(1.2rem, 2.9vw, 1.75rem);
+      line-height: 1.2;
+      color: rgba(31, 39, 56, 0.92);
+    }
+
+    .process-track-wrap {
+      margin-top: 0.9rem;
+      width: 100%;
+    }
+
+    .process-track {
+      width: min(80%, 980px);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.38rem;
+      min-height: 120px;
+    }
+
+    .process-node {
+      min-width: clamp(108px, 12vw, 130px);
+      display: grid;
+      justify-items: center;
+      align-content: start;
+      gap: 0.42rem;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 440ms ease, transform 440ms ease;
+      transition-delay: calc(var(--idx) * 300ms);
+    }
+
+    .process-node-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(37, 59, 104, 0.26);
+      background: rgba(255, 255, 255, 0.78);
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+    }
+
+    .process-node-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.65;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .process-label {
+      font-size: 0.82rem;
+      line-height: 1.25;
+      color: var(--ink-soft);
+      letter-spacing: 0.01em;
+    }
+
+    .process-link {
+      width: clamp(30px, 4vw, 52px);
+      height: 14px;
+      flex: 0 0 auto;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 400ms ease, transform 400ms ease;
+      transition-delay: calc(var(--idx) * 300ms + 130ms);
+    }
+
+    .process-stroke,
+    .process-head {
+      stroke: rgba(37, 59, 104, 0.7);
+      fill: none;
+      stroke-width: 1.55;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 90;
+      stroke-dashoffset: 90;
+    }
+
+    .process-head {
+      stroke-dasharray: 24;
+      stroke-dashoffset: 24;
+    }
+
+    @keyframes processDraw {
+      to { stroke-dashoffset: 0; }
+    }
+
+    .author-process.in .process-node,
+    .author-process.in .process-link {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .author-process.in .process-stroke {
+      animation: processDraw 460ms ease forwards;
+      animation-delay: calc(var(--idx) * 300ms + 150ms);
+    }
+
+    .author-process.in .process-head {
+      animation: processDraw 300ms ease forwards;
+      animation-delay: calc(var(--idx) * 300ms + 280ms);
+    }
+
+    .author-text-block {
+      margin-top: 0.5rem;
+      max-width: 72ch;
+      color: var(--ink-soft);
+      font-size: 1.01rem;
+      line-height: 1.72;
+    }
+
+    .author-text-block p {
+      margin: 0.95rem 0 0;
+    }
+
+    .author-text-block p:first-child {
+      margin-top: 0;
+    }
+
+    .author-divider {
+      width: min(100%, 980px);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(31, 39, 56, 0.24), transparent);
+      margin-top: 0.95rem;
     }
 
     .social-proof {
@@ -1324,14 +1711,6 @@
     }
 
     @media (max-width: 900px) {
-      .network-area {
-        display: none;
-      }
-
-      .mobile-domain-nav {
-        display: block;
-      }
-
       .intro-audio {
         width: 100%;
         max-width: none;
@@ -1348,6 +1727,70 @@
 
       .mini-network {
         display: none !important;
+      }
+
+      .process-track-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        scroll-snap-type: x proximity;
+        padding-bottom: 0.14rem;
+      }
+
+      .process-track {
+        width: max-content;
+        min-width: 100%;
+        justify-content: flex-start;
+        padding: 0 0.32rem;
+        gap: 0.33rem;
+      }
+
+      .process-node {
+        scroll-snap-align: start;
+      }
+
+      .process-link {
+        width: 34px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .network-area {
+        display: none;
+      }
+
+      .mobile-domain-nav {
+        display: block;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      .spread-desc {
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .book-card figcaption {
+        gap: 0.75rem;
+      }
+
+      .author-process.in .process-node,
+      .author-process.in .process-link {
+        transition: none;
+        opacity: 1;
+        transform: none;
+      }
+
+      .author-process.in .process-stroke,
+      .author-process.in .process-head {
+        animation: none;
+        stroke-dashoffset: 0;
       }
     }
 
@@ -1395,6 +1838,41 @@
         line-height: 1.62;
       }
 
+      .process-node {
+        min-width: 104px;
+      }
+
+      .process-label {
+        font-size: 0.79rem;
+      }
+
+      .author-process {
+        padding: 0.95rem 0.82rem;
+        border-radius: 14px;
+      }
+
+      .author-process-title {
+        font-size: 1.14rem;
+      }
+
+      .author-text-block {
+        max-width: none;
+        font-size: 0.97rem;
+        line-height: 1.66;
+      }
+
+      .author-text-block p {
+        margin-top: 0.82rem;
+      }
+
+      .author-divider {
+        margin-top: 0.78rem;
+      }
+
+      .author-layout {
+        gap: 0.95rem;
+      }
+
       .cookie-notice {
         left: 0.5rem;
         right: 0.5rem;
@@ -1405,6 +1883,67 @@
       .cookie-ack {
         width: 100%;
         justify-self: stretch;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .process-track {
+        min-height: 108px;
+        padding: 0 0.22rem;
+      }
+
+      .process-node {
+        min-width: 98px;
+        gap: 0.36rem;
+      }
+
+      .process-node-icon {
+        width: 32px;
+        height: 32px;
+      }
+
+      .process-node-icon svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      .process-label {
+        font-size: 0.75rem;
+        line-height: 1.22;
+      }
+
+      .process-link {
+        width: 28px;
+        height: 12px;
+      }
+
+      .author-text-block {
+        font-size: 0.94rem;
+        line-height: 1.6;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .hero {
+        padding-top: 1.4rem;
+      }
+
+      .hero-copy h1 {
+        font-size: clamp(1.9rem, 10vw, 2.3rem);
+        margin-top: 0.7rem;
+      }
+
+      .hero-copy p {
+        font-size: 0.95rem;
+        margin-top: 0.72rem;
+      }
+
+      .process-node {
+        min-width: 94px;
+      }
+
+      .author-process-title {
+        font-size: 1.08rem;
       }
     }
 
@@ -1451,7 +1990,7 @@
         <div class="hero-copy reveal" style="--delay: 40ms;">
           <span class="eyebrow">Robert Meyer</span>
           <h1 id="hero-title">Die Architektur des KI-Wissens.</h1>
-          <p>Ein kuratiertes Fachsystem für Entscheider, Führungskräfte und KI-Interessierte im DACH-Raum — strategisch gedacht, praxisnah umgesetzt.</p>
+          <p>Ein kuratiertes KI-Fachsystem für Entscheider und Führungskräfte im DACH-Raum.</p>
           <div class="intro-audio" aria-label="Intro Audio">
             <p class="intro-label">INTRO ANHÖREN · 80 SEK</p>
             <div class="audio-player" id="audioPlayer">
@@ -1484,12 +2023,12 @@
             </div>
           </div>
           <nav class="mobile-domain-nav" aria-label="Fachgebiete Schnellnavigation auf Mobilgeräten">
-            <p class="mobile-domain-label">Fachgebiete direkt öffnen</p>
+            <p class="mobile-domain-label">Fachgebiete im System</p>
             <div class="mobile-domain-list" id="mobileDomainList"></div>
           </nav>
         </div>
 
-        <div class="network-area reveal" style="--delay: 120ms;">
+        <div class="network-area">
           <div class="network-shell" id="networkShell" aria-label="Interaktive Landkarte der Fachgebiete">
             <svg id="networkEdges" viewBox="0 0 1000 700" preserveAspectRatio="none"></svg>
 
@@ -1502,6 +2041,11 @@
             <button class="node n-fin" data-node="fin" style="--delay:0.51s;">KI + Finanzen</button>
 
             <div class="network-tooltip" id="networkTooltip" role="tooltip" aria-hidden="true"></div>
+            <div class="network-pointer-hint" id="networkPointerHint" aria-hidden="true">
+              <svg viewBox="0 0 24 30" focusable="false" aria-hidden="true">
+                <path d="M2 1.8v21.6l6.2-6.2 4 9.2 3.3-1.4-4-9.3 8.9-.2L2 1.8Z"></path>
+              </svg>
+            </div>
           </div>
 
           <div class="panel-wrap" id="panelWrap">
@@ -1526,7 +2070,7 @@
       <div class="container">
         <span class="eyebrow reveal" style="--delay: 20ms;">Linear lesen</span>
         <h2 class="reveal" id="spreads-title" style="font-family:'Fraunces','Libre Caslon Display',serif;font-size:clamp(1.6rem,4.2vw,2.8rem);line-height:1.1;margin:0.9rem 0 0;max-width:20ch;">Die 7 Fachgebiete im Überblick</h2>
-        <p class="reveal" style="--delay:80ms;max-width:62ch;margin:0.9rem 0 0;color:var(--ink-soft);">Alle Bereiche sind auch als lineare Leseansicht verfügbar. So bleibt das System nachvollziehbar, auch ohne Interaktion im Netzwerk.</p>
+        <p class="reveal" style="--delay:80ms;max-width:62ch;margin:0.9rem 0 0;color:var(--ink-soft);">Alle Bereiche sind auch linear lesbar. So bleibt die Architektur ohne Netzwerk-Interaktion klar.</p>
       </div>
       <div class="container" id="spreadContainer"></div>
     </section>
@@ -1544,31 +2088,100 @@
     </div>
 
     <section class="section author" id="autor" aria-labelledby="autor-title">
-      <div class="container author-layout">
-        <figure class="author-photo reveal" style="--delay: 40ms;">
-          <img src="robert_vortrag.png" alt="Autorporträt Robert Meyer bei einem Vortrag" width="960" height="1200" loading="lazy" decoding="async">
-        </figure>
+      <div class="container">
+        <div class="author-process reveal" style="--delay: 30ms;">
+          <h2 class="author-process-title">Wie diese Bücher entstehen</h2>
 
-        <div class="author-copy reveal" style="--delay: 90ms;">
-          <span class="eyebrow">Über den Autor</span>
-          <h2 id="autor-title">Robert Meyer</h2>
-          <p>Robert Meyer ist KI-Berater, Fachautor und Dozent mit über 15 Jahren Erfahrung in Digitalisierung und KI-Transformation. Seine Arbeit verbindet strategische Klarheit mit praktischer Umsetzung im Mittelstand.</p>
-          <p>Im Zentrum steht ein Ansatz, der Governance, Technologie und Kompetenzentwicklung als zusammenhängendes System betrachtet. So entstehen belastbare KI-Strukturen, die fachlich tragfähig sind und im Alltag funktionieren.</p>
-          <p>Sein Buchprogramm folgt genau dieser Logik: nicht als lose Sammlung, sondern als Architektur für verantwortungsvolle und wirksame KI-Implementierung.</p>
+          <div class="process-track-wrap">
+            <div class="process-track" role="list" aria-label="Entstehungsprozess der Fachbücher">
+              <div class="process-node" role="listitem" style="--idx:0;">
+                <span class="process-node-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M4 5.5h16v10H7.8L4 18V5.5Z"></path><path d="M10.1 9.1a1.95 1.95 0 1 1 3.9.12c0 1.3-1.3 1.58-1.76 2.32"></path><path d="M12 14.7h.01"></path></svg>
+                </span>
+                <span class="process-label">Praxisfrage</span>
+              </div>
+              <svg class="process-link" style="--idx:0;" viewBox="0 0 52 14" aria-hidden="true">
+                <path class="process-stroke" style="--idx:0;" d="M1 7H45"></path>
+                <path class="process-head" style="--idx:0;" d="M39 3l6 4-6 4"></path>
+              </svg>
 
-          <div class="author-links">
-            <a class="icon-link" href="https://www.linkedin.com/in/robert-meyer-666b39315" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profil von Robert Meyer">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 8.5H3.56V20h3.38V8.5Zm.23-3.56c0-1.04-.8-1.88-1.93-1.88-1.12 0-1.93.84-1.93 1.88 0 1.04.8 1.88 1.9 1.88h.03c1.15 0 1.93-.84 1.93-1.88ZM20.5 13.41c0-3.36-1.8-4.92-4.2-4.92-1.93 0-2.8 1.06-3.28 1.8V8.5H9.64c.04 1.18 0 11.5 0 11.5h3.38v-6.42c0-.34.02-.68.13-.92.27-.68.88-1.38 1.9-1.38 1.34 0 1.88 1.02 1.88 2.53V20h3.38v-6.59Z"/></svg>
-              LinkedIn
-            </a>
-            <a class="icon-link" href="https://youtube.com/@r.meyer2025?si=2Adbk_9vO26xI3xW" target="_blank" rel="noopener noreferrer" aria-label="YouTube Kanal von Robert Meyer">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 7.3c-.27-1-1.06-1.8-2.06-2.06C19.62 4.75 12 4.75 12 4.75s-7.62 0-9.44.49c-1 .26-1.79 1.06-2.06 2.06C0 9.12 0 12 0 12s0 2.88.5 4.7c.27 1 1.06 1.8 2.06 2.06 1.82.49 9.44.49 9.44.49s7.62 0 9.44-.49c1-.26 1.79-1.06 2.06-2.06.5-1.82.5-4.7.5-4.7s0-2.88-.5-4.7ZM9.57 15.28V8.72L15.33 12l-5.76 3.28Z"/></svg>
-              YouTube
-            </a>
-            <a class="icon-link" href="https://open.spotify.com/show/1OqnISBvrKNvA0KgQjaRNn" target="_blank" rel="noopener noreferrer" aria-label="Spotify Podcast von Robert Meyer">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5a10.5 10.5 0 1 0 0 21 10.5 10.5 0 0 0 0-21Zm4.73 15.2a.86.86 0 0 1-1.18.28c-3.25-1.99-7.34-2.44-12.16-1.33a.86.86 0 1 1-.39-1.68c5.3-1.22 9.84-.7 13.45 1.52.4.24.53.77.28 1.17Zm1.69-2.8a1.07 1.07 0 0 1-1.47.35c-3.72-2.29-9.39-2.95-13.8-1.6a1.07 1.07 0 1 1-.63-2.05c5.04-1.55 11.3-.82 15.55 1.79.5.3.66.96.35 1.46Zm.15-2.9c-4.46-2.65-11.81-2.9-16.07-1.74a1.28 1.28 0 1 1-.67-2.47c4.94-1.34 13.14-1.04 18.05 1.88a1.28 1.28 0 1 1-1.31 2.2Z"/></svg>
-              Spotify
-            </a>
+              <div class="process-node" role="listitem" style="--idx:1;">
+                <span class="process-node-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="4.8"></circle><path d="M14 14l5 5"></path></svg>
+                </span>
+                <span class="process-label">Recherche</span>
+              </div>
+              <svg class="process-link" style="--idx:1;" viewBox="0 0 52 14" aria-hidden="true">
+                <path class="process-stroke" style="--idx:1;" d="M1 7H45"></path>
+                <path class="process-head" style="--idx:1;" d="M39 3l6 4-6 4"></path>
+              </svg>
+
+              <div class="process-node" role="listitem" style="--idx:2;">
+                <span class="process-node-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><circle cx="6" cy="7" r="1.6"></circle><circle cx="18" cy="7" r="1.6"></circle><circle cx="12" cy="17" r="1.6"></circle><path d="M7.6 7.8 10.6 15.2M16.4 7.8 13.4 15.2M7.6 7h8.8"></path></svg>
+                </span>
+                <span class="process-label">Wissensgraph</span>
+              </div>
+              <svg class="process-link" style="--idx:2;" viewBox="0 0 52 14" aria-hidden="true">
+                <path class="process-stroke" style="--idx:2;" d="M1 7H45"></path>
+                <path class="process-head" style="--idx:2;" d="M39 3l6 4-6 4"></path>
+              </svg>
+
+              <div class="process-node" role="listitem" style="--idx:3;">
+                <span class="process-node-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M4 6h16M7 6l4.2 6.8v4.2l1.6.9 1.1-.8v-4.3L17 6"></path></svg>
+                </span>
+                <span class="process-label">Verdichtung</span>
+              </div>
+              <svg class="process-link" style="--idx:3;" viewBox="0 0 52 14" aria-hidden="true">
+                <path class="process-stroke" style="--idx:3;" d="M1 7H45"></path>
+                <path class="process-head" style="--idx:3;" d="M39 3l6 4-6 4"></path>
+              </svg>
+
+              <div class="process-node" role="listitem" style="--idx:4;">
+                <span class="process-node-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M6 4.8h9.2a2.5 2.5 0 0 1 2.5 2.5V19H8a2 2 0 0 1-2-2V4.8Z"></path><path d="M8 6h8.4"></path></svg>
+                </span>
+                <span class="process-label">Fachbuch</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="author-text-block">
+            <p>Jedes Buch beginnt mit einer realen Frage aus Beratung, Seminar oder Gespräch mit Entscheidern. Diese Fragen fließen in ein persönliches Wissenssystem aus vernetzten Datenbanken mit Analysen, Fallstudien und Querverbindungen aus über 15 Jahren Praxis.</p>
+            <p>Aus der Frage wird Recherche, Abgleich mit Praxiserfahrung und Verdichtung. So entsteht ein Wissensextrakt aus Beratungsarbeit, Fachlektüre und dem Austausch mit Experten, Regulierungsbehörden und Technologie-Teams.</p>
+            <p>Robert Meyer nutzt KI nicht als Schreibhilfe, sondern als Denkpartner: mit lokalen Wissensgraphen, vernetzten Datenbanken und einem eigenen Recherche-System. Die Bücher entstehen dadurch nicht schnell, sondern systematisch.</p>
+          </div>
+
+          <div class="author-divider" aria-hidden="true"></div>
+        </div>
+
+        <div class="author-layout">
+          <figure class="author-photo reveal" style="--delay: 40ms;">
+            <img src="robert_vortrag.png" alt="Autorporträt Robert Meyer bei einem Vortrag" width="960" height="1200" loading="lazy" decoding="async">
+          </figure>
+
+          <div class="author-copy reveal" style="--delay: 90ms;">
+            <span class="eyebrow">Über den Autor</span>
+            <h2 id="autor-title">Robert Meyer</h2>
+            <p>Robert Meyer ist KI-Berater, Fachautor und Dozent mit über 15 Jahren Erfahrung in Digitalisierung und KI-Transformation.</p>
+            <p>Sein Ansatz verbindet Governance, Technologie und Kompetenzentwicklung zu einem System, das im Mittelstand funktioniert.</p>
+            <p>Das Buchprogramm folgt dieser Logik: keine lose Sammlung, sondern eine klare Architektur für wirksame KI-Umsetzung.</p>
+
+            <div class="author-links">
+              <a class="icon-link" href="https://www.linkedin.com/in/robert-meyer-666b39315" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profil von Robert Meyer">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 8.5H3.56V20h3.38V8.5Zm.23-3.56c0-1.04-.8-1.88-1.93-1.88-1.12 0-1.93.84-1.93 1.88 0 1.04.8 1.88 1.9 1.88h.03c1.15 0 1.93-.84 1.93-1.88ZM20.5 13.41c0-3.36-1.8-4.92-4.2-4.92-1.93 0-2.8 1.06-3.28 1.8V8.5H9.64c.04 1.18 0 11.5 0 11.5h3.38v-6.42c0-.34.02-.68.13-.92.27-.68.88-1.38 1.9-1.38 1.34 0 1.88 1.02 1.88 2.53V20h3.38v-6.59Z"/></svg>
+                LinkedIn
+              </a>
+              <a class="icon-link" href="https://youtube.com/@r.meyer2025?si=2Adbk_9vO26xI3xW" target="_blank" rel="noopener noreferrer" aria-label="YouTube Kanal von Robert Meyer">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 7.3c-.27-1-1.06-1.8-2.06-2.06C19.62 4.75 12 4.75 12 4.75s-7.62 0-9.44.49c-1 .26-1.79 1.06-2.06 2.06C0 9.12 0 12 0 12s0 2.88.5 4.7c.27 1 1.06 1.8 2.06 2.06 1.82.49 9.44.49 9.44.49s7.62 0 9.44-.49c1-.26 1.79-1.06 2.06-2.06.5-1.82.5-4.7.5-4.7s0-2.88-.5-4.7ZM9.57 15.28V8.72L15.33 12l-5.76 3.28Z"/></svg>
+                YouTube
+              </a>
+              <a class="icon-link" href="https://open.spotify.com/show/1OqnISBvrKNvA0KgQjaRNn" target="_blank" rel="noopener noreferrer" aria-label="Spotify Podcast von Robert Meyer">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5a10.5 10.5 0 1 0 0 21 10.5 10.5 0 0 0 0-21Zm4.73 15.2a.86.86 0 0 1-1.18.28c-3.25-1.99-7.34-2.44-12.16-1.33a.86.86 0 1 1-.39-1.68c5.3-1.22 9.84-.7 13.45 1.52.4.24.53.77.28 1.17Zm1.69-2.8a1.07 1.07 0 0 1-1.47.35c-3.72-2.29-9.39-2.95-13.8-1.6a1.07 1.07 0 1 1-.63-2.05c5.04-1.55 11.3-.82 15.55 1.79.5.3.66.96.35 1.46Zm.15-2.9c-4.46-2.65-11.81-2.9-16.07-1.74a1.28 1.28 0 1 1-.67-2.47c4.94-1.34 13.14-1.04 18.05 1.88a1.28 1.28 0 1 1-1.31 2.2Z"/></svg>
+                Spotify
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -1577,7 +2190,7 @@
     <section class="section ecosystem" id="oekosystem" aria-labelledby="eco-title">
       <div class="container">
         <span class="eyebrow reveal" style="--delay:20ms;">Ökosystem</span>
-        <h2 id="eco-title" class="reveal" style="--delay:70ms;font-family:'Fraunces','Libre Caslon Display',serif;font-size:clamp(1.45rem,3.8vw,2.5rem);line-height:1.15;margin:0.9rem 0 0;max-width:24ch;">Über die Bücher hinaus: Interaktive Lernplattformen, Coaching und Beratung</h2>
+        <h2 id="eco-title" class="reveal" style="--delay:70ms;font-family:'Fraunces','Libre Caslon Display',serif;font-size:clamp(1.45rem,3.8vw,2.5rem);line-height:1.15;margin:0.9rem 0 0;max-width:24ch;">Über die Bücher hinaus: Lernplattform, Coaching und Beratung</h2>
 
         <div class="eco-grid">
           <article class="eco-card reveal" style="--delay:120ms;">
@@ -1638,8 +2251,9 @@
           spreadId: 'spread-reg',
           name: 'REGULIERUNG + KONTROLLE',
           subtitle: 'EU AI Act · Governance-Frameworks · Compliance-Strategien',
-          lead: 'Von der kritischen Analyse über strukturierte Governance bis zur regulatorischen Umsetzung.',
-          description: 'Die Reihe für alle, die KI nicht nur einsetzen, sondern verantwortungsvoll steuern wollen.',
+          lead: 'Governance, Compliance und EU AI Act als belastbares Steuerungssystem.',
+          description: 'Für Entscheider, die KI kontrolliert in die Umsetzung bringen.',
+          mobileTeaser: 'Governance und EU AI Act als klare Leitplanke für den KI-Einsatz.',
           books: [
             { title: 'Die KI-Lüge', cover: 'lüge.png', url: 'https://amzn.eu/d/03TE7yga', sampleUrl: 'leseproben/die_ki_luege.html' },
             { title: 'EU AI Act Readiness für KMU', cover: 'act.png', url: 'https://amzn.eu/d/06i2a1wU' },
@@ -1652,8 +2266,9 @@
           spreadId: 'spread-auto',
           name: 'AUTONOME KI-SYSTEME',
           subtitle: 'Agentic AI · MCP-Architektur · Automatisierung · Vibe Coding',
-          lead: 'Wie KI-Systeme eigenständig handeln, Werkzeuge nutzen und komplexe Aufgaben orchestrieren.',
-          description: 'Von der Theorie bis zur praktischen Implementierung in realen Prozessen.',
+          lead: 'Von Agentic AI bis MCP: autonome Systeme vom Konzept in den Betrieb.',
+          description: 'Für Teams, die Automatisierung skalieren wollen.',
+          mobileTeaser: 'Autonome Systeme, MCP und Orchestrierung für den produktiven Einsatz.',
           books: [
             { title: 'Agentic AI 2.0', cover: 'agent2.png', url: 'https://amzn.eu/d/00afhkdj', sampleUrl: 'leseproben/agent20.html' },
             { title: 'Der MCP Architekt', cover: 'mcp2.png', url: 'https://amzn.eu/d/0hsbd4NJ' },
@@ -1666,10 +2281,11 @@
           spreadId: 'spread-soc',
           name: 'KI + GESELLSCHAFT',
           subtitle: 'Philosophie · Ethik · Zukunftsszenarien · Bildung',
-          lead: 'Was macht KI mit uns als Menschen, als Gesellschaft, als Zivilisation?',
-          description: 'Die Reihe für alle, die über den technischen Horizont hinausdenken.',
+          lead: 'KI im Spannungsfeld von Ethik, Bildung und Zukunftsfragen.',
+          description: 'Für Leser, die Technik mit gesellschaftlicher Wirkung verbinden.',
+          mobileTeaser: 'Gesellschaftliche Perspektiven auf KI jenseits der reinen Technik.',
           books: [
-            { title: 'Gott 2.0', cover: 'gott.png', url: 'https://amzn.eu/d/09NcDFso' },
+            { title: 'Gott 2.0', cover: 'gott.png', url: 'https://amzn.eu/d/09NcDFso', sampleUrl: 'leseproben/gott20.html' },
             { title: 'Die Intelligenz-Lüge', cover: 'intell.png', url: 'https://amzn.eu/d/0fd4v2rg' },
             { title: 'Die Sinnkrise 2.0', cover: 'sinn.png', url: 'https://amzn.eu/d/02Yw94W2' }
           ],
@@ -1680,10 +2296,11 @@
           spreadId: 'spread-trans',
           name: 'KI-TRANSFORMATION',
           subtitle: 'Beratung · Change Management · Führung · Wissensmanagement',
-          lead: 'KI-Projekte scheitern nicht an der Technologie, sondern an der Umsetzung.',
-          description: 'Die Reihe für Führungskräfte, die Transformation richtig angehen wollen.',
+          lead: 'Warum KI-Projekte an der Umsetzung scheitern und wie Führung gegensteuert.',
+          description: 'Konkrete Muster für Change, Beratung und Wissensarbeit.',
+          mobileTeaser: 'Umsetzung statt Hype: Führung, Change und belastbare Transformationsmuster.',
           books: [
-            { title: 'Die KI-Revolution in der Beratung', cover: 'beratung.png', url: 'https://amzn.eu/d/059sTks2' },
+            { title: 'Die KI-Revolution in der Beratung', cover: 'beratung.png', url: 'https://amzn.eu/d/059sTks2', sampleUrl: 'leseproben/beratung.html' },
             { title: 'Change Management mit KI', cover: 'change.png', url: 'https://amzn.eu/d/0hwvQWb0' },
             { title: 'CaaS – Consulting as a Service', cover: 'caas.png', url: 'https://amzn.eu/d/0aksWHWj' }
           ],
@@ -1694,8 +2311,9 @@
           spreadId: 'spread-tool',
           name: 'KI-WERKZEUGKASTEN',
           subtitle: 'Prompting · Alltags-KI · Faktencheck · Praxiswissen',
-          lead: 'Sofort anwendbares KI-Wissen für den Alltag.',
-          description: 'Von der perfekten Prompt-Technik bis zum kritischen Umgang mit KI-Ergebnissen.',
+          lead: 'Prompting, Faktencheck und Alltags-KI als direkt nutzbares Handwerk.',
+          description: 'Methoden für sichere Entscheidungen im Tagesgeschäft.',
+          mobileTeaser: 'Direkt nutzbare KI-Methoden für Alltag, Prompting und Faktencheck.',
           books: [
             { title: 'Jetzt aber richtig Prompten', cover: 'prompt.png', url: 'https://amzn.eu/d/0gCjsba5' },
             { title: 'KI im Alltag meistern', cover: 'alltag.png', url: 'https://amzn.eu/d/0fkkIPr8' },
@@ -1708,8 +2326,9 @@
           spreadId: 'spread-pers',
           name: 'PERSÖNLICHE KI-KOMPETENZ',
           subtitle: 'Future Skills · Stärkenentwicklung · Cognitive Leverage',
-          lead: 'KI als Werkzeug für persönliches Wachstum.',
-          description: 'Wie Sie Ihre individuellen Stärken mit KI-Unterstützung auf das nächste Level heben.',
+          lead: 'Future Skills und Cognitive Leverage für persönliche Wirksamkeit mit KI.',
+          description: 'Für Menschen, die KI als Verstärker ihrer Stärken nutzen.',
+          mobileTeaser: 'Persönliche Kompetenzentwicklung mit KI als Hebel für Stärken.',
           books: [
             { title: 'Future Skills mit KI', cover: 'future.png', url: 'https://amzn.eu/d/0dN53Erh' },
             { title: 'Cognitive Leverage', cover: 'cogn.png', url: 'https://amzn.eu/d/084J84uV' },
@@ -1722,8 +2341,9 @@
           spreadId: 'spread-fin',
           name: 'KI + FINANZEN',
           subtitle: 'Finanzanalyse · Treasury · DeFi',
-          lead: 'Wie KI die Finanzwelt verändert.',
-          description: 'Von der intelligenten Anlageanalyse bis zu dezentralen Finanzprotokollen.',
+          lead: 'Finanzanalyse, Treasury und DeFi im KI-Einsatz.',
+          description: 'Für Teams, die Chancen nutzen und Risiken steuern wollen.',
+          mobileTeaser: 'KI in Finanzen: Analyse, Treasury und DeFi mit klarer Risikosteuerung.',
           books: [
             { title: 'Die KI-gestützte Finanzanlage', cover: 'finanz.png', url: 'https://amzn.eu/d/072WLsCi' },
             { title: 'Smart KI Treasury', cover: 'smart.png', url: 'https://amzn.eu/d/0dyjCs3y' },
@@ -1748,14 +2368,14 @@
           from: 'reg',
           to: 'trans',
           d: 'M448 98 Q520 256 706 560',
-          text: 'Governance entfaltet Wirkung erst dann, wenn sie in Veränderungsprozesse übersetzt wird.'
+          text: 'Governance wirkt erst, wenn sie in Veränderung übersetzt wird.'
         },
         {
           id: 'e-auto-trans',
           from: 'auto',
           to: 'trans',
           d: 'M816 184 Q846 340 714 560',
-          text: 'Agentische Systeme brauchen organisatorische Verankerung, sonst bleibt es beim Prototyp.'
+          text: 'Agentische Systeme brauchen Organisation, sonst bleibt es beim Prototyp.'
         },
         {
           id: 'e-soc-pers',
@@ -1776,35 +2396,35 @@
           from: 'tool',
           to: 'pers',
           d: 'M286 560 Q182 486 106 390',
-          text: 'Werkzeuge entfalten erst durch Kompetenz ihren Hebel.'
+          text: 'Werkzeuge werden erst mit Kompetenz wirksam.'
         },
         {
           id: 'e-fin-reg',
           from: 'fin',
           to: 'reg',
           d: 'M160 180 Q264 102 446 96',
-          text: 'Finanznahe KI-Anwendungen erfordern besonders klare Compliance-Strukturen.'
+          text: 'Finanz-KI braucht klare Compliance-Strukturen.'
         },
         {
           id: 'e-fin-auto',
           from: 'fin',
           to: 'auto',
           d: 'M166 190 Q498 84 812 182',
-          text: 'Autonome Finanzprozesse brauchen verlässliche Modell- und Risikologik.'
+          text: 'Autonome Finanzprozesse brauchen verlässliche Risiko- und Modelllogik.'
         },
         {
           id: 'e-soc-trans',
           from: 'soc',
           to: 'trans',
           d: 'M862 392 Q806 470 712 560',
-          text: 'Transformation gelingt nur, wenn kulturelle und gesellschaftliche Faktoren mitgedacht werden.'
+          text: 'Transformation gelingt nur mit kulturellem und gesellschaftlichem Kontext.'
         },
         {
           id: 'e-reg-tool',
           from: 'reg',
           to: 'tool',
           d: 'M450 98 Q326 278 292 556',
-          text: 'Regeln werden im Alltag erst durch konkrete Arbeitswerkzeuge wirksam.'
+          text: 'Regeln werden im Alltag durch konkrete Werkzeuge wirksam.'
         }
       ];
 
@@ -1829,6 +2449,7 @@
       const spreadContainer = document.getElementById('spreadContainer');
       const tooltip = document.getElementById('networkTooltip');
       const networkShell = document.getElementById('networkShell');
+      const networkPointerHint = document.getElementById('networkPointerHint');
       const miniNetwork = document.getElementById('miniNetwork');
       const jumpNetworkBtn = document.getElementById('jumpNetwork');
       const heroSection = document.getElementById('netzwerk-ansicht');
@@ -1855,10 +2476,20 @@
       let lockedId = null;
       let hoverId = null;
       let hoverEdgeId = null;
+      const networkIntroMs = 2300;
+      const demoIds = ['reg', 'auto', 'trans'];
+      const networkDemo = {
+        cancelled: false,
+        running: false,
+        hintDone: false,
+        startTimer: null,
+        stepTimer: null,
+        timers: new Set()
+      };
 
       function renderEdges() {
-        networkEdges.innerHTML = edges.map((edge) => `
-          <path class="edge" id="${edge.id}" d="${edge.d}" aria-hidden="true"></path>
+        networkEdges.innerHTML = edges.map((edge, idx) => `
+          <path class="edge" id="${edge.id}" style="--edge-idx:${idx};" d="${edge.d}" aria-hidden="true"></path>
           <path class="edge-hit" data-edge="${edge.id}" d="${edge.d}" tabindex="0" aria-label="Beziehung ${nodeIndex[edge.from].name} und ${nodeIndex[edge.to].name}"></path>
         `).join('');
 
@@ -1867,20 +2498,202 @@
         `).join('');
       }
 
+      function installNetworkIntro() {
+        if (!networkShell) return;
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isMobile = window.matchMedia('(max-width: 767px)').matches;
+        if (reduced || isMobile) return;
+
+        networkShell.classList.add('intro-running');
+        window.setTimeout(() => {
+          networkShell.classList.remove('intro-running');
+        }, networkIntroMs);
+      }
+
+      function demoSetTimeout(callback, delay) {
+        const id = window.setTimeout(() => {
+          networkDemo.timers.delete(id);
+          callback();
+        }, delay);
+        networkDemo.timers.add(id);
+        return id;
+      }
+
+      function hidePointerHint() {
+        if (!networkPointerHint) return;
+        networkPointerHint.classList.remove('show', 'moving', 'click');
+        networkPointerHint.style.removeProperty('--ptr-transform');
+        networkPointerHint.style.transform = '';
+      }
+
+      function playPointerHint(node, done) {
+        if (!networkPointerHint || networkDemo.cancelled || !node || !networkShell) {
+          done();
+          return;
+        }
+
+        networkDemo.hintDone = true;
+        const shellRect = networkShell.getBoundingClientRect();
+        const nodeRect = node.getBoundingClientRect();
+        const targetX = Math.max(6, nodeRect.left - shellRect.left + Math.min(18, Math.max(8, nodeRect.width * 0.22)));
+        const targetY = Math.max(6, nodeRect.top - shellRect.top + Math.max(10, nodeRect.height * 0.56));
+        const startX = -24;
+        const startY = Math.min(shellRect.height + 14, targetY + 90);
+
+        networkPointerHint.classList.remove('show', 'moving', 'click');
+        networkPointerHint.style.transform = `translate3d(${startX}px, ${startY}px, 0) scale(0.96)`;
+        networkPointerHint.style.setProperty('--ptr-transform', `translate3d(${targetX}px, ${targetY}px, 0) scale(1)`);
+        networkPointerHint.classList.add('show');
+
+        demoSetTimeout(() => {
+          if (networkDemo.cancelled) return;
+          networkPointerHint.classList.add('moving');
+          networkPointerHint.style.transform = `translate3d(${targetX}px, ${targetY}px, 0) scale(1)`;
+        }, 24);
+
+        demoSetTimeout(() => {
+          if (networkDemo.cancelled) return;
+          networkPointerHint.classList.add('click');
+        }, 790);
+
+        demoSetTimeout(() => {
+          if (networkDemo.cancelled) return;
+          networkPointerHint.classList.remove('click');
+          networkPointerHint.classList.remove('moving');
+          networkPointerHint.classList.remove('show');
+          done();
+        }, 1080);
+      }
+
+      function clearNetworkDemoTimers() {
+        if (networkDemo.startTimer) {
+          window.clearTimeout(networkDemo.startTimer);
+          networkDemo.startTimer = null;
+        }
+        if (networkDemo.stepTimer) {
+          window.clearTimeout(networkDemo.stepTimer);
+          networkDemo.stepTimer = null;
+        }
+        networkDemo.timers.forEach((id) => window.clearTimeout(id));
+        networkDemo.timers.clear();
+      }
+
+      function stopNetworkDemo() {
+        if (networkDemo.cancelled) return;
+        networkDemo.cancelled = true;
+        networkDemo.running = false;
+        clearNetworkDemoTimers();
+        nodeButtons.forEach((node) => node.classList.remove('demo-pulse'));
+        hidePointerHint();
+      }
+
+      function scheduleNetworkDemoStep(stepIndex) {
+        if (networkDemo.cancelled) return;
+
+        if (stepIndex >= demoIds.length) {
+          networkDemo.running = false;
+          return;
+        }
+
+        const id = demoIds[stepIndex];
+        const node = nodeButtons.find((btn) => btn.dataset.node === id);
+        if (!node) {
+          scheduleNetworkDemoStep(stepIndex + 1);
+          return;
+        }
+
+        const runStep = () => {
+          if (networkDemo.cancelled) return;
+          networkDemo.running = true;
+          node.classList.add('demo-pulse');
+
+          networkDemo.stepTimer = window.setTimeout(() => {
+            if (networkDemo.cancelled) return;
+            node.classList.remove('demo-pulse');
+            openNode(id, true);
+
+            networkDemo.stepTimer = window.setTimeout(() => {
+              if (networkDemo.cancelled) return;
+              const isLastStep = stepIndex === demoIds.length - 1;
+
+              if (isLastStep) {
+                const defaultId = demoIds[0];
+                networkDemo.running = false;
+                if (defaultId && nodeIndex[defaultId]) {
+                  openNode(defaultId, true);
+                }
+                return;
+              }
+
+              lockedId = null;
+              hoverId = null;
+              panelWrap.classList.remove('open');
+              setActive(null);
+
+              networkDemo.stepTimer = window.setTimeout(() => {
+                scheduleNetworkDemoStep(stepIndex + 1);
+              }, 320);
+            }, 3600);
+          }, 1800);
+        };
+
+        if (stepIndex === 0 && !networkDemo.hintDone) {
+          playPointerHint(node, runStep);
+          return;
+        }
+
+        runStep();
+      }
+
+      function installNetworkAutoDemo() {
+        if (!networkShell) return;
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isMobile = window.matchMedia('(max-width: 767px)').matches;
+        if (reduced || isMobile) return;
+
+        networkShell.addEventListener('mouseenter', stopNetworkDemo, { once: true });
+        networkShell.addEventListener('pointerdown', stopNetworkDemo, { once: true });
+        networkShell.addEventListener('touchstart', stopNetworkDemo, { once: true, passive: true });
+        networkShell.addEventListener('focusin', stopNetworkDemo, { once: true });
+
+        networkDemo.startTimer = window.setTimeout(() => {
+          if (networkDemo.cancelled) return;
+          scheduleNetworkDemoStep(0);
+        }, networkIntroMs + 2000);
+      }
+
       function coverAltText(title) {
         return `Buchcover ${title} von Robert Meyer`;
+      }
+
+      function coverSources(cover) {
+        const dotIndex = cover.lastIndexOf('.');
+        if (dotIndex < 0) {
+          return {
+            src: cover,
+            srcset: '',
+            sizes: '(max-width: 767px) 30vw, 180px'
+          };
+        }
+        const mobile = `${cover.slice(0, dotIndex)}-m.jpg`;
+        return {
+          src: cover,
+          srcset: `${mobile} 300w, ${cover} 600w`,
+          sizes: '(max-width: 767px) 30vw, (max-width: 1199px) 18vw, 180px'
+        };
       }
 
       function bookCardMarkup(book) {
         const cover = String(book.cover || '').trim();
         const isPlaceholder = !cover || (/^\[.+\]$/.test(cover));
+        const sources = coverSources(cover);
         const sampleLink = book.sampleUrl
           ? `<a class="sample-link" href="${book.sampleUrl}" target="_blank" rel="noopener noreferrer">Leseprobe lesen →</a>`
           : '';
         const media = isPlaceholder
           ? `<div class="book-cover book-cover-placeholder"><span>Cover folgt</span></div>`
           : `<a class="cover-link" href="${book.url}" target="_blank" rel="noopener noreferrer">
-              <div class="book-cover"><img src="${cover}" alt="${coverAltText(book.title)}" data-cover-title="${book.title}" width="600" height="900" loading="lazy" decoding="async"></div>
+              <div class="book-cover"><img src="${sources.src}" srcset="${sources.srcset}" sizes="${sources.sizes}" alt="${coverAltText(book.title)}" data-cover-title="${book.title}" width="600" height="900" loading="lazy" decoding="async"></div>
             </a>`;
 
         return `
@@ -1908,16 +2721,17 @@
           const cover = String(book.cover || '').trim();
           const isPlaceholder = !cover || (/^\\[.+\\]$/.test(cover));
           const pos = layout[index] || layout[layout.length - 1];
+          const sources = coverSources(cover);
           const media = isPlaceholder
             ? '<div class=\"book-cover book-cover-placeholder\"><span>Cover folgt</span></div>'
-            : `<div class=\"book-cover\"><img src=\"${cover}\" alt=\"${coverAltText(book.title)}\" data-cover-title=\"${book.title}\" width=\"600\" height=\"900\" loading=\"lazy\" decoding=\"async\"></div>`;
+            : `<div class=\"book-cover\"><img src=\"${sources.src}\" srcset=\"${sources.srcset}\" sizes=\"(max-width: 767px) 34vw, 160px\" alt=\"${coverAltText(book.title)}\" data-cover-title=\"${book.title}\" width=\"600\" height=\"900\" loading=\"lazy\" decoding=\"async\"></div>`;
           const active = index === count - 1 ? ' active' : '';
           return `<button type=\"button\" class=\"panel-stack-card${active}\" data-stack-card data-stack-index=\"${index}\" style=\"--x:${pos.x};--rot:${pos.rot};z-index:${index + 1};\" aria-label=\"${book.title} in den Vordergrund bringen\">${media}</button>`;
         }).join('');
 
         return `
           <div class="panel-stack" aria-label="Highlight-Cover gestapelt">${cards}</div>
-          <a class="panel-stack-link" href="#${item.spreadId}" data-spread-jump="${item.spreadId}">Alle Highlights im Fachgebiet ansehen ↓</a>
+          <a class="panel-stack-link" href="#${item.spreadId}" data-spread-jump="${item.spreadId}">Zum Fachgebiet ↓</a>
         `;
       }
 
@@ -1964,14 +2778,17 @@
         const item = nodeIndex[id];
         if (!item) {
           panelWrap.classList.remove('open');
+          panelMeta.removeAttribute('data-node');
           return;
         }
+
+        panelMeta.setAttribute('data-node', id);
 
         panelMeta.innerHTML = `
           <h2>${formatPanelTitle(item.name)}</h2>
           <p class="panel-sub">${formatSubtitle(item.subtitle)}</p>
           <p class="panel-desc"><span class="lead">${item.lead}</span>${item.description}</p>
-          <a class="series-link" href="${item.seriesUrl}" target="_blank" rel="noopener noreferrer">Weitere Titel dieser Reihe auf Amazon ↗</a>
+          <a class="series-link" href="${item.seriesUrl}" target="_blank" rel="noopener noreferrer">Weitere Titel bei Amazon ↗</a>
         `;
 
         panelBooks.innerHTML = panelStackMarkup(item);
@@ -1990,8 +2807,8 @@
                 <span class="eyebrow">Fachgebiet ${String(idx + 1).padStart(2, '0')}</span>
                 <h2>${item.name}</h2>
                 <p class="spread-sub">${formatSubtitle(item.subtitle)}</p>
-                <p class="spread-desc"><span style="font-size:1.05rem;">${item.lead}</span> ${item.description}</p>
-                <a class="series-link" href="${item.seriesUrl}" target="_blank" rel="noopener noreferrer">Weitere Titel dieser Reihe auf Amazon ↗</a>
+                <p class="spread-desc"><span style="font-size:1rem;">${item.lead}</span> ${item.description}</p>
+                <a class="series-link" href="${item.seriesUrl}" target="_blank" rel="noopener noreferrer">Weitere Titel bei Amazon ↗</a>
               </div>
               <div class="spread-books reveal" data-count="${item.books.length}" style="--delay:${130 + (idx % 3) * 40}ms;">
                 ${item.books.map((book) => bookCardMarkup(book)).join('')}
@@ -2004,16 +2821,106 @@
 
       function renderMobileDomainLinks() {
         if (!mobileDomainList) return;
-        mobileDomainList.innerHTML = domains.map((item) =>
-          `<a class="mobile-domain-link" href="#${item.spreadId}" data-mobile-target="${item.id}">${item.name}</a>`
-        ).join('');
+        const mobileEnabled = window.matchMedia('(max-width: 767px)').matches;
+        const alphas = [0.95, 0.84, 0.76, 0.68, 0.6, 0.52, 0.46];
+        let mobileHintCancelled = false;
+
+        mobileDomainList.innerHTML = domains.map((item, index) => {
+          const books = item.books.slice(0, 3).map((book) => {
+            const cover = String(book.cover || '').trim();
+            const isPlaceholder = !cover || (/^\[.+\]$/.test(cover));
+            if (isPlaceholder) {
+              return `<div class="mobile-domain-book"><div class="book-cover book-cover-placeholder"><span>Cover folgt</span></div><span class="mobile-domain-book-title">${book.title}</span></div>`;
+            }
+            const sources = coverSources(cover);
+            return `
+              <a class="mobile-domain-book" href="${book.url}" target="_blank" rel="noopener noreferrer" aria-label="${book.title} bei Amazon öffnen">
+                <img src="${sources.src}" srcset="${sources.srcset}" sizes="(max-width: 767px) 26vw, 140px" alt="${coverAltText(book.title)}" width="600" height="900" loading="lazy" decoding="async">
+                <span class="mobile-domain-book-title">${book.title}</span>
+              </a>
+            `;
+          }).join('');
+
+          return `
+            <article class="mobile-domain-item" style="--dot-alpha:${alphas[index] || 0.6};" data-mobile-item="${item.id}">
+              <button class="mobile-domain-trigger" type="button" data-mobile-trigger="${item.id}" aria-expanded="false" aria-controls="mobile-panel-${item.id}">
+                <span class="mobile-domain-dot" aria-hidden="true"></span>
+                <span class="mobile-domain-name">${item.name}</span>
+                <span class="mobile-domain-chevron" aria-hidden="true">+</span>
+              </button>
+              <div class="mobile-domain-panel" id="mobile-panel-${item.id}" hidden>
+                <div class="mobile-domain-panel-inner">
+                  <p class="mobile-domain-text">${item.mobileTeaser || item.lead}</p>
+                  <div class="mobile-domain-books">${books}</div>
+                </div>
+              </div>
+            </article>
+          `;
+        }).join('');
+
+        const openMobileItem = (id) => {
+          const items = Array.from(mobileDomainList.querySelectorAll('[data-mobile-item]'));
+          items.forEach((item) => {
+            const itemId = item.getAttribute('data-mobile-item');
+            const trigger = item.querySelector('[data-mobile-trigger]');
+            const panel = item.querySelector('.mobile-domain-panel');
+            const isActive = itemId === id;
+            if (trigger) trigger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+            if (panel) {
+              panel.classList.toggle('open', isActive);
+              panel.hidden = !isActive;
+            }
+          });
+
+          if (id && mobileEnabled) {
+            lockedId = id;
+            setActive(id);
+          }
+        };
 
         mobileDomainList.addEventListener('click', (ev) => {
-          const link = ev.target.closest('[data-mobile-target]');
-          if (!link) return;
-          lockedId = link.dataset.mobileTarget || null;
-          setActive(lockedId);
+          const trigger = ev.target.closest('[data-mobile-trigger]');
+          if (!trigger) return;
+          mobileHintCancelled = true;
+          const id = trigger.getAttribute('data-mobile-trigger');
+          if (!id) return;
+          const expanded = trigger.getAttribute('aria-expanded') === 'true';
+          if (expanded) {
+            trigger.setAttribute('aria-expanded', 'false');
+            const panel = mobileDomainList.querySelector(`#mobile-panel-${id}`);
+            if (panel) {
+              panel.classList.remove('open');
+              panel.hidden = true;
+            }
+            if (mobileEnabled) {
+              lockedId = null;
+              setActive(null);
+            }
+            return;
+          }
+          openMobileItem(id);
         });
+
+        if (mobileEnabled) {
+          mobileDomainList.addEventListener('pointerdown', () => {
+            mobileHintCancelled = true;
+          }, { once: true });
+          mobileDomainList.addEventListener('touchstart', () => {
+            mobileHintCancelled = true;
+          }, { once: true, passive: true });
+
+          demoSetTimeout(() => {
+            if (mobileHintCancelled) return;
+            const firstTrigger = mobileDomainList.querySelector('[data-mobile-trigger]');
+            if (!firstTrigger) return;
+            firstTrigger.classList.add('demo-tap');
+            demoSetTimeout(() => {
+              firstTrigger.classList.remove('demo-tap');
+            }, 820);
+          }, 860);
+
+          openMobileItem(domains[0]?.id || null);
+        }
       }
 
       function scrollToSpread(spreadId) {
@@ -2024,11 +2931,17 @@
 
       function setActive(id) {
         const current = id || lockedId;
+        const focusMode = Boolean(lockedId);
+
+        if (networkShell) {
+          networkShell.classList.toggle('focused', focusMode);
+        }
 
         nodeButtons.forEach((node) => {
           node.classList.toggle('active', node.dataset.node === current);
           const isRelated = current && relationsByNode[current]?.has(node.dataset.node);
           node.classList.toggle('related', Boolean(isRelated));
+          node.classList.toggle('dim', Boolean(focusMode && node.dataset.node !== lockedId));
         });
 
         miniButtons.forEach((node) => {
@@ -2060,7 +2973,7 @@
         tooltip.textContent = text;
         const bounds = networkShell.getBoundingClientRect();
         const x = Math.max(24, Math.min(bounds.width - 24, clientX - bounds.left));
-        const y = Math.max(22, Math.min(bounds.height - 12, clientY - bounds.top - 14));
+        const y = Math.max(18, Math.min(bounds.height - 10, clientY - bounds.top - 8));
         tooltip.style.left = `${x}px`;
         tooltip.style.top = `${y}px`;
         tooltip.classList.add('visible');
@@ -2096,8 +3009,14 @@
       function installNodeEvents() {
         nodeButtons.forEach((btn) => {
           const id = btn.dataset.node;
-          btn.addEventListener('mouseenter', () => openNode(id, false));
-          btn.addEventListener('focus', () => openNode(id, false));
+          btn.addEventListener('mouseenter', () => {
+            stopNetworkDemo();
+            openNode(id, false);
+          });
+          btn.addEventListener('focus', () => {
+            stopNetworkDemo();
+            openNode(id, false);
+          });
           btn.addEventListener('mouseleave', () => {
             if (!lockedId || lockedId !== id) clearHoverNode();
             hideTooltip();
@@ -2106,12 +3025,14 @@
             if (!lockedId || lockedId !== id) clearHoverNode();
           });
           btn.addEventListener('click', () => {
+            stopNetworkDemo();
             openNode(id, true);
           });
         });
 
         miniButtons.forEach((btn) => {
           btn.addEventListener('click', () => {
+            stopNetworkDemo();
             const id = btn.dataset.target;
             lockedId = id;
             setActive(id);
@@ -2129,8 +3050,9 @@
           if (!edge) return;
 
           hit.addEventListener('mouseenter', (ev) => {
+            stopNetworkDemo();
             hoverEdgeId = id;
-            showTooltip(`"${nodeIndex[edge.from].name}" ↔ "${nodeIndex[edge.to].name}": ${edge.text}`, ev.clientX, ev.clientY);
+            showTooltip(edge.text, ev.clientX, ev.clientY);
             setActive(hoverId || lockedId || edge.from);
             nodeButtons.forEach((btn) => {
               const n = btn.dataset.node;
@@ -2139,7 +3061,7 @@
           });
 
           hit.addEventListener('mousemove', (ev) => {
-            showTooltip(`"${nodeIndex[edge.from].name}" ↔ "${nodeIndex[edge.to].name}": ${edge.text}`, ev.clientX, ev.clientY);
+            showTooltip(edge.text, ev.clientX, ev.clientY);
           });
 
           hit.addEventListener('mouseleave', () => {
@@ -2149,6 +3071,7 @@
           });
 
           hit.addEventListener('focus', () => {
+            stopNetworkDemo();
             hoverEdgeId = id;
             setActive(hoverId || lockedId || edge.from);
           });
@@ -2162,6 +3085,7 @@
 
       function installClosePanel() {
         closePanelBtn.addEventListener('click', () => {
+          stopNetworkDemo();
           lockedId = null;
           hoverId = null;
           panelWrap.classList.remove('open');
@@ -2171,6 +3095,7 @@
 
       function installPanelJumpLinks() {
         panelBooks.addEventListener('click', (ev) => {
+          stopNetworkDemo();
           const stackCard = ev.target.closest('[data-stack-card]');
           if (stackCard) {
             const cards = Array.from(panelBooks.querySelectorAll('[data-stack-card]'));
@@ -2206,6 +3131,7 @@
       function installSpreadObserver() {
         const spreadEls = Array.from(document.querySelectorAll('.spread[data-node]'));
         const spreadObserver = new IntersectionObserver((entries) => {
+          if (lockedId) return;
           const visible = entries
             .filter((e) => e.isIntersecting)
             .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
@@ -2225,8 +3151,9 @@
 
       function installReveal() {
         const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isMobile = window.matchMedia('(max-width: 767px)').matches;
         const revealItems = Array.from(document.querySelectorAll('.reveal'));
-        if (reduced) {
+        if (reduced || isMobile) {
           revealItems.forEach((el) => el.classList.add('in'));
           return;
         }
@@ -2594,6 +3521,8 @@
       renderEdges();
       renderSpreads();
       renderMobileDomainLinks();
+      installNetworkIntro();
+      installNetworkAutoDemo();
       installNodeEvents();
       installEdgeEvents();
       installClosePanel();
@@ -2607,9 +3536,7 @@
       installImpressumModal();
       installDatenschutzModal();
 
-      lockedId = domains[0].id;
-      renderPanel(lockedId, true);
-      setActive(lockedId);
+      setActive(null);
     })();
   </script>
 </body>
