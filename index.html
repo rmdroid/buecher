@@ -1329,6 +1329,41 @@
       margin-top: 0.95rem;
     }
 
+    .author-release-note {
+      margin-top: 0.25rem;
+      width: min(100%, 980px);
+      border-left: 2px solid rgba(37, 59, 104, 0.36);
+      padding: 0.2rem 0 0.2rem 0.8rem;
+      color: rgba(31, 39, 56, 0.86);
+      font-size: clamp(0.86rem, 1.8vw, 0.98rem);
+      line-height: 1.55;
+    }
+
+    .author-release-note p {
+      margin: 0;
+    }
+
+    .author-release-note .prefix {
+      font-style: italic;
+      color: var(--ink-soft);
+    }
+
+    .author-release-note strong {
+      font-weight: 700;
+    }
+
+    .author-release-note a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .author-release-note a:hover,
+    .author-release-note a:focus-visible {
+      color: #1f3158;
+      outline: none;
+    }
+
     .social-proof {
       padding: clamp(1.8rem, 4vw, 2.8rem) 0;
       border-top: 1px solid rgba(31, 39, 56, 0.1);
@@ -2204,6 +2239,10 @@
           </div>
 
           <div class="author-divider" aria-hidden="true"></div>
+        </div>
+
+        <div class="author-release-note reveal" style="--delay: 65ms;">
+          <p><span class="prefix">Zuletzt erschienen:</span> <strong>Automatisieren nach Eisenhower</strong> — Ein Führungsframework, das Aufgaben gezielt zwischen Mensch, KI-Agent und Automatisierung verteilt. <a href="news.html" target="_blank" rel="noopener noreferrer">Alle Neuerscheinungen →</a></p>
         </div>
 
         <div class="author-layout">
