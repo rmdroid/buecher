@@ -1,0 +1,2442 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>KI-Anonymisierer</title>
+  <meta name="description" content="Lokale Web-App zur datenschutzkonformen Anonymisierung deutscher Texte. Vollständig lokal im Browser.">
+  <meta name="theme-color" content="#0f172a">
+  <meta property="og:title" content="KI-Anonymisierer — Lokales Datenschutz-Werkzeug">
+  <meta property="og:description" content="Personenbezogene Daten erkennen und ersetzen — vollständig lokal im Browser. Keine Cloud, keine Installation.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230f172a'/><path d='M16 4 6 8.5v7c0 6.5 3.8 12.5 10 14.5 6.2-2 10-8 10-14.5v-7L16 4Z' fill='%233b82f6' opacity='0.9'/><path d='M13 16l2.5 2.5L20 13' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f172a;
+      --secondary: #3b82f6;
+      --accent: #10b981;
+      --warning: #ef4444;
+      --background: #f8fafc;
+      --surface: #ffffff;
+      --text-primary: #0f172a;
+      --text-secondary: #64748b;
+      --border: #e2e8f0;
+      --highlight-yellow: #fef3c7;
+      --highlight-yellow-border: #f59e0b;
+      --highlight-blue: #dbeafe;
+      --highlight-blue-border: #60a5fa;
+      --highlight-green: #d1fae5;
+      --highlight-green-border: #10b981;
+      --highlight-orange: #ffedd5;
+      --highlight-orange-border: #fb923c;
+      --highlight-violet: #ede9fe;
+      --highlight-violet-border: #8b5cf6;
+      --custom-1-bg: #fee2e2;
+      --custom-1-fg: #b91c1c;
+      --custom-1-border: rgba(239, 68, 68, 0.34);
+      --custom-2-bg: #ffedd5;
+      --custom-2-fg: #c2410c;
+      --custom-2-border: rgba(251, 146, 60, 0.34);
+      --custom-3-bg: #fef3c7;
+      --custom-3-fg: #a16207;
+      --custom-3-border: rgba(245, 158, 11, 0.34);
+      --custom-4-bg: #dcfce7;
+      --custom-4-fg: #15803d;
+      --custom-4-border: rgba(34, 197, 94, 0.34);
+      --custom-5-bg: #dbeafe;
+      --custom-5-fg: #1d4ed8;
+      --custom-5-border: rgba(59, 130, 246, 0.34);
+      --custom-neutral-bg: #e2e8f0;
+      --custom-neutral-fg: #475569;
+      --custom-neutral-border: rgba(100, 116, 139, 0.26);
+      --shadow-card: 0 1px 3px rgba(0,0,0,0.08), 0 8px 32px rgba(0,0,0,0.04);
+      --shadow-button: 0 8px 18px rgba(59, 130, 246, 0.22);
+      --shadow-button-hover: 0 14px 26px rgba(59, 130, 246, 0.28);
+      --radius-card: 16px;
+      --radius-field: 10px;
+      --radius-button: 10px;
+      --radius-badge: 6px;
+      --max-width: 1320px;
+      --focus-ring: 0 0 0 4px rgba(59, 130, 246, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-primary);
+      background:
+        radial-gradient(800px 360px at 15% -15%, rgba(59, 130, 246, 0.08), transparent 68%),
+        radial-gradient(720px 320px at 85% 0%, rgba(16, 185, 129, 0.06), transparent 72%),
+        linear-gradient(180deg, #fbfdff 0%, var(--background) 26%, #f1f5f9 100%);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    textarea,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:focus-visible,
+    textarea:focus-visible,
+    input:focus-visible,
+    [tabindex]:focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(248, 250, 252, 0.88);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner,
+    .main-inner,
+    .footer-inner {
+      width: min(var(--max-width), calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .header-inner {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.85rem;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      background: linear-gradient(145deg, #16233f 0%, #0f172a 100%);
+      color: #e0f2fe;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.16);
+    }
+
+    .brand-title {
+      display: block;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      font-size: 1.04rem;
+      color: var(--text-primary);
+    }
+
+    .brand-subtitle {
+      display: block;
+      color: var(--text-secondary);
+      font-size: 0.84rem;
+    }
+
+    .trust-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 0.55rem;
+    }
+
+    .trust-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      min-height: 34px;
+      padding: 0.42rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.1);
+      color: #047857;
+      border: 1px solid rgba(16, 185, 129, 0.16);
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .trust-badge svg {
+      flex: 0 0 auto;
+    }
+
+    .main-inner {
+      padding: 2rem 0 2.4rem;
+    }
+
+    .hero {
+      margin: 0 auto 1.4rem;
+      max-width: 680px;
+      text-align: center;
+      padding: clamp(1.5rem, 2vw, 2.1rem) clamp(1.2rem, 2.2vw, 2.3rem);
+      border-radius: 24px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.82));
+      box-shadow: var(--shadow-card);
+      transition: opacity 200ms ease, transform 200ms ease, max-height 200ms ease, margin 200ms ease, padding 200ms ease;
+      overflow: clip;
+    }
+
+    .hero.is-hidden {
+      opacity: 0;
+      transform: translateY(-8px);
+      max-height: 0;
+      margin-bottom: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      border-width: 0;
+      box-shadow: none;
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.12);
+      color: #1d4ed8;
+      font-size: 0.79rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(2.3rem, 6vw, 4rem);
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-wrap: balance;
+    }
+
+    .hero p {
+      margin: 1rem auto 0;
+      max-width: 52ch;
+      color: var(--text-secondary);
+      font-size: clamp(1rem, 2vw, 1.12rem);
+      text-wrap: balance;
+    }
+
+    .hero-features {
+      margin: 1.45rem 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.8rem;
+    }
+
+    .hero-features li {
+      display: grid;
+      justify-items: center;
+      gap: 0.55rem;
+      padding: 0.95rem 0.8rem;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(248, 250, 252, 0.84);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .hero-features svg {
+      color: var(--primary);
+    }
+
+    .hero-cta {
+      margin-top: 1.35rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      min-height: 50px;
+      padding: 0.88rem 1.25rem;
+      border: 0;
+      border-radius: var(--radius-button);
+      background: linear-gradient(180deg, #4a90ff 0%, var(--secondary) 100%);
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      box-shadow: var(--shadow-button);
+      transition: transform 200ms ease, box-shadow 200ms ease, filter 200ms ease;
+    }
+
+    .hero-cta:hover,
+    .hero-cta:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-button-hover);
+      filter: saturate(1.04);
+    }
+
+    .workspace {
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.88));
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+    }
+
+    .workspace-head {
+      padding: 1.15rem 1.4rem;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(248,250,252,0.96), rgba(248,250,252,0.8));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .workspace-head h2 {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .workspace-head p {
+      margin: 0.1rem 0 0;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .security-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.52rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.1);
+      color: #047857;
+      border: 1px solid rgba(16, 185, 129, 0.16);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .workspace-body {
+      padding: 1.3rem;
+    }
+
+    .editor-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 132px minmax(0, 1fr);
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .panel {
+      min-width: 0;
+    }
+
+    .panel-header {
+      margin-bottom: 0.55rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .panel-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      color: var(--text-secondary);
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .panel-label strong {
+      color: var(--text-primary);
+      font-size: 0.93rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .panel-surface {
+      position: relative;
+      min-height: 400px;
+      border-radius: var(--radius-field);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.03);
+      transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+      overflow: hidden;
+    }
+
+    .sample-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem 0.55rem;
+      align-items: center;
+      margin-top: 0.65rem;
+      padding: 0.15rem 0.05rem 0;
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+    }
+
+    .sample-label {
+      font-weight: 600;
+    }
+
+    .sample-link {
+      border: 0;
+      background: transparent;
+      padding: 0;
+      color: var(--secondary);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      text-underline-offset: 0.18rem;
+      transition: color 200ms ease, text-decoration-color 200ms ease;
+    }
+
+    .sample-link:hover,
+    .sample-link:focus-visible {
+      color: #1d4ed8;
+      text-decoration: underline;
+      text-decoration-color: currentColor;
+    }
+
+    .panel-surface:focus-within {
+      border-color: rgba(59, 130, 246, 0.5);
+      box-shadow: inset 0 2px 6px rgba(15, 23, 42, 0.06), var(--focus-ring);
+    }
+
+    textarea.text-input,
+    .rendered-text,
+    .output-text {
+      width: 100%;
+      min-height: 400px;
+      height: 100%;
+      padding: 1rem 1rem 1.1rem;
+      border: 0;
+      background: transparent;
+      color: var(--text-primary);
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      font-size: 0.96rem;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    textarea.text-input {
+      resize: vertical;
+      outline: none;
+    }
+
+    textarea.text-input::placeholder {
+      color: var(--text-secondary);
+    }
+
+    .rendered-text,
+    .output-text {
+      display: block;
+      overflow: auto;
+    }
+
+    .rendered-text[hidden],
+    textarea.text-input[hidden] {
+      display: none;
+    }
+
+    .rendered-text {
+      cursor: text;
+      animation: fadeIn 300ms ease;
+    }
+
+    .output-text {
+      position: relative;
+      animation: fadeIn 300ms ease;
+    }
+
+    .output-text.is-empty {
+      color: var(--text-secondary);
+    }
+
+    .copy-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      min-height: 34px;
+      padding: 0.5rem 0.72rem;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: rgba(248, 250, 252, 0.9);
+      color: var(--text-primary);
+      font-size: 0.82rem;
+      font-weight: 700;
+      transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease, background 200ms ease, color 200ms ease;
+    }
+
+    .copy-button:hover,
+    .copy-button:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(59, 130, 246, 0.28);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+    }
+
+    .copy-button.is-success {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.26);
+      color: #047857;
+    }
+
+    .action-column {
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      gap: 0.8rem;
+    }
+
+    .action-column .anonymize-button {
+      width: 100%;
+      min-height: 54px;
+      border: 0;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #4a90ff 0%, var(--secondary) 100%);
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      box-shadow: var(--shadow-button);
+      transition: transform 200ms ease, box-shadow 200ms ease, filter 200ms ease;
+    }
+
+    .action-column .anonymize-button:hover,
+    .action-column .anonymize-button:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-button-hover);
+      filter: saturate(1.03);
+    }
+
+    .action-column .anonymize-button.is-processing {
+      animation: pulse 360ms ease;
+    }
+
+    .action-column .anonymize-button:disabled {
+      cursor: not-allowed;
+      opacity: 0.62;
+      box-shadow: none;
+      transform: none;
+      filter: none;
+    }
+
+    .action-column .reset-button {
+      border: 0;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: underline;
+      text-decoration-color: rgba(100, 116, 139, 0.4);
+      text-underline-offset: 0.18rem;
+      padding: 0.2rem 0;
+      transition: color 200ms ease, text-decoration-color 200ms ease;
+    }
+
+    .action-column .reset-button:hover,
+    .action-column .reset-button:focus-visible {
+      color: var(--text-primary);
+      text-decoration-color: rgba(15, 23, 42, 0.45);
+    }
+
+    .shortcut-hint {
+      color: var(--text-secondary);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      text-align: center;
+    }
+
+    .stats-bar {
+      margin-top: 1rem;
+      padding: 0.9rem 1rem;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(248, 250, 252, 0.88);
+      color: var(--text-secondary);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1rem;
+      align-items: center;
+      font-size: 0.92rem;
+    }
+
+    .stats-bar.is-success {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.2);
+      color: #047857;
+    }
+
+    .stats-headline {
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .stats-bar.is-success .stats-headline {
+      color: #047857;
+    }
+
+    .stats-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-weight: 600;
+    }
+
+    .stats-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      flex: 0 0 auto;
+    }
+
+    .settings-card {
+      margin-top: 1rem;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.78);
+      overflow: hidden;
+    }
+
+    .settings-toggle {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.1rem;
+      color: var(--text-primary);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .settings-toggle span:last-child {
+      color: var(--text-secondary);
+      transition: transform 200ms ease;
+    }
+
+    .settings-toggle[aria-expanded="true"] span:last-child {
+      transform: rotate(180deg);
+    }
+
+    .settings-panel {
+      padding: 0 1.1rem 1.1rem;
+      border-top: 1px solid var(--border);
+      display: grid;
+      gap: 1rem;
+    }
+
+    .settings-panel[hidden] {
+      display: none;
+    }
+
+    .settings-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.85rem 1rem;
+      padding-top: 1rem;
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+      min-height: 52px;
+      padding: 0.85rem 0.95rem;
+      border-radius: 14px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      background: rgba(248, 250, 252, 0.84);
+    }
+
+    .toggle-copy {
+      display: grid;
+      gap: 0.08rem;
+      min-width: 0;
+    }
+
+    .toggle-copy strong {
+      font-size: 0.92rem;
+      letter-spacing: -0.01em;
+    }
+
+    .toggle-copy span {
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+    }
+
+    .switch {
+      position: relative;
+      width: 50px;
+      height: 30px;
+      flex: 0 0 auto;
+    }
+
+    .switch input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      margin: 0;
+      z-index: 2;
+    }
+
+    .switch-track {
+      position: absolute;
+      inset: 0;
+      border-radius: 999px;
+      background: #d9e2ef;
+      transition: background 200ms ease, box-shadow 200ms ease;
+      pointer-events: none;
+    }
+
+    .switch-track::after {
+      content: "";
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.18);
+      transition: transform 200ms ease;
+    }
+
+    .switch input:checked + .switch-track {
+      background: var(--secondary);
+    }
+
+    .switch input:checked + .switch-track::after {
+      transform: translateX(20px);
+    }
+
+    .switch input:focus-visible + .switch-track {
+      box-shadow: var(--focus-ring);
+    }
+
+    .custom-rules {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .custom-rule-card {
+      display: grid;
+      gap: 0.75rem;
+      padding: 1rem;
+      border-radius: 16px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      background: rgba(248, 250, 252, 0.84);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
+    }
+
+    .custom-rule-copy {
+      display: grid;
+      gap: 0.2rem;
+    }
+
+    .custom-rule-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .custom-rule-copy label {
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .custom-rule-copy p {
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+
+    .custom-rule-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 30px;
+      min-height: 30px;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.06);
+      color: var(--text-primary);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+
+    .custom-rule-entry {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.65rem;
+    }
+
+    .custom-rule-entry input {
+      min-height: 48px;
+      border-radius: var(--radius-field);
+      border: 1px solid var(--border);
+      background: #fff;
+      padding: 0.8rem 0.9rem;
+      color: var(--text-primary);
+      transition: border-color 200ms ease, box-shadow 200ms ease;
+    }
+
+    .custom-rule-entry input:focus-visible {
+      border-color: rgba(59, 130, 246, 0.5);
+    }
+
+    .custom-rule-add {
+      min-height: 48px;
+      padding: 0.78rem 0.95rem;
+      border-radius: 10px;
+      border: 1px solid rgba(59, 130, 246, 0.16);
+      background: rgba(59, 130, 246, 0.1);
+      color: #1d4ed8;
+      font-weight: 700;
+      transition: transform 200ms ease, box-shadow 200ms ease, background 200ms ease;
+    }
+
+    .custom-rule-add:hover,
+    .custom-rule-add:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+      background: rgba(59, 130, 246, 0.14);
+    }
+
+    .custom-rule-list {
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .custom-rule-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto auto;
+      gap: 0.7rem;
+      align-items: center;
+      min-height: 52px;
+      padding: 0.7rem 0.8rem;
+      border-radius: 12px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      background: #fff;
+      transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+    }
+
+    .custom-rule-item:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+      border-color: rgba(59, 130, 246, 0.14);
+    }
+
+    .custom-rule-term {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      min-width: 0;
+      font-size: 0.9rem;
+      font-weight: 600;
+      word-break: break-word;
+    }
+
+    .custom-rule-term-copy {
+      min-width: 0;
+    }
+
+    .custom-rule-meta {
+      display: block;
+      margin-top: 0.08rem;
+      color: var(--text-secondary);
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+
+    .custom-rule-swatch {
+      width: 14px;
+      height: 14px;
+      margin-top: 0.18rem;
+      border-radius: 999px;
+      border: 1px solid var(--custom-neutral-border);
+      background: var(--custom-neutral-bg);
+      flex: 0 0 auto;
+    }
+
+    .custom-rule-swatch.custom-slot-1 {
+      background: var(--custom-1-bg);
+      border-color: var(--custom-1-border);
+    }
+
+    .custom-rule-swatch.custom-slot-2 {
+      background: var(--custom-2-bg);
+      border-color: var(--custom-2-border);
+    }
+
+    .custom-rule-swatch.custom-slot-3 {
+      background: var(--custom-3-bg);
+      border-color: var(--custom-3-border);
+    }
+
+    .custom-rule-swatch.custom-slot-4 {
+      background: var(--custom-4-bg);
+      border-color: var(--custom-4-border);
+    }
+
+    .custom-rule-swatch.custom-slot-5 {
+      background: var(--custom-5-bg);
+      border-color: var(--custom-5-border);
+    }
+
+    .custom-rule-delete {
+      min-height: 38px;
+      padding: 0.55rem 0.72rem;
+      border-radius: 10px;
+      border: 1px solid rgba(239, 68, 68, 0.16);
+      background: rgba(239, 68, 68, 0.08);
+      color: #b91c1c;
+      font-size: 0.82rem;
+      font-weight: 700;
+      transition: transform 200ms ease, box-shadow 200ms ease, background 200ms ease;
+    }
+
+    .custom-rule-delete:hover,
+    .custom-rule-delete:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+      background: rgba(239, 68, 68, 0.12);
+    }
+
+    .custom-rule-empty {
+      padding: 0.85rem 0.9rem;
+      border-radius: 12px;
+      border: 1px dashed rgba(100, 116, 139, 0.28);
+      color: var(--text-secondary);
+      font-size: 0.84rem;
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .mark {
+      position: relative;
+      display: inline;
+      padding: 0.08rem 0.15rem;
+      border-radius: var(--radius-badge);
+      border: 1px solid transparent;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+      animation: fadeIn 300ms ease;
+    }
+
+    .mark-tag {
+      display: inline-flex;
+      align-items: center;
+      margin-left: 0.35rem;
+      padding: 0.08rem 0.36rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+
+    .mark-person,
+    .badge-person {
+      background: var(--highlight-yellow);
+      border-color: rgba(245, 158, 11, 0.38);
+    }
+
+    .mark-person .mark-tag,
+    .badge-person {
+      color: #92400e;
+    }
+
+    .mark-address,
+    .badge-address {
+      background: var(--highlight-blue);
+      border-color: rgba(59, 130, 246, 0.3);
+    }
+
+    .mark-address .mark-tag,
+    .badge-address {
+      color: #1d4ed8;
+    }
+
+    .mark-contact,
+    .badge-contact {
+      background: var(--highlight-green);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    .mark-contact .mark-tag,
+    .badge-contact {
+      color: #047857;
+    }
+
+    .mark-identifier,
+    .badge-identifier {
+      background: var(--highlight-orange);
+      border-color: rgba(251, 146, 60, 0.35);
+    }
+
+    .mark-identifier .mark-tag,
+    .badge-identifier {
+      color: #9a3412;
+    }
+
+    .mark-date,
+    .badge-date {
+      background: var(--highlight-violet);
+      border-color: rgba(139, 92, 246, 0.3);
+    }
+
+    .mark-date .mark-tag,
+    .badge-date {
+      color: #6d28d9;
+    }
+
+    .mark-custom,
+    .badge-custom {
+      background: var(--custom-neutral-bg);
+      border-color: var(--custom-neutral-border);
+    }
+
+    .mark-custom .mark-tag,
+    .badge-custom {
+      color: var(--custom-neutral-fg);
+    }
+
+    .mark-custom-1,
+    .badge-custom-1 {
+      background: var(--custom-1-bg);
+      border-color: var(--custom-1-border);
+    }
+
+    .mark-custom-1 .mark-tag,
+    .badge-custom-1 {
+      color: var(--custom-1-fg);
+    }
+
+    .mark-custom-2,
+    .badge-custom-2 {
+      background: var(--custom-2-bg);
+      border-color: var(--custom-2-border);
+    }
+
+    .mark-custom-2 .mark-tag,
+    .badge-custom-2 {
+      color: var(--custom-2-fg);
+    }
+
+    .mark-custom-3,
+    .badge-custom-3 {
+      background: var(--custom-3-bg);
+      border-color: var(--custom-3-border);
+    }
+
+    .mark-custom-3 .mark-tag,
+    .badge-custom-3 {
+      color: var(--custom-3-fg);
+    }
+
+    .mark-custom-4,
+    .badge-custom-4 {
+      background: var(--custom-4-bg);
+      border-color: var(--custom-4-border);
+    }
+
+    .mark-custom-4 .mark-tag,
+    .badge-custom-4 {
+      color: var(--custom-4-fg);
+    }
+
+    .mark-custom-5,
+    .badge-custom-5 {
+      background: var(--custom-5-bg);
+      border-color: var(--custom-5-border);
+    }
+
+    .mark-custom-5 .mark-tag,
+    .badge-custom-5 {
+      color: var(--custom-5-fg);
+    }
+
+    .placeholder-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.08rem 0.34rem;
+      margin: 0.04rem 0.08rem;
+      border-radius: var(--radius-badge);
+      border: 1px solid transparent;
+      font-weight: 700;
+      line-height: 1.45;
+      vertical-align: baseline;
+    }
+
+    .footer-inner {
+      padding: 1.25rem 0 2rem;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+
+    .footer-inner p {
+      margin: 0;
+    }
+
+    .footer-inner p + p {
+      margin-top: 0.32rem;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      40% { transform: scale(0.985); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 1024px) {
+      .editor-grid {
+        grid-template-columns: minmax(0, 1fr) 84px minmax(0, 1fr);
+      }
+
+      .action-column .anonymize-button .button-text {
+        display: none;
+      }
+
+      .settings-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .custom-rules {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .header-inner {
+        padding: 0.8rem 0;
+        align-items: flex-start;
+      }
+
+      .trust-badges {
+        justify-content: flex-start;
+      }
+
+      .hero-features {
+        grid-template-columns: 1fr;
+      }
+
+      .workspace-body {
+        padding: 1rem;
+      }
+
+      .editor-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .action-column {
+        grid-auto-flow: row;
+      }
+
+      .action-column .anonymize-button {
+        max-width: none;
+      }
+
+      .action-column .anonymize-button .button-text {
+        display: inline;
+      }
+
+      .panel-surface,
+      textarea.text-input,
+      .rendered-text,
+      .output-text {
+        min-height: 250px;
+      }
+
+      .stats-bar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .app-header,
+      .hero,
+      .action-column,
+      .sample-bar,
+      .shortcut-hint,
+      .settings-card,
+      .copy-button {
+        display: none !important;
+      }
+
+      .main-inner,
+      .footer-inner {
+        width: 100%;
+        padding: 0;
+      }
+
+      .workspace {
+        box-shadow: none;
+        border: 0;
+      }
+
+      .workspace-body,
+      .workspace-head {
+        padding: 0;
+      }
+
+      .editor-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .panel-surface {
+        border: 1px solid #bbb;
+        box-shadow: none;
+        min-height: auto;
+      }
+
+      textarea.text-input,
+      .rendered-text,
+      .output-text {
+        min-height: auto;
+        padding: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand" aria-label="KI-Anonymisierer">
+        <div class="brand-mark" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" role="presentation">
+            <path d="M12 2.5 4.75 5.75v5.05c0 5.09 2.94 9.85 7.25 11.66 4.31-1.81 7.25-6.57 7.25-11.66V5.75L12 2.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+            <path d="m8.55 12.2 2.22 2.23 4.67-4.86" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <span class="brand-title">KI-Anonymisierer</span>
+          <span class="brand-subtitle">Lokale Textanonymisierung für Verwaltung und KMU</span>
+        </div>
+      </div>
+
+      <div class="trust-badges" aria-label="Sicherheitsmerkmale">
+        <span class="trust-badge">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="m4 10 4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Offline
+        </span>
+        <span class="trust-badge">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="m4 10 4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Lokal
+        </span>
+        <span class="trust-badge">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="m4 10 4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Sicher
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="main-inner">
+      <section class="hero" id="hero">
+        <div class="eyebrow">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M10 1.8 3.7 4.6v4.39c0 4.41 2.55 8.54 6.3 10.11 3.75-1.57 6.3-5.7 6.3-10.1V4.6L10 1.8Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          </svg>
+          Lokales Datenschutz-Werkzeug
+        </div>
+        <h1>Text anonymisieren. Ein Klick.</h1>
+        <p>Personenbezogene Daten erkennen und ersetzen — vollständig lokal in Ihrem Browser.</p>
+        <ul class="hero-features" aria-label="Produktmerkmale">
+          <li>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 2.5 4.75 5.75v5.05c0 5.09 2.94 9.85 7.25 11.66 4.31-1.81 7.25-6.57 7.25-11.66V5.75L12 2.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+            </svg>
+            Keine Cloud
+          </li>
+          <li>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="5" y="10" width="14" height="10" rx="2.4" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M8 10V7.9A4 4 0 0 1 12 4a4 4 0 0 1 4 3.9V10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            Keine Installation
+          </li>
+          <li>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="8.2" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M12 7.2v4.9l3.2 1.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            In Sekunden fertig
+          </li>
+        </ul>
+        <button class="hero-cta" id="startButton" type="button" aria-label="Zum Arbeitsbereich wechseln">
+          Loslegen
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4 10h11.5m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </section>
+
+      <section class="workspace" id="workspace" aria-labelledby="workspaceHeading">
+        <div class="workspace-head">
+          <div>
+            <h2 id="workspaceHeading">Arbeitsbereich</h2>
+            <p>Texte vollständig lokal analysieren und vor der KI-Nutzung datenschutzkonform bereinigen.</p>
+          </div>
+          <div class="security-chip">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="m4 10 4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Keine Datenübertragung
+          </div>
+        </div>
+
+        <div class="workspace-body">
+          <div class="editor-grid">
+            <section class="panel" aria-labelledby="originalLabel">
+              <div class="panel-header">
+                <div class="panel-label" id="originalLabel">
+                  <span aria-hidden="true">◦</span>
+                  <strong>Originaltext</strong>
+                </div>
+              </div>
+              <div class="panel-surface">
+                <textarea id="originalInput" class="text-input" spellcheck="false" aria-label="Originaltext" placeholder="Fügen Sie hier den Text ein, der anonymisiert werden soll..."></textarea>
+                <div id="originalRendered" class="rendered-text" tabindex="0" aria-label="Originaltext mit Markierungen" hidden></div>
+              </div>
+              <div class="sample-bar" aria-label="Beispieltexte laden">
+                <span class="sample-label">Beispiel laden:</span>
+                <button class="sample-link" type="button" data-sample="standard">Bescheid</button>
+                <span aria-hidden="true">·</span>
+                <button class="sample-link" type="button" data-sample="social">Sozialdaten</button>
+                <span aria-hidden="true">·</span>
+                <button class="sample-link" type="button" data-sample="administration">Landratsamt</button>
+                <span aria-hidden="true">·</span>
+                <button class="sample-link" type="button" data-sample="police">Polizei</button>
+                <span aria-hidden="true">·</span>
+                <button class="sample-link" type="button" data-sample="jobcenter">Jobcenter</button>
+                <span aria-hidden="true">·</span>
+                <button class="sample-link" type="button" data-sample="neutral">Neutral</button>
+              </div>
+            </section>
+
+            <div class="action-column" aria-label="Aktionen">
+              <button id="anonymizeButton" class="anonymize-button" type="button" aria-label="Text anonymisieren">
+                <span class="button-icon" aria-hidden="true">🛡️</span>
+                <span class="button-text">Anonymisieren →</span>
+              </button>
+              <div class="shortcut-hint" aria-hidden="true">⌘↵ / Strg+Enter</div>
+              <button id="resetButton" class="reset-button" type="button" aria-label="Original- und Ergebnisfeld zurücksetzen">Zurücksetzen</button>
+            </div>
+
+            <section class="panel" aria-labelledby="resultLabel">
+              <div class="panel-header">
+                <div class="panel-label" id="resultLabel">
+                  <span aria-hidden="true">◦</span>
+                  <strong>Anonymisierter Text</strong>
+                </div>
+                <button id="copyButton" class="copy-button" type="button" aria-label="Anonymisierten Text kopieren">
+                  <svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <rect x="7" y="3" width="9" height="11" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M5 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2v-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                  <span>Kopieren</span>
+                </button>
+              </div>
+              <div class="panel-surface">
+                <div id="outputText" class="output-text is-empty" aria-live="polite">Der anonymisierte Text erscheint hier nach der Analyse.</div>
+              </div>
+            </section>
+          </div>
+
+          <div id="statsBar" class="stats-bar is-success" role="status" aria-live="polite">
+            <span class="stats-headline">Keine personenbezogenen Daten erkannt.</span>
+          </div>
+
+          <section class="settings-card" aria-labelledby="settingsHeading">
+            <button id="settingsToggle" class="settings-toggle" type="button" aria-expanded="false" aria-controls="settingsPanel">
+              <span id="settingsHeading">Erkennungsregeln</span>
+              <span aria-hidden="true">▼</span>
+            </button>
+
+            <div id="settingsPanel" class="settings-panel" hidden>
+              <div class="settings-grid" id="settingsGrid"></div>
+              <div class="custom-rules">
+                <section class="custom-rule-card" aria-labelledby="customIncludeHeading">
+                  <div class="custom-rule-copy">
+                    <div class="custom-rule-title">
+                      <label id="customIncludeHeading" for="customIncludeInput">Eigene Begriffe hinzufügen</label>
+                      <span id="customIncludeCount" class="custom-rule-count" aria-label="Anzahl eigener Begriffe">0</span>
+                    </div>
+                    <p>Begriffe in dieser Liste werden als zusätzliche Erkennung immer anonymisiert. Jeder Eintrag ist separat aktivierbar.</p>
+                  </div>
+                  <div class="custom-rule-entry">
+                    <input id="customIncludeInput" type="text" autocomplete="off" placeholder="z. B. Max Mustermann, Projekt Adler">
+                    <button id="customIncludeAdd" class="custom-rule-add" type="button">Hinzufügen</button>
+                  </div>
+                  <div id="customIncludeList" class="custom-rule-list" aria-live="polite"></div>
+                </section>
+
+                <section class="custom-rule-card" aria-labelledby="customExcludeHeading">
+                  <div class="custom-rule-copy">
+                    <div class="custom-rule-title">
+                      <label id="customExcludeHeading" for="customExcludeInput">Eigene Begriffe ausschließen</label>
+                      <span id="customExcludeCount" class="custom-rule-count" aria-label="Anzahl ausgeschlossener Begriffe">0</span>
+                    </div>
+                    <p>Aktive Ausschlüsse werden trotz Treffer nicht anonymisiert. Praktisch für Behördennamen, Produktnamen oder bewusst erlaubte Begriffe.</p>
+                  </div>
+                  <div class="custom-rule-entry">
+                    <input id="customExcludeInput" type="text" autocomplete="off" placeholder="z. B. Stadt Frankfurt am Main, ChatGPT">
+                    <button id="customExcludeAdd" class="custom-rule-add" type="button">Hinzufügen</button>
+                  </div>
+                  <div id="customExcludeList" class="custom-rule-list" aria-live="polite"></div>
+                </section>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p>KI-Anonymisierer · Alle Daten bleiben lokal in Ihrem Browser · Keine Gewähr für vollständige Erkennung</p>
+      <p>Robert Meyer · ai.rm-on.de</p>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const STORAGE_KEYS = {
+        heroHidden: "ki-anonymizer.hero-hidden",
+        settings: "ki-anonymizer.settings",
+        customTerms: "ki-anonymizer.custom-terms",
+        customIncludeTerms: "ki-anonymizer.custom-include-terms",
+        customExcludeTerms: "ki-anonymizer.custom-exclude-terms"
+      };
+
+      const defaultSettings = {
+        personNames: true,
+        streetAddress: true,
+        postalLocation: true,
+        email: true,
+        phoneFax: true,
+        iban: true,
+        fileReference: true,
+        date: true,
+        socialSecurity: true
+      };
+
+      const settingMeta = [
+        { key: "personNames", title: "Personennamen", description: "Herr/Frau + Name, Titel, Namensmuster" },
+        { key: "streetAddress", title: "Straßen und Hausnummern", description: "Straßen, Plätze, Wege, Anlagen mit Hausnummer" },
+        { key: "postalLocation", title: "Postleitzahlen und Orte", description: "PLZ-Ort-Kombinationen wie 61169 Friedberg" },
+        { key: "email", title: "E-Mail-Adressen", description: "Lokale und institutionelle Mailadressen" },
+        { key: "phoneFax", title: "Telefon- und Faxnummern", description: "Tel., Fax, Mobil, Durchwahl, +49 und deutsche Vorwahlen" },
+        { key: "iban", title: "IBAN und Kontonummern", description: "IBAN-Formate und lange Bankkennungen" },
+        { key: "fileReference", title: "Aktenzeichen und Geschäftszeichen", description: "Az., GZ., Kassenzeichen, Fallnummern und Verwaltungsmuster" },
+        { key: "date", title: "Datumsangaben", description: "Numerische und ausgeschriebene deutsche Datumsformen" },
+        { key: "socialSecurity", title: "Sozialversicherungsnummern", description: "Deutsche SVN-Muster mit Buchstabenblock" }
+      ];
+
+      const SAMPLE_TEXTS = {
+        standard: `Sehr geehrter Herr Max Mustermann,
+Ihr Antrag vom 14.03.2026 (Aktenzeichen 48-7732/26) wurde geprüft. Bitte senden Sie die fehlenden Unterlagen an: Stadtverwaltung Friedberg, Mainzer Tor Anlage 6, 61169 Friedberg.
+Rückfragen an Frau Dr. Sabine Weber, Tel. 06031 88-312, E-Mail: s.weber@wetteraukreis.de.
+IBAN: DE89 3704 0044 0532 0130 00
+Mit freundlichen Grüßen
+gez. Thomas Schäfer`,
+        social: `Frau Maria Gonzales, geb. am 12.05.1987, wohnhaft Berliner Str. 42a, 61169 Friedberg, SVN 53 270587 G 412, beantragt Leistungen nach SGB II. Telefonisch erreichbar unter 0170-9876543.`,
+        neutral: `Die Verwaltungsvorschrift regelt den Einsatz von KI-Systemen in der Sachbearbeitung. Grundlage ist die EU-Verordnung 2024/1689.`,
+        administration: `Landratsamt Wetteraukreis
+Fachstelle Eingliederungshilfe
+Bearbeitet von Frau Claudia Werner
+Zimmer 2.14 · Durchwahl 06031 / 83-2145 · Fax 06031 / 83-9145
+E-Mail: claudia.werner@wetteraukreis.de
+Kassenzeichen: 2026-004512/EGH
+Postfach 100123, 61141 Friedberg
+
+Für Rückfragen wenden Sie sich bitte an Herrn Dr. Jens Hofmann oder an die Sachbearbeiterin Maria Keller.
+Der Bescheid wurde am 03. März 2026 erstellt.`,
+        police: `Polizeipräsidium Mittelhessen
+Vorgangsnummer PPMH-12/4507-2026
+Kontakt: KHK Stefan Jung, Tel. +49 (641) 7006-2345
+Anschrift: Ferniestraße 8, 35394 Gießen
+ Rückmeldung bitte bis 21.03.2026 an stefan.jung@polizei.hessen.de.`,
+        jobcenter: `Jobcenter Wetterau
+BG-Nummer 34567 / 2026
+Leistungsberechtigte: Frau Yasmin Albrecht
+Wohnanschrift: Am Lindenring 14, 61169 Friedberg
+Telefonisch erreichbar unter 0151 23456789
+Bescheid vom 07.04.2026.`,
+        court: `Amtsgericht Bad Homburg v. d. Höhe
+Aktenzeichen: 12 C 345/26
+Ansprechpartnerin: Frau Richterin Eva Berg
+Schriftverkehr an: Gerichtsstraße 7, 61348 Bad Homburg vor der Höhe
+Termin am 15.04.2026, Rückfragen per E-Mail an eva.berg@justiz.hessen.de.`,
+        youthOffice: `Jugendamt Frankfurt am Main
+Bearbeiterin: Frau Jana Neumann
+Fallnummer JA-FFM/2026-77
+Postfach 900321, 60003 Frankfurt am Main
+Bitte reichen Sie die Unterlagen bis zum 30.03.2026 telefonisch unter 069 / 212-44567 nach.`
+      };
+
+      const FIRST_NAMES = [
+        "Alexander","Andreas","Anna","Annika","Anton","Aylin","Benjamin","Birgit","Brigitte","Carina","Carolin","Charlotte","Christian","Christiane","Christina","Christoph","Claudia","Cornelia","Daniel","Daniela","David","Dennis","Dirk","Dominik","Edith","Elena","Elisabeth","Elke","Emilia","Erik","Fabian","Felix","Florian","Frank","Franziska","Friedrich","Gabriele","Georg","Gerhard","Gisela","Hannah","Hans","Heike","Heiko","Helga","Henning","Holger","Ines","Inga","Ingrid","Isabel","Jana","Janina","Jannik","Jasmin","Jennifer","Jessica","Joachim","Johanna","Johannes","Jonas","Jörg","Julia","Julian","Karin","Karl","Karoline","Katharina","Katja","Kerstin","Kevin","Klaus","Kristin","Laura","Lea","Lena","Leon","Leonie","Lina","Lisa","Lukas","Madeleine","Manfred","Marc","Marcel","Maren","Margarete","Maria","Marianne","Mario","Mark","Markus","Martin","Marvin","Matthias","Max","Maximilian","Melanie","Michael","Miriam","Monika","Moritz","Nadine","Nele","Nico","Niklas","Nina","Noah","Oliver","Olivia","Patrick","Paula","Peter","Petra","Philipp","Ralf","Rebecca","Renate","Rene","Ricarda","Robin","Sabine","Sarah","Sascha","Sebastian","Simone","Sina","Sofie","Sonja","Stefan","Stefanie","Sven","Svenja","Thomas","Timo","Tobias","Udo","Ulrike","Valentina","Vanessa","Verena","Viktor","Vincent","Walter","Werner","Yannick","Yvonne","Adrian","Alina","Amelie","Anja","Armin","Astrid","Bastian","Beate","Bettina","Carmen","Celine","Clemens","Diana","Eduard","Elisa","Emil","Eva","Finn","Friederike","Gregor","Helene","Ida","Ilona","Jan","Jeanette","Jette","Johann","Jule","Kai","Konrad","Larissa","Lars","Leif","Lilli","Lorenz","Luisa","Maja","Manuela","Marlene","Marta","Melina","Mia","Mona","Natalie","Nora","Ole","Rainer","Rosa","Samuel","Selina","Silke","Tanja","Theresa","Tim","Torben","Ute","Viola","Wilhelm"
+      ];
+
+      const LAST_NAMES = [
+        "Müller","Schmidt","Schneider","Fischer","Weber","Meyer","Wagner","Becker","Schulz","Hoffmann","Schäfer","Koch","Bauer","Richter","Klein","Wolf","Schröder","Neumann","Schwarz","Braun","Krüger","Hofmann","Hartmann","Lange","Schmitt","Werner","Schmitz","Krause","Meier","Lehmann","Schmid","Schulze","Maier","Köhler","Herrmann","König","Walter","Mayer","Huber","Kaiser","Fuchs","Peters","Lang","Scholz","Möller","Weiß","Jung","Hahn","Schubert","Vogel","Friedrich","Keller","Günther","Frank","Berger","Winkler","Roth","Beck","Lorenz","Baumann","Franke","Albrecht","Schuster","Simon","Ludwig","Böhm","Winter","Kraus","Martin","Schumacher","Krämer","Vogt","Stein","Jäger","Otto","Sommer","Groß","Seidel","Heinrich","Brandt","Haas","Schreiber","Graf","Schulte","Dietrich","Ziegler","Kuhn","Pohl","Engel","Horn","Busch","Bergmann","Thomas","Voigt","Sauer","Arnold","Wolff","Pfeiffer","Schenk","Jansen","Nowak","Krebs","Schröer","Böttcher","Franz","Hermann","Jakob","Bender","Schilling","Ahrens","Götz","Heinze","Kühn","Bartsch","Bahr","Berg","Paul","Kraft","Krieger","Hoppe","Maurer","Gärtner","Ebert","Kaufmann","Fink","Kessler","Geiger","Voss","Kunz","Haase","Kopp","Urban","Kruse","Glaser","Haller","Riedel","Hartwig","Blank","Ulrich","Bode","Reuter","Schramm","Kluge"
+      ];
+
+      const monthsPattern = "(?:Januar|Februar|März|Maerz|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)";
+      const capitalWordPattern = "[A-ZÄÖÜ][A-Za-zÄÖÜäöüßẞ'’\\-]+";
+      const titlePattern = "(?:(?:Dr\\.|Prof\\.|Dipl\\.-Ing\\.|Dipl\\.-Verw\\.|M\\.A\\.|M\\.Sc\\.|B\\.A\\.|B\\.Sc\\.|Ass\\. iur\\.|LL\\.M\\.|KHK|PHK|PK'in|PK)\\s+)*";
+      const honorificPattern = "(?:(?:Herr|Frau|Herrn)\\s+)?";
+      const personConnectorPattern = "(?:von|van|der|den|de|del|di|du|zu|zur|zum|vom)";
+      const placeConnectorPattern = "(?:am|an|auf|bei|im|in|ob|unter|vor|der|dem|den|zum|zur|von)";
+      const personNamePattern = `${capitalWordPattern}(?:[ \\t]+(?:${capitalWordPattern}|${personConnectorPattern})){0,4}`;
+      const placeNamePattern = `${capitalWordPattern}(?:[ \\t-]+(?:${capitalWordPattern}|${placeConnectorPattern})){0,5}`;
+      const compoundStreetPattern = "[A-ZÄÖÜ][A-Za-zÄÖÜäöüßẞ'’\\-]*(?:straße|str\\.|weg|platz|allee|ring|gasse|damm|ufer|anlage|tor|chaussee|steig|pfad|promenade|kai|hof)";
+      const roleLeadPattern = "(?:Name|Antragsteller(?:in)?|Beschwerdeführer(?:in)?|Betreuer(?:in)?|Sachbearbeiter(?:in)?|Sachbearbeitung|Sachgebietsleitung|Abteilungsleitung|Fachdienstleitung|Dezernent(?:in)?|Ansprechperson|Kontaktperson|Bearbeitet\\s+von|Bearbeiter(?:in)?|zuständig(?:e?r)?|Unterzeichner(?:in)?|Unterzeichnet\\s+von|Leistungsberechtigte(?:r)?|Leistungsempfänger(?:in)?|Teamleitung|Amtsleitung|Fachbereichsleitung|Richter(?:in)?|Rechtspfleger(?:in)?)";
+      const identifierLeadPattern = "(?:Az\\.?|GZ\\.?|Aktenzeichen|Geschäftszeichen|Vorgangsnummer|Vorgangsnr\\.?|Kassenzeichen|Kundennummer|Fallnummer|Bescheidnummer|BG-Nummer|Leistungsnummer|Behördenzeichen|Zeichen|Personalnummer|Steuernummer|Mandatsreferenz)";
+      const streetTypePattern = "(?:Straße|Str\\.?|Weg|Platz|Allee|Ring|Gasse|Damm|Ufer|Anlage|Tor|Chaussee|Steig|Pfad|Promenade|Kai|Hof)";
+      const firstNameSet = new Set(FIRST_NAMES.map((name) => name.toLowerCase()));
+      const lastNameSet = new Set(LAST_NAMES.map((name) => name.toLowerCase()));
+
+      const els = {
+        hero: document.getElementById("hero"),
+        startButton: document.getElementById("startButton"),
+        originalInput: document.getElementById("originalInput"),
+        originalRendered: document.getElementById("originalRendered"),
+        outputText: document.getElementById("outputText"),
+        anonymizeButton: document.getElementById("anonymizeButton"),
+        resetButton: document.getElementById("resetButton"),
+        copyButton: document.getElementById("copyButton"),
+        statsBar: document.getElementById("statsBar"),
+        settingsToggle: document.getElementById("settingsToggle"),
+        settingsPanel: document.getElementById("settingsPanel"),
+        settingsGrid: document.getElementById("settingsGrid"),
+        customIncludeInput: document.getElementById("customIncludeInput"),
+        customIncludeAdd: document.getElementById("customIncludeAdd"),
+        customIncludeCount: document.getElementById("customIncludeCount"),
+        customIncludeList: document.getElementById("customIncludeList"),
+        customExcludeInput: document.getElementById("customExcludeInput"),
+        customExcludeAdd: document.getElementById("customExcludeAdd"),
+        customExcludeCount: document.getElementById("customExcludeCount"),
+        customExcludeList: document.getElementById("customExcludeList"),
+        workspace: document.getElementById("workspace")
+      };
+
+      const state = {
+        settings: loadSettings(),
+        customIncludeTerms: loadCustomRuleList(STORAGE_KEYS.customIncludeTerms, STORAGE_KEYS.customTerms),
+        customExcludeTerms: loadCustomRuleList(STORAGE_KEYS.customExcludeTerms),
+        analyzed: null,
+        lastOriginalText: ""
+      };
+
+      function loadSettings() {
+        try {
+          const raw = JSON.parse(localStorage.getItem(STORAGE_KEYS.settings) || "{}");
+          return { ...defaultSettings, ...raw };
+        } catch {
+          return { ...defaultSettings };
+        }
+      }
+
+      function saveSettings() {
+        localStorage.setItem(STORAGE_KEYS.settings, JSON.stringify(state.settings));
+      }
+
+      function createCustomRule(term, enabled = true) {
+        return {
+          id: `rule-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`,
+          term: normalizeWhitespace(term),
+          enabled
+        };
+      }
+
+      function normalizeRuleList(rawRules) {
+        if (!Array.isArray(rawRules)) return [];
+
+        const seen = new Set();
+        const normalized = [];
+        for (const entry of rawRules) {
+          const term = normalizeWhitespace(typeof entry === "string" ? entry : entry?.term || "");
+          if (!term) continue;
+          const key = term.toLowerCase();
+          if (seen.has(key)) continue;
+          seen.add(key);
+          normalized.push({
+            id: typeof entry === "object" && entry?.id ? String(entry.id) : createCustomRule(term).id,
+            term,
+            enabled: typeof entry === "object" && typeof entry?.enabled === "boolean" ? entry.enabled : true
+          });
+        }
+        return normalized;
+      }
+
+      function parseLegacyCustomTerms(rawValue) {
+        return normalizeRuleList(
+          String(rawValue || "")
+            .split(",")
+            .map((term) => term.trim())
+            .filter(Boolean)
+        );
+      }
+
+      function loadCustomRuleList(storageKey, legacyKey) {
+        try {
+          const raw = localStorage.getItem(storageKey);
+          if (raw) {
+            return normalizeRuleList(JSON.parse(raw));
+          }
+        } catch {
+        }
+
+        if (legacyKey) {
+          const legacyRaw = localStorage.getItem(legacyKey);
+          if (legacyRaw) {
+            const migrated = parseLegacyCustomTerms(legacyRaw);
+            if (migrated.length) {
+              localStorage.setItem(storageKey, JSON.stringify(migrated));
+            }
+            return migrated;
+          }
+        }
+
+        return [];
+      }
+
+      function saveCustomRuleList(storageKey, rules) {
+        localStorage.setItem(storageKey, JSON.stringify(normalizeRuleList(rules)));
+      }
+
+      function isHeroHidden() {
+        return localStorage.getItem(STORAGE_KEYS.heroHidden) === "1";
+      }
+
+      function hideHero(persist = false) {
+        els.hero.classList.add("is-hidden");
+        if (persist) {
+          localStorage.setItem(STORAGE_KEYS.heroHidden, "1");
+        }
+      }
+
+      function buildSettingsUi() {
+        els.settingsGrid.innerHTML = settingMeta.map((item) => `
+          <label class="toggle-row">
+            <span class="toggle-copy">
+              <strong>${escapeHtml(item.title)}</strong>
+              <span>${escapeHtml(item.description)}</span>
+            </span>
+            <span class="switch">
+              <input type="checkbox" data-setting="${item.key}" ${state.settings[item.key] ? "checked" : ""}>
+              <span class="switch-track" aria-hidden="true"></span>
+            </span>
+          </label>
+        `).join("");
+
+        els.settingsGrid.querySelectorAll("input[data-setting]").forEach((input) => {
+          input.addEventListener("change", () => {
+            state.settings[input.dataset.setting] = input.checked;
+            saveSettings();
+          });
+        });
+        renderCustomRuleLists();
+      }
+
+      function renderRuleItems(kind, rules) {
+        if (!rules.length) {
+          return `<div class="custom-rule-empty">${kind === "include" ? "Noch keine zusätzlichen Begriffe hinterlegt." : "Noch keine ausgeschlossenen Begriffe hinterlegt."}</div>`;
+        }
+
+        return rules.map((rule) => `
+          <div class="custom-rule-item">
+            <div class="custom-rule-term">
+              <span class="custom-rule-swatch ${kind === "include" ? getCustomSlotClass(rule.colorSlot) : ""}" aria-hidden="true"></span>
+              <span class="custom-rule-term-copy">
+                ${escapeHtml(rule.term)}
+                <span class="custom-rule-meta">${kind === "include" ? getIncludeMetaText(rule) : "wird bei aktiver Regel nicht anonymisiert"}</span>
+              </span>
+            </div>
+            <span class="switch">
+              <input type="checkbox" data-custom-kind="${kind}" data-custom-toggle="${escapeHtml(rule.id)}" ${rule.enabled ? "checked" : ""} aria-label="${escapeHtml(rule.term)} ${kind === "include" ? "aktivieren oder deaktivieren" : "als Ausschluss aktivieren oder deaktivieren"}">
+              <span class="switch-track" aria-hidden="true"></span>
+            </span>
+            <button class="custom-rule-delete" type="button" data-custom-kind="${kind}" data-custom-delete="${escapeHtml(rule.id)}" aria-label="${escapeHtml(rule.term)} löschen">Löschen</button>
+          </div>
+        `).join("");
+      }
+
+      function renderCustomRuleLists() {
+        const includeRules = assignCustomColorSlots(state.customIncludeTerms);
+        els.customIncludeList.innerHTML = renderRuleItems("include", includeRules);
+        els.customExcludeList.innerHTML = renderRuleItems("exclude", state.customExcludeTerms);
+        els.customIncludeCount.textContent = String(state.customIncludeTerms.length);
+        els.customExcludeCount.textContent = String(state.customExcludeTerms.length);
+
+        document.querySelectorAll("input[data-custom-toggle]").forEach((input) => {
+          input.addEventListener("change", () => {
+            toggleCustomRule(input.dataset.customKind, input.dataset.customToggle);
+          });
+        });
+
+        document.querySelectorAll("button[data-custom-delete]").forEach((button) => {
+          button.addEventListener("click", () => {
+            removeCustomRule(button.dataset.customKind, button.dataset.customDelete);
+          });
+        });
+      }
+
+      function assignCustomColorSlots(rules) {
+        return rules.map((rule, index) => ({
+          ...rule,
+          colorSlot: index < 5 ? index + 1 : 0
+        }));
+      }
+
+      function getCustomSlotClass(slot) {
+        return slot > 0 ? `custom-slot-${slot}` : "";
+      }
+
+      function getCustomMatchGroup(slot) {
+        return slot > 0 ? `custom-${slot}` : "custom";
+      }
+
+      function getIncludeMetaText(rule) {
+        if (!rule.colorSlot) return "wird anonymisiert, Darstellung ab Regel 6 neutral";
+        return `wird anonymisiert, Farbschlüssel ${rule.colorSlot}`;
+      }
+
+      function escapeHtml(value) {
+        return value
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function escapeRegExp(value) {
+        return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      }
+
+      function normalizeWhitespace(value) {
+        return value.replace(/\s+/g, " ").trim();
+      }
+
+      function normalizePersonName(value) {
+        const cleaned = value
+          .replace(/\b(?:sehr\s+geehrte[rn]?|herr|frau|herrn|gez\.?|dr\.?|prof\.?|dipl\.-ing\.?|dipl\.-verw\.?|m\.a\.?|m\.sc\.?|b\.a\.?|b\.sc\.?|ll\.m\.?|ass\.\s*iur\.?|name|antragsteller(?:in)?|beschwerdeführer(?:in)?|betreuer(?:in)?|sachbearbeiter(?:in)?|sachbearbeitung|ansprechperson|kontaktperson|bearbeitet\s+von|bearbeiter(?:in)?|zuständig(?:e?r)?|unterzeichner(?:in)?|unterzeichnet\s+von|leistungsberechtigte(?:r)?|leistungsempfänger(?:in)?|teamleitung|amtsleitung|fachbereichsleitung|sachgebietsleitung|abteilungsleitung|fachdienstleitung|khk|phk|pk(?:'in)?|richter(?:in)?|rechtspfleger(?:in)?|rückfragen\s+an|kontakt)\b/giu, " ")
+          .replace(/\b(?:von|van|der|den|de|del|di|du|zu|zur|zum|vom)\b/giu, " ")
+          .replace(/[,:;()]/g, " ")
+          .replace(/\s+/g, " ")
+          .trim();
+        return cleaned.toLowerCase();
+      }
+
+      function getCustomRuleState(kind) {
+        return kind === "include" ? state.customIncludeTerms : state.customExcludeTerms;
+      }
+
+      function setCustomRuleState(kind, rules) {
+        const normalized = normalizeRuleList(rules);
+        if (kind === "include") {
+          state.customIncludeTerms = normalized;
+          saveCustomRuleList(STORAGE_KEYS.customIncludeTerms, normalized);
+        } else {
+          state.customExcludeTerms = normalized;
+          saveCustomRuleList(STORAGE_KEYS.customExcludeTerms, normalized);
+        }
+        renderCustomRuleLists();
+      }
+
+      function addCustomRule(kind) {
+        const input = kind === "include" ? els.customIncludeInput : els.customExcludeInput;
+        const term = normalizeWhitespace(input.value);
+        if (!term) return;
+
+        const rules = [...getCustomRuleState(kind)];
+        const existing = rules.find((rule) => rule.term.toLowerCase() === term.toLowerCase());
+        if (existing) {
+          existing.enabled = true;
+        } else {
+          rules.push(createCustomRule(term));
+        }
+
+        setCustomRuleState(kind, rules);
+        input.value = "";
+        input.focus();
+      }
+
+      function toggleCustomRule(kind, id) {
+        const rules = getCustomRuleState(kind).map((rule) => (
+          rule.id === id ? { ...rule, enabled: !rule.enabled } : rule
+        ));
+        setCustomRuleState(kind, rules);
+      }
+
+      function removeCustomRule(kind, id) {
+        setCustomRuleState(kind, getCustomRuleState(kind).filter((rule) => rule.id !== id));
+      }
+
+      function getActiveCustomTerms(kind) {
+        return assignCustomColorSlots(getCustomRuleState(kind))
+          .filter((rule) => rule.enabled);
+      }
+
+      function buildExcludeSets() {
+        const exactTerms = new Set();
+        const personTerms = new Set();
+
+        for (const term of getActiveCustomTerms("exclude")) {
+          const generic = normalizeWhitespace(term.term).toLowerCase();
+          if (generic) exactTerms.add(generic);
+          const person = normalizePersonName(term.term);
+          if (person) personTerms.add(person);
+        }
+
+        return { exactTerms, personTerms };
+      }
+
+      function clearResultState() {
+        els.outputText.classList.add("is-empty");
+        els.outputText.textContent = "Der anonymisierte Text erscheint hier nach der Analyse.";
+        els.statsBar.className = "stats-bar is-success";
+        els.statsBar.innerHTML = `<span class="stats-headline">Keine personenbezogenen Daten erkannt.</span>`;
+        els.originalRendered.innerHTML = "";
+      }
+
+      function loadSampleText(sampleKey) {
+        if (!Object.prototype.hasOwnProperty.call(SAMPLE_TEXTS, sampleKey)) return;
+        els.originalInput.value = SAMPLE_TEXTS[sampleKey];
+        clearResultState();
+        resetEditorMode();
+      }
+
+      function isExcludedCandidate(candidate, excludeSets) {
+        const exact = normalizeWhitespace(candidate.raw).toLowerCase();
+        if (excludeSets.exactTerms.has(exact)) return true;
+        if (candidate.type === "person" && excludeSets.personTerms.has(normalizePersonName(candidate.raw))) return true;
+        return false;
+      }
+
+      function collectCandidates(text) {
+        const candidates = [];
+        const pushCandidate = (candidate) => {
+          if (!candidate) return;
+          if (candidate.start < 0 || candidate.end <= candidate.start) return;
+          candidate.raw = text.slice(candidate.start, candidate.end);
+          candidates.push(candidate);
+        };
+
+        const runRegex = (regex, builder) => {
+          regex.lastIndex = 0;
+          for (const match of text.matchAll(regex)) {
+            const candidate = builder(match);
+            if (candidate) pushCandidate(candidate);
+          }
+        };
+
+        if (state.settings.iban) {
+          runRegex(/\b[A-Z]{2}\d{2}(?:\s?[A-Z0-9]){11,30}\b/gu, (match) => ({
+            start: match.index,
+            end: match.index + match[0].length,
+            type: "iban",
+            group: "identifier",
+            label: "Kennung",
+            replacement: "[IBAN]",
+            priority: 1
+          }));
+        }
+
+        if (state.settings.socialSecurity) {
+          runRegex(/\b\d{2}\s?\d{6}\s?[A-Z]\s?\d{3}\b/gu, (match) => ({
+            start: match.index,
+            end: match.index + match[0].length,
+            type: "svn",
+            group: "identifier",
+            label: "Kennung",
+            replacement: "[SVN]",
+            priority: 2
+          }));
+        }
+
+        if (state.settings.email) {
+          runRegex(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/giu, (match) => ({
+            start: match.index,
+            end: match.index + match[0].length,
+            type: "email",
+            group: "contact",
+            label: "Kontakt",
+            replacement: "[E-Mail]",
+            priority: 3
+          }));
+        }
+
+        if (state.settings.phoneFax) {
+          const phoneRegex = /(?:\b(?:Tel\.?|Telefon|Fax|Mobil|Durchwahl|Hotline)\s*:?\s*)?(?:(?:\+49|00\s?49|0)\s*(?:\(\d{2,5}\)|\d{2,5})(?:[\s./-]*\d{1,5}){1,5}|\b\d{3,5}\s*\/\s*\d{2,5}(?:[-\s]?\d{2,5}){1,3}\b)(?:\s*(?:DW|Durchwahl)\s*\d{1,5})?/gu;
+          runRegex(phoneRegex, (match) => {
+            const digits = match[0].replace(/\D/g, "");
+            if (digits.length < 7) return null;
+            return {
+              start: match.index,
+              end: match.index + match[0].length,
+              type: "phone",
+              group: "contact",
+              label: "Kontakt",
+              replacement: "[Telefon]",
+              priority: 4
+            };
+          });
+        }
+
+        if (state.settings.fileReference) {
+          const fileRefRegex = new RegExp(`(?:\\b${identifierLeadPattern}\\s*:?\\s*[A-Za-zÄÖÜäöü0-9./-]{3,}|\\b(?:[A-ZÄÖÜ]{1,8}|[IVX]{1,6}|\\d{1,4})[-–][A-Za-z0-9]{1,12}(?:[./-][A-Za-z0-9]{1,14})+\\b|\\b\\d{2,8}[-/][A-Za-z0-9]{1,10}[-/][A-Za-z0-9]{1,10}\\b)`, "gu");
+          runRegex(fileRefRegex, (match) => ({
+            start: match.index,
+            end: match.index + match[0].length,
+            type: "aktenzeichen",
+            group: "identifier",
+            label: "Kennung",
+            replacement: "[Aktenzeichen]",
+            priority: 5
+          }));
+        }
+
+        if (state.settings.date) {
+          const dateRegex = new RegExp(`\\b(?:\\d{1,2}\\.\\d{1,2}\\.\\d{2,4}|\\d{4}-\\d{2}-\\d{2}|\\d{1,2}\\.\\s*${monthsPattern}\\s*\\d{4}|${monthsPattern}\\s+\\d{4})\\b`, "giu");
+          runRegex(dateRegex, (match) => ({
+            start: match.index,
+            end: match.index + match[0].length,
+            type: "date",
+            group: "date",
+            label: "Datum",
+            replacement: "[Datum]",
+            priority: 6
+          }));
+        }
+
+        if (state.settings.postalLocation) {
+          const postalRegex = new RegExp(`\\b\\d{5}[ \\t]+${placeNamePattern}\\b`, "gu");
+          runRegex(postalRegex, (match) => ({
+            start: match.index,
+            end: match.index + match[0].length,
+            type: "postal",
+            group: "address",
+            label: "Adresse",
+            replacement: "[PLZ] [Ort]",
+            priority: 7
+          }));
+        }
+
+        if (state.settings.streetAddress) {
+          const streetRegex = new RegExp(`\\b(?:(?:Am|Im|In der|An der|Auf dem|Auf der|Zum|Zur|Bei|Unter den)\\s+)?(?:${compoundStreetPattern}|${placeNamePattern}\\s+${streetTypePattern})\\s+\\d+[a-zA-Z]?(?:\\s?(?:-|–|/)\\s?\\d+[a-zA-Z]?)?\\b`, "gu");
+          runRegex(streetRegex, (match) => ({
+            start: match.index,
+            end: match.index + match[0].length,
+            type: "street",
+            group: "address",
+            label: "Adresse",
+            replacement: "[Adresse]",
+            priority: 8
+          }));
+
+          const postboxRegex = /\bPostfach\s+\d{1,6}\b/gu;
+          runRegex(postboxRegex, (match) => ({
+            start: match.index,
+            end: match.index + match[0].length,
+            type: "street",
+            group: "address",
+            label: "Adresse",
+            replacement: "[Adresse]",
+            priority: 8
+          }));
+        }
+
+        if (state.settings.personNames) {
+          const honorificRegex = new RegExp(`\\b(?:Herr|Frau|Herrn)\\s+${titlePattern}${personNamePattern}`, "gu");
+          runRegex(honorificRegex, (match) => ({
+            start: match.index,
+            end: match.index + match[0].length,
+            type: "person",
+            group: "person",
+            label: "Person",
+            priority: 9
+          }));
+
+          const signatureRegex = new RegExp(`\\b(?:gez\\.?|i\\.\\s?A\\.?|i\\.\\s?V\\.?)\\s+${titlePattern}${personNamePattern}`, "gu");
+          runRegex(signatureRegex, (match) => ({
+            start: match.index,
+            end: match.index + match[0].length,
+            type: "person",
+            group: "person",
+            label: "Person",
+            priority: 10
+          }));
+
+          const roleRegex = new RegExp(`\\b${roleLeadPattern}\\s*:?\\s+(${honorificPattern}${titlePattern}${personNamePattern})`, "gu");
+          runRegex(roleRegex, (match) => {
+            const rawName = match[1];
+            const start = match.index + match[0].length - rawName.length;
+            return {
+              start,
+              end: start + rawName.length,
+              type: "person",
+              group: "person",
+              label: "Person",
+              priority: 11
+            };
+          });
+
+          const roleContextRegex = new RegExp(`\\b(?:Rückfragen\\s+an|Kontakt\\s*:?|Ansprechpartner(?:in)?\\s*:?|zuständig\\s+ist|bearbeitet\\s+den\\s+Vorgang|unterzeichnet\\s+von|wenden\\s+Sie\\s+sich\\s+bitte\\s+an|erreichbar\\s+unter)\\s+(${honorificPattern}${titlePattern}${personNamePattern})`, "gu");
+          runRegex(roleContextRegex, (match) => {
+            const rawName = match[1];
+            const start = match.index + match[0].length - rawName.length;
+            return {
+              start,
+              end: start + rawName.length,
+              type: "person",
+              group: "person",
+              label: "Person",
+              priority: 11
+            };
+          });
+
+          const twoWordNames = new RegExp(`\\b${capitalWordPattern}\\s+${capitalWordPattern}\\b`, "gu");
+          runRegex(twoWordNames, (match) => {
+            const [first, last] = match[0].split(/\s+/);
+            const normalizedFirst = first.toLowerCase();
+            const normalizedLast = last.toLowerCase();
+            if (!firstNameSet.has(normalizedFirst) || !lastNameSet.has(normalizedLast)) return null;
+            return {
+              start: match.index,
+              end: match.index + match[0].length,
+              type: "person",
+              group: "person",
+              label: "Person",
+              priority: 12
+            };
+          });
+
+          for (const term of getActiveCustomTerms("include")) {
+            const matcher = new RegExp(escapeRegExp(term.term), "giu");
+            runRegex(matcher, (match) => {
+              const start = match.index;
+              const end = start + match[0].length;
+              const before = text[start - 1] || "";
+              const after = text[end] || "";
+              if (/\w/u.test(before) || /\w/u.test(after)) return null;
+              return {
+                start,
+                end,
+                type: "custom",
+                group: getCustomMatchGroup(term.colorSlot),
+                label: term.colorSlot ? `Begriff ${term.colorSlot}` : "Eigener Begriff",
+                replacement: term.colorSlot ? `[Begriff ${term.colorSlot}]` : "[Begriff]",
+                customRuleId: term.id,
+                priority: 0
+              };
+            });
+          }
+        }
+
+        return candidates;
+      }
+
+      function resolveOverlaps(candidates) {
+        const accepted = [];
+        const sorted = [...candidates].sort((a, b) => {
+          const lengthDiff = (b.end - b.start) - (a.end - a.start);
+          if (lengthDiff !== 0) return lengthDiff;
+          if (a.priority !== b.priority) return a.priority - b.priority;
+          return a.start - b.start;
+        });
+
+        for (const candidate of sorted) {
+          const overlaps = accepted.some((entry) => candidate.start < entry.end && candidate.end > entry.start);
+          if (!overlaps) accepted.push(candidate);
+        }
+
+        return accepted.sort((a, b) => a.start - b.start);
+      }
+
+      function assignReplacements(matches) {
+        const personRegistry = new Map();
+        const surnameAlias = new Map();
+        const customRegistry = new Map();
+        let personCounter = 0;
+
+        return matches.map((match) => {
+          if (match.type === "custom") {
+            const key = match.customRuleId || normalizeWhitespace(match.raw).toLowerCase();
+            if (!customRegistry.has(key)) {
+              customRegistry.set(key, match.replacement || "[Begriff]");
+            }
+            return { ...match, replacement: customRegistry.get(key) };
+          }
+
+          if (match.type !== "person") return match;
+
+          const canonical = normalizePersonName(match.raw);
+          const tokens = canonical.split(" ").filter(Boolean);
+          let id = personRegistry.get(canonical);
+
+          if (!id && tokens.length === 1 && surnameAlias.has(tokens[0])) {
+            id = surnameAlias.get(tokens[0]);
+          }
+
+          if (!id) {
+            personCounter += 1;
+            id = personCounter;
+            personRegistry.set(canonical, id);
+            if (tokens.length > 1) {
+              const lastToken = tokens[tokens.length - 1];
+              if (lastToken && !surnameAlias.has(lastToken)) {
+                surnameAlias.set(lastToken, id);
+              }
+            }
+          }
+
+          return { ...match, replacement: `[Person ${id}]` };
+        });
+      }
+
+      function anonymize(text) {
+        const excludeSets = buildExcludeSets();
+        const filteredCandidates = collectCandidates(text).filter((candidate) => !isExcludedCandidate(candidate, excludeSets));
+        const resolved = assignReplacements(resolveOverlaps(filteredCandidates));
+        const stats = {
+          total: resolved.length,
+          person: resolved.filter((item) => item.group === "person").length,
+          address: resolved.filter((item) => item.group === "address").length,
+          contact: resolved.filter((item) => item.group === "contact").length,
+          identifier: resolved.filter((item) => item.group === "identifier").length,
+          date: resolved.filter((item) => item.group === "date").length,
+          custom: resolved.filter((item) => item.type === "custom").length
+        };
+
+        return {
+          matches: resolved,
+          stats,
+          anonymizedText: buildPlainOutput(text, resolved)
+        };
+      }
+
+      function buildPlainOutput(text, matches) {
+        let cursor = 0;
+        let result = "";
+        for (const match of matches) {
+          result += text.slice(cursor, match.start) + match.replacement;
+          cursor = match.end;
+        }
+        result += text.slice(cursor);
+        return result;
+      }
+
+      function renderOriginal(text, matches) {
+        let cursor = 0;
+        const parts = [];
+        for (const match of matches) {
+          parts.push(escapeHtml(text.slice(cursor, match.start)));
+          parts.push(`
+            <span class="mark mark-${match.group}">
+              ${escapeHtml(text.slice(match.start, match.end))}
+              <span class="mark-tag">${escapeHtml(match.label)}</span>
+            </span>
+          `);
+          cursor = match.end;
+        }
+        parts.push(escapeHtml(text.slice(cursor)));
+        els.originalRendered.innerHTML = parts.join("");
+      }
+
+      function renderOutput(text, matches) {
+        if (!matches.length) {
+          els.outputText.classList.add("is-empty");
+          els.outputText.textContent = text || "Der anonymisierte Text erscheint hier nach der Analyse.";
+          return;
+        }
+
+        let cursor = 0;
+        const parts = [];
+        for (const match of matches) {
+          parts.push(escapeHtml(text.slice(cursor, match.start)));
+          parts.push(`<span class="placeholder-badge badge-${match.group}">${escapeHtml(match.replacement)}</span>`);
+          cursor = match.end;
+        }
+        parts.push(escapeHtml(text.slice(cursor)));
+        els.outputText.classList.remove("is-empty");
+        els.outputText.innerHTML = parts.join("");
+      }
+
+      function renderStats(stats) {
+        if (!stats.total) {
+          els.statsBar.className = "stats-bar is-success";
+          els.statsBar.innerHTML = `<span class="stats-headline">Keine personenbezogenen Daten erkannt.</span>`;
+          return;
+        }
+
+        const items = [
+          { key: "person", label: stats.person === 1 ? "Person" : "Personen", color: "var(--highlight-yellow-border)" },
+          { key: "address", label: stats.address === 1 ? "Adresse" : "Adressen", color: "var(--highlight-blue-border)" },
+          { key: "contact", label: stats.contact === 1 ? "Kontaktdaten" : "Kontaktdaten", color: "var(--highlight-green-border)" },
+          { key: "identifier", label: stats.identifier === 1 ? "Kennung" : "Kennungen", color: "var(--highlight-orange-border)" },
+          { key: "date", label: stats.date === 1 ? "Datumsangabe" : "Datumsangaben", color: "var(--highlight-violet-border)" },
+          { key: "custom", label: stats.custom === 1 ? "Eigener Begriff" : "Eigene Begriffe", color: "var(--custom-neutral-fg)" }
+        ].filter((item) => stats[item.key] > 0);
+
+        els.statsBar.className = "stats-bar";
+        els.statsBar.innerHTML = `
+          <span class="stats-headline">${stats.total} Ersetzungen</span>
+          ${items.map((item) => `
+            <span class="stats-item">
+              <span class="stats-dot" style="background:${item.color};"></span>
+              ${stats[item.key]} ${item.label}
+            </span>
+          `).join("")}
+        `;
+      }
+
+      function showAnalyzedState(text, result) {
+        renderOriginal(text, result.matches);
+        renderOutput(text, result.matches);
+        renderStats(result.stats);
+        els.originalInput.hidden = true;
+        els.originalRendered.hidden = false;
+        state.analyzed = result;
+      }
+
+      function resetEditorMode() {
+        els.originalRendered.hidden = true;
+        els.originalInput.hidden = false;
+        els.originalInput.focus({ preventScroll: true });
+        state.analyzed = null;
+      }
+
+      function handleAnalyze() {
+        const text = els.originalInput.value.trim();
+        els.anonymizeButton.classList.remove("is-processing");
+        void els.anonymizeButton.offsetWidth;
+        els.anonymizeButton.classList.add("is-processing");
+
+        if (!text) {
+          els.outputText.classList.add("is-empty");
+          els.outputText.textContent = "Bitte zuerst einen Text einfügen.";
+          els.statsBar.className = "stats-bar";
+          els.statsBar.innerHTML = `<span class="stats-headline">Kein Text vorhanden.</span>`;
+          return;
+        }
+
+        const start = performance.now();
+        state.lastOriginalText = els.originalInput.value;
+        const result = anonymize(els.originalInput.value);
+        const runtime = performance.now() - start;
+        showAnalyzedState(els.originalInput.value, result);
+
+        if (!result.stats.total) {
+          els.statsBar.innerHTML = `
+            <span class="stats-headline">Keine personenbezogenen Daten erkannt.</span>
+            <span class="stats-item">Analysezeit: ${Math.round(runtime)} ms</span>
+          `;
+          els.statsBar.classList.add("is-success");
+        } else {
+          els.statsBar.insertAdjacentHTML("beforeend", `<span class="stats-item">Analysezeit: ${Math.round(runtime)} ms</span>`);
+        }
+      }
+
+      async function copyOutput() {
+        const value = state.analyzed ? state.analyzed.anonymizedText : "";
+        if (!value) return;
+
+        try {
+          await navigator.clipboard.writeText(value);
+          flashCopySuccess();
+        } catch {
+          const fallback = document.createElement("textarea");
+          fallback.value = value;
+          fallback.style.position = "fixed";
+          fallback.style.opacity = "0";
+          document.body.appendChild(fallback);
+          fallback.select();
+          document.execCommand("copy");
+          fallback.remove();
+          flashCopySuccess();
+        }
+      }
+
+      function flashCopySuccess() {
+        els.copyButton.classList.add("is-success");
+        els.copyButton.innerHTML = `
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="m4 10 4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Kopiert ✓</span>
+        `;
+        window.clearTimeout(flashCopySuccess.timer);
+        flashCopySuccess.timer = window.setTimeout(() => {
+          els.copyButton.classList.remove("is-success");
+          els.copyButton.innerHTML = `
+            <svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <rect x="7" y="3" width="9" height="11" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M5 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2v-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span>Kopieren</span>
+          `;
+        }, 2000);
+      }
+
+      function resetAll() {
+        if (state.analyzed && state.lastOriginalText) {
+          els.originalInput.value = state.lastOriginalText;
+          clearResultState();
+          resetEditorMode();
+          return;
+        }
+
+        els.originalInput.value = "";
+        clearResultState();
+        resetEditorMode();
+      }
+
+      function maybeDismissHero() {
+        hideHero(true);
+        els.workspace.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function initEvents() {
+        els.startButton.addEventListener("click", maybeDismissHero);
+        els.anonymizeButton.addEventListener("click", handleAnalyze);
+        els.resetButton.addEventListener("click", resetAll);
+        els.copyButton.addEventListener("click", copyOutput);
+        els.originalRendered.addEventListener("click", resetEditorMode);
+        els.originalRendered.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            resetEditorMode();
+          }
+        });
+
+        els.settingsToggle.addEventListener("click", () => {
+          const expanded = els.settingsToggle.getAttribute("aria-expanded") === "true";
+          els.settingsToggle.setAttribute("aria-expanded", String(!expanded));
+          els.settingsPanel.hidden = expanded;
+        });
+
+        document.querySelectorAll("[data-sample]").forEach((button) => {
+          button.addEventListener("click", () => {
+            loadSampleText(button.dataset.sample);
+          });
+        });
+
+        els.customIncludeAdd.addEventListener("click", () => addCustomRule("include"));
+        els.customExcludeAdd.addEventListener("click", () => addCustomRule("exclude"));
+        els.customIncludeInput.addEventListener("keydown", (event) => {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            addCustomRule("include");
+          }
+        });
+        els.customExcludeInput.addEventListener("keydown", (event) => {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            addCustomRule("exclude");
+          }
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.defaultPrevented) return;
+          if (event.key !== "Enter") return;
+          if (!event.ctrlKey && !event.metaKey) return;
+          event.preventDefault();
+          handleAnalyze();
+        });
+      }
+
+      function init() {
+        buildSettingsUi();
+        initEvents();
+
+        if (isHeroHidden()) {
+          hideHero(false);
+        }
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>
