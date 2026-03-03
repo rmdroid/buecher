@@ -235,6 +235,121 @@
       padding-bottom: 0.08rem;
     }
 
+    .news-detail-block {
+      margin-top: 1.2rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid rgba(31, 39, 56, 0.12);
+      display: grid;
+      gap: 1rem;
+    }
+
+    .news-detail-head {
+      display: grid;
+      grid-template-columns: 112px minmax(0, 1fr);
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .news-detail-cover {
+      width: 112px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(31, 39, 56, 0.14);
+      box-shadow: 0 8px 20px rgba(21, 27, 43, 0.1);
+      background: rgba(255,255,255,0.82);
+    }
+
+    .news-detail-title {
+      margin: 0;
+      font-family: var(--display-font);
+      font-size: clamp(1.05rem, 2.2vw, 1.42rem);
+      line-height: 1.18;
+      letter-spacing: -0.01em;
+    }
+
+    .news-gallery {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(31, 39, 56, 0.14);
+      background: rgba(255,255,255,0.78);
+      box-shadow: 0 10px 24px rgba(21, 27, 43, 0.08);
+    }
+
+    .news-gallery-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 900ms ease;
+    }
+
+    .news-gallery-slide.is-active {
+      opacity: 1;
+    }
+
+    .news-gallery-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .news-offer {
+      display: grid;
+      gap: 0.9rem;
+      padding: 1rem 1.1rem 1.05rem;
+      border-radius: 16px;
+      border: 1px solid rgba(37, 59, 104, 0.14);
+      background: rgba(255,255,255,0.7);
+    }
+
+    .news-price {
+      margin: 0;
+      font-family: var(--display-font);
+      font-size: clamp(1.25rem, 2.5vw, 1.9rem);
+      line-height: 1.05;
+      color: var(--accent);
+    }
+
+    .news-bullets {
+      margin: 0;
+      padding-left: 1.1rem;
+      color: rgba(31, 39, 56, 0.88);
+    }
+
+    .news-bullets li + li {
+      margin-top: 0.3rem;
+    }
+
+    .news-buy {
+      margin-top: 0.1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0.72rem 1rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.94rem;
+      font-weight: 700;
+      box-shadow: 0 10px 20px rgba(37, 59, 104, 0.16);
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    .news-buy:hover,
+    .news-buy:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 26px rgba(37, 59, 104, 0.2);
+      outline: none;
+    }
+
+    .news-note {
+      margin: 0;
+      font-size: 0.82rem;
+      color: rgba(31, 39, 56, 0.68);
+    }
+
     @media (max-width: 639px) {
       .news-item {
         grid-template-columns: 110px minmax(0, 1fr);
@@ -253,11 +368,23 @@
       .news-text {
         font-size: 0.9rem;
       }
+
+      .news-detail-head {
+        grid-template-columns: 88px minmax(0, 1fr);
+      }
+
+      .news-detail-cover {
+        width: 88px;
+      }
     }
 
     @media (max-width: 419px) {
       .news-subtitle {
         display: none;
+      }
+
+      .news-detail-head {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -287,6 +414,52 @@
       5) Änderungen committen/pushen — fertig.
       -->
       <section class="news-list" aria-label="Neu erschienene Bücher">
+
+        <!-- ===== BUCH-EINTRAG START ===== -->
+        <article class="news-item" style="--delay: 20ms;">
+          <a class="news-cover-link" href="https://amzn.eu/d/0h7xh5T0" target="_blank" rel="noopener noreferrer" aria-label="KI in der Verwaltung bei Amazon ansehen">
+            <img src="cover_vw.png" alt="Buchcover KI in der Verwaltung von Robert Meyer" width="640" height="960" loading="eager" decoding="async">
+          </a>
+
+          <div>
+            <p class="news-date">FEBRUAR 2026</p>
+            <span class="news-domain">Öffentliche Verwaltung</span>
+            <h2 class="news-title">KI in der Verwaltung — Der praxisnahe Einstieg für Beschäftigte</h2>
+            <p class="news-subtitle">Robert Meyer</p>
+            <p class="news-text">Grundlagen, Datenschutz, EU AI Act und sichere Anwendung im Verwaltungsalltag. Von den ersten Begriffen bis zu fertigen Prompt-Vorlagen und Checklisten — ein kompakter Leitfaden für Fach- und Führungskräfte in öffentlichen Verwaltungen.</p>
+            <a class="news-amazon" href="https://amzn.eu/d/0h7xh5T0" target="_blank" rel="noopener noreferrer">Auf Amazon ansehen <span class="arrow">→</span></a>
+
+            <section class="news-detail-block" aria-label="Interaktiver Leitfaden zu KI in der Verwaltung">
+              <div class="news-detail-head">
+                <div class="news-detail-cover">
+                  <img src="cover_vw.png" alt="Cover des interaktiven Leitfadens KI in der Verwaltung" width="640" height="960" loading="lazy" decoding="async">
+                </div>
+                <div>
+                  <h3 class="news-detail-title">Neu: Das Buch als interaktives Arbeitswerkzeug</h3>
+                  <p class="news-text">Alle Inhalte aus dem Buch — aufbereitet als digitales Lehrmaterial zum Selbstlernen und für den Einsatz im Team. Mit interaktiven Checklisten, einem geführten Entscheidungsbaum, Wissenstests, Prompt-Builder und KI-Kompetenz-Assessment. Direkt im Browser nutzbar, keine Installation nötig.</p>
+                </div>
+              </div>
+
+              <div class="news-gallery" aria-label="Screenshots des interaktiven Leitfadens">
+                <div class="news-gallery-slide is-active"><img src="bild1.png" alt="Screenshot 1 des interaktiven Leitfadens" width="1600" height="900" loading="lazy" decoding="async"></div>
+                <div class="news-gallery-slide"><img src="bild2.png" alt="Screenshot 2 des interaktiven Leitfadens" width="1600" height="900" loading="lazy" decoding="async"></div>
+                <div class="news-gallery-slide"><img src="bild3.png" alt="Screenshot 3 des interaktiven Leitfadens" width="1600" height="900" loading="lazy" decoding="async"></div>
+              </div>
+
+              <div class="news-offer">
+                <p class="news-price">Einmalig 29,99 €</p>
+                <ul class="news-bullets">
+                  <li>Checklisten, Entscheidungsbaum, Quizze &amp; Prompt-Builder</li>
+                  <li>Funktioniert offline im Browser — keine Software nötig</li>
+                  <li>Ideal als Selbstlern-Material oder interner Verwaltungsstandard</li>
+                </ul>
+                <a href="https://ki-fachbuecher.lemonsqueezy.com/checkout/buy/9e14df3e-abf7-4976-b5c8-bf32c7756983?embed=1" class="news-buy lemonsqueezy-button">Interaktiven Leitfaden kaufen - 29,99€</a>
+                <p class="news-note">Für Behörden- und Organisationslizenzen: rm@kostenmanager.net</p>
+              </div>
+            </section>
+          </div>
+        </article>
+        <!-- ===== BUCH-EINTRAG ENDE ===== -->
 
         <!-- ===== BUCH-EINTRAG START ===== -->
         <article class="news-item" style="--delay: 40ms;">
@@ -340,6 +513,18 @@
         window.setTimeout(() => item.classList.add('is-visible'), 70 + index * 120);
       });
     })();
+
+    (() => {
+      const slides = Array.from(document.querySelectorAll('.news-gallery-slide'));
+      if (slides.length < 2) return;
+      let current = 0;
+      window.setInterval(() => {
+        slides[current].classList.remove('is-active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('is-active');
+      }, 3600);
+    })();
   </script>
+  <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
 </body>
 </html>
