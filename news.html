@@ -223,6 +223,18 @@
       transform: translateX(3px);
     }
 
+    .news-link-stack {
+      margin-top: 0.72rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.22rem;
+    }
+
+    .news-link-stack .news-amazon {
+      margin-top: 0;
+    }
+
     .news-footer {
       padding: 1.6rem 0 2.4rem;
       text-align: center;
@@ -418,7 +430,28 @@
       -->
       <section class="news-list" aria-label="Neu erschienene Bücher">
 
+        
         <!-- ===== BUCH-EINTRAG START ===== -->
+        <article class="news-item" style="--delay: 40ms;">
+          <a class="news-cover-link" href="https://amzn.eu/d/0f2lRyNd" target="_blank" rel="noopener noreferrer" aria-label="Die KI-Kluft bei Amazon ansehen">
+            <img src="kluft.jpg" alt="Buchcover Die KI-Kluft von Robert Meyer" width="640" height="960" loading="eager" decoding="async">
+          </a>
+
+          <div>
+            <p class="news-date">MAERZ 2026</p>
+            <a class="news-domain" href="https://www.amazon.de/dp/B0GDY3BLCZ?binding=kindle_edition&amp;qid=1770998499&amp;sr=8-1&amp;ref=dbs_dp_rwt_sb_pc_tkin" target="_blank" rel="noopener noreferrer">KI-TRANSFORMATION</a>
+            <h2 class="news-title">Die KI-Kluft</h2>
+            <p class="news-subtitle">Warum KI Ihr Team spaltet — und wie Sie daraus Ihren größten Vorteil machen</p>
+            <p class="news-text">Dieses Buch richtet sich an Führungskräfte, die erleben, dass KI nicht nur Arbeit beschleunigt, sondern ihr Team in unterschiedliche kognitive Geschwindigkeiten auseinanderzieht. Im Zentrum steht das Tandem-Modell: ein praxistauglicher Führungsansatz, mit dem Sie Knowledge Debt, Kompetenzillusion und stille Reibung in produktive Zusammenarbeit übersetzen. So wird aus einer riskanten Spaltung ein strategischer Vorteil.</p>
+            <div class="news-link-stack">
+              <a class="news-amazon" href="https://amzn.eu/d/0f2lRyNd" target="_blank" rel="noopener noreferrer">Bei Amazon ansehen <span class="arrow">→</span></a>
+              <a class="news-amazon" href="https://ki-fachbuecher.de/ki-kluft/" target="_blank" rel="noopener noreferrer">Zur Buchseite <span class="arrow">→</span></a>
+            </div>
+          </div>
+        </article>
+        <!-- ===== BUCH-EINTRAG ENDE ===== -->
+
+<!-- ===== BUCH-EINTRAG START ===== -->
         <article class="news-item" style="--delay: 20ms;">
           <a class="news-cover-link" href="https://amzn.eu/d/0h7xh5T0" target="_blank" rel="noopener noreferrer" aria-label="KI in der Verwaltung bei Amazon ansehen">
             <img src="cover_vw.png" alt="Buchcover KI in der Verwaltung von Robert Meyer" width="640" height="960" loading="eager" decoding="async">
