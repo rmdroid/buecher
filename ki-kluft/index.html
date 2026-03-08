@@ -878,6 +878,113 @@
       gap: 0.8rem;
     }
 
+    .newsletter-link {
+      color: var(--accent);
+    }
+
+    .newsletter-link:hover,
+    .newsletter-link:focus-visible {
+      color: var(--accent-deep);
+      outline: none;
+    }
+
+    .updates-dialog {
+      width: min(560px, 100%);
+      height: auto;
+      grid-template-rows: auto auto;
+    }
+
+    .updates-body {
+      padding: 1rem;
+      display: grid;
+      gap: 0.9rem;
+      background: rgba(255,255,255,0.96);
+    }
+
+    .updates-copy h3 {
+      margin: 0;
+      font-family: var(--display-font);
+      font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+      line-height: 1.12;
+    }
+
+    .updates-copy p {
+      margin: 0.4rem 0 0;
+      color: var(--ink-soft);
+      font-size: 0.92rem;
+    }
+
+    .updates-form {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.65rem;
+      align-items: stretch;
+    }
+
+    .updates-input {
+      width: 100%;
+      min-height: 46px;
+      border-radius: 14px;
+      border: 1px solid rgba(31, 39, 56, 0.16);
+      background: rgba(255,255,255,0.96);
+      padding: 0.8rem 0.9rem;
+      font: inherit;
+      color: var(--ink);
+      box-shadow: inset 0 1px 2px rgba(31, 39, 56, 0.04);
+    }
+
+    .updates-input::placeholder {
+      color: rgba(31, 39, 56, 0.5);
+    }
+
+    .updates-input:focus-visible {
+      outline: 2px solid rgba(37, 59, 104, 0.18);
+      outline-offset: 2px;
+      border-color: rgba(37, 59, 104, 0.28);
+    }
+
+    .updates-submit {
+      min-height: 46px;
+      padding: 0.78rem 1rem;
+      border-radius: 14px;
+      border: 1px solid rgba(37, 59, 104, 0.22);
+      background: var(--paper-cta);
+      color: var(--accent);
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 14px rgba(31, 39, 56, 0.08);
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+
+    .updates-submit:hover,
+    .updates-submit:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 18px rgba(31, 39, 56, 0.12);
+      border-color: rgba(37, 59, 104, 0.34);
+      outline: none;
+    }
+
+    .updates-submit[disabled] {
+      opacity: 0.7;
+      cursor: wait;
+    }
+
+    .updates-status {
+      min-height: 1.2rem;
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 0.82rem;
+    }
+
+    .updates-status.is-success {
+      color: #21553e;
+    }
+
+    .updates-status.is-error {
+      color: #9f2f2f;
+    }
+
     footer {
       padding: 1rem 0 1.8rem;
       border-top: 1px solid rgba(31, 39, 56, 0.14);
@@ -1114,7 +1221,8 @@
       .button,
       .ghost-button,
       .lemonsqueezy-button,
-      .cta-link {
+      .cta-link,
+      .updates-submit {
         width: 100%;
       }
 
@@ -1165,6 +1273,18 @@
       .lightbox-meta {
         flex-direction: column;
         align-items: flex-start;
+      }
+
+      .updates-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .updates-form {
+        grid-template-columns: 1fr;
+      }
+
+      .updates-status {
+        grid-column: auto;
       }
 
       .store-row,
@@ -1444,6 +1564,7 @@
     <div class="container">
       <div>© 2026 Robert Meyer</div>
       <nav aria-label="Footer Navigation">
+        <a href="#" id="openUpdates" class="newsletter-link">Email/Newsletter</a>
         <a href="#" id="openImpressum">Impressum</a>
         <a href="#" id="openDatenschutz">Datenschutz</a>
       </nav>
@@ -1453,6 +1574,29 @@
   <div class="cookie-notice" id="cookieNotice" role="region" aria-label="Cookie Hinweis" aria-hidden="false">
     <p class="cookie-text">Datenschutzhinweis: Diese Website verwendet keine Cookies. Zur technischen, anonymisierten Reichweitenmessung wird Umami eingesetzt; es werden keine personenbezogenen Profile für Marketingzwecke erstellt.</p>
     <button type="button" class="cookie-ack" id="cookieAck">Hinweis bestätigen</button>
+  </div>
+
+  <div class="legal-modal" id="updatesModal" aria-hidden="true">
+    <div class="legal-dialog updates-dialog" role="dialog" aria-modal="true" aria-labelledby="updatesModalTitle">
+      <div class="legal-head">
+        <h3 id="updatesModalTitle">KI-Kluft Praxis-Updates</h3>
+        <button type="button" class="legal-close" id="closeUpdates" aria-label="Newsletter-Fenster schließen">×</button>
+      </div>
+      <div class="updates-body">
+        <div class="updates-copy">
+          <h3>Einmal monatlich, kein Spam</h3>
+          <p>Kompakte Hinweise zu neuen Werkzeugen, Leseproben, Praxisformaten und Weiterentwicklungen rund um Die KI-Kluft.</p>
+        </div>
+        <form class="updates-form" id="updatesForm" novalidate>
+          <label class="sr-only" for="updatesName">Name</label>
+          <input class="updates-input" id="updatesName" name="name" type="text" autocomplete="name" placeholder="Ihr Name">
+          <label class="sr-only" for="updatesEmail">E-Mail-Adresse</label>
+          <input class="updates-input" id="updatesEmail" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Ihre E-Mail-Adresse" required>
+          <button class="updates-submit" id="updatesSubmit" type="submit">Absenden</button>
+        </form>
+        <p class="updates-status" id="updatesStatus" aria-live="polite"></p>
+      </div>
+    </div>
   </div>
 
   <div class="legal-modal" id="impressumModal" aria-hidden="true">
@@ -1506,6 +1650,14 @@
       const openDatenschutz = document.getElementById('openDatenschutz');
       const closeDatenschutz = document.getElementById('closeDatenschutz');
       const datenschutzFrame = document.getElementById('datenschutzFrame');
+      const updatesModal = document.getElementById('updatesModal');
+      const openUpdates = document.getElementById('openUpdates');
+      const closeUpdates = document.getElementById('closeUpdates');
+      const updatesForm = document.getElementById('updatesForm');
+      const updatesName = document.getElementById('updatesName');
+      const updatesEmail = document.getElementById('updatesEmail');
+      const updatesSubmit = document.getElementById('updatesSubmit');
+      const updatesStatus = document.getElementById('updatesStatus');
       const toolLightbox = document.getElementById('toolLightbox');
       const toolLightboxImage = document.getElementById('toolLightboxImage');
       const toolLightboxCaption = document.getElementById('toolLightboxCaption');
@@ -1637,6 +1789,72 @@
         });
       }
 
+      function installUpdatesModal() {
+        if (!updatesModal || !openUpdates || !closeUpdates) return;
+        const openModal = () => {
+          updatesModal.classList.add('open');
+          updatesModal.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+        };
+        const closeModal = () => {
+          updatesModal.classList.remove('open');
+          updatesModal.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        };
+        openUpdates.addEventListener('click', (ev) => { ev.preventDefault(); openModal(); });
+        closeUpdates.addEventListener('click', closeModal);
+        updatesModal.addEventListener('click', (ev) => { if (ev.target === updatesModal) closeModal(); });
+        document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape' && updatesModal.classList.contains('open')) closeModal(); });
+      }
+
+      function installUpdatesForm() {
+        if (!updatesForm || !updatesEmail || !updatesSubmit || !updatesStatus) return;
+        const endpoint = 'https://n8n.top-beraternetzwerk.de/webhook/termine';
+        updatesForm.addEventListener('submit', async (event) => {
+          event.preventDefault();
+          const name = updatesName ? updatesName.value.trim() : '';
+          const email = updatesEmail.value.trim();
+          if (!email || !updatesEmail.checkValidity()) {
+            updatesStatus.textContent = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+            updatesStatus.className = 'updates-status is-error';
+            updatesEmail.focus();
+            return;
+          }
+          updatesSubmit.disabled = true;
+          updatesStatus.textContent = 'Wird übermittelt ...';
+          updatesStatus.className = 'updates-status';
+          try {
+            const effectiveName = name || email;
+            const payload = {
+              name: effectiveName,
+              email,
+              message: 'KI-Kluft Praxis-Updates\n'
+                + 'Name: ' + effectiveName + '\n'
+                + 'E-Mail: ' + email + '\n'
+                + 'Quelle: KI-Kluft Landingpage\n'
+                + 'Seite: ' + window.location.href,
+              source: 'ki-kluft-landingpage',
+              page: window.location.href,
+              interest: 'KI-Kluft Praxis-Updates'
+            };
+            const response = await fetch(endpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+            if (!response.ok) throw new Error('request_failed');
+            updatesForm.reset();
+            updatesStatus.textContent = 'Vielen Dank. Ihre Angaben wurden übermittelt.';
+            updatesStatus.className = 'updates-status is-success';
+          } catch (_) {
+            updatesStatus.textContent = 'Die Übermittlung hat gerade nicht funktioniert. Bitte versuchen Sie es später erneut.';
+            updatesStatus.className = 'updates-status is-error';
+          } finally {
+            updatesSubmit.disabled = false;
+          }
+        });
+      }
+
       function installImpressumModal() {
         if (!impressumModal || !openImpressum || !closeImpressum || !impressumFrame) return;
         const impressumDoc = `<!doctype html>
@@ -1740,6 +1958,8 @@
       installAudioPlayer();
       installCookieNotice();
       installToolLightbox();
+      installUpdatesModal();
+      installUpdatesForm();
       installImpressumModal();
       installDatenschutzModal();
     })();
