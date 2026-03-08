@@ -1160,6 +1160,39 @@
       background: white;
     }
 
+    .scroll-top {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(37, 59, 104, 0.22);
+      border-radius: 999px;
+      background: rgba(251,247,239,0.94);
+      color: var(--accent);
+      box-shadow: 0 10px 22px rgba(21, 27, 43, 0.12);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: opacity 180ms ease, transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+      z-index: 70;
+    }
+    .scroll-top.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .scroll-top:hover,
+    .scroll-top:focus-visible {
+      border-color: rgba(37, 59, 104, 0.34);
+      box-shadow: 0 14px 28px rgba(21, 27, 43, 0.16);
+      outline: none;
+    }
     .reveal {
       opacity: 0;
       transform: translateY(18px);
@@ -1588,6 +1621,8 @@
     </div>
   </section>
 
+  <button type="button" class="scroll-top" id="scrollTopButton" aria-label="Nach oben">↑</button>
+
   <footer>
     <div class="container">
       <div>© 2026 Robert Meyer</div>
@@ -1669,6 +1704,7 @@
       const audioProgress = document.getElementById('audioProgress');
       const audioTime = document.getElementById('audioTime');
       const cookieNotice = document.getElementById('cookieNotice');
+      const scrollTopButton = document.getElementById('scrollTopButton');
       const cookieAck = document.getElementById('cookieAck');
       const impressumModal = document.getElementById('impressumModal');
       const openImpressum = document.getElementById('openImpressum');
@@ -1764,6 +1800,19 @@
             introAudio.currentTime = duration * ratio;
           }
         });
+      }
+
+      function installScrollTop() {
+        if (!scrollTopButton) return;
+        const update = () => {
+          if (window.scrollY > 520) scrollTopButton.classList.add('is-visible');
+          else scrollTopButton.classList.remove('is-visible');
+        };
+        scrollTopButton.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        window.addEventListener('scroll', update, { passive: true });
+        update();
       }
 
       function installCookieNotice() {
@@ -1983,6 +2032,7 @@
       }
 
       installReveal();
+      installScrollTop();
       installAudioPlayer();
       installCookieNotice();
       installToolLightbox();
