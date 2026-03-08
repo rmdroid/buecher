@@ -323,24 +323,49 @@
       border-radius: 14px;
     }
 
-    .store-row {
+    .shop-disclosure {
       margin-top: 1rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.55rem;
+      width: fit-content;
+      max-width: 100%;
+      border: 1px solid rgba(31, 39, 56, 0.14);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.76);
+      overflow: hidden;
+    }
+
+    .shop-disclosure summary {
+      list-style: none;
+      cursor: pointer;
+      min-height: 44px;
+      display: inline-flex;
       align-items: center;
+      gap: 0.55rem;
+      padding: 0.72rem 0.9rem;
+      color: var(--ink);
+      font-size: 0.88rem;
+      font-weight: 700;
     }
 
-    .store-row--compact {
-      row-gap: 0.45rem;
+    .shop-disclosure summary::-webkit-details-marker {
+      display: none;
     }
 
-    .store-label {
-      font-size: 0.82rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: rgba(31, 39, 56, 0.62);
-      margin-right: 0.15rem;
+    .shop-disclosure summary::after {
+      content: '+';
+      color: var(--accent);
+      font-size: 1rem;
+      line-height: 1;
+      margin-left: 0.2rem;
+    }
+
+    .shop-disclosure[open] summary::after {
+      content: '−';
+    }
+
+    .shop-links-panel {
+      display: grid;
+      gap: 0.5rem;
+      padding: 0 0.9rem 0.9rem;
     }
 
     .shop-link {
@@ -1226,12 +1251,13 @@
         width: 100%;
       }
 
-      .store-row {
-        align-items: stretch;
+      .shop-disclosure {
+        width: 100%;
       }
 
-      .store-row .store-label {
-        flex-basis: 100%;
+      .shop-disclosure summary {
+        width: 100%;
+        justify-content: space-between;
       }
 
       .shop-link,
@@ -1287,7 +1313,6 @@
         grid-column: auto;
       }
 
-      .store-row,
       .hero-actions,
       .author-links,
       footer .container,
@@ -1325,14 +1350,15 @@
           <a class="ghost-button" href="#digitale-erweiterung">Interaktive Erweiterung entdecken</a>
         </div>
 
-        <div class="store-row store-row--compact" aria-label="Weitere Buchshops">
-          <span class="store-label">Auch erhältlich bei</span>
-          <a class="shop-link" href="https://amzn.eu/d/0f2lRyNd" target="_blank" rel="noopener noreferrer">Amazon</a>
-          <a class="shop-link" href="https://play.google.com/store/books/details?id=MkzHEQAAQBAJ" target="_blank" rel="noopener noreferrer">Google Books</a>
-          <span class="shop-link is-soon">Apple Books · Link folgt</span>
-          <span class="shop-link is-soon">Thalia · Link folgt</span>
-          <span class="shop-link is-soon">Hugendubel · Link folgt</span>
-        </div>
+        <details class="shop-disclosure" aria-label="Weitere Buchshops">
+          <summary>Auch erhältlich bei</summary>
+          <div class="shop-links-panel">
+            <a class="shop-link" href="https://play.google.com/store/books/details?id=MkzHEQAAQBAJ" target="_blank" rel="noopener noreferrer">Google Books</a>
+            <span class="shop-link is-soon">Apple Books · Link folgt</span>
+            <span class="shop-link is-soon">Thalia · Link folgt</span>
+            <span class="shop-link is-soon">Hugendubel · Link folgt</span>
+          </div>
+        </details>
 
         <div class="intro-audio reveal" style="--delay: 100ms;">
           <p class="intro-label">Kurzvorstellung des Buches · ca. 90 Sekunden</p>
@@ -1549,13 +1575,15 @@
           <a class="button" href="https://amzn.eu/d/0f2lRyNd" target="_blank" rel="noopener noreferrer">Bei Amazon ansehen →</a>
           <a class="ghost-button" href="#digitale-erweiterung">Interaktive Erweiterung bestellen</a>
         </div>
-        <div class="store-row store-row--compact" aria-label="Weitere Buchshops am Seitenende">
-          <span class="store-label">Weitere Shops</span>
-          <a class="shop-link" href="https://play.google.com/store/books/details?id=MkzHEQAAQBAJ" target="_blank" rel="noopener noreferrer">Google Books</a>
-          <span class="shop-link is-soon">Apple Books · Link folgt</span>
-          <span class="shop-link is-soon">Thalia · Link folgt</span>
-          <span class="shop-link is-soon">Hugendubel · Link folgt</span>
-        </div>
+        <details class="shop-disclosure" aria-label="Weitere Buchshops am Seitenende">
+          <summary>Auch erhältlich bei</summary>
+          <div class="shop-links-panel">
+            <a class="shop-link" href="https://play.google.com/store/books/details?id=MkzHEQAAQBAJ" target="_blank" rel="noopener noreferrer">Google Books</a>
+            <span class="shop-link is-soon">Apple Books · Link folgt</span>
+            <span class="shop-link is-soon">Thalia · Link folgt</span>
+            <span class="shop-link is-soon">Hugendubel · Link folgt</span>
+          </div>
+        </details>
       </article>
     </div>
   </section>
