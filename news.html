@@ -223,6 +223,18 @@
       transform: translateX(3px);
     }
 
+    .news-link-stack {
+      margin-top: 0.72rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.22rem;
+    }
+
+    .news-link-stack .news-amazon {
+      margin-top: 0;
+    }
+
     .news-footer {
       padding: 1.6rem 0 2.4rem;
       text-align: center;
@@ -233,6 +245,124 @@
       font-size: 0.92rem;
       border-bottom: 1px solid rgba(37, 59, 104, 0.3);
       padding-bottom: 0.08rem;
+    }
+
+    .news-detail-block {
+      margin-top: 1.2rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid rgba(31, 39, 56, 0.12);
+      display: grid;
+      gap: 1rem;
+    }
+
+    .news-detail-head {
+      display: grid;
+      grid-template-columns: 112px minmax(0, 1fr);
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .news-detail-cover {
+      width: 112px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(31, 39, 56, 0.14);
+      box-shadow: 0 8px 20px rgba(21, 27, 43, 0.1);
+      background: rgba(255,255,255,0.82);
+    }
+
+    .news-detail-title {
+      margin: 0;
+      font-family: var(--display-font);
+      font-size: clamp(1.05rem, 2.2vw, 1.42rem);
+      line-height: 1.18;
+      letter-spacing: -0.01em;
+    }
+
+    .news-gallery {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(31, 39, 56, 0.14);
+      background: rgba(255,255,255,0.78);
+      box-shadow: 0 10px 24px rgba(21, 27, 43, 0.08);
+    }
+
+    .news-gallery-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 900ms ease;
+    }
+
+    .news-gallery-slide.is-active {
+      opacity: 1;
+    }
+
+    .news-gallery-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .news-offer {
+      display: grid;
+      gap: 0.9rem;
+      padding: 1rem 1.1rem 1.05rem;
+      border-radius: 16px;
+      border: 1px solid rgba(37, 59, 104, 0.14);
+      background: rgba(255,255,255,0.7);
+    }
+
+    .news-price {
+      margin: 0;
+      font-family: var(--display-font);
+      font-size: clamp(1.25rem, 2.5vw, 1.9rem);
+      line-height: 1.05;
+      color: var(--accent);
+    }
+
+    .news-bullets {
+      margin: 0;
+      padding-left: 1.1rem;
+      color: rgba(31, 39, 56, 0.88);
+    }
+
+    .news-bullets li + li {
+      margin-top: 0.3rem;
+    }
+
+    .news-buy {
+      margin-top: 0.1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0.72rem 1rem;
+      border-radius: 14px;
+      border: 1px solid rgba(37, 59, 104, 0.22);
+      background: linear-gradient(180deg, rgba(251,247,239,0.96), rgba(242,236,226,0.96));
+      color: var(--accent);
+      font-size: 0.94rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      box-shadow: 0 6px 14px rgba(31, 39, 56, 0.08);
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .news-buy:hover,
+    .news-buy:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(37, 59, 104, 0.34);
+      box-shadow: 0 10px 18px rgba(31, 39, 56, 0.12);
+      outline: none;
+    }
+
+    .news-note {
+      margin: 0;
+      font-size: 0.82rem;
+      color: rgba(31, 39, 56, 0.68);
     }
 
     @media (max-width: 639px) {
@@ -253,11 +383,23 @@
       .news-text {
         font-size: 0.9rem;
       }
+
+      .news-detail-head {
+        grid-template-columns: 88px minmax(0, 1fr);
+      }
+
+      .news-detail-cover {
+        width: 88px;
+      }
     }
 
     @media (max-width: 419px) {
       .news-subtitle {
         display: none;
+      }
+
+      .news-detail-head {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -288,20 +430,77 @@
       -->
       <section class="news-list" aria-label="Neu erschienene Bücher">
 
-        
         <!-- ===== BUCH-EINTRAG START ===== -->
-        <article class="news-item" style="--delay: 40ms;">
+        <article class="news-item" style="--delay: 20ms;">
           <a class="news-cover-link" href="https://www.amazon.de/KI-Agenten-fu%CC%88r-Selbst%C3%A4ndige-produktiver-automatisieren-ebook/dp/B0H47Z227Y?_encoding=UTF8&amp;dib_tag=se&amp;dib=eyJ2IjoiMSJ9.N8vSXzTq2vozrQnYLLKIi57hQZZQIQKK7A7rxyJ5qLJO_DrVy3qxk0nU75G5JWIFfmel48Yyyo_YW-1gDMjvg7_4oqDfoImD5870VWNW_XEeffRg0CmOUJqT_AVK9ql56CCEbyTkBNweD9HHCC_WS4-hw7LzDMp94bsu1HuM7Ae0ep3RSa7Lx9PHLDQag2BB8CB96gCPIcl-yQmmvoLVoKEraztd4st_K6uPJiWp-eI.kmXAOiwcSLl-u5c1WdZxQtQr6oUvjM3txkWqdc6g9kk&amp;qid=1781293610&amp;sr=8-1" target="_blank" rel="noopener noreferrer" aria-label="KI-Agenten für Selbständige bei Amazon ansehen">
             <img src="cover_agent.jpg" alt="Buchcover KI-Agenten für Selbständige von Robert Meyer" width="640" height="960" loading="eager" decoding="async">
           </a>
 
           <div>
             <p class="news-date">JUNI 2026</p>
-            <a class="news-domain" href="https://www.amazon.de/dp/B0GDXX6BCK?binding=hardcover&amp;qid=1770996129&amp;sr=8-1&amp;ref=dbs_dp_rwt_sb_pc_thcv" target="_blank" rel="noopener noreferrer">AUTONOME KI-SYSTEME</a>
+            <span class="news-domain">AUTONOME KI-SYSTEME</span>
             <h2 class="news-title">KI-Agenten für Selbständige</h2>
             <p class="news-subtitle">Mit Clawbot, Hermes, Claude Code und Codex produktiver arbeiten und Aufgaben automatisieren</p>
             <p class="news-text">Weniger Routine, mehr Fokus: Dieses Buch zeigt Selbständigen, Freelancern und Einzelunternehmern, wie KI-Agenten Aufgaben in Recherche, Content, Kundenkommunikation, Backoffice und technischer Automatisierung übernehmen können, ohne die Kontrolle aus der Hand zu geben. Mit Praxisanleitungen zu Claude Code, Codex, Hermes und Clawbot, einem konkreten 30-Tage-Plan, Sicherheits-Checklisten und interaktivem Begleitmaterial.</p>
             <a class="news-amazon" href="https://www.amazon.de/KI-Agenten-fu%CC%88r-Selbst%C3%A4ndige-produktiver-automatisieren-ebook/dp/B0H47Z227Y?_encoding=UTF8&amp;dib_tag=se&amp;dib=eyJ2IjoiMSJ9.N8vSXzTq2vozrQnYLLKIi57hQZZQIQKK7A7rxyJ5qLJO_DrVy3qxk0nU75G5JWIFfmel48Yyyo_YW-1gDMjvg7_4oqDfoImD5870VWNW_XEeffRg0CmOUJqT_AVK9ql56CCEbyTkBNweD9HHCC_WS4-hw7LzDMp94bsu1HuM7Ae0ep3RSa7Lx9PHLDQag2BB8CB96gCPIcl-yQmmvoLVoKEraztd4st_K6uPJiWp-eI.kmXAOiwcSLl-u5c1WdZxQtQr6oUvjM3txkWqdc6g9kk&amp;qid=1781293610&amp;sr=8-1" target="_blank" rel="noopener noreferrer">Bei Amazon ansehen <span class="arrow">→</span></a>
+          </div>
+        </article>
+        <!-- ===== BUCH-EINTRAG ENDE ===== -->
+
+        <!-- ===== BUCH-EINTRAG START ===== -->
+        <article class="news-item" style="--delay: 20ms;">
+          <a class="news-cover-link" href="https://amzn.eu/d/06Z8cyGy" target="_blank" rel="noopener noreferrer" aria-label="Kleine KI, großer Nutzen bei Amazon ansehen">
+            <img src="Kleine%20KI,%20gro%C3%9Fer%20Nutzen%20Cover%201400x2100.jpg" alt="Buchcover Kleine KI, großer Nutzen von Robert Meyer" width="640" height="960" loading="eager" decoding="async">
+          </a>
+
+          <div>
+            <p class="news-date">APRIL 2026</p>
+            <span class="news-domain">Small Language Models</span>
+            <h2 class="news-title">Kleine KI, großer Nutzen</h2>
+            <p class="news-subtitle">Small Language Models im Mittelstand praktisch einführen: lokal, sicher, bezahlbar</p>
+            <p class="news-text">Dieses Buch zeigt, wie Unternehmen kleine Sprachmodelle sinnvoll einsetzen, ohne sich in Cloud-Abhängigkeiten, Modell-Hype oder unklare Kostenstrukturen zu verlieren. Im Mittelpunkt stehen konkrete Anwendungsfälle, realistische Entscheidungen und ein sauberer Weg von der ersten lokalen Testumgebung bis zum belastbaren Einsatz im Mittelstand.</p>
+            <a class="news-amazon" href="https://amzn.eu/d/06Z8cyGy" target="_blank" rel="noopener noreferrer">Bei Amazon ansehen <span class="arrow">→</span></a>
+          </div>
+        </article>
+        <!-- ===== BUCH-EINTRAG ENDE ===== -->
+
+        
+        <!-- ===== BUCH-EINTRAG START ===== -->
+        <article class="news-item" style="--delay: 40ms;">
+          <a class="news-cover-link" href="https://amzn.eu/d/0f2lRyNd" target="_blank" rel="noopener noreferrer" aria-label="Die KI-Kluft bei Amazon ansehen">
+            <img src="kluft.jpg" alt="Buchcover Die KI-Kluft von Robert Meyer" width="640" height="960" loading="eager" decoding="async">
+          </a>
+
+          <div>
+            <p class="news-date">MAERZ 2026</p>
+            <a class="news-domain" href="https://www.amazon.de/dp/B0GDY3BLCZ?binding=kindle_edition&amp;qid=1770998499&amp;sr=8-1&amp;ref=dbs_dp_rwt_sb_pc_tkin" target="_blank" rel="noopener noreferrer">KI-TRANSFORMATION</a>
+            <h2 class="news-title">Die KI-Kluft</h2>
+            <p class="news-subtitle">Warum KI Ihr Team spaltet — und wie Sie daraus Ihren größten Vorteil machen</p>
+            <p class="news-text">Dieses Buch richtet sich an Führungskräfte, die erleben, dass KI nicht nur Arbeit beschleunigt, sondern ihr Team in unterschiedliche kognitive Geschwindigkeiten auseinanderzieht. Im Zentrum steht das Tandem-Modell: ein praxistauglicher Führungsansatz, mit dem Sie Knowledge Debt, Kompetenzillusion und stille Reibung in produktive Zusammenarbeit übersetzen. So wird aus einer riskanten Spaltung ein strategischer Vorteil.</p>
+            <div class="news-link-stack">
+              <a class="news-amazon" href="https://amzn.eu/d/0f2lRyNd" target="_blank" rel="noopener noreferrer">Bei Amazon ansehen <span class="arrow">→</span></a>
+              <a class="news-amazon" href="https://ki-fachbuecher.de/ki-kluft/" target="_blank" rel="noopener noreferrer">Zur Buchseite <span class="arrow">→</span></a>
+            </div>
+          </div>
+        </article>
+        <!-- ===== BUCH-EINTRAG ENDE ===== -->
+
+<!-- ===== BUCH-EINTRAG START ===== -->
+        <article class="news-item" style="--delay: 20ms;">
+          <a class="news-cover-link" href="https://amzn.eu/d/0h7xh5T0" target="_blank" rel="noopener noreferrer" aria-label="KI in der Verwaltung bei Amazon ansehen">
+            <img src="cover_vw.png" alt="Buchcover KI in der Verwaltung von Robert Meyer" width="640" height="960" loading="eager" decoding="async">
+          </a>
+
+          <div>
+            <p class="news-date">FEBRUAR 2026</p>
+            <span class="news-domain">Öffentliche Verwaltung</span>
+            <h2 class="news-title">KI in der Verwaltung — Der praxisnahe Einstieg für Beschäftigte</h2>
+            <p class="news-subtitle">Robert Meyer</p>
+            <p class="news-text">Grundlagen, Datenschutz, EU AI Act und sichere Anwendung im Verwaltungsalltag. Von den ersten Begriffen bis zu fertigen Prompt-Vorlagen und Checklisten — ein kompakter Leitfaden für Fach- und Führungskräfte in öffentlichen Verwaltungen.</p>
+            <div class="news-link-stack">
+              <a class="news-amazon" href="https://amzn.eu/d/0h7xh5T0" target="_blank" rel="noopener noreferrer">Auf Amazon ansehen <span class="arrow">→</span></a>
+              <a class="news-amazon" href="https://ki-fachbuecher.de/verwaltung/" target="_blank" rel="noopener noreferrer">Zur Buchseite <span class="arrow">→</span></a>
+            </div>
           </div>
         </article>
         <!-- ===== BUCH-EINTRAG ENDE ===== -->
@@ -358,6 +557,18 @@
         window.setTimeout(() => item.classList.add('is-visible'), 70 + index * 120);
       });
     })();
+
+    (() => {
+      const slides = Array.from(document.querySelectorAll('.news-gallery-slide'));
+      if (slides.length < 2) return;
+      let current = 0;
+      window.setInterval(() => {
+        slides[current].classList.remove('is-active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('is-active');
+      }, 3600);
+    })();
   </script>
+  <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
 </body>
 </html>
