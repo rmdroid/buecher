@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>KI in der Verwaltung · Fortbildung für Behörden und Bildungsträger</title>
-  <meta name="description" content="Ganztagesfortbildung zu KI in der Verwaltung: Curriculum, Begleitbuch, digitales Begleitmaterial und Anfrage für Verwaltungen, Behörden, VHS und Bildungsträger.">
+  <meta name="description" content="Fortbildung, Fachbücher und interaktives Lehrmaterial für den sicheren und verantwortlichen KI-Einsatz in Verwaltungen, Behörden und Bildungsträgern.">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <meta name="author" content="Robert Meyer">
   <meta name="theme-color" content="#f4efe5">
@@ -20,7 +20,7 @@
   <meta property="og:site_name" content="KI-Fachbücher">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="KI in der Verwaltung · Fortbildung für Behörden und Bildungsträger">
-  <meta name="twitter:description" content="Ganztagesfortbildung mit Curriculum, Begleitbuch und Interaktivem Leitfaden für Verwaltungen, VHS und Bildungsträger.">
+  <meta name="twitter:description" content="Fortbildung, zwei Fachbücher und interaktives Lehrmaterial für Verwaltungen, Behörden und Bildungsträger.">
   <meta name="twitter:image" content="https://ki-fachbuecher.de/verwaltung/verwaltung.png">
   <script defer src="https://cv.rm-on.de/script.js" data-website-id="c3560049-b6a3-408b-bb7c-73e51c8b8df7"></script>
   <script type="application/ld+json">
@@ -48,6 +48,24 @@
           "timeRequired": "PT6H",
           "inLanguage": "de",
           "image": "https://ki-fachbuecher.de/verwaltung/verwaltung.png"
+        },
+        {
+          "@type": "Book",
+          "@id": "https://ki-fachbuecher.de/verwaltung/#book-einstieg",
+          "name": "KI in der Verwaltung",
+          "author": { "@type": "Person", "name": "Robert Meyer" },
+          "inLanguage": "de",
+          "image": "https://ki-fachbuecher.de/verwaltung/verwaltung.png",
+          "url": "https://amzn.eu/d/02eQQte1"
+        },
+        {
+          "@type": "Book",
+          "@id": "https://ki-fachbuecher.de/verwaltung/#book-vertiefung",
+          "name": "Dürfen wir das?",
+          "author": { "@type": "Person", "name": "Robert Meyer" },
+          "inLanguage": "de",
+          "image": "https://ki-fachbuecher.de/verwaltung/cover_v2.png",
+          "url": "https://amzn.eu/d/04VBR9GV"
         },
         {
           "@type": "BreadcrumbList",
@@ -146,6 +164,45 @@
       border: 1px solid rgba(37, 59, 104, 0.16);
       border-radius: 999px;
       padding: 0.42rem 0.8rem;
+    }
+    .section-nav {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      margin-top: 0.8rem;
+      border-top: 1px solid rgba(31, 39, 56, 0.1);
+      border-bottom: 1px solid rgba(31, 39, 56, 0.12);
+      background: rgba(247, 242, 232, 0.9);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .section-nav .container {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-top: 0.55rem;
+      padding-bottom: 0.55rem;
+    }
+    .section-nav .container::-webkit-scrollbar { display: none; }
+    .section-nav a {
+      flex: 0 0 auto;
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0.48rem 0.78rem;
+      border-radius: 999px;
+      color: var(--ink-soft);
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+    .section-nav a:hover,
+    .section-nav a:focus-visible {
+      color: var(--accent);
+      background: rgba(255,255,255,0.7);
+      outline: 2px solid rgba(37, 59, 104, 0.16);
+      outline-offset: 1px;
     }
     .hero { padding-top: 2.2rem; min-height: 94svh; position: relative; }
     .hero-grid {
@@ -316,6 +373,14 @@
       top: 1.4rem;
       background: linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,255,255,0.72));
     }
+    .hero-book-pair {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      align-items: end;
+    }
+    .hero-book-pair .book-cover-wrap:first-child { transform: rotate(-1.5deg); }
+    .hero-book-pair .book-cover-wrap:last-child { transform: rotate(1.5deg); }
     .book-cover-wrap,
     .proof-image,
     .author-photo,
@@ -520,6 +585,98 @@
     .cta-layout,
     .book-layout { grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr); }
     .author-layout { grid-template-columns: minmax(0, 1fr) minmax(280px, 0.92fr); }
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+    .book-offer {
+      display: grid;
+      grid-template-columns: minmax(150px, 0.62fr) minmax(0, 1.38fr);
+      gap: 1.1rem;
+      align-items: start;
+      padding: 1.1rem;
+      background: rgba(255,255,255,0.74);
+      border: 1px solid rgba(31,39,56,0.12);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+    }
+    .book-offer.is-new {
+      background: linear-gradient(180deg, rgba(37, 59, 104, 0.08), rgba(255,255,255,0.84));
+      border-color: rgba(37, 59, 104, 0.2);
+    }
+    .book-offer-copy { min-width: 0; }
+    .book-label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0.28rem 0.6rem;
+      border: 1px solid rgba(37, 59, 104, 0.18);
+      border-radius: 999px;
+      color: var(--accent);
+      background: rgba(255,255,255,0.66);
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .book-offer h3 {
+      margin: 0.7rem 0 0;
+      font-family: var(--display-font);
+      font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+      line-height: 1.12;
+    }
+    .book-offer p { margin: 0.65rem 0 0; color: var(--ink-soft); }
+    .book-for {
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(31, 39, 56, 0.12);
+      font-size: 0.9rem;
+    }
+    .learning-path {
+      margin-top: 1.2rem;
+      padding: 1rem 1.1rem;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem;
+      border: 1px solid rgba(37, 59, 104, 0.16);
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,0.54);
+    }
+    .learning-path p { margin: 0; color: var(--ink-soft); }
+    .learning-path strong { color: var(--ink); }
+    .guide-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+      gap: 1.5rem;
+      align-items: start;
+      margin-top: 1.5rem;
+    }
+    .guide-benefits {
+      margin: 1rem 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 0.65rem;
+    }
+    .guide-benefits li {
+      position: relative;
+      padding-left: 1.55rem;
+      color: var(--ink-soft);
+    }
+    .guide-benefits li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .guide-note {
+      margin-top: 0.8rem;
+      font-size: 0.86rem;
+      color: var(--ink-soft);
+    }
     .proof-image { max-width: 520px; transform: rotate(-1.2deg); transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease; display:block; }
     .proof-image:hover,
     .proof-image:focus-visible {
@@ -708,6 +865,14 @@
       grid-template-columns: 1fr;
       gap: 0.7rem;
       margin-top: 0.95rem;
+    }
+    .contact-field,
+    .updates-field { display: grid; gap: 0.35rem; }
+    .contact-field label,
+    .updates-field label {
+      color: var(--ink);
+      font-size: 0.84rem;
+      font-weight: 700;
     }
     .contact-input,
     .contact-select,
@@ -955,6 +1120,7 @@
       transition: opacity 180ms ease, transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
       z-index: 70;
     }
+    .mobile-course-cta { display: none; }
     .scroll-top.is-visible {
       opacity: 1;
       transform: translateY(0);
@@ -993,13 +1159,17 @@
       .hero-grid,
       .contact-grid,
       .blocks-grid,
-      .audience-grid { grid-template-columns: 1fr; }
+      .audience-grid,
+      .books-grid,
+      .guide-layout { grid-template-columns: 1fr; }
       .book-panel { position: static; }
     }
     @media (max-width: 720px) {
       .section { padding: clamp(2.8rem, 12vw, 4rem) 0; }
       .container { width: min(var(--max), calc(100% - 1.2rem)); }
       .site-badge { font-size: 0.68rem; }
+      .site-topbar .container { align-items: flex-start; }
+      .section-nav { margin-top: 0.65rem; }
       .hero { min-height: auto; padding-top: 1.5rem; }
       .hero-copy h1 { max-width: 11ch; font-size: clamp(2rem, 10vw, 3rem); }
       .hero-copy .lead,
@@ -1029,6 +1199,10 @@
       .contact-grid,
       .format-grid,
       .deadline-card { grid-template-columns: 1fr; }
+      .book-offer,
+      .learning-path { grid-template-columns: 1fr; }
+      .book-offer .book-cover-wrap { width: min(220px, 72vw); margin: 0 auto; }
+      .tool-gallery { grid-template-columns: 1fr; }
       .proof-image { transform: none; }
       .cookie-notice {
         grid-template-columns: 1fr;
@@ -1040,7 +1214,26 @@
       footer nav,
       .author-links,
       .proof-meta { gap: 0.6rem; }
-      .scroll-top { right: 0.75rem; bottom: 0.75rem; }
+      .scroll-top { right: 0.75rem; bottom: 4.8rem; }
+      .mobile-course-cta {
+        position: fixed;
+        left: 0.6rem;
+        right: 0.6rem;
+        bottom: 0.6rem;
+        z-index: 65;
+        min-height: 50px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.72rem 1rem;
+        border-radius: 14px;
+        color: #fff;
+        background: var(--accent);
+        box-shadow: 0 12px 28px rgba(21, 27, 43, 0.22);
+        font-weight: 700;
+      }
+      .mobile-course-cta:focus-visible { outline: 3px solid var(--sand); outline-offset: 2px; }
+      footer { padding-bottom: 5rem; }
     }
   </style>
 </head>
@@ -1052,13 +1245,23 @@
     </div>
   </div>
 
+  <nav class="section-nav" aria-label="Seitennavigation">
+    <div class="container">
+      <a href="#curriculum">Inhalte</a>
+      <a href="#formate">Formate</a>
+      <a href="#buecher">Bücher</a>
+      <a href="#leitfaden">Interaktiver Leitfaden</a>
+      <a href="#kontakt">Fortbildung anfragen</a>
+    </div>
+  </nav>
+
   <section class="section hero" aria-labelledby="hero-title">
     <div class="container hero-grid">
       <div class="hero-copy reveal" style="--delay: 40ms;">
         <span class="eyebrow">Ganztagesfortbildung mit Begleitmaterial</span>
         <h1 id="hero-title">KI in der Verwaltung für Behörden und Bildungsträger</h1>
         <p class="lead">Die Pflicht zur KI-Kompetenz ist da. Die Kapazitäten sind es oft nicht. Genau deshalb braucht die öffentliche Verwaltung ein Format, das Grundlagen, Datenschutz, EU AI Act und sichere Anwendung in einem belastbaren Arbeitstag zusammenführt.</p>
-        <p class="hero-claim">Ob direkte Inhouse-Fortbildung für Behörden oder schlüsselfertiges Format für Bildungsträger: Hier bekommen Sie Schulung und Begleitmaterial direkt aus einer Hand.</p>
+        <p class="hero-claim">Ob direkte Inhouse-Fortbildung für Behörden oder schlüsselfertiges Format für Bildungsträger: Schulung, zwei Fachbücher und interaktives Lehrmaterial bilden einen nachvollziehbaren Weg vom Einstieg bis zur verantwortlichen Einführung.</p>
 
         <div class="meta-row" aria-label="Zielgruppenhinweise">
           <span class="meta-pill">Für Verwaltungen und Behörden</span>
@@ -1067,9 +1270,9 @@
         </div>
 
         <div class="hero-actions">
-          <a class="button" href="#kontakt">Kurs anfragen →</a>
-          <a class="ghost-button" href="#curriculum">Curriculum ansehen</a>
-          <a class="ghost-button" href="#bausteine">Interaktiven Leitfaden entdecken</a>
+          <a class="button" href="#kontakt">Fortbildung anfragen →</a>
+          <a class="lemonsqueezy-button" href="https://ki-fachbuecher.lemonsqueezy.com/checkout/buy/9e14df3e-abf7-4976-b5c8-bf32c7756983?embed=1">Interaktiven Leitfaden kaufen</a>
+          <a class="ghost-button" href="#buecher">Fachbücher ansehen</a>
         </div>
 
 
@@ -1078,11 +1281,16 @@
 
       <aside class="hero-aside reveal" style="--delay: 120ms;">
         <div class="book-panel">
-          <div class="book-cover-wrap">
-            <img src="verwaltung.png" alt="Titelmotiv KI in der Verwaltung" width="1200" height="1800" loading="eager" decoding="async">
+          <div class="hero-book-pair" aria-label="Die beiden Fachbücher zur KI in der Verwaltung">
+            <div class="book-cover-wrap">
+              <img src="verwaltung.png" alt="Buchcover KI in der Verwaltung" width="1200" height="1800" loading="eager" decoding="async">
+            </div>
+            <div class="book-cover-wrap">
+              <img src="cover_v2.png" alt="Buchcover Dürfen wir das?" width="992" height="1586" loading="eager" decoding="async">
+            </div>
           </div>
-          <h2>KI in der Verwaltung</h2>
-          <p>Praxisnahes Schulungsformat mit Curriculum, Begleitbuch und Interaktivem Leitfaden für öffentliche Stellen.</p>
+          <h2>Vom Einstieg bis zur sicheren Einführung</h2>
+          <p>Fortbildung für den gemeinsamen Start, ein kompaktes Einstiegsbuch und ein vertiefendes Praxisbuch zu Recht, EU AI Act und Governance.</p>
           <div class="meta-row">
             <span class="meta-pill">Max. 25 Teilnehmende</span>
             <span class="meta-pill">Präsenz oder remote</span>
@@ -1096,18 +1304,12 @@
   <section class="section" id="problem">
     <div class="container">
       <span class="eyebrow reveal" style="--delay: 20ms;">Das Problem</span>
-      <h2 class="section-title reveal" style="--delay: 50ms;">KI-Kompetenz ist Pflicht. Flächendeckende Schulungskapazität ist es noch nicht.</h2>
-      <p class="section-intro reveal" style="--delay: 80ms;">Seit dem 2. Februar 2025 verlangt der EU AI Act ausreichende KI-Kompetenz in Organisationen, die KI einsetzen. In der Praxis stehen Verwaltungen oft vor einem Missverhältnis: viel Lernbedarf, aber nur begrenzte Zeitfenster, knappe Kursplätze und Unsicherheit darüber, wie Grundlagen, Recht und Anwendung sinnvoll zusammengeführt werden.</p>
+      <h2 class="section-title reveal" style="--delay: 50ms;">KI-Kompetenz ist eine Organisationsaufgabe.</h2>
+      <p class="section-intro reveal" style="--delay: 80ms;">Verwaltungen müssen Beschäftigte für einen sicheren KI-Einsatz qualifizieren. Gleichzeitig fehlen häufig Zeit, ein gemeinsamer Wissensstand und klare Regeln für den Arbeitsalltag. Die Fortbildung führt Grundlagen, Recht und praktische Anwendung in einem belastbaren Format zusammen.</p>
 
       <div class="deadline-card reveal" style="--delay: 95ms;">
         <div class="deadline-date">02.02.2025</div>
-        <div class="deadline-copy"><strong>Art. 4 EU AI Act — KI-Kompetenz ist Pflicht.</strong><p>Seit diesem Datum ist KI-Kompetenz keine freiwillige Zusatzqualifikation mehr, sondern eine konkrete Organisationsaufgabe für Verwaltungen und Bildungsträger.</p></div>
-      </div>
-
-      <div class="stats-grid">
-        <div class="stat-card reveal" style="--delay: 100ms;"><span>Pflicht</span><strong>AI Literacy</strong><p>Der EU AI Act macht KI-Kompetenz in Organisationen und Behörden zu einer realen Führungs- und Umsetzungsaufgabe.</p></div>
-        <div class="stat-card reveal" style="--delay: 140ms;"><span>Engpass</span><strong>1.600 / 60</strong><p>Wenn viele Beschäftigte qualifiziert werden müssen, reichen klassische Einzelplätze oder punktuelle Pilotkurse organisatorisch oft nicht aus.</p></div>
-        <div class="stat-card reveal" style="--delay: 180ms;"><span>Risiko</span><strong>Unsicherer Alltag</strong><p>Ohne klares Format entstehen Übervorsicht, Regelbruch oder unkontrollierte Einzelpraxis statt sicherer Routine.</p></div>
+        <div class="deadline-copy"><strong>Art. 4 EU AI Act — Maßnahmen zur KI-Kompetenz.</strong><p>Seit diesem Datum müssen Anbieter und Betreiber von KI-Systemen Maßnahmen treffen, um bei den mit KI befassten Personen ein ausreichendes Maß an KI-Kompetenz sicherzustellen.</p></div>
       </div>
     </div>
   </section>
@@ -1138,104 +1340,103 @@
         <article class="format-card reveal" style="--delay: 100ms;"><span>Format 1</span><h3>Vor Ort</h3><p>Ganztagesfortbildung mit rund 6 Stunden Netto-Lernzeit, ausgelegt für bis zu 20 Teilnehmende und inklusive Begleitbuch pro Person.</p></article>
         <article class="format-card reveal" style="--delay: 140ms;"><span>Format 2</span><h3>Remote</h3><p>Drei Einheiten à 2 Stunden, ausgelegt für bis zu 25 Teilnehmende, inklusive digitalem Zugang zum Begleitmaterial für die Nachbereitung.</p></article>
       </div>
-    </div>
-  </section>
 
-  <section class="section" id="bausteine">
-    <div class="container">
-      <span class="eyebrow reveal" style="--delay: 20ms;">Drei Bausteine, ein Format</span>
-      <h2 class="section-title reveal" style="--delay: 50ms;">Schulung, Buch und Interaktiver Leitfaden greifen als ein durchgehendes Lernformat ineinander.</h2>
-      <p class="section-intro reveal" style="--delay: 80ms;">Die Fortbildung ist der Einstieg. Das Buch vertieft die Inhalte des Kurstags. Der Interaktive Leitfaden ist die kaufbare Buchfassung mit zusätzlichen interaktiven Werkzeugen für Nutzung, Wiederholung und Transfer.</p>
-
-      <div class="blocks-grid">
-        <article class="block-card reveal" style="--delay: 100ms;"><span>Baustein 1</span><h3>Die Schulung</h3><p>Ganztagesfortbildung für Verwaltungsbeschäftigte mit Live-Demos, Übungen, Gruppenarbeit und klarer Regellogik für den Alltag.</p></article>
-        <article class="block-card reveal" style="--delay: 140ms;"><span>Baustein 2</span><h3>Das Buch</h3><p>Das Begleitbuch folgt dem Curriculum Modul für Modul und liefert Vertiefungen, Checklisten, Entscheidungslogik, Glossar und direkt nutzbare Vorlagen.</p></article>
-        <article class="block-card highlight reveal" style="--delay: 180ms;"><span>Baustein 3</span><h3>Der Interaktive Leitfaden zum Buch</h3><p>Der Interaktive Leitfaden bringt den Kern des Buchs in den Browser: rund 85 Prozent des Buchmaterials, ergänzt um klickbare Werkzeuge, Lernhilfen und direkte Nutzung ohne Installation.</p></article>
-        <article class="support-card highlight reveal" style="--delay: 220ms;">
-          <span>Direkt nutzbar</span>
-          <h3>Ein Browserprodukt für Selbstlernen, Teamarbeit und Wiederholung nach dem Kurstag</h3>
-          <p>Gerade für Verwaltungen und Bildungsträger ist der Interaktive Leitfaden die operative Verlängerung des Buches: dieselbe Logik, aber im Browser sofort nutzbar und mit zusätzlichen interaktiven Hilfen.</p>
-          <a href="https://ki-fachbuecher.lemonsqueezy.com/checkout/buy/9e14df3e-abf7-4976-b5c8-bf32c7756983?embed=1" class="lemonsqueezy-button">Interaktiver Leitfaden kaufen</a>
-          <a href="#" class="license-link" id="openLicenses">Volumen-Lizenzen separat anfragen</a>
-        </article>
-      </div>
-
-      <div class="cta-layout">
-        <div class="tool-gallery-wrap reveal" style="--delay: 250ms;"><div class="tool-gallery" aria-label="Einblicke in den Interaktiven Leitfaden">
-        <article class="tool-flip">
-          <button class="tool-flip-button" type="button" aria-label="Screenshot 1 des Interaktiven Leitfadens drehen">
-            <div class="tool-flip-inner">
-              <div class="tool-face tool-front"><div class="tool-kicker"><span>Ansicht 1</span></div><h4>Schneller Einstieg für Teilnehmende</h4><p>Die Inhalte führen ohne Umwege in die richtigen Grundlagen, statt dass sich Beschäftigte erst durch Tools und Menüs arbeiten müssen.</p></div>
-              <div class="tool-face tool-back"><img src="bi1.jpg" alt="Screenshot 1 des Interaktiven Leitfadens KI in der Verwaltung" width="1600" height="1200" loading="lazy" decoding="async"></div>
-            </div>
-          </button>
-        </article>
-        <article class="tool-flip">
-          <button class="tool-flip-button" type="button" aria-label="Screenshot 2 des Interaktiven Leitfadens drehen">
-            <div class="tool-flip-inner">
-              <div class="tool-face tool-front"><div class="tool-kicker"><span>Ansicht 2</span></div><h4>Module bleiben anschlussfähig</h4><p>Curriculum, Begriffe und Praxisbeispiele bleiben nach dem Kurstag geordnet verfügbar und lassen sich intern leichter weitergeben.</p></div>
-              <div class="tool-face tool-back"><img src="bi2.jpg" alt="Screenshot 2 des Interaktiven Leitfadens KI in der Verwaltung" width="1600" height="1200" loading="lazy" decoding="async"></div>
-            </div>
-          </button>
-        </article>
-        <article class="tool-flip">
-          <button class="tool-flip-button" type="button" aria-label="Screenshot 3 des Interaktiven Leitfadens drehen">
-            <div class="tool-flip-inner">
-              <div class="tool-face tool-front"><div class="tool-kicker"><span>Ansicht 3</span></div><h4>Recht und Praxis zusammengeführt</h4><p>Checklisten und Orientierungshilfen machen Datenschutz, AI Act und sichere Nutzung im Verwaltungsalltag konkret handhabbar.</p></div>
-              <div class="tool-face tool-back"><img src="bi3.jpg" alt="Screenshot 3 des Interaktiven Leitfadens KI in der Verwaltung" width="1600" height="1200" loading="lazy" decoding="async"></div>
-            </div>
-          </button>
-        </article>
-        <article class="tool-flip">
-          <button class="tool-flip-button" type="button" aria-label="Screenshot 4 des Interaktiven Leitfadens drehen">
-            <div class="tool-flip-inner">
-              <div class="tool-face tool-front"><div class="tool-kicker"><span>Ansicht 4</span></div><h4>Wiederholung ohne neue Hürden</h4><p>Das Material bleibt im Browser einsatzbereit für Selbstlernen, Teamrunden und spätere Rückfragen aus dem Arbeitsalltag.</p></div>
-              <div class="tool-face tool-back"><img src="bi4.jpg" alt="Screenshot 4 des Interaktiven Leitfadens KI in der Verwaltung" width="1600" height="1200" loading="lazy" decoding="async"></div>
-            </div>
-          </button>
-        </article>
-      </div>
-        <p class="tool-gallery-note">Klicken für Vorschau · erneut klicken für Großansicht</p>
-      </div>
-        <article class="cta-panel reveal" style="--delay: 290ms;">
-          <span>Warum der Dreiklang funktioniert</span>
-          <h3>Der Kurs schafft Sicherheit. Das Buch stabilisiert Wissen. Der Interaktive Leitfaden hält Anwendung lebendig.</h3>
-          <p>Gerade in Verwaltungen und bei Bildungsträgern wirkt nicht ein einzelnes Medium, sondern die Kombination: Präsenzlernen, vertiefendes Nachschlagewerk und direkt nutzbares Browsermaterial.</p>
-          <p>So entsteht kein isolierter Workshop, sondern ein Format, das auch nach dem Kurstag anschlussfähig bleibt.</p>
-        </article>
+      <div class="audience-grid" aria-label="Zielgruppen">
+        <article class="audience-card reveal" style="--delay: 180ms;"><span>Für Behörden</span><h3>Verwaltungen und öffentliche Stellen</h3><p>Als Inhouse-Fortbildung für Beschäftigte, Führungskräfte und interne Multiplikatoren — vor Ort oder remote.</p></article>
+        <article class="audience-card reveal" style="--delay: 220ms;"><span>Für Bildungsträger</span><h3>VHS und Weiterbildungseinrichtungen</h3><p>Als erprobtes Schulungsformat mit Curriculum, Begleitmaterial und digitalen Bausteinen für das eigene Programm.</p></article>
       </div>
     </div>
   </section>
 
-  <section class="section" id="zielgruppen">
+  <section class="section" id="buecher">
     <div class="container">
-      <span class="eyebrow reveal" style="--delay: 20ms;">Zwei Vertriebswege, ein Format</span>
-      <h2 class="section-title reveal" style="--delay: 50ms;">Ein Schulungsformat, optimiert für Behörden und Bildungsträger.</h2>
-      <div class="audience-grid">
-        <article class="audience-card reveal" style="--delay: 100ms;"><span>Pfad 1</span><h3>Verwaltungen und Behörden</h3><p>Für Inhouse-Fortbildungen, bei denen Beschäftigte praxisnah und rechtssicher im Umgang mit KI geschult werden sollen — vor Ort oder remote.</p></article>
-        <article class="audience-card reveal" style="--delay: 140ms;"><span>Pfad 2</span><h3>VHS und Bildungsträger</h3><p>Für Einrichtungen, die ein schlüsselfertiges KI-Schulungsformat inklusive Curriculum, Begleitmaterial und digitalen Bausteinen in ihr Programm aufnehmen wollen.</p></article>
-      </div>
-    </div>
-  </section>
+      <span class="eyebrow reveal" style="--delay: 20ms;">Zwei Bücher, zwei Einstiegspunkte</span>
+      <h2 class="section-title reveal" style="--delay: 50ms;">Vom ersten sicheren Einsatz bis zur verantwortlichen Einführung.</h2>
+      <p class="section-intro reveal" style="--delay: 80ms;">Beide Fachbücher lassen sich unabhängig nutzen. Gemeinsam bilden sie einen Lernpfad: Das erste Buch schafft Grundlagen und Anwendungssicherheit, das zweite vertieft Recht, EU AI Act, Governance und organisatorische Umsetzung.</p>
 
-  <section class="section" id="buch">
-    <div class="container">
-      <span class="eyebrow reveal" style="--delay: 20ms;">Das Gesamtprodukt</span>
-      <h2 class="section-title reveal" style="--delay: 50ms;">Schulung, Buch und Interaktiver Leitfaden bilden zusammen ein anschlussfähiges Verwaltungsformat.</h2>
-      <div class="book-layout">
-        <div class="book-cover-wrap reveal" style="--delay: 80ms;">
-          <img src="verwaltung.png" alt="Buchcover KI in der Verwaltung" width="1200" height="1800" loading="lazy" decoding="async">
-        </div>
-        <article class="book-card reveal" style="--delay: 120ms;">
-          <span>Begleitmaterial</span>
-          <h3>Buch und Interaktiver Leitfaden sichern das Wissen auch nach dem Kurstag.</h3>
-          <p>Zum Format gehört ein Begleitbuch, das die fünf Module strukturiert nachzeichnet und die Themen dort vertieft, wo im Seminar bewusst verdichtet gearbeitet werden muss: Grundlagen, Verwaltungs-Praxis, Datenschutz, EU AI Act, Anonymisierung, Prompting und sichere Anwendung.</p>
-          <p>Ergänzend dazu steht der Interaktive Leitfaden als kaufbare Buchfassung im Browser bereit. Er enthält den Großteil des Buchmaterials und eignet sich besonders für Verwaltungen und Bildungsträger, die das Material intern weitergeben wollen. Wird sie etwa über ein Intranet bereitgestellt, bleibt der Wissensstand nicht auf einzelne Schulungsteilnehmende begrenzt, sondern wird für weitere Beschäftigte direkt zugänglich.</p>
-          <p>Der Interaktive Leitfaden ist als Einzelprodukt oder als Bestandteil der Fortbildung verfügbar.</p>
-          <div class="hero-actions" style="margin-top:1rem;">
-            <a class="ghost-button" href="https://amzn.eu/d/02eQQte1" target="_blank" rel="noopener noreferrer">Zum Buch bei Amazon</a>
+      <div class="books-grid">
+        <article class="book-offer reveal" style="--delay: 100ms;">
+          <div class="book-cover-wrap">
+            <img src="verwaltung.png" alt="Buchcover KI in der Verwaltung" width="1200" height="1800" loading="lazy" decoding="async">
+          </div>
+          <div class="book-offer-copy">
+            <span class="book-label">Einstieg &amp; Kursbegleitung</span>
+            <h3>KI in der Verwaltung</h3>
+            <p>Der kompakte Einstieg in Grundlagen, sinnvolle Einsatzfelder, Prompting, Datenschutz und den sicheren Umgang mit KI-Ergebnissen. Das Buch folgt dem Curriculum der Fortbildung und eignet sich auch zum Selbstlernen.</p>
+            <p class="book-for"><strong>Passend für:</strong> Beschäftigte, die KI verstehen, ausprobieren und im Arbeitsalltag sicherer einsetzen möchten.</p>
+            <div class="hero-actions" style="margin-top:1rem;">
+              <a class="ghost-button" href="https://amzn.eu/d/02eQQte1" target="_blank" rel="noopener noreferrer">Bei Amazon ansehen →</a>
+            </div>
           </div>
         </article>
+
+        <article class="book-offer is-new reveal" style="--delay: 150ms;">
+          <div class="book-cover-wrap">
+            <img src="cover_v2.png" alt="Buchcover Dürfen wir das?" width="992" height="1586" loading="lazy" decoding="async">
+          </div>
+          <div class="book-offer-copy">
+            <span class="book-label">Neu · Vertiefung &amp; Umsetzung</span>
+            <h3>Dürfen wir das?</h3>
+            <p><strong>KI in der öffentlichen Verwaltung sicher nutzen und verantwortlich einführen.</strong> Das vertiefende Praxisbuch verbindet EU AI Act, Datenschutz, Verwaltungsrecht und Informationssicherheit mit klaren Rollen, Entscheidungswegen und Umsetzungshilfen.</p>
+            <p class="book-for"><strong>Passend für:</strong> Beschäftigte, Führungskräfte, Datenschutz, Personalvertretung und Behördenleitungen, die KI-Anwendungen bewerten oder organisatorisch einführen.</p>
+            <div class="hero-actions" style="margin-top:1rem;">
+              <a class="button" href="https://amzn.eu/d/04VBR9GV" target="_blank" rel="noopener noreferrer">Bei Amazon ansehen →</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="learning-path reveal" style="--delay: 190ms;" aria-label="Leseempfehlung">
+        <p><strong>Sie starten neu?</strong><br>Beginnen Sie mit <em>KI in der Verwaltung</em>.</p>
+        <p><strong>Sie gestalten Regeln oder Einführung?</strong><br>Wählen Sie <em>Dürfen wir das?</em>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="leitfaden">
+    <div class="container">
+      <span class="eyebrow reveal" style="--delay: 20ms;">Direkt im Browser nutzbar</span>
+      <h2 class="section-title reveal" style="--delay: 50ms;">Aus dem Einstiegsbuch wird ein interaktives Arbeitswerkzeug.</h2>
+      <p class="section-intro reveal" style="--delay: 80ms;">Der Interaktive Leitfaden ergänzt das erste Buch <em>KI in der Verwaltung</em>. Er macht zentrale Inhalte, Checklisten und Lernhilfen ohne Installation im Browser zugänglich.</p>
+
+      <div class="guide-layout">
+        <article class="support-card highlight reveal" style="--delay: 100ms;">
+          <span>Interaktives Lehrmaterial</span>
+          <h3>Für Selbstlernen, Teamarbeit und Wiederholung nach dem Kurstag</h3>
+          <p>Das Browserprodukt enthält rund 85 Prozent des Buchmaterials und ergänzt es um klickbare Werkzeuge. Damit bleibt das Wissen nach der Fortbildung geordnet verfügbar und kann im Arbeitsalltag erneut aufgerufen werden.</p>
+          <ul class="guide-benefits">
+            <li>sofort im Browser nutzbar, ohne Installation</li>
+            <li>Checklisten und Orientierungshilfen für typische Verwaltungssituationen</li>
+            <li>für einzelne Lernende sowie als Lizenzlösung für Organisationen</li>
+          </ul>
+          <div class="hero-actions" style="margin-top:1.15rem;">
+            <a href="https://ki-fachbuecher.lemonsqueezy.com/checkout/buy/9e14df3e-abf7-4976-b5c8-bf32c7756983?embed=1" class="lemonsqueezy-button">Interaktiven Leitfaden kaufen →</a>
+            <a href="#" class="license-link" id="openLicenses">Behörden- und Volumenlizenz anfragen</a>
+          </div>
+          <p class="guide-note">Sofort verfügbar über Lemon Squeezy. Der Leitfaden bezieht sich auf das erste Buch und ist keine interaktive Fassung von <em>Dürfen wir das?</em>.</p>
+        </article>
+
+        <div class="tool-gallery-wrap reveal" style="--delay: 150ms;">
+          <div class="tool-gallery" aria-label="Einblicke in den Interaktiven Leitfaden">
+            <article class="tool-flip">
+              <button class="tool-flip-button" type="button" aria-label="Screenshot 1 des Interaktiven Leitfadens drehen">
+                <div class="tool-flip-inner">
+                  <div class="tool-face tool-front"><div class="tool-kicker"><span>Ansicht 1</span></div><h4>Schneller Einstieg</h4><p>Grundlagen, Praxisbeispiele und Begriffe bleiben nach dem Kurstag geordnet verfügbar.</p></div>
+                  <div class="tool-face tool-back"><img src="bi1.jpg" alt="Startansicht des Interaktiven Leitfadens KI in der Verwaltung" width="1600" height="1200" loading="lazy" decoding="async"></div>
+                </div>
+              </button>
+            </article>
+            <article class="tool-flip">
+              <button class="tool-flip-button" type="button" aria-label="Screenshot 2 des Interaktiven Leitfadens drehen">
+                <div class="tool-flip-inner">
+                  <div class="tool-face tool-front"><div class="tool-kicker"><span>Ansicht 2</span></div><h4>Direkt anwendbar</h4><p>Klickbare Hilfen unterstützen Wiederholung, Teamrunden und spätere Fragen aus dem Arbeitsalltag.</p></div>
+                  <div class="tool-face tool-back"><img src="bi2.jpg" alt="Werkzeugansicht des Interaktiven Leitfadens KI in der Verwaltung" width="1600" height="1200" loading="lazy" decoding="async"></div>
+                </div>
+              </button>
+            </article>
+          </div>
+          <p class="tool-gallery-note">Klicken für Vorschau · erneut klicken für Großansicht</p>
+        </div>
       </div>
     </div>
   </section>
@@ -1253,21 +1454,31 @@
           <h3>Kurs für Verwaltung oder Bildungsträger anfragen</h3>
           <p>Beschreiben Sie kurz, ob Sie aus einer Behörde, einer VHS oder einem anderen Bildungsträger anfragen. Auf dieser Basis kann das Format passend für Ihre Organisation angeboten werden.</p>
           <form class="contact-form" id="kontaktForm" novalidate>
-            <label class="sr-only" for="kontaktOrganisation">Organisation</label>
-            <input class="contact-input" id="kontaktOrganisation" name="organisation" type="text" placeholder="Organisation / Behörde / Bildungsträger" required>
-            <label class="sr-only" for="kontaktName">Ansprechperson</label>
-            <input class="contact-input" id="kontaktName" name="name" type="text" placeholder="Ansprechperson" required>
-            <label class="sr-only" for="kontaktTyp">Art der Anfrage</label>
-            <select class="contact-select" id="kontaktTyp" name="typ" required>
-              <option value="" selected disabled>Art der Anfrage wählen</option>
-              <option value="Verwaltung / Behörde">Verwaltung / Behörde</option>
-              <option value="VHS / Volkshochschule">VHS / Volkshochschule</option>
-              <option value="Anderer Bildungsträger">Anderer Bildungsträger</option>
-            </select>
-            <label class="sr-only" for="kontaktTeilnehmer">Teilnehmerzahl oder Region</label>
-            <input class="contact-input" id="kontaktTeilnehmer" name="detail" type="text" placeholder="Geschätzte Teilnehmerzahl oder Region">
-            <label class="sr-only" for="kontaktEmail">E-Mail</label>
-            <input class="contact-input" id="kontaktEmail" name="email" type="email" inputmode="email" autocomplete="email" placeholder="E-Mail-Adresse" required>
+            <div class="contact-field">
+              <label for="kontaktOrganisation">Organisation, Behörde oder Bildungsträger</label>
+              <input class="contact-input" id="kontaktOrganisation" name="organisation" type="text" autocomplete="organization" required>
+            </div>
+            <div class="contact-field">
+              <label for="kontaktName">Ansprechperson</label>
+              <input class="contact-input" id="kontaktName" name="name" type="text" autocomplete="name" required>
+            </div>
+            <div class="contact-field">
+              <label for="kontaktTyp">Art der Anfrage</label>
+              <select class="contact-select" id="kontaktTyp" name="typ" required>
+                <option value="" selected disabled>Bitte auswählen</option>
+                <option value="Verwaltung / Behörde">Verwaltung / Behörde</option>
+                <option value="VHS / Volkshochschule">VHS / Volkshochschule</option>
+                <option value="Anderer Bildungsträger">Anderer Bildungsträger</option>
+              </select>
+            </div>
+            <div class="contact-field">
+              <label for="kontaktTeilnehmer">Geschätzte Teilnehmerzahl oder Region <span aria-hidden="true">(optional)</span></label>
+              <input class="contact-input" id="kontaktTeilnehmer" name="detail" type="text">
+            </div>
+            <div class="contact-field">
+              <label for="kontaktEmail">E-Mail-Adresse</label>
+              <input class="contact-input" id="kontaktEmail" name="email" type="email" inputmode="email" autocomplete="email" required>
+            </div>
             <button class="contact-submit" type="submit">Anfrage senden</button>
             <p class="contact-status" id="kontaktStatus" aria-live="polite"></p>
           </form>
@@ -1282,13 +1493,11 @@
         <span>Zum Autor</span>
         <h3>Robert Meyer</h3>
         <p>Robert Meyer ist KI-Berater, Fachautor und Dozent mit über 15 Jahren Erfahrung in Digitalisierung, Projektarbeit und KI-Transformation.</p>
-        <p>Sein Verwaltungsformat verbindet Governance, Technologie und Kompetenzentwicklung zu einer Schulungslogik, die im Behördenalltag und bei Bildungsträgern anschlussfähig bleibt.</p>
+        <p>Sein Verwaltungsformat verbindet Governance, Technologie und Kompetenzentwicklung mit den konkreten Anforderungen des Behördenalltags.</p>
         <div class="author-links">
           <a class="author-link" href="https://ki-fachbuecher.de" target="_blank" rel="noopener noreferrer">KI-Fachbücher →</a>
           <a class="author-link" href="https://ai.rm-on.de" target="_blank" rel="noopener noreferrer">ai.rm-on.de →</a>
           <a class="author-link" href="https://www.linkedin.com/in/robert-meyer-666b39315" target="_blank" rel="noopener noreferrer">LinkedIn →</a>
-          <a class="author-link" href="https://youtube.com/@r.meyer2025?si=2Adbk_9vO26xI3xW" target="_blank" rel="noopener noreferrer">YouTube →</a>
-          <a class="author-link" href="https://open.spotify.com/show/1OqnISBvrKNvA0KgQjaRNn" target="_blank" rel="noopener noreferrer">Spotify →</a>
         </div>
       </article>
       <figure class="author-photo reveal" style="--delay: 100ms;">
@@ -1297,24 +1506,8 @@
     </div>
   </section>
 
-  <section class="section" id="cta-final">
-    <div class="container cta-layout">
-      <div class="book-cover-wrap reveal" style="--delay: 40ms;">
-        <img src="verwaltung.png" alt="Titelmotiv KI in der Verwaltung" width="1200" height="1800" loading="lazy" decoding="async">
-      </div>
-      <article class="cta-panel reveal" style="--delay: 90ms;">
-        <span style="display:block;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.1em;color:rgba(31,39,56,0.58);">Zum Abschluss</span>
-        <h3>Für Verwaltungen zählt nicht, ob KI spektakulär wirkt. Sondern ob sie sicher, nachvollziehbar und arbeitsfähig eingesetzt werden kann.</h3>
-        <p><strong>KI in der Verwaltung</strong> bündelt dafür Kurs, Begleitbuch und Interaktiver Leitfaden in einer Form, die für Behörden, VHS und Bildungsträger gleichermaßen anschlussfähig ist.</p>
-        <div class="hero-actions">
-          <a class="button" href="#kontakt">Kurs anfragen →</a>
-          <a class="ghost-button" href="#bausteine">Interaktiven Leitfaden ansehen</a>
-        </div>
-      </article>
-    </div>
-  </section>
-
   <button type="button" class="scroll-top" id="scrollTopButton" aria-label="Nach oben">↑</button>
+  <a class="mobile-course-cta" href="#kontakt">Fortbildung anfragen →</a>
 
   <footer>
     <div class="container">
@@ -1344,10 +1537,14 @@
           <p>Kompakte Hinweise zu Kursformaten, Begleitmaterial, Verwaltungswerkzeugen und neuen Inhalten rund um KI in der Verwaltung.</p>
         </div>
         <form class="updates-form" id="updatesForm" novalidate>
-          <label class="sr-only" for="updatesName">Name</label>
-          <input class="updates-input" id="updatesName" name="name" type="text" autocomplete="name" placeholder="Ihr Name">
-          <label class="sr-only" for="updatesEmail">E-Mail-Adresse</label>
-          <input class="updates-input" id="updatesEmail" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Ihre E-Mail-Adresse" required>
+          <div class="updates-field">
+            <label for="updatesName">Name <span aria-hidden="true">(optional)</span></label>
+            <input class="updates-input" id="updatesName" name="name" type="text" autocomplete="name">
+          </div>
+          <div class="updates-field">
+            <label for="updatesEmail">E-Mail-Adresse</label>
+            <input class="updates-input" id="updatesEmail" name="email" type="email" inputmode="email" autocomplete="email" required>
+          </div>
           <button class="updates-submit" id="updatesSubmit" type="submit">Absenden</button>
         </form>
         <p class="updates-status" id="updatesStatus" aria-live="polite"></p>
@@ -1369,14 +1566,22 @@
           <p>Für Verwaltungen, Bildungsträger oder mehrere Kursdurchläufe können Volumen-Lizenzen separat angefragt werden.</p>
         </div>
         <form class="updates-form" id="licenseForm" novalidate>
-          <label class="sr-only" for="licenseName">Name</label>
-          <input class="updates-input" id="licenseName" name="name" type="text" autocomplete="name" placeholder="Ihr Name" required>
-          <label class="sr-only" for="licenseOrganisation">Organisation</label>
-          <input class="updates-input" id="licenseOrganisation" name="organisation" type="text" placeholder="Organisation / Behörde / Bildungsträger" required>
-          <label class="sr-only" for="licenseEmail">E-Mail-Adresse</label>
-          <input class="updates-input" id="licenseEmail" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Ihre E-Mail-Adresse" required>
-          <label class="sr-only" for="licenseSeats">Geschätzte Anzahl</label>
-          <input class="updates-input" id="licenseSeats" name="seats" type="text" placeholder="Geschätzte Anzahl der Lizenzen">
+          <div class="updates-field">
+            <label for="licenseName">Name</label>
+            <input class="updates-input" id="licenseName" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="updates-field">
+            <label for="licenseOrganisation">Organisation</label>
+            <input class="updates-input" id="licenseOrganisation" name="organisation" type="text" autocomplete="organization" required>
+          </div>
+          <div class="updates-field">
+            <label for="licenseEmail">E-Mail-Adresse</label>
+            <input class="updates-input" id="licenseEmail" name="email" type="email" inputmode="email" autocomplete="email" required>
+          </div>
+          <div class="updates-field">
+            <label for="licenseSeats">Geschätzte Anzahl der Lizenzen <span aria-hidden="true">(optional)</span></label>
+            <input class="updates-input" id="licenseSeats" name="seats" type="text">
+          </div>
           <button class="updates-submit" id="licenseSubmit" type="submit">Absenden</button>
         </form>
         <p class="updates-status" id="licenseStatus" aria-live="polite"></p>
