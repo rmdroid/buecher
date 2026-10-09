@@ -1,0 +1,35 @@
+# Robert Meyer · KI-Fachbücher
+
+> Fachbücher über Künstliche Intelligenz von Robert Meyer, KI-Berater, Fachautor und Dozent mit über 15 Jahren Erfahrung in Digitalisierung und KI-Transformation im Mittelstand und in der öffentlichen Verwaltung. Die Bücher sind auf Deutsch und bei Amazon erhältlich.
+
+Die Startseite ordnet die Bücher nach fünf Fragen aus der Praxis. Zu jeder Frage gibt es ein Einstiegsbuch und zwei vertiefende Titel.
+
+## I. Dürfen wir das? (EU AI Act, Datenschutz, Verwaltung)
+- [Dürfen wir das?](https://ki-fachbuecher.de/verwaltung/): KI in der öffentlichen Verwaltung sicher nutzen und verantwortlich einführen (2026)
+- [EU AI Act Readiness für KMU](https://amzn.eu/d/06i2a1wU): Compliance-Leitfaden für kleine und mittlere Unternehmen
+- [Die KI-Lüge](https://ki-fachbuecher.de/leseproben/die_ki_luege.html): Die unbequeme Wahrheit über KI im Business (Leseprobe)
+
+## II. Was kann KI wirklich? (Agenten, Modelle, Grenzen)
+- [Agentic AI 2.0](https://ki-fachbuecher.de/leseproben/agent20.html): Vom Prototyp zum Produktivsystem (Leseprobe)
+- [Kleine KI, großer Nutzen](https://amzn.eu/d/06Z8cyGy): Small Language Models im Mittelstand
+- [Skills > Workflows](https://ki-fachbuecher.de/leseproben/skills.html): Claude Code und MCP statt klassischer Automations-Strecken (Leseprobe)
+
+## III. Wie baue ich das selbst? (Claude Code, Skills, n8n)
+- [Code, nicht PowerPoints](https://amzn.eu/d/01jmSgmq): Mit Claude Code, Skills und n8n selbst automatisieren
+- [Skills, die Geld verdienen](https://www.amazon.de/dp/B0HJB22SB3): Welche Workflows einen KI-Skill verdienen (2026)
+- [KI-Agenten für Selbständige](https://www.amazon.de/dp/B0H47Z227Y): Mit Claude Code, Codex, Hermes und Clawbot produktiver arbeiten (2026)
+
+## IV. Wie kommt es in die Organisation? (Beratung, Verwaltung, Change)
+- [Die KI-Revolution in der Beratung](https://ki-fachbuecher.de/leseproben/beratung.html): Wie KI die Unternehmensberatung verändert (Leseprobe)
+- [KI in der Verwaltung](https://ki-fachbuecher.de/verwaltung/): Der praxisnahe Einstieg für Beschäftigte, mit Fortbildungsangebot
+- [Change Management mit KI](https://amzn.eu/d/0hwvQWb0): Transformation erfolgreich begleiten
+
+## V. Was macht das mit uns? (Teams, Sinn, Intelligenz)
+- [Die KI-Kluft](https://ki-fachbuecher.de/ki-kluft/): Warum KI Teams spaltet und wie Führung daraus einen Vorteil macht
+- [Gott 2.0](https://ki-fachbuecher.de/leseproben/gott20.html): Wenn Maschinen nach dem Sinn fragen (Leseprobe)
+- [Die Intelligenz-Lüge](https://amzn.eu/d/0fd4v2rg): Was KI über unser Bild von Intelligenz enthüllt
+
+## Angebote
+- [Fortbildung KI in der Verwaltung](https://ki-fachbuecher.de/verwaltung/): Ganztagesfortbildung für Behörden und Bildungsträger (KI-Kompetenz nach Art. 4 EU AI Act)
+- [KI-Governance Lernplattform](https://ai-act.rm-on.de)
+- [Beratung und Coaching](https://ai.rm-on.de)

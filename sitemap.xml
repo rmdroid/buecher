@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://ki-fachbuecher.de/</loc>
+    <lastmod>2026-10-09</lastmod>
+    <image:image><image:loc>https://ki-fachbuecher.de/img/covers/duerfen-wir-das-640.webp</image:loc></image:image>
+    <image:image><image:loc>https://ki-fachbuecher.de/img/covers/agentic-ai-2-640.webp</image:loc></image:image>
+    <image:image><image:loc>https://ki-fachbuecher.de/img/covers/code-nicht-powerpoints-640.webp</image:loc></image:image>
+    <image:image><image:loc>https://ki-fachbuecher.de/img/covers/ki-revolution-beratung-640.webp</image:loc></image:image>
+    <image:image><image:loc>https://ki-fachbuecher.de/img/covers/die-ki-kluft-640.webp</image:loc></image:image>
+    <image:image><image:loc>https://ki-fachbuecher.de/img/covers/skills-die-geld-verdienen-640.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://ki-fachbuecher.de/ki-kluft/</loc>
+    <lastmod>2026-10-09</lastmod>
+  </url>
+  <url>
+    <loc>https://ki-fachbuecher.de/verwaltung/</loc>
+    <lastmod>2026-10-09</lastmod>
+  </url>
+  <url>
+    <loc>https://ki-fachbuecher.de/leseproben/die_ki_luege.html</loc>
+    <lastmod>2026-10-09</lastmod>
+  </url>
+  <url>
+    <loc>https://ki-fachbuecher.de/leseproben/agent20.html</loc>
+    <lastmod>2026-10-09</lastmod>
+  </url>
+  <url>
+    <loc>https://ki-fachbuecher.de/leseproben/skills.html</loc>
+    <lastmod>2026-10-09</lastmod>
+  </url>
+  <url>
+    <loc>https://ki-fachbuecher.de/leseproben/beratung.html</loc>
+    <lastmod>2026-10-09</lastmod>
+  </url>
+  <url>
+    <loc>https://ki-fachbuecher.de/leseproben/gott20.html</loc>
+    <lastmod>2026-10-09</lastmod>
+  </url>
+</urlset>

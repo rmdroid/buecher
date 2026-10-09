@@ -1,0 +1,3016 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KI in der Verwaltung | Digitaler Leitfaden</title>
+  <meta name="description" content="Interaktives Lehrmaterial zu KI in der Verwaltung: Grundlagen, Praxis, Datenschutz, EU AI Act und sichere Anwendung im Verwaltungsalltag." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="KI in der Verwaltung | Digitaler Leitfaden" />
+  <meta property="og:description" content="Interaktives Lehrmaterial für Verwaltungsbeschäftigte: Grundlagen, Praxis, Datenschutz, EU AI Act und sichere KI-Anwendung im Arbeitsalltag." />
+  <meta property="og:image" content="./cover.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23ffffff'/%3E%3Crect x='2.5' y='2.5' width='59' height='59' rx='12' fill='none' stroke='%231a3d6d' stroke-width='3'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-family='Inter,Arial,sans-serif' font-size='24' font-weight='800' fill='%231a3d6d'%3EKI%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blue: #1a3d6d;
+      --petrol: #2a7f8e;
+      --bg: #f5f5f0;
+      --surface: #fffefa;
+      --surface-strong: #ffffff;
+      --text: #2d2d2d;
+      --muted: #5e6b76;
+      --line: #d8ddd8;
+      --orange: #e67e22;
+      --green: #27ae60;
+      --gold: #f4d03f;
+      --gold-soft: #fefce8;
+      --red-soft: #fdf0ee;
+      --petrol-soft: #edf7f8;
+      --blue-soft: #edf2f8;
+      --shadow: 0 20px 50px rgba(26, 61, 109, 0.08);
+      --radius: 22px;
+      --sidebar-width: 316px;
+      --header-height: 88px;
+      --content-width: 760px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(42,127,142,0.08), transparent 28%),
+        linear-gradient(180deg, rgba(255,255,255,0.35), rgba(245,245,240,0.92)),
+        var(--bg);
+    }
+
+    a { color: var(--blue); }
+    img { max-width: 100%; display: block; }
+    button, input, textarea, select { font: inherit; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(245,245,240,0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(26,61,109,0.08);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 20px 12px;
+      min-height: var(--header-height);
+    }
+
+    .brand {
+      min-width: 0;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--blue);
+      letter-spacing: -0.02em;
+    }
+
+    .brand-subtitle {
+      margin: 2px 0 0;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .menu-toggle {
+      display: none;
+      border: 1px solid rgba(26,61,109,0.14);
+      background: var(--surface-strong);
+      color: var(--blue);
+      border-radius: 14px;
+      padding: 10px 14px;
+      font-weight: 600;
+      min-height: 44px;
+    }
+
+    .progress-shell {
+      padding: 0 20px 12px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(26,61,109,0.08);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--petrol), var(--blue));
+      transition: width 0.2s ease;
+    }
+
+    .top-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 0 20px 16px;
+      background: linear-gradient(180deg, rgba(242,245,247,0.88), rgba(245,245,240,0));
+    }
+
+    .top-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--blue);
+      border: 1px solid rgba(26,61,109,0.12);
+      background: rgba(255,255,255,0.72);
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .top-tab.is-active,
+    .top-tab:hover,
+    .top-tab:focus-visible {
+      background: var(--petrol);
+      color: #fff;
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(280px, var(--sidebar-width)) minmax(0, 1fr);
+      gap: 32px;
+      width: min(1420px, calc(100vw - 32px));
+      margin: 28px auto 80px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: calc(var(--header-height) + 24px);
+      max-height: calc(100vh - var(--header-height) - 40px);
+      overflow: auto;
+      padding: 24px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(26,61,109,0.08);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .sidebar h2 {
+      margin: 0 0 18px;
+      color: var(--blue);
+      font-size: 1rem;
+    }
+
+    .nav-tree {
+      display: grid;
+      gap: 12px;
+    }
+
+    .nav-group {
+      border: 1px solid rgba(26,61,109,0.08);
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.86);
+    }
+
+    .nav-group summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    .nav-group summary::-webkit-details-marker { display: none; }
+
+    .nav-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .progress-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      border: 2px solid rgba(42,127,142,0.32);
+      background: transparent;
+      flex: 0 0 auto;
+    }
+
+    .progress-dot.half {
+      background: linear-gradient(180deg, var(--petrol) 50%, transparent 50%);
+    }
+
+    .progress-dot.full {
+      background: var(--green);
+      border-color: var(--green);
+    }
+
+    .nav-links {
+      display: grid;
+      gap: 2px;
+      padding: 0 10px 12px;
+    }
+
+    .nav-link {
+      display: block;
+      padding: 10px 12px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.94rem;
+      border-radius: 12px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus-visible {
+      background: var(--blue-soft);
+      color: var(--blue);
+      outline: none;
+    }
+
+    .nav-link.is-active {
+      background: var(--petrol);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    main {
+      min-width: 0;
+    }
+
+    .content {
+      width: min(100%, calc(var(--content-width) + 120px));
+      margin: 0 auto;
+      display: grid;
+      gap: 26px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(255,255,255,0.92), rgba(237,247,248,0.88));
+      border: 1px solid rgba(26,61,109,0.08);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      padding: 40px;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -120px -140px auto;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(42,127,142,0.15), transparent 62%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(26,61,109,0.08);
+      color: var(--blue);
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      margin: 20px 0 10px;
+      font-size: clamp(2.4rem, 5vw, 4.4rem);
+      line-height: 1.04;
+      letter-spacing: -0.05em;
+      color: var(--blue);
+    }
+
+    .hero .subtitle {
+      margin: 0;
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      color: var(--muted);
+      max-width: 54ch;
+    }
+
+    .hero .author {
+      margin-top: 12px;
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--petrol);
+    }
+
+    .hero-copy {
+      margin-top: 24px;
+      max-width: 60ch;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .button,
+    .secondary-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .button {
+      background: var(--blue);
+      color: #fff;
+      box-shadow: 0 14px 30px rgba(26,61,109,0.18);
+    }
+
+    .secondary-button {
+      background: rgba(255,255,255,0.88);
+      border: 1px solid rgba(26,61,109,0.12);
+      color: var(--blue);
+    }
+
+    .button:hover,
+    .button:focus-visible,
+    .secondary-button:hover,
+    .secondary-button:focus-visible {
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .quick-links {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .quick-link {
+      display: grid;
+      grid-template-columns: minmax(88px, 112px) minmax(0, 1fr);
+      gap: 16px;
+      align-items: start;
+      align-content: start;
+      padding: 18px 18px 18px 20px;
+      border-radius: 20px;
+      text-decoration: none;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(26,61,109,0.08);
+      border-left: 5px solid rgba(42,127,142,0.28);
+      color: var(--text);
+      min-height: 0;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .quick-link strong {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 8px 12px;
+      border-radius: 14px;
+      background: rgba(26,61,109,0.08);
+      color: var(--blue);
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .quick-link span {
+      display: block;
+      min-width: 0;
+      color: #31404e;
+    }
+
+    .quick-link:hover,
+    .quick-link:focus-visible {
+      transform: translateY(-1px);
+      border-left-color: var(--petrol);
+      box-shadow: 0 14px 30px rgba(26,61,109,0.08);
+      outline: none;
+    }
+
+    .hero-footnote {
+      margin-top: 18px;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .section-card,
+    .chapter,
+    .interactive-card,
+    .profile-card,
+    .footer-card {
+      background: rgba(255,255,255,0.85);
+      border: 1px solid rgba(26,61,109,0.08);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-card,
+    .chapter {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-card::before,
+    .chapter::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(42,127,142,0.24), rgba(26,61,109,0.02));
+    }
+
+    .section-card {
+      padding: 34px;
+    }
+
+    .chapter {
+      padding: 34px;
+      scroll-margin-top: calc(var(--header-height) + 20px);
+    }
+
+    .chapter article,
+    .chapter .interactive-card {
+      position: relative;
+    }
+
+    .chapter article + article,
+    .chapter article + .interactive-card,
+    .chapter .interactive-card + article,
+    .chapter .interactive-card + .interactive-card {
+      margin-top: 30px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(26,61,109,0.08);
+    }
+
+    .part-head {
+      margin-bottom: 24px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(26,61,109,0.08);
+    }
+
+    .part-index {
+      color: var(--petrol);
+      font-size: 0.95rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      color: var(--blue);
+      font-size: clamp(1.85rem, 3vw, 2.6rem);
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+    }
+
+    h3 {
+      margin: 26px 0 10px;
+      color: var(--blue);
+      font-size: 1.35rem;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    h4 {
+      margin: 18px 0 8px;
+      color: var(--text);
+      font-size: 1.06rem;
+    }
+
+    .lead {
+      font-size: 1.07rem;
+      color: #344252;
+    }
+
+    p { margin: 0 0 16px; }
+    ul, ol { margin: 0 0 18px 22px; }
+    li + li { margin-top: 8px; }
+
+    .toc-grid,
+    .curriculum-grid,
+    .resource-grid,
+    .ampel-grid,
+    .cards-grid,
+    .levels-grid,
+    .timeline,
+    .author-grid,
+    .exercise-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .curriculum-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+    .toc-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .cards-grid { grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+    .exercise-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+    .ampel-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+    .author-grid { grid-template-columns: 1.4fr 0.8fr; }
+
+    .curriculum-card,
+    .toc-card,
+    .mini-card,
+    .ampel-card,
+    .timeline-step,
+    .resource-card,
+    .author-side,
+    .exercise-card,
+    .rating-item {
+      border-radius: 20px;
+      padding: 20px;
+      background: var(--surface-strong);
+      border: 1px solid rgba(26,61,109,0.08);
+    }
+
+    .curriculum-card {
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .curriculum-card:hover,
+    .curriculum-card:focus-visible { transform: translateY(-2px); outline: none; }
+    .curriculum-card strong { display: block; color: var(--blue); margin-bottom: 8px; }
+    .curriculum-card .eyeline { color: var(--petrol); font-weight: 700; font-size: 0.9rem; }
+
+    .toc-card h3,
+    .curriculum-card h3,
+    .resource-card h3,
+    .author-side h3 { margin-top: 0; }
+
+    .lookahead {
+      margin: 20px 0;
+      border-left: 8px solid var(--gold);
+      background: var(--gold-soft);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .lookahead-toggle {
+      width: 100%;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border: 0;
+      background: transparent;
+      color: var(--blue);
+      font-weight: 800;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .lookahead-body {
+      display: none;
+      padding: 0 18px 18px;
+    }
+
+    .lookahead.is-open .lookahead-body { display: block; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: rgba(42,127,142,0.12);
+      color: var(--petrol);
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    .quiz-card,
+    .checklist-card,
+    .wizard-card,
+    .prompt-card,
+    .self-rating,
+    .table-card {
+      padding: 24px;
+      border-radius: 22px;
+      background: var(--surface-strong);
+      border: 1px solid rgba(26,61,109,0.08);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
+    }
+
+    .interactive-card {
+      padding: 28px;
+    }
+
+    .interactive-card h3 { margin-top: 0; }
+
+    .question-card {
+      padding: 20px;
+      border-radius: 18px;
+      background: var(--surface);
+      border: 1px solid rgba(26,61,109,0.08);
+      margin-top: 16px;
+    }
+
+    .answer-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .answer-btn {
+      min-height: 46px;
+      text-align: left;
+      border-radius: 14px;
+      border: 1px solid rgba(26,61,109,0.14);
+      background: #fff;
+      color: var(--text);
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    }
+
+    .answer-btn:hover,
+    .answer-btn:focus-visible {
+      border-color: var(--petrol);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .answer-btn.correct { background: rgba(39,174,96,0.14); border-color: rgba(39,174,96,0.45); }
+    .answer-btn.wrong { background: rgba(230,126,34,0.14); border-color: rgba(230,126,34,0.45); }
+
+    .quiz-feedback {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .quiz-result {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 18px;
+      background: var(--petrol-soft);
+      font-weight: 700;
+      color: var(--blue);
+      display: none;
+    }
+
+    .quiz-result.visible { display: block; }
+
+    .checklist-progress {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    .checklist-items {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .check-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(26,61,109,0.1);
+      background: #fff;
+    }
+
+    .check-item.done {
+      background: rgba(39,174,96,0.12);
+      border-color: rgba(39,174,96,0.3);
+    }
+
+    .check-item input {
+      width: 20px;
+      height: 20px;
+      margin-top: 4px;
+      accent-color: var(--green);
+    }
+
+    .tablist {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .tab-btn {
+      border: 1px solid rgba(26,61,109,0.14);
+      background: rgba(255,255,255,0.82);
+      color: var(--blue);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .tab-btn.is-active { background: var(--petrol); color: #fff; }
+    .tab-panel { display: none; }
+    .tab-panel.is-active { display: block; }
+
+    .wizard-stage {
+      min-height: 140px;
+      padding: 22px;
+      border-radius: 20px;
+      border: 1px solid rgba(26,61,109,0.08);
+      background: var(--surface);
+      margin-bottom: 16px;
+    }
+
+    .wizard-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.95fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .wizard-map {
+      border: 1px solid rgba(26,61,109,0.08);
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(237,247,248,0.85), rgba(255,255,255,0.94));
+      padding: 18px;
+      min-height: 100%;
+    }
+
+    .wizard-map svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .wizard-node text {
+      fill: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .wizard-node rect,
+    .wizard-node path {
+      fill: rgba(255,255,255,0.92);
+      stroke: rgba(26,61,109,0.16);
+      stroke-width: 2;
+      transition: fill 0.2s ease, stroke 0.2s ease, filter 0.2s ease;
+    }
+
+    .wizard-edge {
+      stroke: rgba(26,61,109,0.18);
+      stroke-width: 2.5;
+      fill: none;
+      transition: stroke 0.2s ease, stroke-width 0.2s ease;
+    }
+
+    .wizard-node.active rect,
+    .wizard-node.active path {
+      fill: rgba(42,127,142,0.16);
+      stroke: var(--petrol);
+      filter: drop-shadow(0 10px 18px rgba(42,127,142,0.12));
+    }
+
+    .wizard-node.result-green rect,
+    .wizard-node.result-green path {
+      fill: rgba(39,174,96,0.14);
+      stroke: var(--green);
+    }
+
+    .wizard-node.result-orange rect,
+    .wizard-node.result-orange path {
+      fill: rgba(230,126,34,0.14);
+      stroke: var(--orange);
+    }
+
+    .wizard-node.result-red rect,
+    .wizard-node.result-red path {
+      fill: rgba(194, 71, 48, 0.12);
+      stroke: #c24730;
+    }
+
+    .wizard-edge.active {
+      stroke: var(--petrol);
+      stroke-width: 4;
+    }
+
+    .wizard-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      margin-top: 14px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .wizard-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .wizard-legend i {
+      width: 12px;
+      height: 12px;
+      display: inline-block;
+      border-radius: 999px;
+    }
+
+    .wizard-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .wizard-btn,
+    .reset-btn,
+    .copy-btn,
+    .small-btn {
+      min-height: 44px;
+      padding: 0 16px;
+      border-radius: 14px;
+      border: 0;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .wizard-btn { background: var(--blue); color: #fff; }
+    .wizard-btn.secondary,
+    .reset-btn,
+    .copy-btn,
+    .small-btn {
+      background: rgba(26,61,109,0.08);
+      color: var(--blue);
+    }
+
+    .wizard-result {
+      margin-top: 16px;
+      padding: 18px;
+      border-radius: 18px;
+      display: none;
+    }
+
+    .wizard-result.visible { display: block; }
+    .wizard-result.green { background: rgba(39,174,96,0.14); color: #155c35; }
+    .wizard-result.orange { background: rgba(230,126,34,0.14); color: #8a4f16; }
+    .wizard-result.red { background: var(--red-soft); color: #8d2a17; }
+
+    .prompt-box {
+      margin: 14px 0;
+      padding: 18px;
+      border-radius: 18px;
+      background: var(--blue-soft);
+      border: 1px solid rgba(26,61,109,0.08);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      white-space: pre-wrap;
+      font-size: 0.94rem;
+      line-height: 1.65;
+    }
+
+    .prompt-edit {
+      width: 100%;
+      min-height: 140px;
+      border-radius: 16px;
+      border: 1px solid rgba(26,61,109,0.14);
+      padding: 14px;
+      background: #fff;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field label {
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    .field input,
+    .field textarea {
+      border-radius: 14px;
+      border: 1px solid rgba(26,61,109,0.14);
+      padding: 12px 14px;
+      background: #fff;
+      min-height: 46px;
+    }
+
+    .field textarea { min-height: 110px; resize: vertical; }
+
+    .score-shell {
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .score-bar {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(26,61,109,0.08);
+      overflow: hidden;
+    }
+
+    .score-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), var(--green));
+      transition: width 0.35s ease;
+    }
+
+    .self-result {
+      display: none;
+      margin-top: 16px;
+      padding: 20px;
+      border-radius: 18px;
+      font-weight: 600;
+    }
+
+    .self-result.visible { display: block; }
+    .self-result.blue { background: var(--blue-soft); color: var(--blue); }
+    .self-result.petrol { background: var(--petrol-soft); color: #0d5661; }
+    .self-result.green { background: rgba(39,174,96,0.14); color: #155c35; }
+
+    .levels-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+    .level-card {
+      position: relative;
+      padding: 22px;
+      border-radius: 22px;
+      border: 1px solid rgba(26,61,109,0.1);
+      background: #fff;
+    }
+
+    .level-card::before {
+      content: "";
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      background: rgba(26,61,109,0.12);
+    }
+
+    .level-card[data-level="bronze"]::before { background: #c67c2f; }
+    .level-card[data-level="silber"]::before { background: #4c9cb4; }
+    .level-card[data-level="gold"]::before { background: #d3a61b; }
+    .level-card.is-current { outline: 3px solid rgba(42,127,142,0.22); }
+    .level-card.is-complete { background: rgba(39,174,96,0.1); }
+
+    .timeline {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      margin-top: 18px;
+    }
+
+    .timeline-step {
+      position: relative;
+      padding-top: 54px;
+      background: linear-gradient(180deg, rgba(42,127,142,0.1), rgba(255,255,255,0.96));
+    }
+
+    .timeline-step::before {
+      content: "";
+      position: absolute;
+      top: 18px;
+      left: 20px;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--petrol), var(--blue));
+      box-shadow: 0 0 0 6px rgba(42,127,142,0.12);
+    }
+
+    .timeline-step::after {
+      content: "";
+      position: absolute;
+      top: 28px;
+      left: 52px;
+      right: -22px;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(42,127,142,0.28), rgba(26,61,109,0.06));
+    }
+
+    .timeline-step:last-child::after {
+      display: none;
+    }
+
+    .timeline-step strong { color: var(--blue); display: block; margin-bottom: 8px; }
+
+    .footer-tools {
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(26,61,109,0.08);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .text-link-btn {
+      border: 0;
+      background: transparent;
+      padding: 0;
+      color: var(--blue);
+      font-weight: 700;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 0.96rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(26,61,109,0.08);
+      vertical-align: top;
+    }
+
+    th { color: var(--blue); font-weight: 800; }
+
+    .table-row-details {
+      display: none;
+      padding: 0 16px 16px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .table-row.is-open + .table-row-details { display: table-row; }
+    .table-row { cursor: pointer; }
+
+    .ampel-card.green { background: rgba(39,174,96,0.12); }
+    .ampel-card.yellow { background: rgba(244,208,63,0.18); }
+    .ampel-card.red { background: var(--red-soft); }
+    .ampel-card h4 { margin-top: 0; }
+
+    .part-nav {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(26,61,109,0.08);
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 40;
+      display: none;
+      min-height: 46px;
+      padding: 0 16px;
+      border-radius: 999px;
+      border: 0;
+      background: var(--blue);
+      color: #fff;
+      box-shadow: 0 14px 30px rgba(26,61,109,0.18);
+      cursor: pointer;
+    }
+
+    .back-to-top.visible { display: inline-flex; align-items: center; }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
+    .print-only { display: none; }
+
+    .mobile-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      background: rgba(17, 31, 48, 0.28);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease;
+    }
+
+    @media (max-width: 1180px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar {
+        position: fixed;
+        top: calc(var(--header-height) + 12px);
+        left: 10px;
+        bottom: 10px;
+        width: min(92vw, 380px);
+        max-height: calc(100vh - var(--header-height) - 22px);
+        display: block;
+        z-index: 120;
+        transform: translateX(-115%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.24s ease, opacity 0.24s ease;
+        background: rgba(255,255,255,0.96);
+      }
+      body.menu-open .sidebar {
+        transform: translateX(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      body.menu-open .mobile-overlay {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      body.menu-open { overflow: hidden; }
+      .menu-toggle { display: inline-flex; align-items: center; }
+      .top-tabs { display: none; }
+      .author-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 860px) {
+      .header-inner { padding-left: 16px; padding-right: 16px; }
+      .progress-shell, .top-tabs { padding-left: 16px; padding-right: 16px; }
+      .layout { width: min(100vw - 20px, 100%); margin-top: 18px; gap: 20px; }
+      .hero, .section-card, .chapter, .interactive-card { padding: 24px; border-radius: 22px; }
+      .quick-link { grid-template-columns: 1fr; }
+      .quick-link strong { justify-self: start; min-width: 92px; }
+      .wizard-layout { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      body { font-size: 16px; }
+      .curriculum-grid, .cards-grid, .exercise-grid, .ampel-grid, .levels-grid, .timeline { grid-template-columns: 1fr; }
+      .question-card, .checklist-card, .wizard-card, .prompt-card, .self-rating, .table-card { padding: 20px; }
+      .timeline-step::after { display: none; }
+      table, thead, tbody, th, td, tr { display: block; }
+      thead { display: none; }
+      .table-row,
+      .table-row-details { display: block; }
+      .table-row { border: 1px solid rgba(26,61,109,0.08); border-radius: 18px; margin-bottom: 12px; padding: 12px; }
+      .table-row td { display: block; padding: 0 0 8px; border: 0; }
+      .table-row td::before {
+        content: attr(data-label);
+        display: block;
+        color: var(--blue);
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+      .table-row-details { padding: 0 12px 14px; }
+    }
+
+    @media print {
+      .site-header, .sidebar, .back-to-top, .button, .secondary-button, .top-tabs, .menu-toggle, .wizard-buttons, .copy-btn, .reset-btn, .tablist, .part-nav, .mobile-overlay { display: none !important; }
+      body { background: #fff; color: #000; font-size: 12pt; }
+      .layout { display: block; width: 100%; margin: 0; }
+      .content { width: 100%; }
+      .hero, .section-card, .chapter, .interactive-card, .profile-card, .footer-card { box-shadow: none; border: 1px solid #bbb; background: #fff; }
+      .lookahead-body { display: block !important; }
+      .print-only { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" aria-label="Kopfnavigation">
+    <div class="header-inner">
+      <div class="brand">
+        <p class="brand-title">KI in der Verwaltung</p>
+        <p class="brand-subtitle">Interaktiver Leitfaden für Verwaltungsbeschäftigte</p>
+      </div>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="sidebarNav">Inhaltsnavigation</button>
+    </div>
+    <div class="progress-shell" aria-hidden="true">
+      <div class="progress-track"><div class="progress-fill" id="globalProgress"></div></div>
+    </div>
+    <nav class="top-tabs" aria-label="Teile-Navigation">
+      <a class="top-tab" href="#start">Start</a>
+      <a class="top-tab" href="#curriculum">Curriculum</a>
+      <a class="top-tab" href="#teil-1">Teil 1</a>
+      <a class="top-tab" href="#teil-2">Teil 2</a>
+      <a class="top-tab" href="#teil-3">Teil 3</a>
+      <a class="top-tab" href="#teil-4">Teil 4</a>
+      <a class="top-tab" href="#teil-5">Teil 5</a>
+      <a class="top-tab" href="#anhang">Anhang</a>
+    </nav>
+  </header>
+
+  <div class="mobile-overlay" id="mobileOverlay" hidden></div>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebarNav" aria-label="Kapitel-Navigation">
+      <h2>Schnellnavigation</h2>
+      <div class="nav-tree">
+        <details class="nav-group" open>
+          <summary>
+            <span class="nav-meta"><span class="progress-dot" data-group="intro"></span> Einstieg</span>
+            <span>▾</span>
+          </summary>
+          <div class="nav-links">
+            <a class="nav-link" href="#start">Startseite</a>
+            <a class="nav-link" href="#autor-start">Über den Autor</a>
+            <a class="nav-link" href="#vorwort">Vorwort</a>
+            <a class="nav-link" href="#curriculum">Curriculum</a>
+            <a class="nav-link" href="#inhaltsverzeichnis">Inhaltsverzeichnis</a>
+            <a class="nav-link" href="#einleitung">Einleitung</a>
+          </div>
+        </details>
+
+        <details class="nav-group" open>
+          <summary>
+            <span class="nav-meta"><span class="progress-dot" data-group="teil1"></span> Teil 1</span>
+            <span>▾</span>
+          </summary>
+          <div class="nav-links">
+            <a class="nav-link" href="#teil-1">Teil 1 Überblick</a>
+            <a class="nav-link" href="#t1-1">1.1 Was KI ist und was nicht</a>
+            <a class="nav-link" href="#t1-2">1.2 Generative KI und LLMs</a>
+            <a class="nav-link" href="#t1-3">1.3 Schwache vs. starke KI</a>
+            <a class="nav-link" href="#t1-4">1.4 Biases</a>
+            <a class="nav-link" href="#t1-5">1.5 Halluzinationen</a>
+            <a class="nav-link" href="#t1-6">1.6 Wie funktioniert ein LLM?</a>
+            <a class="nav-link" href="#t1-7">1.7 Von Turing bis ChatGPT</a>
+            <a class="nav-link" href="#t1-vertiefung">Praxisvertiefung Teil 1</a>
+            <a class="nav-link" href="#quiz-teil1">Wissenscheck Teil 1</a>
+          </div>
+        </details>
+
+        <details class="nav-group">
+          <summary>
+            <span class="nav-meta"><span class="progress-dot" data-group="teil2"></span> Teil 2</span>
+            <span>▾</span>
+          </summary>
+          <div class="nav-links">
+            <a class="nav-link" href="#teil-2">Teil 2 Überblick</a>
+            <a class="nav-link" href="#t2-1">2.1 Wo KI heute steckt</a>
+            <a class="nav-link" href="#t2-2">2.2 Generative vs. eingebettete KI</a>
+            <a class="nav-link" href="#t2-3">2.3 Dienstlich freigegebene Systeme</a>
+            <a class="nav-link" href="#t2-4">2.4 Toolvergleich</a>
+            <a class="nav-link" href="#t2-5">2.5 Chancen</a>
+            <a class="nav-link" href="#t2-6">2.6 Grenzen</a>
+            <a class="nav-link" href="#t2-7">2.7 Fallbeispiele</a>
+            <a class="nav-link" href="#t2-8">2.8 Checkliste</a>
+            <a class="nav-link" href="#t2-vertiefung">Praxisvertiefung Teil 2</a>
+            <a class="nav-link" href="#quiz-teil2">Wissenscheck Teil 2</a>
+          </div>
+        </details>
+
+        <details class="nav-group">
+          <summary>
+            <span class="nav-meta"><span class="progress-dot" data-group="teil3"></span> Teil 3</span>
+            <span>▾</span>
+          </summary>
+          <div class="nav-links">
+            <a class="nav-link" href="#teil-3">Teil 3 Überblick</a>
+            <a class="nav-link" href="#t3-1">3.1 Was darf ich eingeben?</a>
+            <a class="nav-link" href="#t3-2">3.2 Anonymisierung</a>
+            <a class="nav-link" href="#t3-3">3.3 Kennzeichnungspflicht</a>
+            <a class="nav-link" href="#t3-4">3.4 EU AI Act kompakt</a>
+            <a class="nav-link" href="#t3-5">3.5 Risikoklassen</a>
+            <a class="nav-link" href="#t3-6">3.6 Konsequenzen</a>
+            <a class="nav-link" href="#t3-7">3.7 Entscheidungsbaum</a>
+            <a class="nav-link" href="#t3-8">3.8 Sicherheitscheckliste</a>
+            <a class="nav-link" href="#t3-vertiefung">Praxisvertiefung Teil 3</a>
+            <a class="nav-link" href="#quiz-teil3">Wissenscheck Teil 3</a>
+          </div>
+        </details>
+
+        <details class="nav-group">
+          <summary>
+            <span class="nav-meta"><span class="progress-dot" data-group="teil4"></span> Teil 4</span>
+            <span>▾</span>
+          </summary>
+          <div class="nav-links">
+            <a class="nav-link" href="#teil-4">Teil 4 Überblick</a>
+            <a class="nav-link" href="#t4-1">4.1 Fünf Bausteine</a>
+            <a class="nav-link" href="#t4-2">4.2 Vom schlechten zum guten Prompt</a>
+            <a class="nav-link" href="#t4-3">4.3 Übung E-Mail</a>
+            <a class="nav-link" href="#t4-4">4.4 Übung Zusammenfassung</a>
+            <a class="nav-link" href="#t4-5">4.5 Übung Fachbegriff</a>
+            <a class="nav-link" href="#t4-6">4.6 Ergebnisse prüfen</a>
+            <a class="nav-link" href="#t4-7">4.7 Iteratives Prompting</a>
+            <a class="nav-link" href="#t4-8">4.8 Prompt-Ketten</a>
+            <a class="nav-link" href="#t4-9">4.9 Prompt-Werkstatt</a>
+            <a class="nav-link" href="#t4-10">4.10 Prompt-Schablone</a>
+            <a class="nav-link" href="#t4-11">4.11 Fehler vermeiden</a>
+            <a class="nav-link" href="#t4-vertiefung">Praxisvertiefung Teil 4</a>
+            <a class="nav-link" href="#quiz-teil4">Wissenscheck Teil 4</a>
+          </div>
+        </details>
+
+        <details class="nav-group">
+          <summary>
+            <span class="nav-meta"><span class="progress-dot" data-group="teil5"></span> Teil 5</span>
+            <span>▾</span>
+          </summary>
+          <div class="nav-links">
+            <a class="nav-link" href="#teil-5">Teil 5 Überblick</a>
+            <a class="nav-link" href="#t5-1">5.1 Potenzialanalyse</a>
+            <a class="nav-link" href="#t5-2">5.2 KI-Kompetenzprofil</a>
+            <a class="nav-link" href="#t5-3">5.3 Lernpfad</a>
+            <a class="nav-link" href="#t5-4">5.4 Verantwortung</a>
+            <a class="nav-link" href="#t5-vertiefung">Praxisvertiefung Teil 5</a>
+            <a class="nav-link" href="#quiz-teil5">Wissenscheck Teil 5</a>
+          </div>
+        </details>
+
+        <details class="nav-group">
+          <summary>
+            <span class="nav-meta"><span class="progress-dot" data-group="anhang"></span> Anhang</span>
+            <span>▾</span>
+          </summary>
+          <div class="nav-links">
+            <a class="nav-link" href="#anhang">Anhang Überblick</a>
+            <a class="nav-link" href="#anhang-a">Glossar</a>
+            <a class="nav-link" href="#anhang-b">Ressourcen</a>
+            <a class="nav-link" href="#anhang-c">EU AI Act für Behörden</a>
+            <a class="nav-link" href="#anhang-d">Fachbücher</a>
+            <a class="nav-link" href="#anhang-e">Autor & Fortbildung</a>
+            <a class="nav-link" href="#impressum">Impressum</a>
+          </div>
+        </details>
+      </div>
+    </aside>
+
+    <main>
+      <div class="content">
+        <section class="hero" id="start">
+          <span class="eyebrow">Digitaler Leitfaden</span>
+          <h1>KI in der Verwaltung</h1>
+          <p class="subtitle">Der praxisnahe Einstieg für Beschäftigte</p>
+          <p class="author">Robert Meyer</p>
+          <div class="hero-copy">
+            <p>Dieses Material übersetzt das Buch in einen direkt nutzbaren Lernraum für Verwaltungsbeschäftigte. Es verbindet Grundlagen, sichere Anwendung, Datenschutz, EU AI Act und konkrete Arbeitshilfen in einer Struktur, die im Kurs, im Selbststudium oder als interner Leitfaden funktioniert.</p>
+            <p>Die Leitidee bleibt bewusst pragmatisch: KI kann entlasten, strukturieren und beschleunigen. Sie ersetzt jedoch weder fachliche Verantwortung noch Ermessensentscheidungen oder saubere Qualitätsprüfung.</p>
+          </div>
+          <div class="hero-actions">
+            <a class="button" href="#vorwort">Lernmaterial starten →</a>
+            <a class="secondary-button" href="#curriculum">Curriculum ansehen</a>
+          </div>
+          <div class="quick-links" aria-label="Schnelleinstieg in die fünf Teile">
+            <a class="quick-link" href="#teil-1"><strong>Teil 1</strong><span>Begriffe, Grundlagen und Funktionslogik für einen sicheren Start.</span></a>
+            <a class="quick-link" href="#teil-2"><strong>Teil 2</strong><span>Einsatzfelder, Freigaben, Chancen und Grenzen im Verwaltungsalltag.</span></a>
+            <a class="quick-link" href="#teil-3"><strong>Teil 3</strong><span>Datenschutz, Sicherheit, Ampellogik und EU AI Act in der Praxis.</span></a>
+            <a class="quick-link" href="#teil-4"><strong>Teil 4</strong><span>Übungen, Prompt-Muster, Prüfroutinen und wiederverwendbare Vorlagen.</span></a>
+            <a class="quick-link" href="#teil-5"><strong>Teil 5</strong><span>Kompetenzprofil, Lernpfad, Transfer und Verstetigung im Team.</span></a>
+            <a class="quick-link" href="#anhang"><strong>Anhang</strong><span>Glossar, Ressourcen, Behördenfokus und weiterführende Arbeitsmittel.</span></a>
+          </div>
+          <p class="hero-footnote">Dieses Material begleitet die Ganztagesfortbildung und kann auch eigenständig als interner Verwaltungsleitfaden genutzt werden.</p>
+        </section>
+
+        <section class="section-card" id="autor-start">
+          <span class="eyebrow">Über den Autor</span>
+          <h2>Robert Meyer</h2>
+          <p>Robert Meyer ist freiberuflicher KI-Berater, zertifizierter Projektmanager (PRINCE2) und Dozent mit über 15 Jahren Erfahrung in der digitalen Transformation öffentlicher Verwaltungen und mittelständischer Unternehmen. Er berät Kommunen und Organisationen bei der strategischen Einführung von KI-Technologien und begleitet die Umsetzung der Anforderungen des EU AI Act.</p>
+          <p>Seine Fortbildungen für Verwaltungsbeschäftigte verbinden regulatorisches Wissen mit unmittelbarer Praxisanwendung nach dem Grundsatz: KI soll Menschen klüger machen, nicht ersetzen.</p>
+        </section>
+
+        <section class="section-card" id="vorwort">
+          <span class="eyebrow">Vorwort</span>
+          <h2>Warum dieses Buch?</h2>
+          <p class="lead">Künstliche Intelligenz ist in der öffentlichen Verwaltung angekommen. Nicht als fernes Zukunftsthema, sondern als konkrete Arbeitspraxis auf dem Schreibtisch vieler Beschäftigter.</p>
+          <p>Textentwürfe, Zusammenfassungen, Strukturhilfen, Übersetzungen und Rechercheunterstützung sind längst verfügbar. Gleichzeitig wächst der Druck: Aufgaben werden komplexer, Fristen enger, Bürgererwartungen höher. KI wirkt hier wie ein naheliegendes Werkzeug, aber ihr Einsatz ist nur dann ein Fortschritt, wenn Qualität, Rechtssicherheit und Verantwortung erhalten bleiben.</p>
+          <p>Genau an dieser Stelle entsteht in vielen Behörden eine doppelte Unsicherheit. Die eine Seite fragt: „Dürfen wir das überhaupt?“ Die andere Seite fragt: „Warum nutzen wir es noch nicht konsequenter?“ Beide Fragen sind berechtigt. Wer zu schnell vorgeht, riskiert Fehlentscheidungen, Datenschutzprobleme und Vertrauensverlust. Wer gar nicht vorgeht, verliert Effizienz, Anschlussfähigkeit und Lernfähigkeit.</p>
+          <p>Dieses Buch ist deshalb bewusst als Brücke geschrieben: zwischen Innovationsdruck und Sorgfaltspflicht, zwischen technischem Potenzial und verwaltungspraktischer Realität. Es ist kein Technikmanual für Entwicklerteams und kein abstraktes Zukunftsmanifest, sondern ein Arbeitsbuch für Fach- und Führungskräfte, die KI verantwortungsvoll nutzen wollen.</p>
+          <div class="lookahead">
+            <button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button>
+            <div class="lookahead-body">
+              <ul>
+                <li>Der Fokus liegt auf klaren Begriffen, Entscheidungslogik und sicheren Prüfroutinen.</li>
+                <li>Das Material funktioniert als Kursbegleitung, Nachschlagewerk und interner Leitfaden.</li>
+                <li>KI kann unterstützen, aber Verantwortung, Ermessensentscheidungen und Endprüfung bleiben menschlich.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-card" id="curriculum">
+          <span class="eyebrow">Curriculum</span>
+          <h2>Ganztagesfortbildung und Buch greifen ineinander</h2>
+          <p>Dieses Buch folgt dem Curriculum einer erprobten Ganztagesfortbildung für Verwaltungsbeschäftigte. Die fünf Module des Kurses bilden die fünf Teile dieses Leitfadens. Im Kurs werden Grundlagen vermittelt und praktisch geübt. Das Buch geht bei jedem Modul eine Ebene tiefer mit zusätzlichen Erklärungen, Checklisten, Kopiervorlagen und Prompt-Schablonen.</p>
+          <div class="curriculum-grid">
+            <a class="curriculum-card" href="#teil-1"><div class="eyeline">Modul 1</div><strong>Was ist KI?</strong><p>Im Kurs: Grundbegriffe, Einordnung. Im Buch zusätzlich: technische Vertiefung, Glossar und typische Fehlannahmen.</p></a>
+            <a class="curriculum-card" href="#teil-2"><div class="eyeline">Modul 2</div><strong>KI in der Verwaltung</strong><p>Im Kurs: Tools, Chancen, Grenzen. Im Buch zusätzlich: Toolvergleich, Fallbeispiele und Einsatzlogik.</p></a>
+            <a class="curriculum-card" href="#teil-3"><div class="eyeline">Modul 3</div><strong>Recht & Sicherheit</strong><p>Im Kurs: Datenschutz, EU AI Act, Übung. Im Buch zusätzlich: Entscheidungsbaum, Ampellogik und Kopiervorlagen.</p></a>
+            <a class="curriculum-card" href="#teil-4"><div class="eyeline">Modul 4</div><strong>Praxis</strong><p>Im Kurs: drei Übungen und Prompt-Aufbau. Im Buch zusätzlich: weitere Vorlagen, Schablonen und Fehlervermeidung.</p></a>
+            <a class="curriculum-card" href="#teil-5"><div class="eyeline">Modul 5</div><strong>Vertiefung & Reflexion</strong><p>Im Kurs: eigener Use Case und Ausblick. Im Buch zusätzlich: Selbsteinschätzung, Lernpfad und Bereichsverstetigung.</p></a>
+          </div>
+          <h3>Kurs und Buch im Zusammenspiel</h3>
+          <p>Die Fortbildung ist auf einen kompakten Arbeitstag ausgelegt. Das Buch erweitert diesen Rahmen systematisch: mit zusätzlichen Beispielen aus dem Verwaltungsalltag, mit vertieften rechtlichen Einordnungen, mit direkt nutzbaren Arbeitsmitteln und mit einem strukturierten Lernpfad über den Kurstag hinaus.</p>
+          <p>Damit kann der Leitfaden sowohl als Begleitmaterial im Kurs als auch als eigenständige Arbeitsgrundlage im Haus genutzt werden. Genau diese Doppelfunktion ist gewollt: Das Material soll nicht nach dem Seminartag enden, sondern in Teamstandards, Vorlagen und sichere Routinen übergehen.</p>
+        </section>
+
+        <section class="section-card" id="inhaltsverzeichnis">
+          <span class="eyebrow">Inhaltsverzeichnis</span>
+          <h2>Der Aufbau des Leitfadens</h2>
+          <div class="toc-grid">
+            <div class="toc-card"><h3>Teil 1</h3><p>1.1 Was KI ist und was nicht<br>1.2 Generative KI und Large Language Models<br>1.3 Schwache vs. starke KI<br>1.4 Biases<br>1.5 Halluzinationen<br>1.6 Wie funktioniert ein LLM?<br>1.7 Von Turing bis ChatGPT</p></div>
+            <div class="toc-card"><h3>Teil 2</h3><p>2.1 Wo KI heute schon im Arbeitsalltag steckt<br>2.2 Generative KI vs. eingebettete KI<br>2.3 Dienstlich freigegebene KI-Systeme<br>2.4 Welches Tool für welche Aufgabe?<br>2.5 Chancen<br>2.6 Grenzen<br>2.7 Fallbeispiele<br>2.8 Checkliste</p></div>
+            <div class="toc-card"><h3>Teil 3</h3><p>3.1 Was darf ich eingeben?<br>3.2 Anonymisierung<br>3.3 Kennzeichnungspflicht<br>3.4 EU AI Act kompakt<br>3.5 Risikoklassen<br>3.6 Konsequenzen<br>3.7 Entscheidungsbaum<br>3.8 Vor/Während/Nach Checkliste</p></div>
+            <div class="toc-card"><h3>Teil 4</h3><p>4.1 Fünf Bausteine eines guten Prompts<br>4.2 Vom schlechten zum guten Prompt<br>4.3–4.5 Drei Übungen<br>4.6 Ergebnisse prüfen<br>4.7 Iteratives Prompting<br>4.8 Prompt-Ketten<br>4.9 Vorlagen<br>4.10 Schablone<br>4.11 Fehler vermeiden</p></div>
+            <div class="toc-card"><h3>Teil 5 & Anhang</h3><p>5.1 Potenzialanalyse<br>5.2 KI-Kompetenzprofil<br>5.3 Lernpfad<br>5.4 Verantwortung<br>A Glossar<br>B Ressourcen<br>C EU AI Act in Behörden<br>D Fachbücher<br>E Autor</p></div>
+          </div>
+        </section>
+
+        <section class="section-card" id="einleitung">
+          <span class="eyebrow">Einleitung</span>
+          <h2>Vom Verständnis in die Anwendung</h2>
+          <p>Bevor Sie ein KI-Tool öffnen, den ersten Prompt eingeben und ein Ergebnis in eine Fachvorlage übernehmen, brauchen Sie ein klares Bild davon, womit Sie es zu tun haben. Genau dafür ist diese Einleitung gedacht: Sie schafft die inhaltliche Orientierung, mit der die folgenden Kapitel praktisch nutzbar werden.</p>
+          <p>Künstliche Intelligenz ist einer der meistverwendeten und gleichzeitig am stärksten überladenen Begriffe der Gegenwart. Zwischen Marketingversprechen, medialen Zuspitzungen und berechtigter Skepsis entsteht leicht ein unklarer Eindruck. Im Verwaltungsalltag trägt das wenig weiter. Hier zählt eine dritte Perspektive: KI als Werkzeug im Rahmen professioneller Verfahren.</p>
+          <p>Diese Perspektive ist pragmatisch und anspruchsvoll zugleich. Pragmatismus bedeutet: Wir nutzen KI dort, wo sie entlastet, strukturiert und Qualität unterstützt. Anspruch bedeutet: Ergebnisse werden nicht blind übernommen, sondern fachlich, rechtlich und organisatorisch geprüft. Genau diese Kombination aus Nutzung und Kontrolle ist das Leitprinzip dieses Leitfadens.</p>
+          <div class="lookahead">
+            <button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button>
+            <div class="lookahead-body">
+              <ol>
+                <li>Teil 1 klärt Begriffe, Funktionslogik und typische Fehlerquellen.</li>
+                <li>Teil 2 zeigt konkrete Einsatzfelder in der Verwaltung.</li>
+                <li>Teil 3 überführt den Einsatz in Datenschutz-, Sicherheits- und Compliance-Logik.</li>
+                <li>Teil 4 liefert Übungen, Vorlagen und Prüfroutinen.</li>
+                <li>Teil 5 unterstützt den Transfer in Teamstandards und Lernpfade.</li>
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        <section class="chapter" id="teil-1" data-part="teil1">
+          <div class="part-head">
+            <div class="part-index">Teil 1</div>
+            <h2>Was ist Künstliche Intelligenz?</h2>
+            <p class="lead">Teil 1 schafft die Begriffs- und Funktionsbasis. Er ist bewusst voraussetzungsarm geschrieben, weil gute Entscheidungen über KI nur dort gelingen, wo Grundbegriffe, Fehlerrisiken und Systemlogik sauber verstanden werden.</p>
+          </div>
+
+          <article id="t1-1">
+            <h3>1.1 Was KI ist und was nicht</h3>
+            <p>Wenn der Spamfilter in Ihrem E-Mail-Postfach Nachrichten aussortiert, ist das ein KI-Anwendungsfall. Wenn Ihre Videokonferenz Hintergrundgeräusche reduziert, ebenfalls. Gleichzeitig gibt es viele Fälle, in denen „KI“ gesagt wird, aber nur klassische Automatisierung vorliegt. Für den Verwaltungsalltag ist diese Abgrenzung zentral, weil sie unmittelbar darüber entscheidet, wann Sie einem Ergebnis vertrauen können und wann nicht.</p>
+            <p>Künstliche Intelligenz bezeichnet Systeme, die aus Daten Muster ableiten und Aufgaben lösen, für die man früher menschliche Einschätzung gebraucht hätte. Dazu gehören Sprachverarbeitung, Mustererkennung, Klassifikation und Prognose. Was KI nicht ist: eine einfache Regelautomatik, ein magisches Verständnis der Welt oder ein Ersatz für Fachverantwortung.</p>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>KI erkennt Muster in Daten, sie „denkt“ nicht menschlich.</li><li>Regelbasierte Automatisierung ist nicht automatisch KI.</li><li>KI-Ergebnisse sind Vorschläge, keine Entscheidungen.</li><li>Fachliche Verantwortung bleibt bei der Sachbearbeitung.</li></ul></div></div>
+          </article>
+
+          <article id="t1-2">
+            <h3>1.2 Generative KI und Large Language Models</h3>
+            <p>Generative KI erzeugt neue Inhalte: Texte, Bilder, Tabellen, Zusammenfassungen oder Entwürfe. Das unterscheidet sie von analytischer KI, die vor allem erkennt, klassifiziert oder vorhersagt. Ein Large Language Model ist ein Sprachmodell, das auf sehr großen Textmengen trainiert wurde. Vereinfacht berechnet es, welches nächste Wort in einem Kontext am wahrscheinlichsten ist.</p>
+            <p>LLMs wirken intelligent, weil sie viel Kontext verarbeiten, sprachliche Muster erkennen und Stil anpassen können. Sie liegen dennoch oft falsch, weil sie sprachliche Plausibilität optimieren und nicht Wahrheit. Für die Verwaltung heißt das: LLMs sind stark bei Entwürfen und Strukturierung, aber nicht als alleinige Quelle für Rechts- oder Fachwahrheit.</p>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>Generative KI erstellt neue Inhalte, analytische KI bewertet Daten.</li><li>LLMs sind Sprachvorhersagesysteme mit großem Kontextfenster.</li><li>Gute Formulierung bedeutet nicht automatisch Richtigkeit.</li><li>Belastbare Ergebnisse brauchen Prüfung und Quellenabgleich.</li></ul></div></div>
+          </article>
+
+          <article id="t1-3">
+            <h3>1.3 Schwache vs. starke KI</h3>
+            <p>Im Verwaltungsalltag begegnen Ihnen nahezu ausschließlich Systeme der schwachen KI. Sie sind auf bestimmte Aufgaben spezialisiert: Texte zusammenfassen, Formulierungen verbessern, Muster in Datensätzen erkennen oder Vorschläge für Struktur und Priorisierung liefern. Sie verfolgen keine allgemeinen Ziele wie Menschen und tragen keine Verantwortung.</p>
+            <p>Starke KI oder AGI ist derzeit eine Zukunftsvision. Praktisch relevant ist deshalb eine einfache Regel: Arbeiten Sie mit dem, was heute real verfügbar ist. Vermeiden Sie Debatten, die operative Entscheidungen verzögern, und richten Sie Ihre Standards auf reale Fähigkeiten statt auf mediale Zukunftsszenarien aus.</p>
+          </article>
+
+          <article id="t1-4">
+            <h3>1.4 Biases: Wenn KI verzerrt</h3>
+            <p>Bias bedeutet Verzerrung. KI kann verzerrte Ergebnisse liefern, wenn Trainingsdaten, Zieldefinitionen oder Eingaben unausgewogen sind. Im Verwaltungskontext ist das besonders sensibel, weil schon kleine systematische Verzerrungen bei Priorisierung, Klassifikation oder Formulierung zu realen Nachteilen führen können.</p>
+            <p>Typische Quellen sind historische Daten, unklare Zielkriterien, einseitige Beispiele im Prompt oder fehlende Gegenprüfung. Die praktisch wichtigste Konsequenz ist: Ergebnisse nie als „objektiv“ interpretieren, sondern durch Stichproben, Vergleichsfragen und dokumentierte Auffälligkeiten absichern.</p>
+          </article>
+
+          <article id="t1-5">
+            <h3>1.5 Halluzinationen: Wenn KI erfindet</h3>
+            <p>Halluzinationen sind inhaltlich falsche, aber sprachlich überzeugende Aussagen. Das betrifft erfundene Quellen, falsche Paragrafen oder scheinbar exakte, aber nicht belegbare Zahlen. Solche Fehler entstehen, weil das Modell Kohärenz optimiert und Lücken mit plausiblen Formulierungen auffüllt.</p>
+            <p>Für die Verwaltung folgt daraus eine klare Sicherheitsregel: Entwurf durch KI ist zulässig, verbindliche Aussage ohne Prüfung ist es nicht. Namen, Normen, Zahlen und Zuständigkeiten gehören immer in einen strukturierten Faktencheck.</p>
+          </article>
+
+          <article id="t1-6">
+            <h3>1.6 Wie funktioniert ein Large Language Model? (vereinfacht)</h3>
+            <p>Ein LLM verarbeitet Text in kleinen Einheiten, sogenannten Tokens. Für jeden nächsten Schritt berechnet das Modell Wahrscheinlichkeiten. Aus Token, Kontextfenster und Wahrscheinlichkeitsausgabe entsteht Wort für Wort das Ergebnis. Eine hilfreiche Analogie lautet: LLMs sind ein sehr leistungsfähiges Autocomplete-System, das auf gewaltigen Datenmengen trainiert wurde.</p>
+            <p>Die Konsequenz für den Alltag ist direkt: Klare Eingaben verbessern die Qualität deutlich. Viel Kontext hilft, vergrößert aber auch die Fehlerfläche. Ein „sicher klingendes“ Ergebnis ist kein Beweis für Richtigkeit.</p>
+          </article>
+
+          <article id="t1-7">
+            <h3>1.7 Von Turing bis ChatGPT: kurzer historischer Abriss</h3>
+            <p>Alan Turing stellte die Grundfrage, ob Maschinen intelligentes Verhalten zeigen können. Danach folgten Expertensysteme, Machine Learning, Deep Learning und schließlich generative KI mit Large Language Models. Aus Verwaltungssicht ist der zentrale Lerneffekt nicht historisches Detailwissen, sondern die Einordnung: Moderne Systeme sind breit nutzbar, aber ihre verlässliche Anwendung folgt weiterhin den klassischen Prinzipien von Qualitätssicherung, Verantwortlichkeit und Dokumentation.</p>
+          </article>
+
+          <section class="interactive-card" id="quiz-teil1">
+            <h3>Wissenscheck: Teil 1</h3>
+            <p>Die Fragen greifen die Kernlogik von Teil 1 auf: Begriffsschärfe, Halluzinationen und Prüfverantwortung.</p>
+            <div class="quiz-card" data-quiz="teil1"></div>
+          </section>
+
+          <article id="t1-vertiefung">
+            <h3>Praxisvertiefung zu Teil 1</h3>
+            <p>Die folgenden Vertiefungen übersetzen die Grundlagen aus Teil 1 in Teamroutinen, mit denen Unsicherheit sinkt und Ergebnisqualität steigt. Für Führungskräfte ist besonders relevant, dass hier nicht nur Toolwissen, sondern auch Organisationslogik adressiert wird.</p>
+            <h4>Vertiefung 1.1: KI-Mythen im Verwaltungsalltag auflösen</h4>
+            <p>In vielen Teams entsteht Unsicherheit durch unpräzise Begriffe. Es hilft deshalb, intern zwischen drei Ebenen zu unterscheiden: einfache Automatisierung, klassische Fachsoftware und lernende Systeme. Diese Trennung reduziert Missverständnisse in Besprechungen und macht Zuständigkeiten klarer. Eine kurze Begriffsminute zu Beginn von Teamrunden verhindert, dass ein Workflow-Trigger fälschlich als „autonome KI“ diskutiert oder ein komplexes Modell als bloße Suchfunktion unterschätzt wird.</p>
+            <p>Wenn sich diese Sprachdisziplin etabliert, verbessert sich auch die Qualität von Freigabeentscheidungen. Datenschutz, IT-Sicherheit und Fachverantwortung lassen sich nur dann sauber zuordnen, wenn klar ist, über welche Technologie konkret gesprochen wird.</p>
+            <h4>Vertiefung 1.2: Warum LLM-Ergebnisse so überzeugend wirken</h4>
+            <p>LLMs erzeugen nicht nur Text, sondern oft den Eindruck von Sicherheit. Das liegt an kohärenter Satzstruktur, flüssigem Stil und einer scheinbaren Vollständigkeit der Antwort. Für Fachanwender ist genau das ein Risiko: Gute Sprache kann ein falsches Ergebnis verdecken. Eine bewährte Gegenmaßnahme ist der begründete Prompt: Fordern Sie nicht nur eine Antwort, sondern auch Annahmen, Unsicherheiten und offene Punkte.</p>
+            <p>Zusätzlich lohnt sich ein fester Zusatz im Prompt: „Welche Teile Ihrer Antwort sind unsicher?“ Das ersetzt keine Prüfung, erhöht aber die Transparenz der Modellgrenzen und verbessert die Qualität der anschließenden Fachprüfung.</p>
+            <h4>Vertiefung 1.3: Schwache KI sinnvoll in Rollen integrieren</h4>
+            <p>Der wichtigste organisatorische Schritt ist die Rollenklarheit. Schwache KI kann als Assistenz für Entwurf, Vorstrukturierung und Variantenbildung eingesetzt werden. Die finale Freigabe bleibt beim Menschen. In der Praxis sollte diese Rollentrennung sichtbar gemacht werden, etwa in Prozessbeschreibungen, Checklisten oder Vorlagenvermerken wie „KI-Entwurf, fachlich geprüft am …“.</p>
+            <p>Gerade in bereichsübergreifenden Prozessen reduziert diese Klarheit Reibung: IT kennt die technischen Leitplanken, Fachbereiche die nicht delegierbaren Entscheidungen und Führungskräfte sehen, wo Qualitätssicherung stattfindet.</p>
+            <h4>Vertiefung 1.4: Bias praktisch erkennen und gegensteuern</h4>
+            <p>Bias-Reduktion beginnt im Kleinen. Testen Sie alternative Formulierungen bei fachlich gleichen Fällen. Reagiert ein Modell systematisch unterschiedlich, ist das ein Prüfhinweis. Ein zweiter Hebel sind Gegenbeispiele im Prompt. Wenn Sie unterschiedliche Falltypen vergleichen lassen, werden Verzerrungen häufiger sichtbar.</p>
+            <p>Langfristig empfiehlt sich ein kurzes Bias-Log: Welche Muster traten auf, wie wurden sie erkannt und welche Korrektur war wirksam? Diese Dokumentation schafft Lernkurven im Team und verbessert die Qualität künftiger Anwendungen.</p>
+            <h4>Vertiefung 1.5: Halluzinationen systematisch entschärfen</h4>
+            <p>Halluzinationen lassen sich nicht vollständig verhindern, aber gut kontrollieren. Ein bewährtes Muster ist die Trennung zwischen Entwurfsmodus und Nachweismodus. Im Entwurfsmodus darf das Modell frei strukturieren. Im Nachweismodus muss jede Tatsachenbehauptung mit überprüfbarer Quelle oder als unsicher markiert werden.</p>
+            <p>In sensiblen Vorgängen sollte zusätzlich die interne Quellenpflicht gelten: Aussagen mit Rechtsbezug werden nur übernommen, wenn Primärquellen dokumentiert sind. Ein weiterer Tipp ist die Reduktion des Antwortumfangs bei kritischen Fragen. Kürzere, präzisere Antworten sind oft leichter zu prüfen und enthalten weniger erfundene Details.</p>
+            <h4>Vertiefung 1.6: Kontextfenster in der Praxis richtig nutzen</h4>
+            <p>Mehr Kontext ist nicht automatisch besser. Ein zu großer, unstrukturierter Input kann die Antwortqualität verschlechtern, weil relevante Signale im Rauschen untergehen. Besser ist ein kuratierter Kontext mit klaren Blöcken: Ausgangslage, Ziel, relevante Fakten, gewünschtes Format.</p>
+            <p>Für längere Vorgänge eignet sich ein Stufenmodell: erst verdichten, dann bewerten, dann formulieren. Wenn Sie regelmäßig mit langen Dokumenten arbeiten, etablieren Sie Kontextbausteine als Textvorlagen. Das spart Zeit, reduziert Zufall und macht Ergebnisse teamweit konsistenter.</p>
+            <h4>Vertiefung 1.7: Historisches Verständnis als Entscheidungshilfe</h4>
+            <p>Der Blick auf die KI-Entwicklung hilft, Hype von Substanz zu trennen. Viele heutige Debatten wirken neu, folgen aber bekannten Mustern: hohe Erwartungen, praktische Grenzen, anschließende Professionalisierung. Für Verwaltungen ist das eine gute Nachricht, weil Dokumentation, Nachvollziehbarkeit, Vier-Augen-Prüfung und Zuständigkeit bereits als tragfähige Qualitätsprinzipien vorhanden sind.</p>
+            <p>Historisches Bewusstsein schützt damit vor zwei Extremen: unkritischer Begeisterung und pauschaler Ablehnung. Beides ist für den Alltag wenig hilfreich. Entscheidend ist ein nüchterner, lernorientierter Einsatz mit klaren Regeln.</p>
+          </article>
+
+          <div class="part-nav"><a class="secondary-button" href="#start">← Start</a><a class="button" href="#teil-2">Nächstes Kapitel →</a></div>
+        </section>
+
+        <section class="chapter" id="teil-2" data-part="teil2">
+          <div class="part-head">
+            <div class="part-index">Teil 2</div>
+            <h2>KI in der Verwaltung</h2>
+            <p class="lead">Teil 2 übersetzt die Grundlagen in konkrete Einsatzfelder. Er zeigt, wo KI schon heute im Alltag steckt, welche Aufgaben besonders profitieren und an welchen Grenzen professionelle Nutzung aufhören muss.</p>
+          </div>
+
+          <article id="t2-1">
+            <h3>2.1 Wo KI heute schon im Arbeitsalltag steckt</h3>
+            <p>Viele Beschäftigte verbinden KI nur mit Chatbots. Tatsächlich nutzen Sie KI wahrscheinlich bereits täglich, oft ohne sichtbare Kennzeichnung: Spam- und Phishing-Erkennung, automatische Transkription, Such- und Vorschlagsfunktionen, Übersetzungs- oder Sprachassistenzfunktionen. KI ist damit kein Fremdkörper, sondern längst Teil digitaler Arbeitsumgebungen.</p>
+            <ul>
+              <li>Spam- und Phishing-Erkennung im E-Mail-System</li>
+              <li>automatische Transkription in Besprechungstools</li>
+              <li>Such- und Vorschlagsfunktionen in Office-Software</li>
+              <li>Übersetzungs- und Sprachassistenzfunktionen</li>
+              <li>Priorisierung in Service- oder Ticketsystemen</li>
+            </ul>
+            <p>Neu ist vor allem, dass generative KI nun direkt von Fachbereichen genutzt werden kann. Genau deshalb beginnt KI-Kompetenz nicht mit Toolbegeisterung, sondern mit dem Erkennen vorhandener KI-Nutzung und ihrer Grenzen.</p>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>KI ist in vielen Standardtools bereits integriert.</li><li>Der sichtbare Chatbot ist nur ein Teil des Gesamtbilds.</li><li>Die eigentliche Veränderung ist der direkte Fachbereichszugriff.</li><li>KI-Kompetenz beginnt mit der Einordnung vorhandener Nutzung.</li></ul></div></div>
+          </article>
+
+          <article id="t2-2">
+            <h3>2.2 Generative KI vs. eingebettete KI</h3>
+            <p>In der Praxis sollten Sie zwei Formen unterscheiden: generative KI als eigenes Tool, etwa ein Browser-Chat, und eingebettete KI in bestehender Fachsoftware. Generative Tools sind flexibel und schnell für Entwürfe, Zusammenfassungen und Strukturierung. Eingebettete KI ist meist stärker in Rechtemanagement, Dokumentationslogik und interne Schnittstellen integriert.</p>
+            <p>Für Verwaltungen ist diese Unterscheidung keine Technikspezialität, sondern ein Governance-Thema: Datennutzung, Freigaben und Verantwortlichkeiten unterscheiden sich je nach Einsatzform oft erheblich.</p>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>Generative KI ist flexibel, eingebettete KI meist prozessnäher.</li><li>Datennutzung und Freigaben unterscheiden sich je Einsatzform.</li><li>Nicht jedes gute Ergebnis ist automatisch regelkonform.</li><li>Vor Nutzung immer Tooltyp und Regelwerk prüfen.</li></ul></div></div>
+          </article>
+
+          <article id="t2-3">
+            <h3>2.3 Dienstlich freigegebene KI-Systeme</h3>
+            <p>In Verwaltungen gilt: Nicht alles, was technisch möglich ist, ist dienstlich zulässig. Maßgeblich sind interne Dienstanweisungen, IT-Sicherheitsvorgaben und datenschutzrechtliche Regelungen. Praktisch relevant sind Positivlisten erlaubter Tools, Beschränkungen auf bestimmte Aufgabentypen und definierte Datenkategorien.</p>
+            <ul>
+              <li>explizite Positivliste erlaubter Tools</li>
+              <li>eingeschränkte Nutzung nur für bestimmte Aufgabentypen</li>
+              <li>Nutzung nur über definierte Zugriffswege</li>
+              <li>Ausschluss bestimmter Datenkategorien</li>
+            </ul>
+            <p>Die wichtigste Praxisregel lautet daher: Im Zweifel nicht improvisieren, sondern Freigabestatus klären. Genau diese scheinbar kleine Disziplin schützt Beschäftigte und Organisation gleichermaßen.</p>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>Dienstliche KI-Nutzung folgt Freigaberegeln, nicht individuellen Präferenzen.</li><li>Positivlisten und Datenkategorien sind verbindlich.</li><li>Unklare Fälle sollten vorab geklärt werden.</li><li>Regelkonformität ist Teil professioneller KI-Nutzung.</li></ul></div></div>
+          </article>
+
+          <article id="t2-4">
+            <h3>2.4 Welches Tool für welche Aufgabe?</h3>
+            <p>Die beste KI gibt es nicht. Es gibt nur passende Werkzeuge für konkrete Aufgaben. Deshalb ist die Auswahl immer aufgabenbezogen und nie rein markenbezogen. Nutzen und Risiko müssen gemeinsam bewertet werden.</p>
+            <section class="interactive-card">
+              <h4>Interaktive Tool-Matrix</h4>
+              <p>Klicken Sie auf eine Zeile, um die Einordnung und Detailhinweise für die jeweilige Aufgabenart zu öffnen.</p>
+              <div class="table-card">
+                <table aria-label="Welches Tool für welche Aufgabe">
+                  <thead>
+                    <tr><th>Aufgabe</th><th>Geeignetes KI-Profil</th><th>Typischer Nutzen</th><th>Typische Grenze</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr class="table-row" tabindex="0"><td data-label="Aufgabe">Rohentwurf für Schreiben</td><td data-label="Geeignetes KI-Profil">Generatives Textmodell</td><td data-label="Typischer Nutzen">schnelle Struktur und Sprache</td><td data-label="Typische Grenze">Fakten können fehlerhaft sein</td></tr>
+                    <tr class="table-row-details"><td colspan="4">Geeignet für Entwürfe von Bürgeranschreiben, kurzen Mails und Erstfassungen. Vor jeder Nutzung im Verfahren: Fakten, Normen und Adressatenlogik prüfen.</td></tr>
+                    <tr class="table-row" tabindex="0"><td data-label="Aufgabe">Fachtext verdichten</td><td data-label="Geeignetes KI-Profil">Zusammenfassungsstarkes Modell</td><td data-label="Typischer Nutzen">Zeitersparnis bei Erstsichtung</td><td data-label="Typische Grenze">Nuancen gehen verloren</td></tr>
+                    <tr class="table-row-details"><td colspan="4">Stark bei langen Stellungnahmen und Vorlagen. Risiken liegen besonders bei verkürzten Minderheitspositionen und übersehenen Einwänden.</td></tr>
+                    <tr class="table-row" tabindex="0"><td data-label="Aufgabe">Übersetzung / Leichte Sprache</td><td data-label="Geeignetes KI-Profil">Sprach- und Stilmodell</td><td data-label="Typischer Nutzen">bessere Verständlichkeit</td><td data-label="Typische Grenze">fachliche Präzision prüfen</td></tr>
+                    <tr class="table-row-details"><td colspan="4">Hoher Nutzen für Bürgerkommunikation. Immer prüfen, ob Vereinfachung noch die fachlich richtige Aussage transportiert.</td></tr>
+                    <tr class="table-row" tabindex="0"><td data-label="Aufgabe">Tabellen-/Musteranalyse</td><td data-label="Geeignetes KI-Profil">Analytische Assistenz</td><td data-label="Typischer Nutzen">schnellere Vorstrukturierung</td><td data-label="Typische Grenze">Kontext kann fehlen</td></tr>
+                    <tr class="table-row-details"><td colspan="4">Hilfreich für erste Cluster, Listen und Vergleichsmuster. Ungeeignet für finale Bewertungen ohne Kontextwissen und Fachaufsicht.</td></tr>
+                    <tr class="table-row" tabindex="0"><td data-label="Aufgabe">Ideensammlung / Gliederung</td><td data-label="Geeignetes KI-Profil">Kreativmodus</td><td data-label="Typischer Nutzen">bessere Startqualität</td><td data-label="Typische Grenze">nicht ohne Fachprüfung übernehmen</td></tr>
+                    <tr class="table-row-details"><td colspan="4">Besonders nützlich in Konzept-, Workshop- und Strukturphasen. Niedrigeres Risiko, solange nur Entwurfscharakter vorliegt.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>Toolauswahl erfolgt aufgabenbezogen, nicht markenbezogen.</li><li>Nutzen und Risiko müssen gemeinsam bewertet werden.</li><li>Ein Tabellenvergleich hilft bei transparenten Entscheidungen.</li><li>Standardisierte Auswahlkriterien verbessern Teamkonsistenz.</li></ul></div></div>
+          </article>
+
+          <article id="t2-5">
+            <h3>2.5 Chancen: Was wird einfacher, schneller, besser?</h3>
+            <p>Richtig eingesetzt kann KI in der Verwaltung an mehreren Punkten entlasten: schnellerer Erstentwurf von Textbausteinen, bessere Strukturierung komplexer Unterlagen, verständlichere Formulierungen für Bürgerkommunikation, Unterstützung bei Recherche und Voranalyse sowie Zeitgewinn bei Routineaufgaben. Besonders wirksam ist KI dort, wo hohe Textlast auf knappe Zeit trifft.</p>
+            <p>Der Mehrwert entsteht aber nur, wenn Ergebnisse geprüft und angepasst werden. KI erhöht vor allem die Geschwindigkeit in der Erstbearbeitung. Bürgerkommunikation kann verständlicher werden, Vorlagen werden schneller entscheidungsreif, und die erste Struktur steht oft in Minuten statt Stunden. Genau deshalb ist KI ein Hebel für gute Prozesse, nicht für Abkürzungen bei der Qualität.</p>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>KI erhöht vor allem die Geschwindigkeit in der Erstbearbeitung.</li><li>Bürgerkommunikation kann verständlicher werden.</li><li>Nutzen entsteht durch Kombination aus KI und Fachprüfung.</li><li>KI ist ein Multiplikator für gute Arbeitsprozesse.</li></ul></div></div>
+          </article>
+
+          <article id="t2-6">
+            <h3>2.6 Grenzen: Was KI nicht kann</h3>
+            <p>Klare Grenzen schützen vor Fehlentscheidungen. KI kann Ihnen Arbeit abnehmen, aber keine Verantwortung. Sie trifft keine rechtsverbindlichen Entscheidungen, übt kein Ermessen aus, übernimmt keine Haftung und kennt weder lokale Zuständigkeiten noch politische Kontexte zuverlässig.</p>
+            <ul>
+              <li>keine rechtsverbindlichen Entscheidungen</li>
+              <li>keine eigenständige Ermessensausübung</li>
+              <li>keine Gewähr für Faktenrichtigkeit</li>
+              <li>kein vollständiges Verständnis organisatorischer Besonderheiten</li>
+              <li>keine Haftungsübernahme</li>
+            </ul>
+            <p>Die wichtigste Grenze ist organisatorisch: KI versteht nicht automatisch, welche Folgen eine Formulierung in Ihrem konkreten Verwaltungsverfahren hat. Gute Nutzung bedeutet deshalb auch bewusstes Nicht-Nutzen.</p>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>KI kann unterstützen, aber nicht verantwortlich entscheiden.</li><li>Faktische, rechtliche und organisatorische Grenzen sind real.</li><li>Ermessensentscheidungen bleiben menschliche Aufgabe.</li><li>Gute KI-Nutzung bedeutet auch bewusstes Nicht-Nutzen.</li></ul></div></div>
+          </article>
+
+          <article id="t2-7">
+            <h3>2.7 Fallbeispiele aus öffentlichen Verwaltungen</h3>
+            <div class="exercise-grid">
+              <div class="exercise-card"><h4>Fallbeispiel 1: Entwurf einer Bürgerinformation</h4><p><strong>Ausgangslage:</strong> Eine Fachabteilung muss kurzfristig eine Information zu veränderten Abläufen veröffentlichen. <strong>KI-Einsatz:</strong> Entwurf in zwei Sprachstufen, fachlich und bürgernah. <strong>Ergebnis:</strong> deutlich kürzere Redaktionszeit und bessere Lesbarkeit. <strong>Lesson Learned:</strong> Faktencheck und Rechtsprüfung bleiben zwingend.</p><p>Bewährt hat sich, zunächst die fachlich präzise Version zu erzeugen und erst danach die bürgernahe Fassung abzuleiten. So bleibt die inhaltliche Substanz erhalten, während Tonalität und Verständlichkeit systematisch verbessert werden.</p></div>
+              <div class="exercise-card"><h4>Fallbeispiel 2: Zusammenfassung langer Stellungnahmen</h4><p><strong>Ausgangslage:</strong> Mehrere längere Eingaben müssen für eine interne Vorlage vorstrukturiert werden. <strong>KI-Einsatz:</strong> Erstzusammenfassungen je Dokument, anschließend Synopse. <strong>Ergebnis:</strong> schnellere Vorbereitung der Entscheidungsvorlage. <strong>Lesson Learned:</strong> Nuancen und Minderheitspositionen müssen manuell nachgearbeitet werden.</p><p>Ein zentraler Erfolgsfaktor war eine feste Strukturvorgabe: Argumente pro und contra, offene Rechtsfragen und Auswirkungen auf die Umsetzung.</p></div>
+              <div class="exercise-card"><h4>Fallbeispiel 3: Interne Wissensaufbereitung</h4><p><strong>Ausgangslage:</strong> Neue Mitarbeitende brauchen schnell Überblick über Verfahren. <strong>KI-Einsatz:</strong> Erklärtexte in einfacher Sprache auf Basis interner Leitfäden. <strong>Ergebnis:</strong> besserer Einstieg in die Einarbeitung. <strong>Lesson Learned:</strong> Interne Begriffe und Prozesse müssen vor Veröffentlichung validiert werden.</p><p>Praktisch bewährt hat sich eine Zweifassung: didaktische Kurzfassung für den Einstieg und fachliche Referenzfassung mit exakten Prozessbegriffen.</p></div>
+              <div class="exercise-card"><h4>Fallbeispiel 4: Strukturhilfe für komplexe Vorgänge</h4><p><strong>Ausgangslage:</strong> Unstrukturierte Notizen aus mehreren Quellen. <strong>KI-Einsatz:</strong> Vorschlag einer einheitlichen Gliederung und Aufgabenliste. <strong>Ergebnis:</strong> klarere Arbeitsteilung im Team. <strong>Lesson Learned:</strong> Prioritäten setzen weiterhin Führung und Fachbereich.</p><p>Besonders hilfreich war die Kombination aus KI-Gliederung und kurzem Kickoff-Review im Team.</p></div>
+            </div>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>Fallbeispiele zeigen: KI spart Zeit in Vorbereitung und Strukturierung.</li><li>Qualitätsgewinn entsteht durch menschliche Endbearbeitung.</li><li>Risiken liegen vor allem in ungeprüfter Übernahme.</li><li>Dokumentierte Lessons Learned verbessern Folgeeinsätze.</li></ul></div></div>
+          </article>
+
+          <article id="t2-8">
+            <h3>2.8 Checkliste: Passt KI für meine Aufgabe?</h3>
+            <p>Nutzen Sie diese Entscheidungshilfe vor jedem Einsatz. Sie reduziert Unsicherheit und schafft eine wiederholbare Vorprüfung.</p>
+            <section class="interactive-card">
+              <h4>Interaktive Checkliste</h4>
+              <div class="checklist-card" data-checklist="ki-task-fit">
+                <div class="checklist-progress"><span class="status">0 von 7 erledigt</span><span class="badge">Local Storage aktiv</span></div>
+                <div class="checklist-items"></div>
+                <button class="reset-btn" type="button">Checkliste zurücksetzen</button>
+              </div>
+            </section>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>Eine kurze Vorprüfung reduziert Fehler und Unsicherheit.</li><li>Freigabe, Datenart und Prüfbarkeit sind die Schlüsselkriterien.</li><li>KI ist besonders stark bei klaren, prüfbaren Assistenzaufgaben.</li><li>Ein Nein an der richtigen Stelle ist professionelles Handeln.</li></ul></div></div>
+          </article>
+
+          <section class="interactive-card" id="quiz-teil2">
+            <h3>Wissenscheck: Teil 2</h3>
+            <div class="quiz-card" data-quiz="teil2"></div>
+          </section>
+
+          <article id="t2-vertiefung">
+            <h3>Praxisvertiefung zu Teil 2</h3>
+            <p>Die Vertiefungen in Teil 2 helfen dabei, aus Einzelanwendungen ein konsistentes Betriebsmodell zu machen. Sie sind bewusst auf Steuerbarkeit ausgerichtet: klare Freigabelogik, messbarer Nutzen und belastbare Entscheidungswege.</p>
+            <h4>Vertiefung 2.1: KI-Bestand im eigenen Bereich erfassen</h4>
+            <p>Bevor neue Tools diskutiert werden, lohnt sich eine Bestandsaufnahme: Welche KI-Funktionen werden bereits genutzt, durch wen und in welchem Prozessschritt? Viele Teams stellen dabei fest, dass KI längst vorhanden ist, aber ohne gemeinsame Sprache und ohne einheitliche Qualitätsmaßstäbe.</p>
+            <p>Ein schlanker Inventaransatz reicht für den Start: Toolname, Einsatzfall, Datentyp, verantwortliche Stelle und Prüfmechanismus. Diese fünf Felder schaffen Transparenz und erleichtern spätere Governance-Entscheidungen.</p>
+            <h4>Vertiefung 2.2: Auswahl zwischen generativ und eingebettet</h4>
+            <p>In der Praxis ist die beste Lösung oft ein Zusammenspiel: eingebettete KI für standardisierte Routineprozesse, generative KI für flexible Entwurfs- und Strukturaufgaben. Wenn ein Vorgang starke Systemintegration braucht, ist eingebettete KI meist robuster. Wenn schnelle Variantenbildung nötig ist, kann ein generatives Tool schneller Mehrwert liefern.</p>
+            <h4>Vertiefung 2.3: Freigaben operationalisieren</h4>
+            <p>Freigaben wirken nur dann, wenn sie im Alltag nutzbar sind. Eine gute Freigabeliste enthält nicht nur Toolnamen, sondern klare Einsatzgrenzen: zulässige Aufgaben, unzulässige Daten, Prüfpflichten und Dokumentationsanforderungen. Zusätzlich hilft ein kurzer Eskalationspfad für Zweifelsfälle.</p>
+            <h4>Vertiefung 2.4: Tool-Matching als Teamstandard</h4>
+            <p>Statt jede Person einzeln entscheiden zu lassen, welches Tool geeignet ist, sollten Teams ein gemeinsames Matching-Schema nutzen. Ein einseitiger Leitfaden mit drei Fragen reicht oft aus: Welches Ziel? Welche Datenklasse? Welche Prüftiefe?</p>
+            <h4>Vertiefung 2.5: Chancen messbar machen</h4>
+            <p>Chancen werden greifbar, wenn sie in Kennzahlen übersetzt werden: Bearbeitungszeit vor/nach KI-Einsatz, Nachbearbeitungsquote, Rückfragenrate oder Verständlichkeitsfeedback. Viele Bereiche starten mit KI, ohne den Ausgangszustand zu messen. Für belastbare Steuerung sollten vor dem Rollout mindestens drei Kennzahlen als Baseline erhoben werden: Durchlaufzeit, Nachbearbeitungsquote und Rückfragenrate.</p>
+            <p>Wichtig ist die fachliche Interpretation. Eine sinkende Durchlaufzeit ist nur dann ein Erfolg, wenn die Fehlerquote nicht gleichzeitig steigt. Ein kleines Auswertungsboard mit Trend, Ursache, Maßnahme und verantwortlicher Stelle macht aus Messung einen echten Steuerungsprozess.</p>
+            <h4>Vertiefung 2.6: Grenzen als Qualitätsrahmen</h4>
+            <p>Grenzen sind kein Hindernis, sondern ein Qualitätsrahmen. Wenn klar ist, was KI nicht leisten darf, steigt das Vertrauen in die Anwendungsfälle, in denen KI sinnvoll eingesetzt wird. Teams sollten deshalb bewusst No-AI-Zonen definieren, etwa bei sensiblen Ermessensentscheidungen oder unklaren Rechtsfragen.</p>
+            <h4>Vertiefung 2.7: Fallbeispiele strukturiert auswerten</h4>
+            <p>Aus Einzelfällen wird nur dann organisationales Lernen, wenn Ergebnisse strukturiert dokumentiert werden. Ein kurzes Lessons-Learned-Schema reicht: Ausgangslage, KI-Einsatz, Ergebnisqualität, Risikoereignisse, Verbesserung für den nächsten Durchlauf.</p>
+            <h4>Vertiefung 2.8: Checkliste als tägliches Werkzeug</h4>
+            <p>Checklisten funktionieren nur, wenn sie kurz und verbindlich sind. Zu lange Listen werden im Alltag umgangen. Besser sind wenige Kernfragen mit klaren Ja/Nein-Entscheidungen. Ein zusätzlicher Pflichtpunkt „Prüfvermerk erstellt“ erhöht die Nachvollziehbarkeit.</p>
+            <h4>Vertiefung 2.9: KPI-Baseline vor dem Rollout setzen</h4>
+            <p>Nach vier bis acht Wochen sollte die Entwicklung mit derselben Methodik erneut gemessen werden. So wird aus gefühltem Nutzen ein nachweisbarer Ergebnisbeitrag. Gerade in der Verwaltung lohnt sich dabei die Verknüpfung von Effizienz- und Qualitätskennzahlen.</p>
+            <h4>Vertiefung 2.10: Vergabe- und Beschaffungslogik früh mitdenken</h4>
+            <p>Gute Pilotideen scheitern häufig nicht fachlich, sondern an späteren Beschaffungsfragen. Deshalb sollte bereits in der Konzeptphase geklärt werden, welche Anforderungen an Datenschutz, Informationssicherheit, Schnittstellen und Betriebsmodell in die Vergabeunterlagen müssen.</p>
+            <p>Ein Muss-/Kann-Schema zu Datenverarbeitung, Protokollierung, Rollenrechten und Exit-Strategie verhindert, dass Ausschreibungen später zu eng oder zu unklar formuliert sind. Ebenso wichtig ist die frühe Planung des späteren Betriebs mit Update-, Support- und Governance-Anforderungen.</p>
+          </article>
+
+          <div class="part-nav"><a class="secondary-button" href="#teil-1">← Vorheriges Kapitel</a><a class="button" href="#teil-3">Nächstes Kapitel →</a></div>
+        </section>
+
+        <section class="chapter" id="teil-3" data-part="teil3">
+          <div class="part-head">
+            <div class="part-index">Teil 3</div>
+            <h2>Sicherheit, Datenschutz und rechtliche Rahmenbedingungen</h2>
+            <p class="lead">Teil 3 verankert KI-Nutzung in Verwaltungsrealität: Dateneingabe, Anonymisierung, Kennzeichnung, EU AI Act, Risikoklassen und ein belastbarer Entscheidungsweg für Grenzfälle.</p>
+          </div>
+
+          <article id="t3-1">
+            <h3>3.1 Was darf ich eingeben, was nicht?</h3>
+            <p>Die wichtigste Sicherheitsfrage lautet nicht: „Welches Modell ist am besten?“, sondern: „Welche Informationen dürfen in dieses System?“ Für den Verwaltungsalltag gilt eine klare Priorität: Schutz personenbezogener Daten, Schutz von Dienstgeheimnissen und internen Vorgängen sowie Einhaltung interner Freigabe- und Dokumentationsregeln.</p>
+            <p>Eine praktikable Faustregel lautet: Würden Sie diese Information auf eine offen lesbare Postkarte schreiben? Wenn nein, gehört sie nicht ungeprüft in ein KI-Tool. Typisch unzulässig ohne gesicherte Grundlage sind Namen mit Aktenbezug, exakte Adressen, Kontodaten, Gesundheits- oder Sozialdaten sowie vertrauliche Verfahrensdetails.</p>
+            <ul>
+              <li>vollständige Namen mit Aktenbezug</li>
+              <li>exakte Adressen und Kontodaten</li>
+              <li>Gesundheits- oder Sozialdaten</li>
+              <li>sicherheitsrelevante interne Informationen</li>
+              <li>vertrauliche Verfahrensdetails</li>
+            </ul>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>Die Dateneingabe ist der zentrale Risikohebel.</li><li>Personenbezug und Vertraulichkeit vor jeder Nutzung prüfen.</li><li>Interne Vorgaben sind verbindlich.</li><li>Im Zweifel: nicht eingeben, sondern klären.</li></ul></div></div>
+          </article>
+
+          <section class="interactive-card">
+            <h3>Ampel-Karte: Datenkategorien</h3>
+            <div class="ampel-grid">
+              <div class="ampel-card green"><h4>Grün</h4><p><strong>Unkritische, allgemeine Inhalte</strong></p><ul><li>Öffnungszeiten</li><li>allgemeine Prozessbeschreibungen</li><li>Formulierungsentwürfe ohne Einzelfalldaten</li></ul></div>
+              <div class="ampel-card yellow"><h4>Gelb</h4><p><strong>Fachlich sensible, aber anonymisierbare Inhalte</strong></p><ul><li>Fallbeschreibungen ohne direkte Identifikatoren</li><li>interne Entwürfe mit abstrahierten Daten</li><li>Prüftexte ohne Rückschluss auf Betroffene</li></ul></div>
+              <div class="ampel-card red"><h4>Rot</h4><p><strong>Personenbezogene oder vertrauliche Inhalte</strong></p><ul><li>Name plus Aktenbezug</li><li>Gesundheits- oder Sozialdaten</li><li>sicherheitsrelevante interne Informationen</li></ul></div>
+            </div>
+          </section>
+
+          <article id="t3-2">
+            <h3>3.2 Anonymisierung in der Praxis</h3>
+            <p>Anonymisierung bedeutet nicht nur Namen zu entfernen. In der Praxis sind indirekte Merkmale oft ebenso identifizierend, etwa Kombinationen aus Datum, Ort, Funktion und Aktenzeichen. Ein belastbares Verfahren besteht deshalb aus fünf Schritten: Originaltext kopieren, direkte Identifikatoren entfernen, indirekte Identifikatoren verallgemeinern, fachliche Relevanz prüfen und die anonymisierte Fassung gegenlesen.</p>
+            <ol>
+              <li>Originaltext kopieren</li>
+              <li>direkte Identifikatoren entfernen</li>
+              <li>indirekte Identifikatoren verallgemeinern</li>
+              <li>fachliche Relevanz prüfen</li>
+              <li>anonymisierte Fassung gegen Original gegenlesen</li>
+            </ol>
+            <div class="prompt-box">Original:
+"Herr Max Mustermann, wohnhaft in der Musterstraße 12,
+beantragt am 14.03.2026 ... Aktenzeichen 48-7732/26"
+
+Anonymisiert:
+"Eine antragstellende Person beantragt im März 2026 ...
+Interne Referenz entfernt"</div>
+            <p>Typische Fehler sind stehen gelassene Aktenzeichen, nicht abstrahierte Zeit- und Ortsangaben sowie unbereinigte Anhänge mit Metadaten. Relevante Fachinformation soll erhalten bleiben, aber jeder Restbezug muss aktiv geprüft werden.</p>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>Anonymisierung umfasst direkte und indirekte Identifikatoren.</li><li>Relevante Fachinformation soll erhalten bleiben.</li><li>Der Gegencheck ist Pflicht.</li><li>Metadaten und Anhänge nicht vergessen.</li></ul></div></div>
+          </article>
+
+          <article id="t3-3">
+            <h3>3.3 Kennzeichnungspflicht</h3>
+            <p>Bei KI-Unterstützung stellt sich die Frage, wann eine Kennzeichnung erforderlich oder sinnvoll ist. Neben gesetzlichen Vorgaben spielen interne Transparenzregeln und Nachvollziehbarkeit eine zentrale Rolle. Praxisorientiert gilt: interne Arbeitsskizzen werden je nach Hausregel behandelt, entscheidungsrelevante Dokumente sollten die KI-Mitwirkung dokumentieren, externe Kommunikation wird im Zweifel transparent gekennzeichnet.</p>
+            <p>Der Nutzen der Kennzeichnung ist doppelt: Sie schafft Vertrauen und verbessert die Nachvollziehbarkeit im Fehlerfall. Interne und externe Nutzung sollten deshalb bewusst getrennt betrachtet werden.</p>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>Kennzeichnung ist Teil professioneller Transparenz.</li><li>Interne und externe Nutzung getrennt betrachten.</li><li>Im Zweifel transparent kommunizieren.</li><li>Nachvollziehbarkeit schützt Organisation und Beschäftigte.</li></ul></div></div>
+          </article>
+
+          <article id="t3-4">
+            <h3>3.4 Der EU AI Act kompakt</h3>
+            <p>Der EU AI Act ist der zentrale Rechtsrahmen für KI-Systeme in der Europäischen Union. Er arbeitet risikobasiert: Je höher das Risiko eines Systems, desto strenger die Anforderungen. Für Behörden und öffentliche Stellen sind vor allem die stufenweise wirksam werdenden Pflichten entscheidend.</p>
+            <ul>
+              <li>Verordnung (EU) 2024/1689 ist in Kraft</li>
+              <li>Pflichten greifen stufenweise</li>
+              <li>früh wirksam wurden Verbote bestimmter Praktiken und Vorgaben zur KI-Kompetenz</li>
+              <li>weitere Kernpflichten folgen in den nächsten Umsetzungsstufen</li>
+            </ul>
+            <p>Wichtig ist: KI-Compliance betrifft nicht nur IT-Abteilungen. Auch operative Stellen, die KI einsetzen oder Ergebnisse weiterverarbeiten, sind Teil des Compliance-Systems.</p>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>Der AI Act ist risikobasiert aufgebaut.</li><li>Pflichten werden stufenweise wirksam.</li><li>Öffentliche Stellen sind ausdrücklich betroffen.</li><li>KI-Compliance ist keine reine IT-Aufgabe.</li></ul></div></div>
+          </article>
+
+          <article id="t3-5">
+            <h3>3.5 Risikoklassen</h3>
+            <p>Der AI Act unterscheidet vier Risikoklassen: verbotenes Risiko, hohes Risiko, begrenztes Risiko und minimales Risiko. Für die Verwaltung ist die korrekte Einordnung zentral, weil daraus konkrete Pflichten folgen: Dokumentation, Transparenz, Überwachung und Governance.</p>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>Vier Risikoklassen steuern die Pflichten.</li><li>Falsche Einordnung erzeugt direkte Compliance-Risiken.</li><li>Dokumentation der Einordnung ist zentral.</li><li>Bei Unsicherheit konservativ und transparent vorgehen.</li></ul></div></div>
+          </article>
+
+          <article id="t3-6">
+            <h3>3.6 Konsequenzen bei Verstößen</h3>
+            <p>Verstöße haben rechtliche, organisatorische und persönliche Folgen. In der Praxis sind die häufigsten Ursachen keine bösen Absichten, sondern unklare Prozesse: Pilotbetrieb ohne Zuständigkeit, fehlende Dokumentation, nicht definierte Eskalation oder unscharfe Rollen. Genau deshalb sind klare Regeln, Schulung und Checklisten wirksamer als reine Verbote.</p>
+            <ul>
+              <li>aufsichtsrechtliche Maßnahmen</li>
+              <li>datenschutzrechtliche Konsequenzen</li>
+              <li>dienstrechtliche Folgen</li>
+              <li>Reputationsschaden für die Organisation</li>
+              <li>zusätzlicher Prüf- und Korrekturaufwand</li>
+            </ul>
+            <p>Prävention ist deshalb fast immer günstiger als Nachsteuerung.</p>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>Verstöße haben reale fachliche und organisatorische Folgen.</li><li>Häufigster Grund ist Prozessunklarheit, nicht Vorsatz.</li><li>Prävention ist günstiger als Nachsteuerung.</li><li>Schulung und klare Verfahren sind Kern der Risikoreduktion.</li></ul></div></div>
+          </article>
+
+          <article id="t3-7">
+            <h3>3.7 Entscheidungsbaum: Darf ich das in die KI eingeben?</h3>
+            <p>Der folgende Entscheidungsbaum übersetzt die Kernlogik von Datenschutz, Freigabe und fachlicher Prüfbarkeit in einen kurzen Vorentscheidungsprozess. Er eignet sich auch als Standard für Intranet oder Team-Wiki.</p>
+            <section class="interactive-card">
+              <div class="wizard-card" id="decisionWizard">
+                <div class="wizard-layout">
+                  <div class="wizard-stage">
+                    <div class="badge">Geführter Entscheidungsweg</div>
+                    <h4 id="wizardQuestion">Enthält die Eingabe personenbezogene Daten?</h4>
+                    <p id="wizardHint">Starten Sie mit der strengsten Prüffrage: Personenbezug.</p>
+                    <div class="wizard-result" id="wizardResult"></div>
+                  </div>
+                  <div class="wizard-map" aria-hidden="true">
+                    <svg viewBox="0 0 430 520" role="img">
+                      <path id="edge-start-anon" class="wizard-edge" d="M215 86 L120 150" />
+                      <path id="edge-start-approved" class="wizard-edge" d="M215 86 L310 150" />
+                      <path id="edge-anon-stopred" class="wizard-edge" d="M120 206 L80 278" />
+                      <path id="edge-anon-approved" class="wizard-edge" d="M120 206 L310 214" />
+                      <path id="edge-approved-stoporange1" class="wizard-edge" d="M310 214 L350 278" />
+                      <path id="edge-approved-reviewable" class="wizard-edge" d="M310 214 L215 310" />
+                      <path id="edge-reviewable-stoporange2" class="wizard-edge" d="M215 366 L110 430" />
+                      <path id="edge-reviewable-ok" class="wizard-edge" d="M215 366 L320 430" />
+
+                      <g id="node-start" class="wizard-node">
+                        <rect x="115" y="28" rx="18" ry="18" width="200" height="58"></rect>
+                        <text x="215" y="54" text-anchor="middle">Personenbezogene</text>
+                        <text x="215" y="71" text-anchor="middle">Daten?</text>
+                      </g>
+
+                      <g id="node-anon" class="wizard-node">
+                        <rect x="24" y="150" rx="18" ry="18" width="192" height="56"></rect>
+                        <text x="120" y="177" text-anchor="middle">Vollständig</text>
+                        <text x="120" y="194" text-anchor="middle">anonymisierbar?</text>
+                      </g>
+
+                      <g id="node-approved" class="wizard-node">
+                        <rect x="214" y="150" rx="18" ry="18" width="192" height="56"></rect>
+                        <text x="310" y="177" text-anchor="middle">Tool dienstlich</text>
+                        <text x="310" y="194" text-anchor="middle">freigegeben?</text>
+                      </g>
+
+                      <g id="node-stop-red" class="wizard-node">
+                        <rect x="18" y="278" rx="18" ry="18" width="124" height="58"></rect>
+                        <text x="80" y="304" text-anchor="middle">Stopp:</text>
+                        <text x="80" y="321" text-anchor="middle">Datenschutz</text>
+                      </g>
+
+                      <g id="node-stop-orange-1" class="wizard-node">
+                        <rect x="288" y="278" rx="18" ry="18" width="124" height="58"></rect>
+                        <text x="350" y="304" text-anchor="middle">Stopp:</text>
+                        <text x="350" y="321" text-anchor="middle">Freigabe</text>
+                      </g>
+
+                      <g id="node-reviewable" class="wizard-node">
+                        <rect x="121" y="310" rx="18" ry="18" width="188" height="56"></rect>
+                        <text x="215" y="336" text-anchor="middle">Zweck klar &</text>
+                        <text x="215" y="353" text-anchor="middle">Ergebnis prüfbar?</text>
+                      </g>
+
+                      <g id="node-stop-orange-2" class="wizard-node">
+                        <rect x="42" y="430" rx="18" ry="18" width="136" height="58"></rect>
+                        <text x="110" y="456" text-anchor="middle">Stopp:</text>
+                        <text x="110" y="473" text-anchor="middle">Auftrag schärfen</text>
+                      </g>
+
+                      <g id="node-ok" class="wizard-node">
+                        <rect x="252" y="430" rx="18" ry="18" width="136" height="58"></rect>
+                        <text x="320" y="456" text-anchor="middle">Freigabe:</text>
+                        <text x="320" y="473" text-anchor="middle">zulässig</text>
+                      </g>
+                    </svg>
+                    <div class="wizard-legend">
+                      <span><i style="background: rgba(42,127,142,0.16); border: 1px solid #2a7f8e;"></i>aktiver Schritt</span>
+                      <span><i style="background: rgba(39,174,96,0.14); border: 1px solid #27ae60;"></i>zulässig</span>
+                      <span><i style="background: rgba(230,126,34,0.14); border: 1px solid #e67e22;"></i>nachschärfen / Freigabe</span>
+                      <span><i style="background: rgba(194,71,48,0.12); border: 1px solid #c24730;"></i>Stopp</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="wizard-buttons" id="wizardButtons">
+                  <button class="wizard-btn" type="button" data-answer="ja">Ja</button>
+                  <button class="wizard-btn secondary" type="button" data-answer="nein">Nein</button>
+                  <button class="reset-btn" type="button" id="wizardReset">Nochmal starten</button>
+                </div>
+                <p class="hero-footnote">Diesen Entscheidungsbaum können Sie auch als Team-Standard in Ihrem Intranet hinterlegen.</p>
+              </div>
+            </section>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>Ein klarer Entscheidungsweg reduziert Ad-hoc-Fehler.</li><li>Datenart, Freigabe und Prüfbarkeit sind die Kernknoten.</li><li>Dokumentation erhöht Nachvollziehbarkeit.</li><li>Der Baum ist als Kopiervorlage nutzbar.</li></ul></div></div>
+          </article>
+
+          <article id="t3-8">
+            <h3>3.8 Checkliste: Vor, während und nach dem KI-Einsatz</h3>
+            <p>Diese Dreiteilung schafft Struktur und ist im Alltag mit wenigen Minuten Aufwand anwendbar. Sie trennt Verantwortung sauber nach Prozessphase.</p>
+            <section class="interactive-card">
+              <div class="checklist-card">
+                <div class="tablist" role="tablist" aria-label="Checklistenphasen">
+                  <button class="tab-btn is-active" role="tab" type="button" aria-selected="true" data-target="phase-vor">Vor dem Einsatz</button>
+                  <button class="tab-btn" role="tab" type="button" aria-selected="false" data-target="phase-waehrend">Während</button>
+                  <button class="tab-btn" role="tab" type="button" aria-selected="false" data-target="phase-nach">Nach dem Einsatz</button>
+                </div>
+                <div class="tab-panel is-active" id="phase-vor">
+                  <div class="checklist-card" data-checklist="phase-vor-list"></div>
+                </div>
+                <div class="tab-panel" id="phase-waehrend">
+                  <div class="checklist-card" data-checklist="phase-waehrend-list"></div>
+                </div>
+                <div class="tab-panel" id="phase-nach">
+                  <div class="checklist-card" data-checklist="phase-nach-list"></div>
+                </div>
+              </div>
+            </section>
+            <p>Die Dreiteilung bewährt sich, weil sie Verantwortung zeitlich sauber trennt: vor dem Einsatz die Zulässigkeit, während des Einsatzes die Kontrolle der Eingabe und nach dem Einsatz die Prüfung und Freigabe des Ergebnisses. Dadurch wird aus punktueller Vorsicht ein belastbarer Standardablauf.</p>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>Vor/Während/Nach trennt Verantwortung klar.</li><li>Die Checkliste ist schnell und wirksam.</li><li>Prüfung und Dokumentation sind Pflichtbestandteile.</li><li>Standardisierte Abläufe erhöhen Rechtssicherheit.</li></ul></div></div>
+          </article>
+
+          <section class="interactive-card" id="quiz-teil3">
+            <h3>Wissenscheck: Teil 3</h3>
+            <div class="quiz-card" data-quiz="teil3"></div>
+          </section>
+
+          <article id="t3-vertiefung">
+            <h3>Praxisvertiefung zu Teil 3</h3>
+            <p>Dieser Vertiefungsteil dient als Brücke zwischen Regelwerk und Alltagspraxis. Ziel ist nicht, juristische Detailkommentare zu ersetzen, sondern eine belastbare Handlungslogik für Fachbereiche zu schaffen: Was wird wie dokumentiert, wer entscheidet wann und wie bleiben Verfahren revisionsfähig?</p>
+            <h4>Vertiefung 3.1: Datenkategorien als Ampellogik</h4>
+            <p>Die Ampellogik eignet sich besonders gut als sichtbare Alltagsheuristik. Sie ersetzt keine Rechtsprüfung, reduziert aber spontane Fehlentscheidungen. Als Karte am Arbeitsplatz oder im Intranet hinterlegt, schafft sie schnelle Orientierung.</p>
+            <h4>Vertiefung 3.2: Anonymisierung als Teamroutine</h4>
+            <p>Anonymisierung sollte nicht als Sonderfall behandelt werden, sondern als Standardprozess mit klaren Schritten. Für kritische Dokumente bewährt sich ein Vier-Augen-Prinzip: eine Person anonymisiert, eine zweite prüft auf Restbezug. Ergänzend hilft ein kleines Musterarchiv mit Vorher/Nachher-Beispielen.</p>
+            <h4>Vertiefung 3.3: Transparenz intern und extern differenzieren</h4>
+            <p>Nicht jede interne Notiz braucht dieselbe Kennzeichnung wie externe Kommunikation. Sinnvoll ist ein gestuftes Modell: intern Prozessvermerk, extern klare Transparenz bei relevanter KI-Mitwirkung, entscheidungsrelevant vollständige Nachvollziehbarkeit.</p>
+            <h4>Vertiefung 3.4: EU AI Act in der Umsetzungsplanung</h4>
+            <p>Rechtliche Anforderungen sollten nicht erst kurz vor Fristen operationalisiert werden. Besser ist eine gestaffelte Planung mit Quartalszielen: Inventarisierung, Rollenklärung, Dokumentations- und Schulungsaufbau sowie regelmäßige Überprüfung und Nachsteuerung.</p>
+            <p>Ein abgestimmter Jahreskalender mit festen Entscheidungspunkten zu Inventar-Update, Rollenreview, Schulungsstand und Vorfallauswertung macht den AI-Act-Bezug Teil der regulären Steuerung.</p>
+            <h4>Vertiefung 3.5: Risikoklassifikation dokumentieren</h4>
+            <p>Die Einordnung in Risikoklassen sollte begründet dokumentiert werden: Einsatzzweck, betroffene Personen/Prozesse, Risikoeinschätzung, Begründung, verantwortliche Stelle und nächster Prüftermin. Zusätzlich sollte klar sein, was eine Neubewertung auslöst und wer sie freizeichnet.</p>
+            <h4>Vertiefung 3.6: Konsequenzen als Lernanlass nutzen</h4>
+            <p>Wenn Fehler passieren, sollte der Fokus auf Lernfähigkeit liegen: Welche Prozesslücke war ursächlich, welche Regel hat gefehlt und welche Schulung ist nötig? Ein schuldorientierter Umgang erzeugt Vermeidungsverhalten, ein lernorientierter verbessert Qualität und senkt Wiederholungsfehler.</p>
+            <h4>Vertiefung 3.7: Entscheidungsbaum digital integrieren</h4>
+            <p>Der Entscheidungsbaum wirkt am besten, wenn er in den Arbeitsfluss integriert wird, etwa als Formular im Intranet oder als Pflichtschritt in einer Vorlage. Dadurch wird aus einem Poster ein Steuerungsinstrument.</p>
+            <h4>Vertiefung 3.8: Checklisten auditfähig machen</h4>
+            <p>Eine gute Checkliste ist nicht nur praktisch, sondern auditfähig. Das bedeutet: Versionierung, klare Verantwortlichkeit, dokumentierte Anwendung und regelmäßige Aktualisierung. Erst wenn nachvollziehbar ist, wer den Prüfschritt wann durchgeführt hat, wird die Checkliste zum belastbaren Governance-Artefakt.</p>
+            <h4>Vertiefung 3.9: Entscheidungsbaum als Pflichtschritt im Fachverfahren</h4>
+            <p>Der höchste Nutzen entsteht, wenn der Entscheidungsbaum nicht nur als Poster existiert, sondern als Pflichtschritt vor jeder KI-Eingabe. Ein kurzes Formularfeld mit Datenkategorie, Tool-Freigabe und Prüfbarkeit des Zwecks reicht oft aus, um Fehlerquote und Revisionsrisiko deutlich zu senken.</p>
+            <p>Für Führungskräfte liefert das zusätzlich Prozessdaten: In welchen Vorgangsarten Unsicherheit besonders häufig auftritt, welche Ablehnungsgründe dominieren und wo Schulungsbedarf entsteht.</p>
+            <h4>Vertiefung 3.10: Eskalationslogik für Grenzfälle</h4>
+            <p>Grenzfälle sind normal. Sinnvoll ist eine feste Eskalationskette mit klarer Reaktionszeit: Fachbereich entscheidet zuerst, bei Unsicherheit geht der Fall an Datenschutz oder Informationssicherheit, bei Grundsatzfragen an die zentrale Governance-Stelle.</p>
+            <p>Wird diese Eskalation als Mini-Verfahren mit Rollen, Fristen und Dokumentationsstandard beschrieben, sinken Wildwuchs und Blockaden. Ein quartalsweiser Grenzfall-Review hilft, wiederkehrende Fragen in verbindliche Leitlinien zu überführen.</p>
+          </article>
+
+          <div class="part-nav"><a class="secondary-button" href="#teil-2">← Vorheriges Kapitel</a><a class="button" href="#teil-4">Nächstes Kapitel →</a></div>
+        </section>
+
+        <section class="chapter" id="teil-4" data-part="teil4">
+          <div class="part-head">
+            <div class="part-index">Teil 4</div>
+            <h2>Praxis – Die ersten Schritte</h2>
+            <p class="lead">Teil 4 ist handlungsorientiert. Er zeigt, wie aus groben Anfragen tragfähige Prompts, saubere Entwürfe und fachlich prüfbare Ergebnisse entstehen.</p>
+          </div>
+
+          <article id="t4-1">
+            <h3>4.1 Die fünf Bausteine eines guten Prompts</h3>
+            <p>Gute Ergebnisse entstehen selten durch Zufall. Ein belastbarer Prompt hat in der Regel fünf Bausteine: Rolle, Kontext, Aufgabe, Format und Einschränkungen. Je klarer diese Steuerung, desto geringer die Nacharbeit.</p>
+            <p>Verwaltungsbeispiel: Statt „Schreib mir eine E-Mail“ arbeiten Sie mit klaren Vorgaben. Die Rolle definiert die Funktion des Systems, der Kontext die Ausgangslage, die Aufgabe den konkreten Arbeitsauftrag, das Format die erwartete Struktur und die Einschränkungen die Grenzen des Ergebnisses. Diese fünf Bausteine verwandeln einen vagen Wunsch in einen prüfbaren Arbeitsauftrag.</p>
+            <div class="interactive-card">
+              <h4>Prompt-Karte</h4>
+              <div class="prompt-card">
+                <div class="prompt-box">Rolle: Sie sind Schreibassistenz für eine öffentliche Verwaltung.
+Kontext: Es geht um eine Terminverschiebung im Bürgeramt.
+Aufgabe: Formulieren Sie eine freundliche und klare E-Mail.
+Format: 1 Betreff, 1 kurzer Einleitungssatz, 3 Stichpunkte, 1 Abschluss.
+Einschränkungen: Keine juristischen Bewertungen, keine persönlichen Daten.</div>
+                <button class="copy-btn" type="button" data-copy-target="prev">In Zwischenablage kopieren</button>
+              </div>
+            </div>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>Rolle, Kontext, Aufgabe, Format und Einschränkungen sind Standard.</li><li>Je klarer der Prompt, desto geringer die Nacharbeit.</li><li>Unklare Aufträge erzeugen unklare Ergebnisse.</li><li>Ein guter Prompt spart Zeit in jeder Iteration.</li></ul></div></div>
+          </article>
+
+          <article id="t4-2">
+            <h3>4.2 Vom schlechten zum guten Prompt</h3>
+            <p>Qualitätsunterschiede entstehen nicht durch Länge, sondern durch Präzision. „Fass den Bescheid zusammen“ bleibt unscharf. Ein guter Prompt steuert Ziel, Struktur und Grenzen konkret.</p>
+            <p>Der Unterschied liegt nicht in „mehr Text“, sondern in präziser Steuerung. Gute Prompts benennen, für wen der Text gedacht ist, welche Elemente zwingend enthalten sein müssen und welche Grenzen gelten. Genau dadurch sinkt das Risiko, dass die KI plausible, aber fachlich ungeeignete Ausgaben erzeugt.</p>
+            <div class="cards-grid">
+              <div class="mini-card"><h4>Schlecht</h4><p>„Fass den Bescheid zusammen.“</p></div>
+              <div class="mini-card"><h4>Mittel</h4><p>„Fass den Bescheid in drei Punkten zusammen.“</p></div>
+              <div class="mini-card"><h4>Gut</h4><p>„Fassen Sie den Bescheid für interne Abstimmung zusammen: Anlass, Rechtsgrundlage, nächste Schritte. Maximal 120 Wörter. Keine neuen Fakten ergänzen.“</p></div>
+            </div>
+            <div class="prompt-box">Lernvorlage
+1) Welche Information fehlt im schlechten Prompt?
+2) Welche Struktur wurde im guten Prompt ergänzt?
+3) Welche Einschränkung schützt vor Halluzinationen?</div>
+            <p>Für die Praxis lohnt sich ein einfacher Prüfgedanke: Gute Prompts sind nicht möglichst elegant, sondern steuerbar. Wenn Zielgruppe, Format oder Grenzen fehlen, steigt die Wahrscheinlichkeit für sprachlich schöne, aber praktisch unbrauchbare Antworten. Präzision reduziert damit nicht nur Nacharbeit, sondern auch das Risiko fachlicher Fehlsteuerung.</p>
+            <p>Hilfreich ist außerdem die Unterscheidung zwischen Erstqualität und Prüfqualität. Manche Antworten wirken im ersten Moment stark, verursachen aber hohe Nacharbeit in der Fachprüfung. Ein belastbarer Prompt erzeugt deshalb nicht nur gute Sprache, sondern eine Ausgabe, die mit überschaubarem Aufwand geprüft und weiterverarbeitet werden kann.</p>
+          </article>
+
+          <article id="t4-3">
+            <h3>4.3 Übung: E-Mail an Bürgerinnen und Bürger formulieren</h3>
+            <p>Die Aufgabe zeigt die Stärke von KI bei klar umrissener Bürgerkommunikation: Tonalität, Struktur und Verständlichkeit lassen sich schnell variieren, solange Datenarmut und Endprüfung sichergestellt sind.</p>
+            <div class="prompt-box">Prompt
+Sie sind Kommunikationsassistenz einer öffentlichen Verwaltung.
+Formulieren Sie eine E-Mail zur Terminverschiebung einer Sprechstunde.
+Anforderungen:
+- Sprache: freundlich und verständlich
+- Länge: max. 140 Wörter
+- Struktur: Betreff, kurzer Anlass, neuer Terminvorschlag, Kontaktmöglichkeit
+- Keine personenbezogenen Beispieldaten</div>
+            <p><strong>Erwartetes Ergebnis:</strong> klare, kurze, serviceorientierte Nachricht ohne überflüssige Fachsprache. <strong>Prüfhinweise:</strong> Ist die Botschaft sofort verständlich? Fehlt rechtlich heikler Inhalt? Sind konkrete Handlungsoptionen enthalten?</p>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>Bürgerkommunikation profitiert stark von klaren Promptvorgaben.</li><li>Verständlichkeit ist wichtiger als rhetorische Komplexität.</li><li>Datenarmut im Prompt schützt vor Datenschutzrisiken.</li><li>Endprüfung bleibt immer fachlich erforderlich.</li></ul></div></div>
+          </article>
+
+          <article id="t4-4">
+            <h3>4.4 Übung: Fachtext zusammenfassen</h3>
+            <p>Hier geht es um Führungsvorlagen und interne Abstimmungen. Die KI soll keine Meinung bilden, sondern Material verdichten. Entscheidend ist, Risiken, Maßnahmen und Prüfbedarf sichtbar zu halten.</p>
+            <div class="prompt-box">Prompt
+Fassen Sie den folgenden Fachtext für eine interne Leitungsvorlage zusammen.
+Ausgabeformat:
+1) Kernaussage in einem Satz
+2) Drei zentrale Risiken
+3) Drei empfohlene Maßnahmen
+Grenzen:
+- Keine neuen Fakten erfinden
+- Unklare Stellen mit "Prüfbedarf" markieren</div>
+            <p><strong>Erwartetes Ergebnis:</strong> strukturierte, entscheidungsreife Kurzfassung. <strong>Prüfhinweise:</strong> Sind Risiken vollständig und priorisiert? Wurden kritische Nuancen unterschlagen? Sind Maßnahmen konkret genug für Folgeschritte?</p>
+            <p>Gerade in Leitungs- und Abstimmungsprozessen ist diese Disziplin entscheidend. Eine verdichtete Zusammenfassung wirkt nur dann entlastend, wenn sie die für Entscheidungen relevanten Spannungen sichtbar lässt: Risiken, Zielkonflikte, Fristen und offene Punkte. Gute KI-Nutzung verkürzt deshalb den Weg zur entscheidungsreifen Vorlage, ohne kritische Differenzierungen zu glätten.</p>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>Strukturierte Zusammenfassungen beschleunigen Abstimmung.</li><li>Markierung von Unsicherheiten erhöht Qualität.</li><li>Der Maßnahmenteil ist für Entscheidungsprozesse besonders wichtig.</li><li>Die Zusammenfassung ersetzt nie die Primärquelle.</li></ul></div></div>
+          </article>
+
+          <article id="t4-5">
+            <h3>4.5 Übung: Fachbegriff allgemeinverständlich erklären lassen</h3>
+            <p>Leichte Sprache und allgemeinverständliche Erklärungen sind ein starker Einsatzfall. Die Qualität hängt davon ab, ob fachliche Korrektheit und Zielgruppenorientierung gleichzeitig geprüft werden.</p>
+            <div class="prompt-box">Prompt
+Erklären Sie den Begriff "Ermessensentscheidung" für Bürgerinnen und Bürger.
+Format:
+- 1 kurze Definition
+- 1 Beispiel aus dem Alltag
+- 1 Hinweis, was Betroffene tun können
+Sprache:
+- möglichst einfach
+- kurze Sätze
+- keine juristischen Fachzitate</div>
+            <p><strong>Erwartetes Ergebnis:</strong> alltagstaugliche Erklärung ohne fachliche Verfälschung. <strong>Prüfhinweise:</strong> Ist die Erklärung korrekt? Sind unklare Fachwörter enthalten? Passt der Ton zur Zielgruppe?</p>
+            <p>Die eigentliche Leistung dieser Übung liegt nicht nur in Vereinfachung, sondern in Übersetzung. Verwaltungsbegriffe sollen verständlich werden, ohne ihre fachliche Substanz zu verlieren. Das ist besonders wichtig in der Bürgerkommunikation, weil Verständlichkeit unmittelbar auf Vertrauen, Mitwirkung und Rückfragen wirkt.</p>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>KI kann Fachsprache wirksam vereinfachen.</li><li>Korrektheit und Verständlichkeit müssen gemeinsam geprüft werden.</li><li>Zielgruppenorientierung ist ein eigener Qualitätsschritt.</li><li>Gute Beispiele erhöhen Akzeptanz in der Bürgerkommunikation.</li></ul></div></div>
+          </article>
+
+          <article id="t4-9">
+            <h3>4.9 Zehn Prompt-Vorlagen für den Verwaltungsalltag</h3>
+            <p>Vorlagen sparen Zeit und erhöhen Konsistenz. Gleichzeitig gilt: Keine Vorlage ist selbsterklärend fertig. Jede muss auf Vorgang, Datenlage und Zielgruppe angepasst werden. Genau deshalb ist die Vorlagenbibliothek kein Ersatz für Denken, sondern ein Startpunkt für gute Routine.</p>
+            <section class="interactive-card">
+              <h4>Prompt-Werkstatt</h4>
+              <p>Die zehn Vorlagen aus dem Buch sind hier als direkt nutzbare Arbeitskarten hinterlegt. Sie können jede Vorlage kopieren oder im Eingabefeld anpassen.</p>
+              <div class="cards-grid" id="promptCards"></div>
+            </section>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>Vorlagen sparen Zeit und erhöhen Konsistenz.</li><li>Standardprompts eignen sich für Team-Playbooks.</li><li>Jede Vorlage muss auf den konkreten Vorgang angepasst werden.</li><li>Vorlagen ersetzen nicht die Ergebnisprüfung.</li></ul></div></div>
+          </article>
+
+          <article id="t4-6">
+            <h3>4.6 Ergebnisse prüfen</h3>
+            <p>Ein gutes Ergebnis erkennt man nicht am Stil, sondern an der Belastbarkeit. Ein strukturierter Prüfprozess umfasst Faktencheck, Quellencheck, Logikcheck, Kontextcheck und Sprachcheck. Ohne diese fünf Schritte sollte kein KI-Ergebnis in verbindliche Dokumente übernommen werden.</p>
+            <div class="prompt-box">Warnsignale
+- Sehr selbstsicherer Ton ohne Belege
+- Exakte Details ohne nachvollziehbare Quelle
+- Zu perfekte Antworten trotz komplexer Ausgangslage
+- Verweis auf nicht existente Rechtsquellen</div>
+            <p>Besonders relevant ist die Trennung zwischen sprachlicher Qualität und fachlicher Verlässlichkeit. Ein souverän formulierter Text kann dennoch falsche Normen, erfundene Quellen oder verkürzte Schlussfolgerungen enthalten. Ein standardisierter Prüfprozess reduziert dieses Risiko erheblich und macht Teamarbeit belastbarer, weil alle Beteiligten dieselben Prüfkriterien anwenden.</p>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>Stil ist kein Wahrheitskriterium.</li><li>Ein strukturierter Prüfprozess senkt Risiko deutlich.</li><li>Warnsignale sollten teamweit bekannt sein.</li><li>Ohne Prüfung keine Übernahme in verbindliche Dokumente.</li></ul></div></div>
+          </article>
+
+          <article id="t4-7">
+            <h3>4.7 Iteratives Prompting</h3>
+            <p>Der erste Output ist selten der beste. Iteratives Prompting heißt: Entwurf erzeugen, Schwächen benennen lassen, gezielt nachschärfen. Gerade im Verwaltungsalltag ist das ein Qualitätsmerkmal und kein Umweg.</p>
+            <div class="prompt-box">Iteration 1
+"Erstellen Sie einen Entwurf für eine interne Notiz zum Projektstatus."
+
+Iteration 2
+"Überarbeiten Sie den Entwurf: kürzer, klare Prioritäten, max. 6 Bullet Points."
+
+Iteration 3
+"Ergänzen Sie Risiken mit Verantwortlichkeit und nächstem Termin."</div>
+            <p>Das Verfahren ist schnell, transparent und führt in der Regel zu deutlich besseren Ergebnissen. Gute Ergebnisse entstehen oft in zwei bis vier Iterationen, wenn jede Runde ein klares Ziel hat.</p>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>Gute Ergebnisse entstehen oft in zwei bis vier Iterationen.</li><li>Jede Iteration sollte ein klares Ziel haben.</li><li>Nachschärfung ist ein Qualitätsmerkmal, kein Fehler.</li><li>Iteratives Vorgehen erhöht die fachliche Passung.</li></ul></div></div>
+          </article>
+
+          <article id="t4-8">
+            <h3>4.8 Prompt-Ketten</h3>
+            <p>Komplexe Aufgaben sollten in Teilschritte zerlegt werden: Recherche strukturieren, Ergebnisse zusammenfassen, Entscheidungsvorlage formulieren, Bürgerfassung ableiten. So bleibt jeder Schritt fachlich prüfbar und die Gesamtaufgabe beherrschbar.</p>
+            <div class="prompt-box">Prompt-Kette (Beispiel)
+Schritt 1: "Liste die zentralen Aspekte des Themas X in 5 Punkten."
+Schritt 2: "Verdichte diese Punkte zu einer internen Kurzvorlage."
+Schritt 3: "Formuliere eine Entscheidungsvorlage mit Optionen A/B/C."
+Schritt 4: "Erstelle daraus eine bürgerverständliche Information."</div>
+            <p>Der Vorteil liegt weniger in technischer Raffinesse als in Steuerbarkeit. Wenn komplexe Vorgänge in klare Zwischenprodukte zerlegt werden, sinkt die Fehlerdichte, Übergaben werden transparenter und Fachprüfung lässt sich gezielt an den kritischen Punkten ansetzen. Prompt-Ketten sind deshalb besonders dort stark, wo mehrere Rollen an einem Vorgang beteiligt sind.</p>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>Prompt-Ketten reduzieren Komplexitätsrisiken.</li><li>Jeder Schritt bleibt fachlich prüfbar.</li><li>Die Kette eignet sich gut für Teamarbeit mit Übergaben.</li><li>Komplexe Aufgaben werden so beherrschbar.</li></ul></div></div>
+          </article>
+
+          <article id="t4-10">
+            <h3>4.10 Prompt-Schablone zum Ausfüllen</h3>
+            <p>Eine wiederverwendbare Schablone ist mehr als Komfort. Sie schafft Wiederholbarkeit, senkt Einstiegshürden und macht gute Eingaben teamfähig. Besonders wirksam wird die Schablone, wenn sie nicht nur Ziel und Format abfragt, sondern auch Prüfkriterien direkt mitdenkt.</p>
+            <section class="interactive-card">
+              <div class="prompt-card">
+                <div class="form-grid">
+                  <div class="field"><label for="roleField">Rolle</label><input id="roleField" type="text" placeholder="z. B. Schreibassistenz einer öffentlichen Verwaltung"></div>
+                  <div class="field"><label for="contextField">Kontext</label><input id="contextField" type="text" placeholder="z. B. Es geht um ..."></div>
+                  <div class="field"><label for="taskField">Aufgabe</label><input id="taskField" type="text" placeholder="z. B. Formulieren Sie ..."></div>
+                  <div class="field"><label for="formatField">Gewünschtes Format</label><input id="formatField" type="text" placeholder="z. B. Betreff, Einleitung, 3 Bullet Points"></div>
+                  <div class="field"><label for="limitsField">Einschränkungen / No-Gos</label><textarea id="limitsField" placeholder="z. B. Keine personenbezogenen Daten, keine Rechtsbewertung"></textarea></div>
+                </div>
+                <div class="hero-actions">
+                  <button class="wizard-btn" type="button" id="buildPromptBtn">Prompt zusammensetzen</button>
+                  <button class="copy-btn" type="button" id="copyBuiltPromptBtn">In Zwischenablage kopieren</button>
+                </div>
+                <div class="prompt-box" id="builtPrompt">Noch kein Prompt erstellt.</div>
+              </div>
+            </section>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>Eine Schablone schafft Qualität durch Wiederholbarkeit.</li><li>Sie reduziert spontane, unscharfe Eingaben.</li><li>Prüfkriterien gehören in den Prompt.</li><li>Die Schablone ist als Kopiervorlage nutzbar.</li></ul></div></div>
+          </article>
+
+          <article id="t4-11">
+            <h3>4.11 Häufige Fehler und wie Sie sie vermeiden</h3>
+            <p>Typische Fehler sind unklare Aufträge, überladene Prompts, fehlende Prüfkriterien, ungeprüfte Fakten und fehlende Dokumentation. Praktisch bewährt hat sich eine einfache Gegenlogik: Ziel klar benennen, Ausgabeformat vorgeben, Risiken begrenzen, Fakten markieren und den Prüfprozess standardisieren.</p>
+            <div class="prompt-box">Top-10-Fehler in der Praxis
+1. Zu vage Aufgabenstellung.
+2. Kein Zielpublikum definiert.
+3. Fehlende Formatvorgabe.
+4. Keine Einschränkungen gesetzt.
+5. Ergebnisse ungeprüft übernommen.
+6. Quellen nicht überprüft.
+7. Zu viel sensibler Kontext im Prompt.
+8. Keine Iteration bei schwachem Ergebnis.
+9. Kein Teamstandard für gute Prompts.
+10. Kein Lernprozess aus Fehlern.</div>
+            <p>Das Lösungsprinzip lautet: Struktur vor Geschwindigkeit. Ein sauberer Prompt plus kurzer Prüfprozess ist meist schneller als hektische Nacharbeit.</p>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>Die meisten Fehler sind Prozessfehler, keine Toolfehler.</li><li>Strukturierte Prompts vermeiden Nacharbeit.</li><li>Prüfung ist integraler Teil des Workflows.</li><li>Teamstandards erhöhen Qualität und Sicherheit.</li></ul></div></div>
+          </article>
+
+          <section class="interactive-card" id="quiz-teil4">
+            <h3>Wissenscheck: Teil 4</h3>
+            <div class="quiz-card" data-quiz="teil4"></div>
+          </section>
+
+          <article id="t4-vertiefung">
+            <h3>Praxisvertiefung zu Teil 4</h3>
+            <p>Teil 4 ist der operative Kern des Buchs. Die folgenden Vertiefungen sind als Umsetzungsbausteine angelegt: Sie zeigen, wie aus guten Einzelprompts ein stabiler Teamprozess wird, der Qualität wiederholbar liefert.</p>
+            <h4>Vertiefung 4.1: Prompt-Design als Qualitätsprozess</h4>
+            <p>Prompting ist kein Einzelschritt, sondern ein Qualitätsprozess. Gute Teams arbeiten mit Prompt-Patterns: wiederkehrende Aufgaben erhalten standardisierte Startprompts, die je Vorgang angepasst werden. Ein kurzer monatlicher Check hält diese Vorlagen lebendig und verhindert schleichende Qualitätsverluste.</p>
+            <h4>Vertiefung 4.2: Qualitätsvergleich systematisch durchführen</h4>
+            <p>Beim Vergleich schlechter und guter Prompts empfiehlt sich ein Bewertungsraster mit vier Kriterien: fachliche Korrektheit, Strukturtreue, Verständlichkeit und Nachbearbeitungsaufwand. Hilfreich ist die zusätzliche Trennung zwischen Erstqualität und Prüfqualität, weil manche Ausgaben zunächst stark wirken, aber hohe Nacharbeit auslösen.</p>
+            <h4>Vertiefung 4.3: Bürgerkommunikation mit Qualitätsgates</h4>
+            <p>Bei E-Mails an Bürgerinnen und Bürger sollte ein Mini-Gate gelten: Verständlichkeit geprüft, rechtliche Begriffe korrekt, Handlungsaufforderung klar und Ton respektvoll. Bei konfliktanfälligen Themen kommt ein fünfter Gate-Punkt hinzu: Erwartungsmanagement zu Fristen, Zuständigkeit und fehlenden Unterlagen.</p>
+            <h4>Vertiefung 4.4: Zusammenfassungen für Führungsvorlagen</h4>
+            <p>In Führungsprozessen sind Kürze und Klarheit entscheidend. KI kann verdichten, aber Priorisierung und Gewichtung bleiben menschlich. Eine gute Praxis ist deshalb die Trennung zwischen KI-Zusammenfassung und fachlicher Endbewertung. Für Steuerungsreife sollten Risiko bei Nicht-Handeln, Ressourcenbedarf und Zeitkritikalität explizit benannt werden.</p>
+            <h4>Vertiefung 4.5: Verständlichkeit als Verwaltungsservice</h4>
+            <p>Die Fähigkeit, Fachbegriffe verständlich zu erklären, ist keine Nebensache. Sie verbessert Zugang, Akzeptanz und Verfahrensqualität. KI kann hier als Sprachbrücke dienen, wenn Inhalte fachlich validiert werden.</p>
+            <h4>Vertiefung 4.6: Prüfcheck in Teamarbeit verankern</h4>
+            <p>Die Fünf-Punkte-Prüfung wirkt am besten, wenn sie Teil von Teamroutinen ist. In Bereichen mit hohem Volumen hilft ein Rotationsprinzip für Prüfchecks, damit Prüfwissen breiter verteilt wird und Qualitätsverantwortung nicht an einzelnen Schlüsselpersonen hängt.</p>
+            <h4>Vertiefung 4.7: Iteration mit Zielmarken</h4>
+            <p>Nicht jede Iteration bringt Fortschritt. Setzen Sie vor jeder Runde eine Zielmarke wie „kürzer“, „präziser“ oder „bürgernäher“. Nach spätestens drei Iterationen sollte ein Stoppkriterium greifen. Wenn die Qualität nicht messbar steigt, liegt das Problem meist in unklarer Aufgabenstellung oder fehlendem Kontext.</p>
+            <h4>Vertiefung 4.8: Prompt-Ketten in Rollen aufteilen</h4>
+            <p>Bei komplexen Aufgaben kann ein Team die Kette aufteilen: Recherche- und Kontextvorbereitung, Entwurf, Fach- und Rechtsprüfung. So bleibt der Prozess schnell und gleichzeitig kontrolliert.</p>
+            <h4>Vertiefung 4.9: Vorlagenbibliothek pflegen</h4>
+            <p>Eine Prompt-Vorlagenbibliothek sollte versioniert sein und Einsatzzweck, Prompttext, Grenzen, Prüfschritte und letzte Aktualisierung enthalten. Mit Rollenfreigabe wird aus Einzelwissen ein echtes Teamasset.</p>
+            <h4>Vertiefung 4.10: Schablone in Fachverfahren integrieren</h4>
+            <p>Die Prompt-Schablone entfaltet den größten Effekt, wenn sie direkt in Vorlagen- oder Wissenssysteme eingebunden ist. Das erleichtert den Einstieg und erhöht die Konsistenz der Eingaben.</p>
+            <h4>Vertiefung 4.11: Fehlerkultur für KI-Arbeit</h4>
+            <p>Fehler sollten als Lernsignal behandelt werden. Ein kurzes Fehlerlog mit Ursache, Korrektur und Präventionsmaßnahme reicht oft aus, um die Qualität im Team nachhaltig zu erhöhen. Entscheidend ist ein neutraler, sachlicher Stil statt eines Schuldregisters.</p>
+            <h4>Vertiefung 4.12: 30/60/90-Review fest verankern</h4>
+            <p>Nach der Einführung sollte der Betrieb nicht in den Autopiloten wechseln. Ein 30/60/90-Review schafft Stabilität: nach 30 Tagen Fokus auf Anwendungsqualität, nach 60 Tagen auf Prozessintegration, nach 90 Tagen auf Governance und Skalierung.</p>
+            <p>Praktisch bewährt sich ein einheitliches Review-Protokoll mit den Abschnitten Befund, Risiko, Maßnahme, Termin und verantwortliche Stelle. So entsteht ein durchgängiger Verbesserungszyklus statt isolierter Einzelrunden.</p>
+            <p>Für den 30-Tage-Punkt eignet sich ein enger Blick auf die Ergebnisqualität im Tagesbetrieb: Welche Output-Typen funktionieren stabil, wo entstehen systematische Nacharbeiten, welche Prompt-Varianten führen wiederholt zu Missverständnissen? Nach 60 Tagen rückt die Prozessintegration in den Vordergrund, also die Frage, ob der KI-gestützte Schritt von allen betroffenen Rollen konsistent angewendet wird.</p>
+            <p>Am 90-Tage-Punkt geht es um Steuerbarkeit und Skalierbarkeit: Sind Rollen, Freigaben und Incident-Prozesse sauber dokumentiert? Gibt es ein klares Update-Verfahren für Prompt-Vorlagen und Richtlinien? Diese Governance-Fragen entscheiden darüber, ob eine Pilotlösung wirklich tragfähig in den Regelbetrieb übergeht.</p>
+          </article>
+
+          <div class="part-nav"><a class="secondary-button" href="#teil-3">← Vorheriges Kapitel</a><a class="button" href="#teil-5">Nächstes Kapitel →</a></div>
+        </section>
+
+        <section class="chapter" id="teil-5" data-part="teil5">
+          <div class="part-head">
+            <div class="part-index">Teil 5</div>
+            <h2>Vertiefung, Reflexion und Ausblick</h2>
+            <p class="lead">Teil 5 führt den Blick weg vom einzelnen Tool und hin zu Kompetenzaufbau, Teamstandards und nachhaltiger Umsetzung im Arbeitsbereich.</p>
+          </div>
+
+          <article id="t5-1">
+            <h3>5.1 Wo kann KI in meinem Arbeitsbereich unterstützen?</h3>
+            <p>Nicht jede Aufgabe profitiert gleich stark von KI. Der sinnvollste Einstieg ist eine strukturierte Potenzialanalyse im eigenen Bereich. Hohe Potenziale liegen meist dort, wo viel wiederkehrende Textarbeit anfällt und Ergebnisse gut prüfbar sind.</p>
+            <div class="table-card">
+              <table aria-label="Potenzialmatrix">
+                <thead><tr><th>Aufgabentyp</th><th>Häufigkeit</th><th>Fehlerkosten</th><th>KI-Potenzial</th></tr></thead>
+                <tbody>
+                  <tr><td>Routinetexte</td><td>hoch</td><td>mittel</td><td>hoch</td></tr>
+                  <tr><td>Fachrecherche</td><td>mittel</td><td>hoch</td><td>mittel bis hoch</td></tr>
+                  <tr><td>Entscheidungen mit Ermessensspielraum</td><td>mittel</td><td>sehr hoch</td><td>niedrig</td></tr>
+                  <tr><td>Bürgerkommunikation</td><td>hoch</td><td>hoch</td><td>mittel</td></tr>
+                  <tr><td>Datenaufbereitung</td><td>mittel</td><td>mittel</td><td>hoch</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Reflexionsfragen <span>▼</span></button><div class="lookahead-body"><ul><li>Welche Aufgaben kosten mich pro Woche am meisten Zeit?</li><li>Welche davon sind klar strukturierbar?</li><li>Wo kann KI einen Entwurf liefern, den ich sicher prüfen kann?</li><li>Welche Aufgaben bleiben bewusst ohne KI?</li></ul></div></div>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>KI-Potenzial ergibt sich aus Aufgabe, Risiko und Prüfbarkeit.</li><li>Routinetätigkeiten sind oft der beste Einstieg.</li><li>Ermessensentscheidungen bleiben menschlich.</li><li>Eine einfache Matrix schafft klare Prioritäten.</li></ul></div></div>
+            <p>Der praktische Wert dieser Matrix liegt in ihrer Nüchternheit. Sie verhindert, dass Teams aus Hype-Gründen mit den falschen Aufgaben starten. Der beste Einstieg ist selten die spektakulärste Aufgabe, sondern der Vorgang mit hoher Wiederholung, klarer Struktur und guter fachlicher Prüfbarkeit.</p>
+          </article>
+
+          <article id="t5-2">
+            <h3>5.2 Selbsteinschätzungsbogen: Mein KI-Kompetenzprofil</h3>
+            <p>Kompetenz in der Verwaltung besteht nicht nur aus Toolwissen. Sie umfasst Technikverständnis, Risikobewusstsein, Prüfmethodik, Dokumentation und die Fähigkeit, andere sicher mitzunehmen.</p>
+            <section class="interactive-card">
+              <div class="self-rating" id="selfAssessment"></div>
+            </section>
+            <p>Die Selbsteinschätzung ist kein Zertifikat, sondern ein Steuerungsinstrument. Sie hilft, Lernbedarf sichtbar zu machen und die nächsten Schritte realistisch zu planen. Besonders nützlich wird sie, wenn Ergebnisse nach einigen Wochen erneut betrachtet werden: Dann wird aus einer Momentaufnahme ein Entwicklungsverlauf.</p>
+          </article>
+
+          <article id="t5-3">
+            <h3>5.3 Lernpfad: Vom Einsteiger zum sicheren Anwender</h3>
+            <p>Ein praktikabler Lernpfad in drei Stufen schafft Orientierung statt Überforderung. Er hilft, Kompetenzen nicht abstrakt zu beschreiben, sondern mit Standards, Praxisfällen und Teamfähigkeit zu verknüpfen.</p>
+            <section class="interactive-card">
+              <div class="levels-grid" id="levelCards">
+                <div class="level-card" data-level="bronze" tabindex="0"><h4>Bronze</h4><p><strong>Sicherer Einstieg</strong></p><ul><li>Grundlagen zu KI, Bias und Halluzinationen</li><li>erste strukturierte Prompts</li><li>konsequenter Faktencheck</li></ul></div>
+                <div class="level-card" data-level="silber" tabindex="0"><h4>Silber</h4><p><strong>Souveräne Anwendung</strong></p><ul><li>wiederverwendbare Prompt-Vorlagen</li><li>Einsatz in echten Arbeitsfällen</li><li>strukturierte Ergebnisprüfung im Team</li></ul></div>
+                <div class="level-card" data-level="gold" tabindex="0"><h4>Gold</h4><p><strong>Multiplikation im Bereich</strong></p><ul><li>interne Checklisten und Standards</li><li>Coaching von Kolleginnen und Kollegen</li><li>Mitarbeit an Governance und Qualitätsregeln</li></ul></div>
+              </div>
+              <div class="timeline">
+                <div class="timeline-step"><strong>Tag 1–30</strong><p>Grundlagen festigen und drei sichere Anwendungsfälle mit dokumentierter Prüfung bearbeiten.</p></div>
+                <div class="timeline-step"><strong>Tag 31–60</strong><p>Vorlagenbibliothek aufbauen, Team-Feedback einholen und Prüfroutinen vereinheitlichen.</p></div>
+                <div class="timeline-step"><strong>Tag 61–90</strong><p>Bereichsstandard definieren und eine Kurzschulung für Kollegium oder Team durchführen.</p></div>
+              </div>
+            </section>
+            <p>Auf Bronze-Niveau geht es vor allem um Verlässlichkeit, nicht um Geschwindigkeit. Ein sinnvoller Mindeststandard ist: Jeder KI-Entwurf wird mit derselben Prüfroutine kontrolliert, und jede Person kann erklären, warum ein Ergebnis übernommen oder verworfen wurde. Als Nachweis für erreichte Bronze-Kompetenz eignen sich drei dokumentierte Praxisfälle mit kurzer Reflexion zu Fehlern und Korrekturen.</p>
+            <p>Silber bedeutet, dass KI nicht mehr sporadisch, sondern methodisch eingesetzt wird. Gold steht für Multiplikation und Steuerungsfähigkeit: neue Anwendungsfälle werden schneller und sicherer eingeführt, weil Standards bereits vorhanden sind und nicht bei jedem Projekt neu erfunden werden müssen.</p>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>Ein Kompetenzpfad schafft Orientierung statt Überforderung.</li><li>Praxisfälle sind der schnellste Lernbeschleuniger.</li><li>Standards machen Wissen teamfähig.</li><li>Lernen endet nicht mit dem ersten Kurs.</li></ul></div></div>
+            <p>Der Pfad ist ausdrücklich als Entwicklungslogik gedacht, nicht als starres Reifegradmodell. Teams können in einzelnen Bereichen bereits auf Silber arbeiten und in anderen noch auf Bronze stehen. Entscheidend ist nicht die Selbsteinordnung als Etikett, sondern die klare Ableitung des nächsten Lern- und Standardisierungsschritts.</p>
+          </article>
+
+          <article id="t5-4">
+            <h3>5.4 KI verändert Arbeit, aber nicht den Menschen</h3>
+            <p>KI wird Arbeitsabläufe verändern: schneller, strukturierter, häufig auch effizienter. Was sie nicht ersetzt, ist Verantwortung, Urteilskraft und menschliche Kommunikation. Gerade in der Verwaltung bleibt der Kern der Arbeit menschlich: Interessen abwägen, rechtliche Folgen einordnen, verständlich kommunizieren und Vertrauen in Verfahren sichern.</p>
+            <p>KI kann unterstützen, aber nicht die Rolle des verantwortlichen Menschen übernehmen. Die entscheidende Haltung für die kommenden Jahre lautet deshalb: offen für Neues, klar in der Verantwortung. Genau daraus entsteht professionelle Souveränität im Umgang mit KI.</p>
+            <div class="lookahead"><button class="lookahead-toggle" type="button" aria-expanded="false">Auf einen Blick <span>▼</span></button><div class="lookahead-body"><ul><li>KI verändert Prozesse, nicht den Kern verantwortlicher Arbeit.</li><li>Menschliche Urteilskraft bleibt zentral.</li><li>Verantwortung kann nicht delegiert werden.</li><li>Souveräne Nutzung verbindet Offenheit mit professioneller Vorsicht.</li></ul></div></div>
+          </article>
+
+          <section class="interactive-card" id="quiz-teil5">
+            <h3>Wissenscheck: Teil 5</h3>
+            <div class="quiz-card" data-quiz="teil5"></div>
+          </section>
+
+          <article id="t5-vertiefung">
+            <h3>Praxisvertiefung zu Teil 5</h3>
+            <p>Die Vertiefungen in Teil 5 sind auf Verstetigung ausgerichtet: Wie bleibt KI-Nutzung auch nach der Pilotphase wirksam, nachvollziehbar und lernfähig? Der Schwerpunkt liegt auf Teamfähigkeit, Führung und dauerhafter Betriebsqualität.</p>
+            <h4>Vertiefung 5.1: Bereichsstrategie statt Einzelaktion</h4>
+            <p>Einzelne KI-Anwendungen bringen kurzfristige Effekte. Nachhaltiger wird es, wenn Bereiche eine kleine KI-Roadmap erstellen: drei priorisierte Anwendungsfälle, klare Verantwortlichkeiten, definierte Qualitätskriterien und ein Review-Rhythmus. Wenige, klar abgegrenzte Anwendungsfälle erhöhen Umsetzungsquote und Akzeptanz.</p>
+            <h4>Vertiefung 5.2: Selbsteinschätzung als Entwicklungsinstrument</h4>
+            <p>Die Selbsteinschätzung sollte nicht einmalig bleiben. Wiederholen Sie sie nach 8 bis 12 Wochen. So wird sichtbar, welche Lernmaßnahmen wirken und wo weiterhin Unsicherheit besteht. Sinnvoll ist die Kombination aus individuellen Ergebnissen und Teamtrends.</p>
+            <h4>Vertiefung 5.3: Lernpfad im Team verankern</h4>
+            <p>Individuelle Kompetenz reicht nicht aus, wenn Teamstandards fehlen. Sinnvoll ist ein abgestufter Lernpfad mit kurzen Austauschformaten, in denen gute Prompts, Fehlerfälle und Prüfmethoden gemeinsam reflektiert werden. 30-Minuten-Formate im zweiwöchigen Rhythmus sind oft wirksamer als seltene Großschulungen.</p>
+            <h4>Vertiefung 5.4: Menschliche Verantwortung sichtbar halten</h4>
+            <p>Je besser KI funktioniert, desto größer wird die Gefahr der stillen Delegation. Deshalb sollte in sensiblen Prozessen immer dokumentiert werden, wer final geprüft und freigegeben hat und auf welcher Grundlage die Freigabe erfolgte. So wird aus einer formalen Unterschrift eine inhaltlich belastbare Verantwortungsübernahme.</p>
+            <h4>Vertiefung 5.5: Rollenbasierte Kompetenzmatrix einführen</h4>
+            <p>Nicht jede Rolle braucht dieselbe KI-Tiefe. Praktisch ist eine kompakte Matrix mit drei Stufen je Rolle: Anwenden, Prüfen, Verantworten. Fachbearbeitung, Teamleitung und IT erhalten so jeweils passgenaue Lernziele statt unscharfer „alle müssen alles können“-Ansätze.</p>
+            <p>Ein häufiger Umsetzungsfehler ist die rein technische Schulung ohne Rollenkontext. Leitungsfunktionen brauchen zusätzlich ein Governance-Modul für Einsatzgrenzen, Zielkonflikte und Ressourcenpriorisierung.</p>
+            <h4>Vertiefung 5.6: Umsetzungssteuerung mit Monatszielen</h4>
+            <p>Für den Übergang vom Pilot in den Regelbetrieb helfen Monatsziele mit klaren Ergebniskriterien: ein priorisierter Anwendungsfall produktiv, eine verbindliche Prüfroutine etabliert, ein Governance-Artefakt abgeschlossen. Monatsziele sollten Ergebnisversprechen sein, keine bloßen Aktivitätslisten.</p>
+            <p>In größeren Organisationen empfiehlt sich ein monatliches Lenkungsboard mit maximal fünf Kennzahlen und drei priorisierten Maßnahmen. Ein schlanker Rhythmus aus priorisieren, umsetzen und nachhalten ist meist wirksamer als komplexes Reporting ohne klare Entscheidungslogik.</p>
+            <p>Zusätzlich sollte jede Kompetenzstufe an reale Aufgabenbeispiele aus dem jeweiligen Fachprozess gekoppelt werden. Erst dadurch wird sichtbar, wie sich Anwenden, Prüfen und Verantworten im Alltag tatsächlich unterscheiden. Für Leitungsfunktionen ist diese Kopplung besonders wichtig, weil hier Zielkonflikte zwischen Effizienz, Rechtssicherheit und Ressourcensteuerung aktiv moderiert werden müssen.</p>
+          </article>
+
+          <div class="part-nav"><a class="secondary-button" href="#teil-4">← Vorheriges Kapitel</a><a class="button" href="#anhang">Zum Anhang →</a></div>
+        </section>
+
+        <section class="chapter" id="anhang" data-part="anhang">
+          <div class="part-head">
+            <div class="part-index">Anhang</div>
+            <h2>Nachschlagewerk, Ressourcen und Behördenfokus</h2>
+            <p class="lead">Der Anhang ergänzt das Material mit einem kompakten Glossar, verlässlichen Ressourcen und einem fokussierten Blick auf den EU AI Act in der öffentlichen Verwaltung.</p>
+          </div>
+
+          <article id="anhang-a">
+            <h3>A. Glossar</h3>
+            <div class="cards-grid">
+              <div class="mini-card"><h4>AI Act</h4><p>EU-Verordnung für den risikobasierten Einsatz von KI-Systemen.</p></div>
+              <div class="mini-card"><h4>Anonymisierung</h4><p>Entfernung oder Verfremdung von Merkmalen, sodass Personen nicht mehr identifizierbar sind.</p></div>
+              <div class="mini-card"><h4>Bias</h4><p>Systematische Verzerrung in Daten, Modellen oder Ergebnissen.</p></div>
+              <div class="mini-card"><h4>Datensparsamkeit</h4><p>Prinzip, nur die tatsächlich erforderlichen Daten zu verarbeiten.</p></div>
+              <div class="mini-card"><h4>Eingebettete KI</h4><p>KI-Funktionen, die in bestehende Software integriert sind.</p></div>
+              <div class="mini-card"><h4>Ermessensentscheidung</h4><p>Entscheidungsspielraum einer Behörde innerhalb rechtlicher Grenzen.</p></div>
+              <div class="mini-card"><h4>Faktencheck</h4><p>Gezielte Prüfung von Angaben anhand verlässlicher Primärquellen.</p></div>
+              <div class="mini-card"><h4>Generative KI</h4><p>KI-Systeme, die neue Inhalte erzeugen, zum Beispiel Texte oder Bilder.</p></div>
+              <div class="mini-card"><h4>Halluzination</h4><p>Plausibel klingende, aber inhaltlich falsche KI-Aussage.</p></div>
+              <div class="mini-card"><h4>High-Risk-System</h4><p>KI-System mit erhöhtem Risiko und entsprechend strengeren Pflichten.</p></div>
+              <div class="mini-card"><h4>KI-Kompetenz</h4><p>Fähigkeit, KI verantwortungsvoll, kritisch und sicher anzuwenden.</p></div>
+              <div class="mini-card"><h4>Kontextfenster</h4><p>Textmenge, die ein Sprachmodell in einer Antwort gleichzeitig berücksichtigen kann.</p></div>
+              <div class="mini-card"><h4>Large Language Model</h4><p>Großes Sprachmodell, das Token-Wahrscheinlichkeiten aus umfangreichen Trainingsdaten berechnet.</p></div>
+              <div class="mini-card"><h4>Prompt</h4><p>Eingabeanweisung an ein KI-System.</p></div>
+              <div class="mini-card"><h4>Prompt-Kette</h4><p>Abfolge mehrerer Prompts, um komplexe Aufgaben in Teilaufgaben zu zerlegen.</p></div>
+              <div class="mini-card"><h4>Risikoklassen</h4><p>Einteilung von KI-Systemen in verboten, hoch, begrenzt und minimal.</p></div>
+              <div class="mini-card"><h4>Token</h4><p>Kleine Spracheinheit, mit der Large Language Models intern arbeiten.</p></div>
+              <div class="mini-card"><h4>Transparenzpflicht</h4><p>Pflicht, den Einsatz von KI in bestimmten Situationen nachvollziehbar kenntlich zu machen.</p></div>
+            </div>
+          </article>
+
+          <article id="anhang-b">
+            <h3>B. Weiterführende Ressourcen und Lernplattformen</h3>
+            <div class="resource-grid">
+              <div class="resource-card"><h4>Primärquellen Recht und Regulierung</h4><ul><li><a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj" target="_blank" rel="noreferrer">EUR-Lex: Verordnung (EU) 2024/1689</a></li><li><a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" target="_blank" rel="noreferrer">Europäische Kommission: Regulatory framework on AI</a></li><li><a href="https://digital-strategy.ec.europa.eu/en/policies/ai-office" target="_blank" rel="noreferrer">Europäische Kommission: AI Office</a></li></ul></div>
+              <div class="resource-card"><h4>Sicherheit und verantwortungsvolle KI</h4><ul><li><a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" rel="noreferrer">OWASP Top 10 for LLM Applications</a></li><li><a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noreferrer">NIST AI Risk Management Framework</a></li></ul></div>
+              <div class="resource-card"><h4>Lernplattformen und Fortbildung</h4><ul><li><a href="https://ki-campus.org/" target="_blank" rel="noreferrer">KI-Campus</a></li><li><a href="https://www.sicher-im-netz.de/" target="_blank" rel="noreferrer">Deutschland sicher im Netz</a></li><li><a href="https://www.bakoev.bund.de/" target="_blank" rel="noreferrer">BAköV</a></li></ul></div>
+            </div>
+          </article>
+
+          <article id="anhang-c">
+            <h3>C. EU AI Act: Schwerpunkt öffentliche Verwaltung</h3>
+            <p>Die öffentliche Verwaltung sollte den EU AI Act nicht nur als Rechtsrahmen, sondern als Steuerungsinstrument für Qualität, Nachvollziehbarkeit und Grundrechtsschutz nutzen. Operativ entscheidend ist weniger das Schlagwort „Compliance“ als die Frage, wie Verantwortlichkeiten, Freigaben und Prüfpfade sauber in echte Verfahren übersetzt werden.</p>
+            <div class="cards-grid">
+              <div class="mini-card"><h4>Zeitplan</h4><p>2. Februar 2025: erste Regelungen und AI Literacy. 2. August 2025: zusätzliche Pflichten für GPAI-Modelle. 2. August 2026: zentrale Anforderungen für Hochrisiko-Systeme. 2. August 2027: weitere Regelungen.</p></div>
+              <div class="mini-card"><h4>Warum Behörden besonders betroffen sind</h4><p>Behörden arbeiten mit sensiblen Daten, rechtserheblichen Entscheidungen und Grundrechtsbezug. Damit steigt die Wahrscheinlichkeit, dass Systeme als Hochrisiko eingestuft werden.</p></div>
+              <div class="mini-card"><h4>Mindestprogramm für 120 Tage</h4><p>KI-Inventar, Risikoklassifikation, Rollen, Freigabeprozess und Schulungspfad verbindlich aufbauen.</p></div>
+              <div class="mini-card"><h4>Typische Lücken</h4><p>Pilotbetrieb ohne formale Zuständigkeit, unzureichende Dokumentation, keine Eskalationslogik und fehlende Abstimmung zwischen Fachseite und Beschaffung.</p></div>
+            </div>
+            <div class="interactive-card">
+              <h4>C.5 Kompakte Umsetzungs-Checkliste</h4>
+              <div class="checklist-card" data-checklist="eu-ai-act"></div>
+            </div>
+            <p>Für öffentliche Stellen sind insbesondere Art. 26 und Art. 27 praktisch relevant. Das bedeutet: menschliche Aufsicht muss real organisiert sein, und Grundrechtsfolgen in relevanten Fällen müssen vor dem produktiven Einsatz strukturiert geprüft werden. Ein robuster Minimalstandard besteht aus Verfahrensbezug statt reinem Toolblick, doppelter Prüflogik, dokumentierter Stop-Regel, Eskalationspfad mit Frist und quartalsweisem Review.</p>
+            <p>Art. 26 verlangt unter anderem, dass menschliche Aufsicht real organisiert ist und nicht nur formal benannt wird. Zuständige Personen brauchen Kompetenz, Zeit und Entscheidungsspielraum, um Ergebnisse zu prüfen, zu korrigieren oder Prozesse zu stoppen. Art. 27 adressiert die Grundrechts-Folgenabschätzung vor dem Ersteinsatz in relevanten Konstellationen. Für Verwaltungen ist das ein zentraler Qualitätsschritt, weil Verfahren oft direkt in Rechtspositionen von Bürgerinnen und Bürgern eingreifen.</p>
+            <p>Die Folgenabschätzung sollte nicht als reine Formularpflicht behandelt werden, sondern als strukturierte Risikoprüfung mit klaren Maßnahmen: Risiko benennen, Schutzmaßnahme festlegen, Verantwortlichkeit bestimmen und Prüftermin setzen. So wird der AI Act nicht nur erfüllt, sondern als Steuerungsrahmen nutzbar gemacht: nachvollziehbar für Prüfung, handhabbar im Alltag und anschlussfähig für spätere Skalierung.</p>
+          </article>
+
+          <article id="anhang-d">
+            <h3>D. Weiterführende Fachbücher des Autors</h3>
+            <p>Die aktuelle Übersicht der Fachbuchreihe finden Sie unter <a href="https://ki-fachbuecher.de" target="_blank" rel="noreferrer">ki-fachbuecher.de</a>. Die Themen reichen von KI für Business über Agentic AI und Architektur bis hin zu EU AI Act, Compliance und Verwaltungsanwendung.</p>
+          </article>
+
+          <article id="anhang-e">
+            <h3>E. Über den Autor und Fortbildungsangebote</h3>
+            <div class="author-grid footer-card">
+              <div>
+                <p>Robert Meyer begleitet Organisationen bei der praktischen und regulatorisch sicheren Einführung von KI. Der Fokus liegt auf umsetzbaren Arbeitsmodellen statt abstrakter Technologieversprechen.</p>
+                <p>Leistungsfelder: Inhouse-Fortbildungen für öffentliche Verwaltungen, KI-Einführungsworkshops für Fachbereiche, Prompting- und Qualitätsmethodik sowie EU-AI-Act-nahe Umsetzungsbegleitung.</p>
+              </div>
+              <div class="author-side">
+                <h3>Mehr erfahren</h3>
+                <ul>
+                  <li><a href="https://ki-fachbuecher.de" target="_blank" rel="noreferrer">ki-fachbuecher.de</a></li>
+                  <li><a href="https://ai.rm-on.de" target="_blank" rel="noreferrer">ai.rm-on.de</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="footer-tools">
+              <p>Das Material speichert Lernfortschritt, Checklisten und Quizstände lokal im Browser.</p>
+              <button class="text-link-btn" type="button" id="resetAllProgress">Alle Fortschritte zurücksetzen</button>
+            </div>
+          </article>
+
+          <article id="impressum">
+            <h3>Impressum</h3>
+            <p>Robert Meyer – Robert Meyer<br>c/o Online-Impressum.de #4759<br>Europaring 90<br>53757 Sankt Augustin<br>Deutschland</p>
+            <p>E-Mail: <a href="mailto:rm@kostenmanager.net">rm@kostenmanager.net</a><br>Kontaktformular: <a href="https://mein.online-impressum.de/robert-meyer/" target="_blank" rel="noreferrer">mein.online-impressum.de/robert-meyer/</a></p>
+            <p>Verantwortlich für den Inhalt gemäß § 55 Abs. 2 RStV: Robert Meyer, siehe oben</p>
+            <p>Verbraucherstreitbeilegung: Ich bin nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+            <p>Online-Streitbeilegung gemäß Art. 14 ODR-VO: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noreferrer">ec.europa.eu/consumers/odr/</a></p>
+            <p>Haftungsausschluss: Dieses Material stellt keine Rechtsberatung dar. Inhalte zum EU AI Act und zum Datenschutz dienen der Orientierung und ersetzen nicht die individuelle rechtliche Prüfung.</p>
+          </article>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <button class="back-to-top" type="button" id="backToTop">↑ Nach oben</button>
+
+  <script>
+    const quizzes = {
+      teil1: {
+        title: 'Teil 1',
+        questions: [
+          { q: 'Was ist der Hauptunterschied zwischen KI und einfacher Automatisierung?', options: ['KI ist schneller', 'KI lernt aus Daten statt starren Regeln zu folgen', 'KI braucht kein Internet', 'KI ist immer richtig'], correct: 1, explain: 'Der Kern liegt in der datenbasierten Musterableitung und nicht in bloß festen Regeln.' },
+          { q: 'Was bedeutet „Halluzination“ bei KI-Systemen?', options: ['Die KI hat einen Fehler in der Hardware', 'Die KI erzeugt sprachlich überzeugende, aber inhaltlich falsche Aussagen', 'Die KI verweigert die Antwort', 'Die KI wiederholt sich'], correct: 1, explain: 'Halluzinationen sind plausible, aber falsche Aussagen.' },
+          { q: 'Warum klingen LLM-Antworten oft so überzeugend?', options: ['Weil sie immer richtig sind', 'Weil sie auf Wahrheit trainiert wurden', 'Weil sie sprachliche Plausibilität optimieren, nicht Faktentreue', 'Weil sie das Internet durchsuchen'], correct: 2, explain: 'LLMs optimieren Sprachwahrscheinlichkeit und nicht Wahrheitsbeweis.' },
+          { q: 'Was gilt für KI-Ergebnisse in der Verwaltung?', options: ['Sie können direkt übernommen werden', 'Sie sind rechtlich bindend', 'Sie sind Vorschläge und müssen fachlich geprüft werden', 'Sie ersetzen die Sachbearbeitung'], correct: 2, explain: 'Verwaltungsarbeit bleibt fachlich verantwortlich und prüfpflichtig.' }
+        ]
+      },
+      teil2: {
+        title: 'Teil 2',
+        questions: [
+          { q: 'Welche KI nutzen Sie vermutlich bereits täglich?', options: ['Autonomes Fahrzeug', 'Spamfilter und Sprachassistenz in Office-Software', 'Robotergesteuerte Aktenvernichtung', 'Selbstständig entscheidende Sachbearbeitung'], correct: 1, explain: 'Viele KI-Funktionen sind längst in Standardsoftware eingebettet.' },
+          { q: 'Was ist der wichtigste Unterschied zwischen generativer und eingebetteter KI?', options: ['Generative KI ist immer besser', 'Eingebettete KI ist in bestehende Fachsoftware integriert, generative ist ein eigenständiges Tool', 'Eingebettete KI ist verboten', 'Generative KI kostet nichts'], correct: 1, explain: 'Der Unterschied betrifft besonders Prozessintegration, Rechte und Freigabe.' },
+          { q: 'Wann sollten Sie KI für eine Aufgabe NICHT nutzen?', options: ['Wenn die Aufgabe klar definiert ist', 'Wenn Sie das Ergebnis fachlich prüfen können', 'Wenn es um verbindliche Ermessensentscheidungen geht', 'Wenn Sie wenig Zeit haben'], correct: 2, explain: 'Ermessensentscheidungen bleiben menschlich und dürfen nicht delegiert werden.' },
+          { q: 'Was macht KI in der Verwaltung besonders nützlich?', options: ['Sie ersetzt Führungskräfte', 'Sie beschleunigt Erstentwürfe und Strukturierung bei hoher Textlast', 'Sie macht Datenschutz überflüssig', 'Sie eliminiert Fehler vollständig'], correct: 1, explain: 'Der größte Hebel liegt bei Entwurf, Strukturierung und Verdichtung.' }
+        ]
+      },
+      teil3: {
+        title: 'Teil 3',
+        questions: [
+          { q: 'Welche Daten dürfen NICHT ohne Weiteres in ein KI-Tool eingegeben werden?', options: ['Allgemeine Informationen über Öffnungszeiten', 'Personenbezogene Daten mit Aktenbezug', 'Öffentlich verfügbare Gesetzestexte', 'Allgemeine Formulierungsvorschläge'], correct: 1, explain: 'Personenbezug plus Verfahrenskontext ist ein klarer Risikofall.' },
+          { q: 'Was bedeutet Anonymisierung in der Praxis?', options: ['Nur den Namen entfernen', 'Direkte UND indirekte Identifikatoren entfernen oder verallgemeinern', 'Den Text kürzer machen', 'Eine andere Schriftart verwenden'], correct: 1, explain: 'Auch indirekte Identifikatoren können Personen erkennbar machen.' },
+          { q: 'Was regelt der EU AI Act primär?', options: ['Welche KI-Tools kostenlos sein müssen', 'Anforderungen an KI-Systeme basierend auf ihrem Risiko', 'Dass KI in der Verwaltung verboten ist', 'Dass alle Mitarbeiter KI nutzen müssen'], correct: 1, explain: 'Die Logik des AI Act ist risikobasiert.' },
+          { q: 'Was ist der erste Schritt vor jeder KI-Nutzung laut Checkliste?', options: ['Das beste Tool googeln', 'Prüfen ob das Tool dienstlich freigegeben ist', 'Einen langen Prompt schreiben', 'Das Ergebnis an alle weiterleiten'], correct: 1, explain: 'Freigabe vor Nutzung ist einer der zentralen Schutzpunkte.' },
+          { q: 'Was tun Sie bei einem Grenzfall?', options: ['Einfach ausprobieren', 'KI komplett vermeiden', 'Den Fall über den definierten Eskalationspfad klären', 'Nichts dokumentieren'], correct: 2, explain: 'Grenzfälle brauchen Klärung, nicht Improvisation.' }
+        ]
+      },
+      teil4: {
+        title: 'Teil 4',
+        questions: [
+          { q: 'Welche fünf Bausteine hat ein guter Prompt?', options: ['Wer, Was, Wann, Wo, Warum', 'Rolle, Kontext, Aufgabe, Format, Einschränkungen', 'Bitte, Danke, Höflichkeit, Länge, Sprache', 'Titel, Text, Bild, Link, Hashtag'], correct: 1, explain: 'Diese fünf Bausteine steuern Ziel, Struktur und Grenzen.' },
+          { q: 'Was ist der Hauptunterschied zwischen einem schlechten und einem guten Prompt?', options: ['Die Länge', 'Präzise Steuerung von Ziel, Struktur und Grenzen', 'Die Verwendung von Fachbegriffen', 'Ob man „bitte“ sagt'], correct: 1, explain: 'Präzision ist wichtiger als Textmenge.' },
+          { q: 'Was bedeutet „iteratives Prompting“?', options: ['Den gleichen Prompt wiederholt senden', 'Das Ergebnis schrittweise durch Folgeprompts verbessern', 'Mehrere KI-Tools gleichzeitig nutzen', 'Den Prompt in eine andere Sprache übersetzen'], correct: 1, explain: 'Iteration ist ein strukturierter Verbesserungsprozess.' },
+          { q: 'Was ist der wichtigste Prüfschritt nach einem KI-Ergebnis?', options: ['Rechtschreibprüfung', 'Faktencheck: Stimmen Namen, Zahlen, Rechtsbezüge?', 'Ob der Text lang genug ist', 'Ob die KI sich bedankt hat'], correct: 1, explain: 'Fakten, Normen und Zahlen sind der kritischste Prüffokus.' }
+        ]
+      },
+      teil5: {
+        title: 'Teil 5',
+        questions: [
+          { q: 'Was bedeutet Bronze-Niveau im KI-Kompetenzpfad?', options: ['Man kann KI programmieren', 'Man nutzt KI sicher mit konsequentem Faktencheck', 'Man hat drei KI-Kurse besucht', 'Man braucht keine Hilfe mehr'], correct: 1, explain: 'Bronze steht für verlässlichen Einstieg und sichere Routine.' },
+          { q: 'Was ist das Ziel der Gold-Stufe?', options: ['Jede Aufgabe mit KI erledigen', 'Andere beim Aufbau stabiler KI-Prozesse unterstützen und Standards setzen', 'KI-Systeme selbst entwickeln', 'Alle Checklisten auswendig können'], correct: 1, explain: 'Gold heißt Multiplikation und Teamfähigkeit.' },
+          { q: 'Was verändert KI laut dem Buch NICHT?', options: ['Arbeitsgeschwindigkeit', 'Aufgabenverteilung', 'Den Menschen selbst und seine Verantwortung', 'Textqualität'], correct: 2, explain: 'Verantwortung und Urteilskraft bleiben menschlich.' }
+        ]
+      }
+    };
+
+    const checklistData = {
+      'ki-task-fit': [
+        'Ist das Ziel der Aufgabe klar formuliert?',
+        'Enthält die Aufgabe sensible oder personenbezogene Daten?',
+        'Liegt für das geplante Tool eine dienstliche Freigabe vor?',
+        'Ist die Aufgabe ein Entwurf/Assistenzfall und keine verbindliche Entscheidung?',
+        'Kann ich das Ergebnis fachlich prüfen?',
+        'Ist genug Zeit für Fakten- und Quellenprüfung eingeplant?',
+        'Ist dokumentiert, wie das Ergebnis entstanden ist?'
+      ],
+      'phase-vor-list': [
+        'Tool ist dienstlich freigegeben',
+        'Aufgabe ist klar definiert',
+        'Daten sind zulässig oder anonymisiert',
+        'Gewünschtes Ausgabeformat ist festgelegt'
+      ],
+      'phase-waehrend-list': [
+        'Prompt enthält keine sensiblen Details',
+        'Ergebnisse werden nicht ungeprüft übernommen',
+        'Fakten, Normen und Zahlen werden markiert'
+      ],
+      'phase-nach-list': [
+        'Fakten wurden verifiziert',
+        'Ergebnis wurde fachlich angepasst',
+        'KI-Mitwirkung wurde intern dokumentiert (falls erforderlich)',
+        'Endfassung ist freigegeben'
+      ],
+      'eu-ai-act': [
+        'Vollständiges KI-Inventar vorhanden',
+        'Für jede Anwendung liegt eine Risikoeinordnung vor',
+        'Rollen und Verantwortlichkeiten sind schriftlich festgelegt',
+        'Freigabe- und Prüfprozess ist verbindlich eingeführt',
+        'Schulungsnachweise für betroffene Rollen liegen vor',
+        'Incident- und Eskalationsverfahren ist definiert',
+        'Regelmäßiger Governance-Review ist terminiert'
+      ]
+    };
+
+    const promptTemplates = [
+      { title: '1) E-Mail an Bürger formulieren', text: 'Formulieren Sie eine freundliche E-Mail zu [Anlass]. Struktur: Betreff, Anlass, nächste Schritte, Kontakt.' },
+      { title: '2) Fachtext zusammenfassen', text: 'Fassen Sie den Text in 5 Stichpunkten zusammen: Problem, Rechtsbezug, Risiken, Optionen, Empfehlung.' },
+      { title: '3) Leichte Sprache', text: 'Übertragen Sie den folgenden Text in leicht verständliche Sprache. Kurze Sätze, keine Fachwörter ohne Erklärung.' },
+      { title: '4) Protokoll aus Notizen', text: 'Erstellen Sie aus diesen Notizen ein strukturiertes Protokoll mit Beschlüssen und To-dos.' },
+      { title: '5) Stellungnahme strukturieren', text: 'Erstellen Sie eine Gliederung für eine fachliche Stellungnahme mit Kernargumenten und Prüfpunkten.' },
+      { title: '6) Termineinladung', text: 'Formulieren Sie eine sachliche Einladung mit Anlass, Agenda und organisatorischen Hinweisen.' },
+      { title: '7) Sachverhalt erklären', text: 'Erklären Sie den Sachverhalt für neue Mitarbeitende in drei Abschnitten: Ausgangslage, Prozess, Entscheidungspfad.' },
+      { title: '8) Vergleich erstellen', text: 'Vergleichen Sie Option A und B in einer Tabelle mit Kriterien, Chancen, Risiken, Aufwand.' },
+      { title: '9) Checkliste generieren', text: 'Erstellen Sie eine 10-Punkte-Checkliste für [Vorgang], geordnet nach vor/während/nach.' },
+      { title: '10) Feedback formulieren', text: 'Formulieren Sie konstruktives, sachliches Feedback zu diesem Entwurf mit 3 Stärken und 3 Verbesserungspunkten.' }
+    ];
+
+    const selfStatements = [
+      'Ich kann Aufgaben identifizieren, die sich für KI-Unterstützung eignen.',
+      'Ich formuliere Prompts mit klarer Struktur.',
+      'Ich erkenne typische Halluzinationssignale.',
+      'Ich prüfe Fakten systematisch vor Übernahme.',
+      'Ich beachte Datenschutz und interne Freigaben sicher.',
+      'Ich kann Ergebnisse für unterschiedliche Zielgruppen anpassen.',
+      'Ich nutze Iterationen, um Ergebnisse zu verbessern.',
+      'Ich dokumentiere KI-Nutzung nachvollziehbar.',
+      'Ich kenne die Grundlogik des EU AI Act für meinen Bereich.',
+      'Ich kann Kolleginnen und Kollegen beim Einstieg unterstützen.'
+    ];
+
+    const wizardNodes = {
+      start: { q: 'Enthält die Eingabe personenbezogene Daten?', hint: 'Starten Sie mit der Frage nach Personenbezug.', yes: 'anon', no: 'approved' },
+      anon: { q: 'Können die Daten vollständig anonymisiert werden?', hint: 'Denken Sie an direkte und indirekte Identifikatoren.', yes: 'approved', no: 'stop-red' },
+      approved: { q: 'Ist das Tool dienstlich freigegeben?', hint: 'Freigabestatus vor jeder Nutzung prüfen.', yes: 'reviewable', no: 'stop-orange-1' },
+      reviewable: { q: 'Ist der Zweck klar und das Ergebnis fachlich prüfbar?', hint: 'Prüfbarkeit entscheidet über sichere Nutzung.', yes: 'ok', no: 'stop-orange-2' },
+      'stop-red': { result: 'Eingabe nicht zulässig. Klären Sie die Freigabe mit Datenschutz.', tone: 'red' },
+      'stop-orange-1': { result: 'Tool nicht freigegeben. Prüfen Sie Alternativen oder beantragen Sie Freigabe.', tone: 'orange' },
+      'stop-orange-2': { result: 'Präzisieren Sie den Auftrag, bevor Sie die KI nutzen.', tone: 'orange' },
+      ok: { result: 'Eingabe zulässig. Dokumentieren Sie die Nutzung und prüfen Sie das Ergebnis.', tone: 'green' }
+    };
+
+    function storageKey(key) { return `ki-verwaltung:${key}`; }
+
+    function renderQuizzes() {
+      document.querySelectorAll('[data-quiz]').forEach((container) => {
+        const quizId = container.dataset.quiz;
+        const data = quizzes[quizId];
+        if (!data) return;
+        let html = '';
+        data.questions.forEach((item, index) => {
+          html += `\n            <section class="question-card" data-question="${index}">\n              <strong>${index + 1}. ${item.q}</strong>\n              <div class="answer-list">${item.options.map((opt, optIndex) => `<button class="answer-btn" type="button" data-index="${optIndex}">${opt}</button>`).join('')}</div>\n              <div class="quiz-feedback" aria-live="polite"></div>\n            </section>`;
+        });
+        html += '<div class="quiz-result" aria-live="polite"></div>';
+        container.innerHTML = html;
+
+        const rawState = JSON.parse(localStorage.getItem(storageKey(`quiz:${quizId}`)) || '{}');
+        const state = {};
+        Object.entries(rawState).forEach(([key, value]) => {
+          if (typeof value === 'boolean') state[key] = { correct: value, selectedIndex: null };
+          else state[key] = value;
+        });
+        const questions = Array.from(container.querySelectorAll('.question-card'));
+
+        function updateResult() {
+          const result = container.querySelector('.quiz-result');
+          const answered = Object.keys(state).length;
+          if (answered !== data.questions.length) return;
+          const score = Object.values(state).filter((entry) => {
+            if (typeof entry === 'boolean') return entry;
+            return !!entry?.correct;
+          }).length;
+          let label = `${score} von ${data.questions.length} richtig`;
+          if (score === data.questions.length) label += ' — Hervorragend!';
+          else if (score >= data.questions.length - 1) label += ' — Sehr solide.';
+          else label += ' — Noch einmal die Kernpunkte prüfen.';
+          result.textContent = label;
+          result.classList.add('visible');
+          localStorage.setItem(storageKey(`quiz:${quizId}`), JSON.stringify(state));
+        }
+
+        questions.forEach((questionEl, qIndex) => {
+          const feedback = questionEl.querySelector('.quiz-feedback');
+          const buttons = Array.from(questionEl.querySelectorAll('.answer-btn'));
+
+          function lockQuestion(selectedIndex) {
+            const item = data.questions[qIndex];
+            buttons.forEach((btn, btnIndex) => {
+              btn.disabled = true;
+              if (btnIndex === item.correct) btn.classList.add('correct');
+              if (btnIndex === selectedIndex && btnIndex !== item.correct) btn.classList.add('wrong');
+            });
+            feedback.textContent = item.explain;
+          }
+
+          buttons.forEach((btn) => {
+            btn.addEventListener('click', () => {
+              if (typeof state[qIndex] !== 'undefined') return;
+              const selectedIndex = Number(btn.dataset.index);
+              const correct = selectedIndex === data.questions[qIndex].correct;
+              state[qIndex] = { correct, selectedIndex };
+              localStorage.setItem(storageKey(`quiz:${quizId}`), JSON.stringify(state));
+              questionEl.dataset.selected = String(selectedIndex);
+              lockQuestion(selectedIndex);
+              updateResult();
+              updateLearningProgress();
+            });
+          });
+
+          if (state[qIndex] && typeof state[qIndex].selectedIndex === 'number') {
+            const storedSelected = Number(state[qIndex].selectedIndex);
+            lockQuestion(storedSelected);
+          } else if (state[qIndex] && state[qIndex].correct === true) {
+            lockQuestion(data.questions[qIndex].correct);
+          }
+        });
+
+        updateResult();
+      });
+    }
+
+    function renderChecklists() {
+      document.querySelectorAll('[data-checklist]').forEach((container) => {
+        const id = container.dataset.checklist;
+        const items = checklistData[id];
+        if (!items) return;
+        const state = JSON.parse(localStorage.getItem(storageKey(`checklist:${id}`)) || '[]');
+        container.innerHTML = `
+          <div class="checklist-progress"><span class="status">0 von ${items.length} erledigt</span><span class="badge">Checkliste</span></div>
+          <div class="checklist-items"></div>
+          <button class="reset-btn" type="button">Checkliste zurücksetzen</button>`;
+        const wrap = container.querySelector('.checklist-items');
+        items.forEach((item, index) => {
+          const checked = !!state[index];
+          const row = document.createElement('label');
+          row.className = `check-item${checked ? ' done' : ''}`;
+          row.innerHTML = `<input type="checkbox" ${checked ? 'checked' : ''}><span>${item}</span>`;
+          const input = row.querySelector('input');
+          input.addEventListener('change', () => {
+            state[index] = input.checked;
+            row.classList.toggle('done', input.checked);
+            localStorage.setItem(storageKey(`checklist:${id}`), JSON.stringify(state));
+            update();
+            updateLearningProgress();
+          });
+          wrap.appendChild(row);
+        });
+        const status = container.querySelector('.status');
+        const reset = container.querySelector('.reset-btn');
+        function update() {
+          const count = state.filter(Boolean).length;
+          status.textContent = `${count} von ${items.length} erledigt`;
+        }
+        reset.addEventListener('click', () => {
+          state.length = 0;
+          localStorage.removeItem(storageKey(`checklist:${id}`));
+          renderChecklists();
+          updateLearningProgress();
+        });
+        update();
+      });
+    }
+
+    function setupWizard() {
+      const question = document.getElementById('wizardQuestion');
+      const hint = document.getElementById('wizardHint');
+      const result = document.getElementById('wizardResult');
+      const buttons = document.getElementById('wizardButtons');
+      const reset = document.getElementById('wizardReset');
+      let current = 'start';
+      let path = ['start'];
+
+      function paintMap() {
+        document.querySelectorAll('.wizard-node').forEach((node) => {
+          node.classList.remove('active', 'result-green', 'result-orange', 'result-red');
+        });
+        document.querySelectorAll('.wizard-edge').forEach((edge) => edge.classList.remove('active'));
+
+        const sequenceEdges = [];
+        for (let i = 0; i < path.length - 1; i += 1) {
+          const from = path[i];
+          const to = path[i + 1];
+          const pair = `${from}->${to}`;
+          const edgeId = {
+            'start->anon': 'edge-start-anon',
+            'start->approved': 'edge-start-approved',
+            'anon->stop-red': 'edge-anon-stopred',
+            'anon->approved': 'edge-anon-approved',
+            'approved->stop-orange-1': 'edge-approved-stoporange1',
+            'approved->reviewable': 'edge-approved-reviewable',
+            'reviewable->stop-orange-2': 'edge-reviewable-stoporange2',
+            'reviewable->ok': 'edge-reviewable-ok'
+          }[pair];
+          if (edgeId) sequenceEdges.push(edgeId);
+        }
+        sequenceEdges.forEach((id) => document.getElementById(id)?.classList.add('active'));
+
+        const currentNodeId = {
+          start: 'node-start',
+          anon: 'node-anon',
+          approved: 'node-approved',
+          reviewable: 'node-reviewable',
+          'stop-red': 'node-stop-red',
+          'stop-orange-1': 'node-stop-orange-1',
+          'stop-orange-2': 'node-stop-orange-2',
+          ok: 'node-ok'
+        }[current];
+        if (currentNodeId) {
+          const node = document.getElementById(currentNodeId);
+          if (node) {
+            const tone = wizardNodes[current]?.tone;
+            node.classList.add(tone ? `result-${tone}` : 'active');
+          }
+        }
+      }
+
+      function render() {
+        const node = wizardNodes[current];
+        if (node.result) {
+          question.textContent = 'Ergebnis';
+          hint.textContent = 'Bewerten Sie den Fall anhand des Ergebnisses und dokumentieren Sie die Entscheidung.';
+          result.textContent = node.result;
+          result.className = `wizard-result visible ${node.tone}`;
+          buttons.querySelectorAll('[data-answer]').forEach((btn) => btn.style.display = 'none');
+        } else {
+          question.textContent = node.q;
+          hint.textContent = node.hint;
+          result.className = 'wizard-result';
+          result.textContent = '';
+          buttons.querySelectorAll('[data-answer]').forEach((btn) => btn.style.display = 'inline-flex');
+        }
+        paintMap();
+      }
+
+      buttons.addEventListener('click', (event) => {
+        const btn = event.target.closest('[data-answer]');
+        if (!btn) return;
+        const node = wizardNodes[current];
+        current = btn.dataset.answer === 'ja' ? node.yes : node.no;
+        path.push(current);
+        render();
+      });
+
+      reset.addEventListener('click', () => { current = 'start'; path = ['start']; render(); });
+      render();
+    }
+
+    function renderPromptCards() {
+      const host = document.getElementById('promptCards');
+      if (!host) return;
+      host.innerHTML = promptTemplates.map((item, index) => `
+        <article class="prompt-card">
+          <h4>${item.title}</h4>
+          <div class="prompt-box" id="prompt-${index}">${item.text}</div>
+          <button class="copy-btn" type="button" data-copy="#prompt-${index}">In Zwischenablage kopieren</button>
+          <textarea class="prompt-edit" aria-label="${item.title} bearbeiten">${item.text}</textarea>
+        </article>`).join('');
+    }
+
+    function setupCopyButtons() {
+      document.addEventListener('click', async (event) => {
+        const button = event.target.closest('.copy-btn');
+        if (!button) return;
+        let text = '';
+        if (button.dataset.copyTarget === 'prev') {
+          text = button.previousElementSibling?.textContent?.trim() || '';
+        } else if (button.dataset.copy) {
+          const el = document.querySelector(button.dataset.copy);
+          text = el ? el.textContent.trim() : '';
+        } else if (button.id === 'copyBuiltPromptBtn') {
+          text = document.getElementById('builtPrompt').textContent.trim();
+        }
+        if (!text) return;
+        try {
+          await navigator.clipboard.writeText(text);
+          const old = button.textContent;
+          button.textContent = 'Kopiert';
+          setTimeout(() => { button.textContent = old; }, 1200);
+        } catch (_) {}
+      });
+    }
+
+    function setupPromptBuilder() {
+      const btn = document.getElementById('buildPromptBtn');
+      if (!btn) return;
+      const output = document.getElementById('builtPrompt');
+      btn.addEventListener('click', () => {
+        const built = [
+          ['Rolle', document.getElementById('roleField').value],
+          ['Kontext', document.getElementById('contextField').value],
+          ['Aufgabe', document.getElementById('taskField').value],
+          ['Gewünschtes Format', document.getElementById('formatField').value],
+          ['Einschränkungen / No-Gos', document.getElementById('limitsField').value]
+        ].filter(([, value]) => value.trim()).map(([label, value]) => `${label}: ${value.trim()}`).join('\n');
+        output.textContent = built || 'Bitte füllen Sie mindestens ein Feld aus.';
+      });
+    }
+
+    function renderSelfAssessment() {
+      const host = document.getElementById('selfAssessment');
+      if (!host) return;
+      const state = JSON.parse(localStorage.getItem(storageKey('self-assessment')) || '[]');
+      host.innerHTML = `
+        <div class="score-shell"><span>Live-Punktzahl</span><span id="scoreValue">0 / 50</span></div>
+        <div class="score-bar"><div class="score-fill" id="scoreFill"></div></div>
+        <div class="cards-grid" id="ratingsWrap"></div>
+        <div class="hero-actions">
+          <button class="wizard-btn" type="button" id="evaluateSelfBtn">Auswerten</button>
+          <button class="copy-btn" type="button" id="copySelfBtn">Ergebnis als Text kopieren</button>
+        </div>
+        <div class="self-result" id="selfResult"></div>`;
+      const wrap = host.querySelector('#ratingsWrap');
+      selfStatements.forEach((statement, index) => {
+        const value = state[index] || 0;
+        const row = document.createElement('div');
+        row.className = 'rating-item';
+        row.innerHTML = `<strong>${index + 1}) ${statement}</strong><div class="hero-footnote">1 = trifft nicht zu · 5 = trifft vollständig zu</div><div class="answer-list">${[1,2,3,4,5].map((n) => `<button class="answer-btn${value === n ? ' correct' : ''}" type="button" data-value="${n}">${n}</button>`).join('')}</div>`;
+        row.querySelectorAll('[data-value]').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            state[index] = Number(btn.dataset.value);
+            localStorage.setItem(storageKey('self-assessment'), JSON.stringify(state));
+            renderSelfAssessment();
+          });
+        });
+        wrap.appendChild(row);
+      });
+      const total = state.reduce((sum, item) => sum + (Number(item) || 0), 0);
+      document.getElementById('scoreValue').textContent = `${total} / 50`;
+      document.getElementById('scoreFill').style.width = `${(total / 50) * 100}%`;
+      const result = document.getElementById('selfResult');
+      const evaluate = document.getElementById('evaluateSelfBtn');
+      evaluate.addEventListener('click', () => {
+        let cls = 'blue';
+        let text = 'Einstiegsebene – Fokus auf Grundlagen und sichere Routine.';
+        if (total >= 40) { cls = 'green'; text = 'Fortgeschrittene Ebene – Fokus auf Multiplikation und Teambefähigung.'; }
+        else if (total >= 25) { cls = 'petrol'; text = 'Solide Anwendungsebene – Fokus auf Qualität und Standardisierung.'; }
+        result.className = `self-result visible ${cls}`;
+        result.textContent = `${total} Punkte. ${text}`;
+        localStorage.setItem(storageKey('self-assessment-result'), result.textContent);
+        updateLearningProgress();
+      });
+      document.getElementById('copySelfBtn').addEventListener('click', async () => {
+        const text = localStorage.getItem(storageKey('self-assessment-result')) || `${total} Punkte – noch nicht ausgewertet.`;
+        try { await navigator.clipboard.writeText(text); } catch (_) {}
+      });
+    }
+
+    function setupLevelPath() {
+      const key = storageKey('current-level');
+      const current = localStorage.getItem(key);
+      const cards = document.querySelectorAll('.level-card');
+      function paint(selected) {
+        const order = ['bronze', 'silber', 'gold'];
+        cards.forEach((card) => {
+          const level = card.dataset.level;
+          card.classList.toggle('is-current', level === selected);
+          card.classList.toggle('is-complete', order.indexOf(level) <= order.indexOf(selected));
+        });
+      }
+      if (current) paint(current);
+      cards.forEach((card) => {
+        const activate = () => {
+          const level = card.dataset.level;
+          localStorage.setItem(key, level);
+          paint(level);
+        };
+        card.addEventListener('click', activate);
+        card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); } });
+      });
+    }
+
+    function setupLookahead() {
+      document.querySelectorAll('.lookahead-toggle').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const card = btn.closest('.lookahead');
+          const open = card.classList.toggle('is-open');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      });
+    }
+
+    function setupTabs() {
+      document.querySelectorAll('.tablist').forEach((tablist) => {
+        tablist.addEventListener('click', (event) => {
+          const btn = event.target.closest('.tab-btn');
+          if (!btn) return;
+          const parent = tablist.parentElement;
+          tablist.querySelectorAll('.tab-btn').forEach((item) => {
+            item.classList.toggle('is-active', item === btn);
+            item.setAttribute('aria-selected', item === btn ? 'true' : 'false');
+          });
+          parent.querySelectorAll('.tab-panel').forEach((panel) => panel.classList.toggle('is-active', panel.id === btn.dataset.target));
+        });
+      });
+    }
+
+    function setupTableRows() {
+      document.querySelectorAll('.table-row').forEach((row) => {
+        const toggle = () => row.classList.toggle('is-open');
+        row.addEventListener('click', toggle);
+        row.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+        });
+      });
+    }
+
+    function setupNavigationTracking() {
+      const sections = Array.from(document.querySelectorAll('section.chapter, #vorwort, #curriculum, #inhaltsverzeichnis, #einleitung'));
+      const links = Array.from(document.querySelectorAll('.nav-link, .top-tab'));
+      const backToTop = document.getElementById('backToTop');
+      const readKey = storageKey('read-items');
+      const tracked = Array.from(document.querySelectorAll('.hero[id], .section-card[id], .chapter article[id], .interactive-card[id], #anhang article[id]'));
+      const readItems = new Set(JSON.parse(localStorage.getItem(readKey) || '[]'));
+      const groups = {
+        intro: ['start', 'autor-start', 'vorwort', 'curriculum', 'inhaltsverzeichnis', 'einleitung'],
+        teil1: ['teil-1'], teil2: ['teil-2'], teil3: ['teil-3'], teil4: ['teil-4'], teil5: ['teil-5'], anhang: ['anhang']
+      };
+
+      function setActive(id) {
+        links.forEach((link) => {
+          const active = link.getAttribute('href') === `#${id}` || (link.getAttribute('href')?.startsWith(`#${id}`));
+          link.classList.toggle('is-active', active);
+        });
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActive(visible.target.id);
+      }, { rootMargin: '-30% 0px -50% 0px', threshold: [0.1, 0.25, 0.5] });
+
+      sections.forEach((section) => observer.observe(section));
+
+      const chapterObserver = new IntersectionObserver((entries) => {
+        const visibleIds = entries.filter((entry) => entry.isIntersecting).map((entry) => entry.target.id);
+        Object.entries(groups).forEach(([group, ids]) => {
+          const dot = document.querySelector(`[data-group="${group}"]`);
+          if (!dot) return;
+          const hit = ids.some((id) => visibleIds.includes(id));
+          const below = ids.some((id) => window.scrollY > (document.getElementById(id)?.offsetTop || 0) + 120);
+          dot.className = 'progress-dot';
+          if (hit) dot.classList.add('half');
+          if (below) dot.classList.add('full');
+        });
+      }, { rootMargin: '-20% 0px -70% 0px', threshold: 0.1 });
+      document.querySelectorAll('#teil-1, #teil-2, #teil-3, #teil-4, #teil-5, #anhang').forEach((node) => chapterObserver.observe(node));
+
+      const readObserver = new IntersectionObserver((entries) => {
+        let changed = false;
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.65 && entry.target.id && !readItems.has(entry.target.id)) {
+            readItems.add(entry.target.id);
+            changed = true;
+          }
+        });
+        if (changed) {
+          localStorage.setItem(readKey, JSON.stringify(Array.from(readItems)));
+          updateLearningProgress();
+        }
+      }, { threshold: [0.65, 0.8] });
+      tracked.forEach((node) => readObserver.observe(node));
+
+      function updateProgress() {
+        backToTop.classList.toggle('visible', window.scrollY > 300);
+      }
+      updateProgress();
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    }
+
+    function updateLearningProgress() {
+      const readItems = new Set(JSON.parse(localStorage.getItem(storageKey('read-items')) || '[]'));
+      const trackedIds = Array.from(document.querySelectorAll('.hero[id], .section-card[id], .chapter article[id], .interactive-card[id], #anhang article[id]'))
+        .map((node) => node.id)
+        .filter(Boolean);
+      const checklistIds = Object.keys(checklistData);
+      const quizIds = Object.keys(quizzes);
+      let completedChecks = 0;
+      checklistIds.forEach((id) => {
+        const state = JSON.parse(localStorage.getItem(storageKey(`checklist:${id}`)) || '[]');
+        if (state.length && checklistData[id].every((_, idx) => !!state[idx])) completedChecks += 1;
+      });
+      let completedQuizzes = 0;
+      quizIds.forEach((id) => {
+        const state = JSON.parse(localStorage.getItem(storageKey(`quiz:${id}`)) || '{}');
+        if (Object.keys(state).length === quizzes[id].questions.length) completedQuizzes += 1;
+      });
+      const selfResult = localStorage.getItem(storageKey('self-assessment-result')) ? 1 : 0;
+      const totalUnits = trackedIds.length + checklistIds.length + quizIds.length + 1;
+      const doneUnits = trackedIds.filter((id) => readItems.has(id)).length + completedChecks + completedQuizzes + selfResult;
+      const percent = totalUnits ? Math.round((doneUnits / totalUnits) * 100) : 0;
+      const bar = document.getElementById('globalProgress');
+      if (bar) bar.style.width = `${percent}%`;
+    }
+
+    function setupMenu() {
+      const toggle = document.querySelector('.menu-toggle');
+      const sidebar = document.getElementById('sidebarNav');
+      const overlay = document.getElementById('mobileOverlay');
+      if (!toggle || !sidebar || !overlay) return;
+
+      function setMenu(open) {
+        document.body.classList.toggle('menu-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        overlay.hidden = !open;
+      }
+
+      toggle.addEventListener('click', () => {
+        setMenu(!document.body.classList.contains('menu-open'));
+      });
+
+      overlay.addEventListener('click', () => setMenu(false));
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && document.body.classList.contains('menu-open')) {
+          setMenu(false);
+        }
+      });
+
+      sidebar.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          if (window.innerWidth <= 1180) setMenu(false);
+        });
+      });
+    }
+
+    function setupGlobalReset() {
+      const trigger = document.getElementById('resetAllProgress');
+      if (!trigger) return;
+      trigger.addEventListener('click', () => {
+        Object.keys(localStorage).forEach((key) => {
+          if (key.startsWith('ki-verwaltung:')) localStorage.removeItem(key);
+        });
+        window.location.hash = '#start';
+        window.location.reload();
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setupMenu();
+      setupLookahead();
+      setupTabs();
+      setupTableRows();
+      renderQuizzes();
+      renderChecklists();
+      renderPromptCards();
+      setupCopyButtons();
+      setupPromptBuilder();
+      renderSelfAssessment();
+      setupWizard();
+      setupLevelPath();
+      setupNavigationTracking();
+      setupGlobalReset();
+      updateLearningProgress();
+    });
+  </script>
+</body>
+</html>
