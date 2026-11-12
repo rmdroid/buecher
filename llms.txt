@@ -2,34 +2,40 @@
 
 > Fachbücher über Künstliche Intelligenz von Robert Meyer, KI-Berater, Fachautor und Dozent mit über 15 Jahren Erfahrung in Digitalisierung und KI-Transformation im Mittelstand und in der öffentlichen Verwaltung. Die Bücher sind auf Deutsch und bei Amazon erhältlich.
 
-Die Startseite ordnet die Bücher nach fünf Fragen aus der Praxis. Zu jeder Frage gibt es ein Einstiegsbuch und zwei vertiefende Titel.
+Die Bücher sind nach fünf Fragen aus der Praxis geordnet. Zu jeder Frage gibt es ein Einstiegsbuch und zwei vertiefende Titel. Jedes Buch hat eine eigene Seite.
 
-## I. Dürfen wir das? (EU AI Act, Datenschutz, Verwaltung)
-- [Dürfen wir das?](https://ki-fachbuecher.de/verwaltung/): KI in der öffentlichen Verwaltung sicher nutzen und verantwortlich einführen (2026)
-- [EU AI Act Readiness für KMU](https://amzn.eu/d/06i2a1wU): Compliance-Leitfaden für kleine und mittlere Unternehmen
-- [Die KI-Lüge](https://ki-fachbuecher.de/leseproben/die_ki_luege.html): Die unbequeme Wahrheit über KI im Business (Leseprobe)
+## I. [Dürfen wir das?](https://ki-fachbuecher.de/fragen/eu-ai-act-und-datenschutz/) (EU AI Act, Datenschutz, Verwaltung)
+- [Dürfen wir das?](https://ki-fachbuecher.de/buecher/duerfen-wir-das/): Der Prüfweg von der ersten Idee bis zur Freigabe, mit Vorlagen für den Alltag.
+- [EU AI Act Readiness für KMU](https://ki-fachbuecher.de/buecher/eu-ai-act-readiness/): Der Compliance-Leitfaden für kleine und mittlere Unternehmen: Pflichten erkennen, Risiken einstufen, Nachweise aufbauen.
+- [Die KI-Lüge](https://ki-fachbuecher.de/buecher/die-ki-luege/): Die unbequeme Wahrheit über KI im Business: gescheiterte Projekte, ihre Mechanismen und was stattdessen funktioniert.
+  - [Leseprobe](https://ki-fachbuecher.de/leseproben/die_ki_luege.html)
 
-## II. Was kann KI wirklich? (Agenten, Modelle, Grenzen)
-- [Agentic AI 2.0](https://ki-fachbuecher.de/leseproben/agent20.html): Vom Prototyp zum Produktivsystem (Leseprobe)
-- [Kleine KI, großer Nutzen](https://amzn.eu/d/06Z8cyGy): Small Language Models im Mittelstand
-- [Skills > Workflows](https://ki-fachbuecher.de/leseproben/skills.html): Claude Code und MCP statt klassischer Automations-Strecken (Leseprobe)
+## II. [Was kann KI wirklich?](https://ki-fachbuecher.de/fragen/was-kann-ki/) (Agenten, Modelle, Grenzen)
+- [Agentic AI 2.0](https://ki-fachbuecher.de/buecher/agentic-ai-2/): Was nach dem Pilotprojekt kommt: Kosten, Ausfälle, Grenzen.
+  - [Leseprobe](https://ki-fachbuecher.de/leseproben/agent20.html)
+- [Kleine KI, großer Nutzen](https://ki-fachbuecher.de/buecher/kleine-ki-grosser-nutzen/): Small Language Models im Mittelstand: lokal, sicher, bezahlbar. Ohne Cloud-Abhängigkeit und ohne Abo-Falle.
+- [Skills > Workflows](https://ki-fachbuecher.de/buecher/skills-workflows/): Wie Claude Code und MCP klassische Automations-Strecken ablösen. Mit dem Tag, an dem ein 47-Node-Workflow zum dritten Mal abstürzte.
+  - [Leseprobe](https://ki-fachbuecher.de/leseproben/skills.html)
 
-## III. Wie baue ich das selbst? (Claude Code, Skills, n8n)
-- [Code, nicht PowerPoints](https://amzn.eu/d/01jmSgmq): Mit Claude Code, Skills und n8n selbst automatisieren
-- [Skills, die Geld verdienen](https://www.amazon.de/dp/B0HJB22SB3): Welche Workflows einen KI-Skill verdienen (2026)
-- [KI-Agenten für Selbständige](https://www.amazon.de/dp/B0H47Z227Y): Mit Claude Code, Codex, Hermes und Clawbot produktiver arbeiten (2026)
+## III. [Wie baue ich das selbst?](https://ki-fachbuecher.de/fragen/ki-selbst-bauen/) (Claude Code, Skills, n8n)
+- [Code, nicht PowerPoints](https://ki-fachbuecher.de/buecher/code-nicht-powerpoints/): Wie Sie Automatisierung selbst in die Hand nehmen, statt auf das nächste Gutachten zu warten.
+- [Skills, die Geld verdienen](https://ki-fachbuecher.de/buecher/skills-die-geld-verdienen/): Welche Workflows einen KI-Skill verdienen. Bauen, testen, im Mandat einsetzen.
+- [KI-Agenten für Selbständige](https://ki-fachbuecher.de/buecher/ki-agenten-selbstaendige/): Mit Claude Code, Codex, Hermes und Clawbot Routine abgeben, ohne die Kontrolle abzugeben. Mit 30-Tage-Plan und Sicherheits-Checklisten.
 
-## IV. Wie kommt es in die Organisation? (Beratung, Verwaltung, Change)
-- [Die KI-Revolution in der Beratung](https://ki-fachbuecher.de/leseproben/beratung.html): Wie KI die Unternehmensberatung verändert (Leseprobe)
-- [KI in der Verwaltung](https://ki-fachbuecher.de/verwaltung/): Der praxisnahe Einstieg für Beschäftigte, mit Fortbildungsangebot
-- [Change Management mit KI](https://amzn.eu/d/0hwvQWb0): Transformation erfolgreich begleiten
+## IV. [Wie kommt es in die Organisation?](https://ki-fachbuecher.de/fragen/ki-einfuehrung-organisation/) (Beratung, Verwaltung, Change)
+- [Die KI-Revolution in der Beratung](https://ki-fachbuecher.de/buecher/ki-revolution-beratung/): Wie künstliche Intelligenz die Unternehmensberatung verändert. Von datengetriebenen Insights zu autonomen Agenten.
+  - [Leseprobe](https://ki-fachbuecher.de/leseproben/beratung.html)
+- [KI in der Verwaltung](https://ki-fachbuecher.de/buecher/ki-in-der-verwaltung/): Der praxisnahe Einstieg für Beschäftigte: Grundlagen, Datenschutz, EU AI Act und fertige Prompt-Vorlagen für den Verwaltungsalltag.
+- [Change Management mit KI](https://ki-fachbuecher.de/buecher/change-management-ki/): Transformation so begleiten, dass die Menschen mitkommen: Kommunikation, Widerstände, Rollen.
 
-## V. Was macht das mit uns? (Teams, Sinn, Intelligenz)
-- [Die KI-Kluft](https://ki-fachbuecher.de/ki-kluft/): Warum KI Teams spaltet und wie Führung daraus einen Vorteil macht
-- [Gott 2.0](https://ki-fachbuecher.de/leseproben/gott20.html): Wenn Maschinen nach dem Sinn fragen (Leseprobe)
-- [Die Intelligenz-Lüge](https://amzn.eu/d/0fd4v2rg): Was KI über unser Bild von Intelligenz enthüllt
+## V. [Was macht das mit uns?](https://ki-fachbuecher.de/fragen/ki-und-gesellschaft/) (Teams, Sinn, Intelligenz)
+- [Die KI-Kluft](https://ki-fachbuecher.de/buecher/die-ki-kluft/): Was passiert, wenn manche im Team mit KI davonziehen, und wie Sie alle wieder zusammenbringen.
+- [Gott 2.0](https://ki-fachbuecher.de/buecher/gott-2/): Wenn Maschinen nach dem Sinn fragen. Ein philosophischer Versuch über Schöpfung, Bewusstsein und unsere Rolle darin.
+  - [Leseprobe](https://ki-fachbuecher.de/leseproben/gott20.html)
+- [Die Intelligenz-Lüge](https://ki-fachbuecher.de/buecher/die-intelligenz-luege/): Was uns 100 Jahre Forschung verschwiegen haben und was KI jetzt über unser Bild von Intelligenz enthüllt.
 
 ## Angebote
 - [Fortbildung KI in der Verwaltung](https://ki-fachbuecher.de/verwaltung/): Ganztagesfortbildung für Behörden und Bildungsträger (KI-Kompetenz nach Art. 4 EU AI Act)
 - [KI-Governance Lernplattform](https://ai-act.rm-on.de)
 - [Beratung und Coaching](https://ai.rm-on.de)
+- [Kontakt](https://ki-fachbuecher.de/#kontakt)
