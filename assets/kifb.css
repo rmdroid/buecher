@@ -240,8 +240,10 @@ section { padding:clamp(3.2rem,7vw,6rem) 0; }
 @keyframes row-in { from { opacity:0; transform:translateY(.7rem); } to { opacity:1; transform:none; } }
 .menu-toc > li > a { display:flex; align-items:baseline; gap:.6rem; padding:.72rem 0; text-decoration:none; }
 .menu-toc .t { position:relative; font-size:clamp(1.6rem,1.2rem + 2.2vw,2.05rem); font-weight:500; line-height:1.15; letter-spacing:-.015em; }
-.menu-toc .t::after { content:""; position:absolute; left:-.15em; right:-.15em; top:56%; height:.09em; background:var(--red); transform:scaleX(0) rotate(-1.2deg); transform-origin:0 50%; transition:transform .35s cubic-bezier(.22,.61,.36,1); }
-.menu-toc > li > a:hover .t::after,.menu-toc > li > a:active .t::after { transform:scaleX(1) rotate(-1.2deg); }
+.menu-toc .t::after { content:""; position:absolute; left:0; right:0; bottom:-.08em; height:2px; background:var(--red); transform:scaleX(0); transform-origin:0 50%; transition:transform .3s cubic-bezier(.22,.61,.36,1); }
+.menu a:hover { color:inherit; }
+.menu .menu-cta:hover { color:#fff; }
+@media (hover:hover) and (pointer:fine) { .menu-toc > li > a:hover .t::after { transform:scaleX(1); } .menu-sub a:hover span,.menu-legal a:hover { color:var(--red); } }
 .menu-toc > li > a::after { content:""; order:2; flex:1; border-bottom:2px dotted var(--line-strong); transform:translateY(-.3em); }
 .menu-toc .p { order:3; font-family:var(--sans); font-size:.72rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--red); white-space:nowrap; }
 .menu-sub { padding:0 0 .7rem; }
