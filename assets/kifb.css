@@ -47,7 +47,11 @@ section { padding:clamp(3.2rem,7vw,6rem) 0; }
 .hero .wrap { position:relative; z-index:1; display:grid; grid-template-columns:1.1fr .9fr; gap:clamp(1.5rem,4vw,4rem); align-items:center; padding-top:clamp(2.5rem,6vw,5rem); padding-bottom:clamp(3.2rem,7vw,5.5rem); }
 .hero .kicker { color:#e9c9a8; }
 .hero h1 { font-size:clamp(2.3rem,1.3rem + 4.2vw,4.4rem); }
-.hero h1 s { text-decoration-color:var(--red); text-decoration-thickness:.09em; color:rgba(244,239,230,.62); }
+.hero h1 s { position:relative; display:inline-block; white-space:nowrap; text-decoration:none; color:rgba(244,239,230,.62); animation:hype-fade .5s ease .95s both; }
+.hero h1 s::after { content:""; position:absolute; left:-.05em; right:-.05em; top:55%; height:.09em; border-radius:.05em; background:var(--red); transform-origin:0 50%; transform:rotate(-1.4deg); animation:hype-strike .65s cubic-bezier(.6,.05,.3,1) .7s both; }
+@keyframes hype-strike { from { transform:rotate(-1.4deg) scaleX(0); } to { transform:rotate(-1.4deg) scaleX(1); } }
+@keyframes hype-fade { from { color:var(--paper); } to { color:rgba(244,239,230,.62); } }
+@media (prefers-reduced-motion:reduce) { .hero h1 s,.hero h1 s::after { animation:none; } }
 .hero .sub { margin-top:1.3rem; max-width:34rem; color:rgba(244,239,230,.88); }
 .hero small { display:block; margin-top:1rem; font-family:var(--sans); font-size:.82rem; color:rgba(244,239,230,.72); }
 .fan { position:relative; height:clamp(300px,34vw,440px); }
