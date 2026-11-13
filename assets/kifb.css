@@ -272,3 +272,5 @@ section { padding:clamp(3.2rem,7vw,6rem) 0; }
 .new:hover b { color:var(--red); }
 .new:hover { color:var(--ink-2); }
 @media (max-width:860px) { .news-list { grid-template-columns:1fr; gap:1.1rem; } }
+.about p + p { margin-top:1rem; }
+.about p { max-width:38rem; }
